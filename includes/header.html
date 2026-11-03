@@ -1,0 +1,95 @@
+<!-- PREMIUM HEADER START -->
+<header class="main-header">
+    <div class="header-container">
+
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html">
+                <img src="assets/images/logo-dark.png"
+                     alt="UCS World Tour and Travels">
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" type="button"
+                aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar">
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="index.html" class="active">Home</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle">
+                        Wallet Recharge
+                        <i class="fas fa-chevron-down nav-arrow"></i>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="bank-information.html">Bank Information</a></li>
+                        <li><a href="deposit-entry.html">Deposit Entry</a></li>
+                        <li><a href="wallet-history.html">Wallet History</a></li>
+                        <li><a href="wallet-refund.html">Wallet Refund</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="contact.html">Contact Us</a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <!-- Header Right -->
+        <div class="header-right">
+
+            <!-- Language -->
+            <div class="translate-wrapper">
+                <button type="button" class="btn-globe" id="translateBtn"
+                        aria-label="Select language">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="translate-dropdown" id="translateDropdown">
+                    <div class="translate-heading">
+                        <i class="fas fa-language"></i>
+                        Select Language
+                    </div>
+
+                    <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                    <a href="#" onclick="changeLanguage('hi'); return false;">Hindi</a>
+                    <a href="#" onclick="changeLanguage('bn'); return false;">Bengali</a>
+                    <a href="#" onclick="changeLanguage('ta'); return false;">Tamil</a>
+                    <a href="#" onclick="changeLanguage('te'); return false;">Telugu</a>
+                    <a href="#" onclick="changeLanguage('gu'); return false;">Gujarati</a>
+                    <a href="#" onclick="changeLanguage('mr'); return false;">Marathi</a>
+                    <a href="#" onclick="changeLanguage('pa'); return false;">Punjabi</a>
+
+                    <div id="google_translate_element" style="display:none;"></div>
+                </div>
+            </div>
+
+            <!-- Login -->
+            <a href="#" class="login-btn">
+                <i class="far fa-user"></i>
+                <span>Sign In / Register</span>
+                <i class="fas fa-arrow-right login-arrow"></i>
+            </a>
+
+        </div>
+
+    </div>
+    
+</header>
+<!-- PREMIUM HEADER END -->

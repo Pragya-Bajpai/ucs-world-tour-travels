@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | UCS World Tour and Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Header will load here -->
+    <div id="header"></div>
+
+
+    <!-- Contact Section Start -->
+    <section class="contact-section">
+
+        <div class="container">
+
+            <!-- Section Heading -->
+            <div class="contact-heading">
+                <h1>Contact Us</h1>
+            </div>
+
+            <div class="contact-wrapper">
+
+                <!-- Left Side -->
+                <div class="contact-left">
+
+                    <!-- Contact Image -->
+                    <div class="contact-image">
+                        <img src="assets/images/contact.png" alt="Contact UCS World Tour and Travels">
+                    </div>
+
+                    <!-- Address Details -->
+                    <div class="address-box">
+
+                        <h2>Address</h2>
+
+                        <p>
+                            <strong>Mobile:</strong>
+                            <a href="tel:+918853240990">+91 8853240990</a>
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            <a href="mailto:ucsworldtourstravel2@gmail.com">
+                                ucsworldtourstravel2@gmail.com
+                            </a>
+                        </p>
+
+                        <p>
+                            <strong>Address:</strong>
+                            Ranibag rustampur Gorakhpur Uttar Pradesh
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Right Side Contact Form -->
+                <div class="contact-form-wrapper">
+
+                    <div class="form-title">
+                        Send us a message
+                    </div>
+
+                    <form class="contact-form">
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="name">Your name</label>
+                                <input type="text" id="name" placeholder="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" id="email" placeholder="email">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="phone">Your phone</label>
+                                <input type="text" id="phone" placeholder="mobile number">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject:</label>
+                                <input type="text" id="subject" placeholder="Short title">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group message-group">
+                            <label for="message">Message</label>
+                            <textarea id="message"></textarea>
+                        </div>
+
+
+                        <button type="submit" class="send-btn">Send</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Contact Section End -->
+
+  <!-- Why Choose Us Section Start -->
+<section class="why-choose-section">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="why-heading">
+            <h2>Why Choose Us</h2>
+            <p>
+                At UCS Tour and Travels, we provide reliable flight, bus, and car booking services.
+            </p>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="why-cards">
+
+            <!-- Card 1 -->
+            <div class="why-card">
+                <div class="feature-icon">
+                    <img src="assets/images/guarantee.svg" alt="Best Price Guarantee">
+                </div>
+
+                <h3>Best Price Guarantee</h3>
+
+                <p>
+                    Experience top destinations without overpaying. Our pricing is fair,
+                    transparent, and guaranteed.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="why-card">
+                <div class="feature-icon">
+                    <img src="assets/images/booking.svg" alt="Easy and Quick Booking">
+                </div>
+
+                <h3>Easy &amp; Quick Booking</h3>
+
+                <p>
+                    Plan your trip in minutes with our smooth and user-friendly booking
+                    system..
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="why-card">
+                <div class="feature-icon">
+                    <img src="assets/images/customer_care.svg" alt="Customer Care">
+                </div>
+
+                <h3>Customer Care 24/7</h3>
+
+                <p>
+                    Our support team is here for you anytime, anywhere — before,
+                    during, and after your trip.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- Why Choose Us Section End -->
+
+    <!-- Footer will load here -->
+    <div id="footer"></div>
+
+
+    <!-- Header and Footer Include -->
+    <script>
+        fetch("includes/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+
+        fetch("includes/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+
+</body>
+
+</html>

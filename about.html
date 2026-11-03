@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | UCS World Tour and Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- About Company Section Start -->
+    <section class="about-company-section">
+        <div class="container">
+
+            <div class="about-company-wrapper">
+
+                <!-- About Image -->
+                <div class="about-company-image">
+                    <div class="about-image-frame">
+                        <img src="assets/images/1760879165_SightSeeingXeukQQ.jpg"
+                            alt="UCS World Tour and Travels">
+
+                        <div class="about-image-label">
+                            <i class="fas fa-plane-departure"></i>
+                            <span>Explore The World With Us</span>
+                        </div>
+                    </div>
+
+                    <div class="about-experience-badge">
+                        <i class="fas fa-globe-asia"></i>
+                        <div>
+                            <strong>UCS</strong>
+                            <span>Your Travel Partner</span>
+                        </div>
+                    </div>
+
+                    <div class="about-decoration"></div>
+                </div>
+
+                <!-- About Content -->
+                <div class="about-company-content">
+
+                    <span class="about-section-label">
+                        <span></span> ABOUT UCS WORLD TOUR & TRAVELS
+                    </span>
+
+                    <h1>
+                        Making Every Journey
+                        <span>Special & Memorable</span>
+                    </h1>
+
+                    <p>
+                        Welcome to UCS World Tour and Travels, your ultimate travel
+                        companion for creating extraordinary experiences worldwide.
+                        With a focus on quality, convenience, and customer satisfaction,
+                        we offer a comprehensive range of travel services designed to
+                        meet all your travel needs under one roof.
+                    </p>
+
+                    <div class="about-features">
+
+                        <div class="about-feature-item">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div>
+                                <h4>Easy Travel Planning</h4>
+                                <span>Convenient travel services</span>
+                            </div>
+                        </div>
+
+                        <div class="about-feature-item">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4>Customer Support</h4>
+                                <span>Support whenever you need</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a href="contact.html" class="about-contact-btn">
+                        Get In Touch
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- About Company Section End -->
+
+
+  <!-- Why Choose Us Section Start -->
+<section class="why-choose-section">
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="why-heading">
+            <span class="why-subtitle">WHY TRAVEL WITH UCS</span>
+            <h2>Why Choose Us</h2>
+            <p>
+                At UCS Tour and Travels, we provide reliable flight, bus, and car
+                booking services for a smooth and comfortable journey.
+            </p>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="why-cards">
+
+            <!-- Card 1 -->
+            <div class="why-card">
+                <div class="feature-icon">
+                    <img src="assets/images/guarantee.svg"
+                         alt="Best Price Guarantee">
+                </div>
+
+                <h3>Best Price Guarantee</h3>
+
+                <p>
+                    Experience top destinations without overpaying.
+                    Our pricing is fair, transparent, and guaranteed.
+                </p>
+
+                <div class="why-card-line"></div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="why-card">
+                <div class="feature-icon">
+                    <img src="assets/images/booking.svg"
+                         alt="Easy and Quick Booking">
+                </div>
+
+                <h3>Easy &amp; Quick Booking</h3>
+
+                <p>
+                    Plan your trip in minutes with our smooth and
+                    user-friendly booking system.
+                </p>
+
+                <div class="why-card-line"></div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="why-card">
+                <div class="feature-icon">
+                    <img src="assets/images/customer_care.svg"
+                         alt="Customer Care">
+                </div>
+
+                <h3>Customer Care 24/7</h3>
+
+                <p>
+                    Our support team is here for you anytime, anywhere —
+                    before, during, and after your trip.
+                </p>
+
+                <div class="why-card-line"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Why Choose Us Section End -->
+
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+
+    <!-- Header and Footer Include -->
+    <script>
+        fetch("includes/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+
+        fetch("includes/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+
+    <script src="assets/js/script.js"></script>
+
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</body>
+</html>

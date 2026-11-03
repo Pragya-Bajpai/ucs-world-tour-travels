@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposite Details</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Deposit Section -->
+    <section class="deposit-section">
+        <div class="deposit-container">
+
+            <div class="deposit-heading">
+                <h3>Deposite Details</h3>
+            </div>
+
+            <div class="deposit-content">
+
+                <!-- Payment Tabs -->
+                <div class="deposit-tabs">
+                    <button type="button" class="deposit-tab active" data-method="Cash">
+                        Cash
+                    </button>
+
+                    <button type="button" class="deposit-tab" data-method="Net Transper">
+                        Net Transper
+                    </button>
+
+                    <button type="button" class="deposit-tab" data-method="Cash @ ATM">
+                        Cash @ ATM
+                    </button>
+
+                    <button type="button" class="deposit-tab" data-method="Checqe">
+                        Checqe
+                    </button>
+
+                    <button type="button" class="deposit-tab" data-method="UPI">
+                        UPI
+                    </button>
+                </div>
+
+                <!-- Deposit Form -->
+                <form id="depositForm">
+
+                    <input type="hidden" name="payment_method"
+                           id="paymentMethod" value="Cash">
+
+                    <div class="deposit-form-grid">
+
+                        <!-- First Row -->
+                        <div class="deposit-field bank-field">
+                            <label for="depositedBank">Deposited Bank</label>
+                            <select name="deposited_bank" id="depositedBank">
+                                <option value="">Deposited Bank</option>
+                                <option value="Bank 1">Bank 1</option>
+                                <option value="Bank 2">Bank 2</option>
+                            </select>
+                        </div>
+
+                        <div class="deposit-field transaction-field">
+                            <label for="transactionId">Transaction ID</label>
+                            <input type="text" name="transaction_id"
+                                   id="transactionId" placeholder="Transaction ID">
+                        </div>
+
+                        <div class="deposit-field amount-field">
+                            <label for="amount">Amount</label>
+                            <input type="number" name="amount"
+                                   id="amount" placeholder="Amount">
+                        </div>
+
+                        <!-- Second Row -->
+                        <div class="deposit-field date-field">
+                            <label for="depositDate">Date</label>
+                            <input type="date" name="date" id="depositDate">
+                        </div>
+
+                        <div class="deposit-field branch-field">
+                            <label for="depositedBranch">Deposited Branch</label>
+                            <input type="text" name="deposited_branch"
+                                   id="depositedBranch" placeholder="Deposited Branch">
+                        </div>
+
+                        <div class="deposit-field remarks-field">
+                            <label for="remarks">Remarks</label>
+                            <input type="text" name="remarks"
+                                   id="remarks" placeholder="Remarks">
+                        </div>
+
+                        <!-- Third Row -->
+                        <div class="deposit-field upload-field">
+                            <label for="depositSlip">
+                                Upload Deposit Slip Scan Copy
+                            </label>
+                            <input type="file" name="deposit_slip"
+                                   id="depositSlip" accept="image/*,.pdf">
+                        </div>
+
+                        <div class="deposit-buttons">
+                            <button type="submit" class="deposit-submit">
+                                Submit
+                            </button>
+
+                            <button type="reset" class="deposit-reset">
+                                Reset
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script>
+        // Header
+        fetch("includes/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+
+        // Footer
+        fetch("includes/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+
+        // Payment Method Tabs
+        const tabs = document.querySelectorAll(".deposit-tab");
+        const paymentMethod = document.getElementById("paymentMethod");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", function () {
+
+                tabs.forEach(item => item.classList.remove("active"));
+
+                this.classList.add("active");
+
+                paymentMethod.value = this.dataset.method;
+            });
+        });
+
+        // Reset Form
+        document.getElementById("depositForm").addEventListener("reset", function () {
+
+            setTimeout(() => {
+                tabs.forEach(item => item.classList.remove("active"));
+
+                document.querySelector('[data-method="Cash"]')
+                    .classList.add("active");
+
+                paymentMethod.value = "Cash";
+            }, 0);
+
+        });
+
+        // Submit
+        document.getElementById("depositForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Please connect the deposit form with your backend/API.");
+        });
+    </script>
+
+</body>
+</html>
