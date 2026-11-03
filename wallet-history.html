@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet History | UCS World Tour & Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+            color: #07123d;
+        }
+
+        .wallet-history-section {
+            padding: 45px 0 60px;
+        }
+
+        .wallet-container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 18px;
+        }
+
+        .wallet-heading {
+            margin-bottom: 28px;
+        }
+
+        .wallet-heading span {
+            color: #ff0000;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .wallet-heading h1 {
+            font-size: 30px;
+            font-weight: 800;
+            margin: 8px 0;
+            color: #07123d;
+        }
+
+        .wallet-heading p {
+            color: #7b8499;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* Wallet Summary */
+
+        .wallet-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #fff;
+            border: 1px solid #e8ebf2;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(7, 18, 61, .04);
+        }
+
+        .summary-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .icon-balance {
+            background: #eaf0ff;
+            color: #07123d;
+        }
+
+        .icon-credit {
+            background: #e9f8ef;
+            color: #159447;
+        }
+
+        .icon-debit {
+            background: #fcecef;
+            color: #ff0000;
+        }
+
+        .summary-card small {
+            display: block;
+            color: #8790a3;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .summary-card h3 {
+            margin: 0;
+            color: #07123d;
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        /* Transaction Section */
+
+        .transaction-box {
+            background: #fff;
+            border: 1px solid #e7eaf1;
+            border-radius: 13px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(7, 18, 61, .04);
+        }
+
+        .transaction-header {
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .transaction-header h2 {
+            font-size: 19px;
+            font-weight: 800;
+            margin: 0 0 5px;
+            color: #07123d;
+        }
+
+        .transaction-header p {
+            color: #8992a5;
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .transaction-count {
+            background: #fbedf0;
+            color: #ff0000;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 7px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* Filters */
+
+        .transaction-filters {
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            border: 1px solid #e5e8ef;
+            background: #fff;
+            color: #6f7b96;
+            padding: 8px 15px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #07123d;
+            color: #fff;
+            border-color: #07123d;
+        }
+
+        .search-box {
+            position: relative;
+            width: 220px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9aa2b2;
+            font-size: 12px;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 36px;
+            border: 1px solid #e5e8ef;
+            border-radius: 7px;
+            padding: 0 12px 0 33px;
+            font-size: 11px;
+            outline: none;
+            color: #07123d;
+        }
+
+        .search-box input:focus {
+            border-color: #ff0000;
+        }
+
+        /* Table */
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+        }
+
+        .transaction-table thead {
+            background: #f8f9fc;
+        }
+
+        .transaction-table th {
+            color: #8790a3;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            text-align: left;
+            padding: 15px 18px;
+            white-space: nowrap;
+        }
+
+        .transaction-table td {
+            padding: 16px 18px;
+            border-top: 1px solid #edf0f5;
+            font-size: 12px;
+            color: #39435e;
+            white-space: nowrap;
+        }
+
+        .transaction-table tbody tr {
+            transition: .2s;
+        }
+
+        .transaction-table tbody tr:hover {
+            background: #fafbfe;
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .transaction-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .credit-icon {
+            color: #159447;
+            background: #e9f8ef;
+        }
+
+        .debit-icon {
+            color: #ff0000;
+            background: #fcecef;
+        }
+
+        .transaction-info strong {
+            display: block;
+            color: #07123d;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .transaction-info small {
+            color: #929bad;
+            font-size: 10px;
+        }
+
+        .amount-credit {
+            color: #159447 !important;
+            font-weight: 800;
+        }
+
+        .amount-debit {
+            color: #ff0000 !important;
+            font-weight: 800;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .status-success {
+            background: #e9f8ef;
+            color: #159447;
+        }
+
+        .status-pending {
+            background: #fff5df;
+            color: #b67b13;
+        }
+
+        .status-failed {
+            background: #fcecef;
+            color: #ff0000;
+        }
+
+        .view-btn {
+            width: 29px;
+            height: 29px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fbedf0;
+            color: #ff0000;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 11px;
+            transition: .2s;
+        }
+
+        .view-btn:hover {
+            background: #ff0000;
+            color: #fff;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 35px 15px;
+            color: #8992a5;
+            font-size: 13px;
+            display: none;
+        }
+
+        .transaction-footer {
+            padding: 15px 22px;
+            border-top: 1px solid #edf0f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .transaction-footer p {
+            color: #8992a5;
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 6px;
+        }
+
+        .pagination button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #e5e8ef;
+            background: #fff;
+            color: #07123d;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .pagination button.active {
+            background: #07123d;
+            color: #fff;
+            border-color: #07123d;
+        }
+
+        .wallet-note {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            border: 1px solid #e8ebf2;
+            border-left: 3px solid #ff0000;
+            border-radius: 8px;
+            padding: 13px 16px;
+            color: #6f7b96;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .wallet-note i {
+            color: #ff0000;
+            font-size: 16px;
+        }
+
+        @media(max-width: 768px) {
+            .wallet-history-section {
+                padding: 30px 0 40px;
+            }
+
+            .wallet-summary {
+                grid-template-columns: 1fr;
+                gap: 11px;
+            }
+
+            .summary-card {
+                padding: 15px;
+            }
+
+            .summary-card h3 {
+                font-size: 19px;
+            }
+
+            .wallet-heading h1 {
+                font-size: 25px;
+            }
+
+            .transaction-header {
+                padding: 16px;
+            }
+
+            .transaction-filters {
+                padding: 14px 16px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .transaction-footer {
+                padding: 13px 16px;
+            }
+        }
+
+        @media(max-width: 480px) {
+            .wallet-container {
+                padding: 0 12px;
+            }
+
+            .wallet-heading h1 {
+                font-size: 23px;
+            }
+
+            .transaction-header h2 {
+                font-size: 16px;
+            }
+
+            .filter-tabs {
+                width: 100%;
+            }
+
+            .filter-btn {
+                flex: 1;
+                padding: 8px 9px;
+            }
+
+            .transaction-count {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <main class="wallet-history-section">
+        <div class="wallet-container">
+
+            <!-- Page Heading -->
+            <div class="wallet-heading">
+                <span>My Account / Wallet</span>
+                <h1>Wallet <span style="color:#ff0000;">History</span></h1>
+                <p>View and track all your wallet transactions in one place.</p>
+            </div>
+
+            <!-- Wallet Summary -->
+            <div class="wallet-summary">
+
+                <div class="summary-card">
+                    <div class="summary-icon icon-balance">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div>
+                        <small>Available Balance</small>
+                        <h3>₹ 0.00</h3>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon icon-credit">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div>
+                        <small>Total Credit</small>
+                        <h3>₹ 0.00</h3>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon icon-debit">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div>
+                        <small>Total Debit</small>
+                        <h3>₹ 0.00</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Transaction History -->
+            <div class="transaction-box">
+
+                <div class="transaction-header">
+                    <div>
+                        <h2>Transaction History</h2>
+                        <p>Your recent wallet activity</p>
+                    </div>
+                    <span class="transaction-count" id="transactionCount">
+                        5 Transactions
+                    </span>
+                </div>
+
+                <!-- Filters -->
+                <div class="transaction-filters">
+
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="credit">Credit</button>
+                        <button class="filter-btn" data-filter="debit">Debit</button>
+                    </div>
+
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="transactionSearch"
+                               placeholder="Search transactions...">
+                    </div>
+
+                </div>
+
+                <!-- Transactions Table -->
+                <div class="table-responsive">
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Transaction Details</th>
+                                <th>Transaction ID</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Receipt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionBody">
+
+                            <tr data-type="credit">
+                                <td>
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon credit-icon">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Wallet Recharge</strong>
+                                            <small>Money Added</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>TXN000001</td>
+                                <td>--</td>
+                                <td class="amount-credit">+ ₹ 0.00</td>
+                                <td><span class="status status-success">Success</span></td>
+                                <td><a href="#" class="view-btn" aria-label="View receipt"><i class="fas fa-eye"></i></a></td>
+                            </tr>
+
+                            <tr data-type="debit">
+                                <td>
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon debit-icon">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Booking Payment</strong>
+                                            <small>Money Deducted</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>TXN000002</td>
+                                <td>--</td>
+                                <td class="amount-debit">- ₹ 0.00</td>
+                                <td><span class="status status-success">Success</span></td>
+                                <td><a href="#" class="view-btn" aria-label="View receipt"><i class="fas fa-eye"></i></a></td>
+                            </tr>
+
+                            <tr data-type="credit">
+                                <td>
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon credit-icon">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Wallet Recharge</strong>
+                                            <small>Money Added</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>TXN000003</td>
+                                <td>--</td>
+                                <td class="amount-credit">+ ₹ 0.00</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td>--</td>
+                            </tr>
+
+                            <tr data-type="debit">
+                                <td>
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon debit-icon">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Booking Payment</strong>
+                                            <small>Money Deducted</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>TXN000004</td>
+                                <td>--</td>
+                                <td class="amount-debit">- ₹ 0.00</td>
+                                <td><span class="status status-failed">Failed</span></td>
+                                <td>--</td>
+                            </tr>
+
+                            <tr data-type="credit">
+                                <td>
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon credit-icon">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Wallet Recharge</strong>
+                                            <small>Money Added</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>TXN000005</td>
+                                <td>--</td>
+                                <td class="amount-credit">+ ₹ 0.00</td>
+                                <td><span class="status status-success">Success</span></td>
+                                <td><a href="#" class="view-btn" aria-label="View receipt"><i class="fas fa-eye"></i></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <div class="no-results" id="noResults">
+                        <i class="fas fa-folder-open" style="font-size:25px;display:block;margin-bottom:10px;"></i>
+                        No transactions found.
+                    </div>
+                </div>
+
+                <div class="transaction-footer">
+                    <p id="showingCount">Showing 5 transactions</p>
+
+                    <div class="pagination">
+                        <button type="button" class="active">1</button>
+                        <button type="button" disabled>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Note -->
+            <div class="wallet-note">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    Transaction details shown here are sample placeholders.
+                    Actual wallet balance, transaction records and receipts will
+                    appear after connecting the wallet history API.
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Header and Footer Includes -->
+    <script>
+        fetch("includes/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+
+        fetch("includes/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+
+    <!-- Filter and Search -->
+    <script>
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const transactionRows = document.querySelectorAll("#transactionBody tr");
+        const searchInput = document.getElementById("transactionSearch");
+        const noResults = document.getElementById("noResults");
+        const showingCount = document.getElementById("showingCount");
+        const transactionCount = document.getElementById("transactionCount");
+
+        let currentFilter = "all";
+
+        function filterTransactions() {
+            const searchValue = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            transactionRows.forEach(row => {
+                const type = row.dataset.type;
+                const rowText = row.innerText.toLowerCase();
+
+                const matchesFilter =
+                    currentFilter === "all" || currentFilter === type;
+
+                const matchesSearch = rowText.includes(searchValue);
+
+                if (matchesFilter && matchesSearch) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+            showingCount.textContent = `Showing ${visibleCount} transactions`;
+            transactionCount.textContent = `${visibleCount} Transactions`;
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+
+                currentFilter = this.dataset.filter;
+                filterTransactions();
+            });
+        });
+
+        searchInput.addEventListener("input", filterTransactions);
+    </script>
+
+</body>
+</html>

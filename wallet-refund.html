@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wallet Refund | UCS World Tour & Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+            color: #07123d;
+        }
+
+        .refund-section {
+            padding: 42px 0 55px;
+        }
+
+        .refund-container {
+            max-width: 1120px;
+            margin: auto;
+            padding: 0 18px;
+        }
+
+        /* Page Heading */
+
+        .refund-heading {
+            margin-bottom: 27px;
+        }
+
+        .refund-heading span {
+            color: #bd1733;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .refund-heading h1 {
+            color: #07123d;
+            font-size: 30px;
+            font-weight: 800;
+            margin: 8px 0;
+        }
+
+        .refund-heading h1 strong {
+            color: #bd1733;
+        }
+
+        .refund-heading p {
+            color: #7b8499;
+            font-size: 13px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Refund Banner */
+
+        .refund-banner {
+            background: linear-gradient(115deg, #07123d, #14285c);
+            border-radius: 13px;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .refund-banner::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 30px solid rgba(255,255,255,.04);
+            border-radius: 50%;
+            right: 10%;
+            top: -100px;
+        }
+
+        .refund-banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .refund-banner-content span {
+            color: #ff8b9e;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .refund-banner-content h2 {
+            color: #fff;
+            font-size: 23px;
+            font-weight: 800;
+            margin: 8px 0;
+        }
+
+        .refund-banner-content p {
+            color: #d0d7e9;
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 560px;
+        }
+
+        .refund-banner-icon {
+            width: 75px;
+            height: 75px;
+            min-width: 75px;
+            background: rgba(255,255,255,.12);
+            color: #fff;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Layout */
+
+        .refund-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .refund-card,
+        .side-card {
+            background: #fff;
+            border: 1px solid #e7eaf1;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(7,18,61,.04);
+        }
+
+        .refund-card-header {
+            padding: 19px 22px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .refund-card-header h3 {
+            color: #07123d;
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 5px;
+        }
+
+        .refund-card-header p {
+            color: #8992a5;
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .refund-form {
+            padding: 22px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #07123d;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .form-group label span {
+            color: #bd1733;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #e2e6ef;
+            background: #fbfcfe;
+            border-radius: 7px;
+            padding: 0 12px;
+            color: #07123d;
+            font-size: 12px;
+            outline: none;
+            transition: .2s;
+        }
+
+        .form-control:focus {
+            border-color: #bd1733;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(189,23,51,.07);
+        }
+
+        .form-control::placeholder {
+            color: #a0a8b7;
+        }
+
+        textarea.form-control {
+            height: 105px;
+            padding: 12px;
+            resize: vertical;
+        }
+
+        .form-group small {
+            display: block;
+            color: #929bad;
+            font-size: 10px;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .file-upload {
+            border: 1px dashed #cbd1df;
+            background: #fafbfe;
+            border-radius: 8px;
+            padding: 17px;
+            text-align: center;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .file-upload:hover {
+            border-color: #bd1733;
+            background: #fff9fa;
+        }
+
+        .file-upload i {
+            color: #bd1733;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .file-upload strong {
+            display: block;
+            color: #07123d;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .file-upload span {
+            color: #929bad;
+            font-size: 10px;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .refund-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 4px 0 20px;
+        }
+
+        .refund-checkbox input {
+            margin-top: 2px;
+            accent-color: #bd1733;
+        }
+
+        .refund-checkbox label {
+            color: #737e94;
+            font-size: 11px;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        .refund-submit {
+            width: 100%;
+            height: 45px;
+            border: none;
+            border-radius: 7px;
+            background: #bd1733;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .refund-submit:hover {
+            background: #07123d;
+        }
+
+        .refund-submit i {
+            margin-left: 7px;
+        }
+
+        /* Right Side */
+
+        .refund-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .side-card {
+            padding: 19px;
+        }
+
+        .side-card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 17px;
+        }
+
+        .side-card-title i {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: #fbedf0;
+            color: #bd1733;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .side-card-title h3 {
+            color: #07123d;
+            font-size: 14px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .refund-steps {
+            position: relative;
+        }
+
+        .refund-step {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 19px;
+            position: relative;
+        }
+
+        .refund-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            width: 27px;
+            height: 27px;
+            min-width: 27px;
+            border-radius: 50%;
+            background: #fbedf0;
+            color: #bd1733;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .refund-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: calc(100% - 27px);
+            background: #e5e8ef;
+            left: 13px;
+            top: 27px;
+        }
+
+        .refund-step strong {
+            display: block;
+            color: #07123d;
+            font-size: 11px;
+            margin: 2px 0 5px;
+        }
+
+        .refund-step p {
+            color: #8992a5;
+            font-size: 10px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Policy */
+
+        .policy-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .policy-list li {
+            display: flex;
+            gap: 9px;
+            color: #737e94;
+            font-size: 11px;
+            line-height: 1.6;
+            padding: 9px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .policy-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .policy-list i {
+            color: #bd1733;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        /* Support */
+
+        .support-card {
+            background: #fff8f9;
+            border: 1px solid #f5dce1;
+        }
+
+        .support-card p {
+            color: #737e94;
+            font-size: 11px;
+            line-height: 1.6;
+            margin: 0 0 13px;
+        }
+
+        .support-link {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #bd1733;
+            font-size: 11px;
+            font-weight: 800;
+            text-decoration: none;
+            margin-top: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .support-link:hover {
+            color: #07123d;
+        }
+
+        /* Bottom Information */
+
+        .refund-info {
+            margin-top: 22px;
+            padding: 14px 17px;
+            background: #fff;
+            border: 1px solid #e7eaf1;
+            border-left: 3px solid #bd1733;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+        }
+
+        .refund-info i {
+            color: #bd1733;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        .refund-info p {
+            color: #737e94;
+            font-size: 11px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive */
+
+        @media(max-width: 850px) {
+            .refund-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .refund-sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media(max-width: 600px) {
+            .refund-section {
+                padding: 28px 0 38px;
+            }
+
+            .refund-container {
+                padding: 0 13px;
+            }
+
+            .refund-heading h1 {
+                font-size: 25px;
+            }
+
+            .refund-banner {
+                padding: 19px;
+            }
+
+            .refund-banner-content h2 {
+                font-size: 18px;
+            }
+
+            .refund-banner-content p {
+                font-size: 10px;
+            }
+
+            .refund-banner-icon {
+                width: 52px;
+                height: 52px;
+                min-width: 52px;
+                font-size: 21px;
+                border-radius: 12px;
+            }
+
+            .refund-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .refund-card-header,
+            .refund-form {
+                padding: 16px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        @media(max-width: 380px) {
+            .refund-banner-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <main class="refund-section">
+        <div class="refund-container">
+
+            <!-- Page Heading -->
+            <div class="refund-heading">
+                <span>My Account / Wallet</span>
+                <h1>Wallet <strong>Refund</strong></h1>
+                <p>Submit your refund request and get assistance with your wallet transactions.</p>
+            </div>
+
+            <!-- Banner -->
+            <div class="refund-banner">
+                <div class="refund-banner-content">
+                    <span>Refund Assistance</span>
+                    <h2>Need Help With Your Refund?</h2>
+                    <p>
+                        Submit your refund details using the form below.
+                        Our support team can review your request and assist you.
+                    </p>
+                </div>
+
+                <div class="refund-banner-icon">
+                    <i class="fas fa-hand-holding-dollar"></i>
+                </div>
+            </div>
+
+            <div class="refund-layout">
+
+                <!-- Refund Form -->
+                <div class="refund-card">
+
+                    <div class="refund-card-header">
+                        <h3><i class="fas fa-file-invoice-dollar"
+                               style="color:#bd1733;margin-right:8px;"></i>
+                            Submit Refund Request
+                        </h3>
+                        <p>Fill in the required details to submit your request.</p>
+                    </div>
+
+                    <form class="refund-form" id="refundForm">
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="customerName">Full Name <span>*</span></label>
+                                <input type="text" id="customerName"
+                                       class="form-control"
+                                       placeholder="Enter your full name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mobile">Mobile Number <span>*</span></label>
+                                <input type="tel" id="mobile"
+                                       class="form-control"
+                                       placeholder="Enter mobile number"
+                                       pattern="[0-9]{10}" maxlength="10" required>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="transactionId">Transaction ID <span>*</span></label>
+                                <input type="text" id="transactionId"
+                                       class="form-control"
+                                       placeholder="Enter transaction ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="refundAmount">Refund Amount (₹) <span>*</span></label>
+                                <input type="number" id="refundAmount"
+                                       class="form-control"
+                                       placeholder="Enter amount"
+                                       min="1" step="0.01" required>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="refundReason">Refund Reason <span>*</span></label>
+                                <select id="refundReason" class="form-control" required>
+                                    <option value="">Select refund reason</option>
+                                    <option value="Duplicate Payment">Duplicate Payment</option>
+                                    <option value="Booking Cancelled">Booking Cancelled</option>
+                                    <option value="Failed Transaction">Failed Transaction</option>
+                                    <option value="Incorrect Amount">Incorrect Amount</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="refundDate">Transaction Date <span>*</span></label>
+                                <input type="date" id="refundDate"
+                                       class="form-control" required>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="refundDescription">Additional Details</label>
+                            <textarea id="refundDescription"
+                                      class="form-control"
+                                      placeholder="Describe your refund issue..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Payment Proof (Optional)</label>
+
+                            <label class="file-upload" for="paymentProof">
+                                <i class="fas fa-cloud-arrow-up"></i>
+                                <strong id="fileName">Click to upload payment proof</strong>
+                                <span>JPG, PNG or PDF (Maximum 5 MB)</span>
+                                <input type="file" id="paymentProof"
+                                       accept=".jpg,.jpeg,.png,.pdf">
+                            </label>
+                        </div>
+
+                        <div class="refund-checkbox">
+                            <input type="checkbox" id="refundAgreement" required>
+                            <label for="refundAgreement">
+                                I confirm that the information provided above is
+                                accurate and complete.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="refund-submit">
+                            Submit Refund Request
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="refund-sidebar">
+
+                    <!-- Process -->
+                    <div class="side-card">
+                        <div class="side-card-title">
+                            <i class="fas fa-route"></i>
+                            <h3>Refund Process</h3>
+                        </div>
+
+                        <div class="refund-steps">
+
+                            <div class="refund-step">
+                                <div class="step-number">1</div>
+                                <div>
+                                    <strong>Submit Request</strong>
+                                    <p>Fill out the refund form with correct transaction details.</p>
+                                </div>
+                            </div>
+
+                            <div class="refund-step">
+                                <div class="step-number">2</div>
+                                <div>
+                                    <strong>Request Review</strong>
+                                    <p>Your submitted details can be reviewed by the support team.</p>
+                                </div>
+                            </div>
+
+                            <div class="refund-step">
+                                <div class="step-number">3</div>
+                                <div>
+                                    <strong>Refund Update</strong>
+                                    <p>You can be informed about the request status after review.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Policy -->
+                    <div class="side-card">
+                        <div class="side-card-title">
+                            <i class="fas fa-shield-halved"></i>
+                            <h3>Important Information</h3>
+                        </div>
+
+                        <ul class="policy-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                Provide the correct transaction ID.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                Enter the exact transaction amount.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                Attach payment proof if available.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                Refund requests are subject to verification.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div class="side-card support-card">
+                        <div class="side-card-title">
+                            <i class="fas fa-headset"></i>
+                            <h3>Need Assistance?</h3>
+                        </div>
+
+                        <p>
+                            For refund-related questions, please contact our
+                            customer support team.
+                        </p>
+
+                        <a href="contact.html" class="support-link">
+                            <i class="fas fa-envelope"></i>
+                            Contact Support
+                        </a>
+
+                        <a href="wallet-history.html" class="support-link">
+                            <i class="fas fa-clock-rotate-left"></i>
+                            View Wallet History
+                        </a>
+                    </div>
+
+                </aside>
+
+            </div>
+
+            <!-- Information -->
+            <div class="refund-info">
+                <i class="fas fa-circle-info"></i>
+                <p>
+                    Submitting this form does not guarantee a refund.
+                    Each request is subject to transaction verification and
+                    the applicable refund policy.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Header and Footer -->
+    <script>
+        fetch("includes/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+
+        fetch("includes/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+
+    <!-- File Name Preview and Basic Form Validation -->
+    <script>
+        const paymentProof = document.getElementById("paymentProof");
+        const fileName = document.getElementById("fileName");
+
+        paymentProof.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (!file) {
+                fileName.textContent = "Click to upload payment proof";
+                return;
+            }
+
+            const allowedTypes = [
+                "image/jpeg",
+                "image/png",
+                "application/pdf"
+            ];
+
+            if (!allowedTypes.includes(file.type)) {
+                alert("Please select a JPG, PNG or PDF file.");
+                this.value = "";
+                fileName.textContent = "Click to upload payment proof";
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert("File size must not exceed 5 MB.");
+                this.value = "";
+                fileName.textContent = "Click to upload payment proof";
+                return;
+            }
+
+            fileName.textContent = file.name;
+        });
+
+        document.getElementById("refundForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            if (!this.checkValidity()) {
+                this.reportValidity();
+                return;
+            }
+
+            alert("Refund form design is ready. Please connect the refund API to submit your request.");
+        });
+    </script>
+
+</body>
+</html>
