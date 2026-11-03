@@ -633,3 +633,67 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+// Mobile Menu and Submenu Toggle
+document.addEventListener("click", function (e) {
+
+    // Main Mobile Menu
+    const menuToggle = e.target.closest("#menuToggle");
+
+    if (menuToggle) {
+        const navbar = document.getElementById("navbar");
+
+        if (navbar) {
+            navbar.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                navbar.classList.contains("active")
+            );
+        }
+
+        return;
+    }
+
+    // Wallet Recharge Submenu
+    const dropdownToggle = e.target.closest(".dropdown-toggle");
+
+    if (dropdownToggle) {
+        e.preventDefault();
+
+        const dropdown = dropdownToggle.closest(".dropdown");
+
+        if (dropdown) {
+            const isOpen = dropdown.classList.contains("active");
+
+            // Close other dropdowns
+            document.querySelectorAll(".nav-menu .dropdown.active")
+                .forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+            // Toggle selected dropdown
+            if (!isOpen) {
+                dropdown.classList.add("active");
+            }
+        }
+
+        return;
+    }
+
+    // Close menu after clicking normal navigation links
+    const navLink = e.target.closest(
+        "#navbar .nav-menu > li > a:not(.dropdown-toggle)"
+    );
+
+    if (navLink) {
+        const navbar = document.getElementById("navbar");
+        const menuToggle = document.getElementById("menuToggle");
+
+        if (navbar && menuToggle) {
+            navbar.classList.remove("active");
+            menuToggle.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
+    }
+});

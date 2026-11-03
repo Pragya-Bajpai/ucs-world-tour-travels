@@ -8,75 +8,139 @@
     <title>Bank Information | UCS World Tour and Travels</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
+     <link rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Header will load here -->
+    <!-- Header -->
     <div id="header"></div>
 
-
-    <!-- Bank Information Section Start -->
+    <!-- Bank Information Section -->
     <section class="bank-information-section">
 
         <div class="container">
 
-            <!-- UPI Section -->
-            <div class="bank-section-heading">
-                <h2>Pay by UPI</h2>
+            <!-- Page Heading -->
+            <div class="bank-page-heading">
+                <span class="bank-eyebrow">SECURE & EASY PAYMENTS</span>
+                <h1>Bank <span>Information</span></h1>
+                <p>
+                    Choose your preferred payment method and complete your
+                    booking payment securely with UCS World Tour and Travels.
+                </p>
+                <div class="heading-line"></div>
             </div>
 
-            <div class="payment-cards">
+            <!-- UPI Section -->
+            <div class="bank-section-heading">
+                <div class="section-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <div>
+                    <span>QUICK PAYMENT</span>
+                    <h2>Pay by UPI</h2>
+                    <p>Scan the QR code or use the UPI ID to make your payment.</p>
+                </div>
+            </div>
+
+            <div class="payment-cards upi-cards">
 
                 <!-- UPI Card 1 -->
-                <div class="payment-card">
+                <div class="payment-card upi-card">
 
-                    <div class="payment-image">
-                        <img src="assets/images/1762239970_UCSQR.jpeg" alt="UPI QR Code">
+                    <div class="payment-card-top">
+                        <span class="payment-type">UPI PAYMENT</span>
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+
+                    <div class="payment-image qr-image">
+                        <img src="assets/images/1762239970_UCSQR.jpeg"
+                             alt="UCS UPI QR Code">
                     </div>
 
                     <div class="payment-details">
-                        <p><strong>A/C Holder Name :</strong></p>
+                        <span class="detail-label">ACCOUNT HOLDER NAME</span>
                         <h4>UCS WORLD TOUR AND TRAVELS</h4>
 
-                        <p><strong>UPI Id :</strong></p>
-                        <h4>8840622478-3@ybl</h4>
+                        <div class="detail-divider"></div>
+
+                        <span class="detail-label">UPI ID</span>
+                        <div class="upi-id-value">
+                            <h4>8840622478-3@ybl</h4>
+                        </div>
+                    </div>
+
+                    <div class="payment-card-footer">
+                        <i class="fas fa-shield-alt"></i>
+                        Secure UPI Payment
                     </div>
 
                 </div>
 
 
                 <!-- UPI Card 2 -->
-                <div class="payment-card">
+                <div class="payment-card upi-card">
 
-                    <div class="payment-image">
-                        <img src="assets/images/1762239970_UCSQR.jpeg" alt="UPI QR Code">
+                    <div class="payment-card-top">
+                        <span class="payment-type">UPI PAYMENT</span>
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+
+                    <div class="payment-image qr-image">
+                        <img src="assets/images/1762239970_UCSQR.jpeg"
+                             alt="Chandrasen Yadav UPI QR Code">
                     </div>
 
                     <div class="payment-details">
-                        <p><strong>A/C Holder Name :</strong></p>
+                        <span class="detail-label">ACCOUNT HOLDER NAME</span>
                         <h4>CHANDRASEN YADAV</h4>
 
-                        <p><strong>UPI Id :</strong></p>
-                        <h4>chandsasenyadav4044@ybl</h4>
+                        <div class="detail-divider"></div>
+
+                        <span class="detail-label">UPI ID</span>
+                        <div class="upi-id-value">
+                            <h4>chandsasenyadav4044@ybl</h4>
+                        </div>
+                    </div>
+
+                    <div class="payment-card-footer">
+                        <i class="fas fa-shield-alt"></i>
+                        Secure UPI Payment
                     </div>
 
                 </div>
 
 
                 <!-- UPI Card 3 -->
-                <div class="payment-card">
+                <div class="payment-card upi-card">
 
-                    <div class="payment-image">
-                        <img src="assets/images/1762239970_UCSQR.jpeg" alt="UPI QR Code">
+                    <div class="payment-card-top">
+                        <span class="payment-type">UPI PAYMENT</span>
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+
+                    <div class="payment-image qr-image">
+                        <img src="assets/images/1762239970_UCSQR.jpeg"
+                             alt="UCS UPI QR Code">
                     </div>
 
                     <div class="payment-details">
-                        <p><strong>A/C Holder Name :</strong></p>
+                        <span class="detail-label">ACCOUNT HOLDER NAME</span>
                         <h4>UCS WORLD TOUR AND TRAVELS</h4>
 
-                        <p><strong>UPI Id :</strong></p>
-                        <h4>8840622478-5@ybl</h4>
+                        <div class="detail-divider"></div>
+
+                        <span class="detail-label">UPI ID</span>
+                        <div class="upi-id-value">
+                            <h4>8840622478-5@ybl</h4>
+                        </div>
+                    </div>
+
+                    <div class="payment-card-footer">
+                        <i class="fas fa-shield-alt"></i>
+                        Secure UPI Payment
                     </div>
 
                 </div>
@@ -86,64 +150,127 @@
 
             <!-- Bank Account Section -->
             <div class="bank-section-heading bank-account-heading">
-                <h2>Bank Acount List</h2>
+
+                <div class="section-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+
+                <div>
+                    <span>DIRECT BANK TRANSFER</span>
+                    <h2>Bank Account Details</h2>
+                    <p>Use the following details to transfer your payment directly.</p>
+                </div>
+
             </div>
+
 
             <div class="payment-cards bank-account-cards">
 
-                <!-- Bank Account 1 -->
-                <div class="payment-card">
+                <!-- Axis Bank -->
+                <div class="payment-card bank-card">
 
-                    <div class="payment-image">
-                        <img src="assets/images/1785733123_Axis_Bank_logo.svg.webp" alt="Bank QR Code">
+                    <div class="bank-card-header">
+                        <div class="payment-image bank-logo">
+                            <img src="assets/images/1785733123_Axis_Bank_logo.svg.webp"
+                                 alt="Axis Bank Logo">
+                        </div>
+
+                        <span class="bank-badge">BANK ACCOUNT</span>
                     </div>
 
-                    <div class="payment-details">
-                        <p><strong>A/C Holder Name :</strong></p>
-                        <h4>UCS WORLD TOUR AND TRAVELS</h4>
+                    <div class="bank-card-body">
 
-                        <p><strong>A/C No :</strong></p>
-                        <h4>925020050934478</h4>
+                        <div class="bank-detail-row">
+                            <span>Account Holder Name</span>
+                            <strong>UCS WORLD TOUR AND TRAVELS</strong>
+                        </div>
 
-                        <p><strong>IFSC :</strong></p>
-                        <h4>UTIB0003779</h4>
+                        <div class="bank-detail-row">
+                            <span>Account Number</span>
+                            <strong>925020050934478</strong>
+                        </div>
+
+                        <div class="bank-detail-row">
+                            <span>IFSC Code</span>
+                            <strong>UTIB0003779</strong>
+                        </div>
+
                     </div>
 
-                </div>
-
-
-                <!-- Bank Account 2 -->
-                <div class="payment-card">
-
-                    <div class="payment-image">
-                        <img src="assets/images/1790735772_yes-bank-logo-01.png" alt="Bank QR Code">
-                    </div>
-
-                    <div class="payment-details">
-                        <p><strong>A/C Holder Name :</strong></p>
-                        <h4>UCS WORLD TOUR AND TRAVELS</h4>
-
-                        <p><strong>A/C No :</strong></p>
-                        <h4>113126900000029</h4>
-
-                        <p><strong>IFSC :</strong></p>
-                        <h4>YESB0001131</h4>
+                    <div class="bank-card-footer">
+                        <i class="fas fa-lock"></i>
+                        Secure Bank Transfer
                     </div>
 
                 </div>
 
+
+                <!-- YES Bank -->
+                <div class="payment-card bank-card">
+
+                    <div class="bank-card-header">
+                        <div class="payment-image bank-logo">
+                            <img src="assets/images/1790735772_yes-bank-logo-01.png"
+                                 alt="YES Bank Logo">
+                        </div>
+
+                        <span class="bank-badge">BANK ACCOUNT</span>
+                    </div>
+
+                    <div class="bank-card-body">
+
+                        <div class="bank-detail-row">
+                            <span>Account Holder Name</span>
+                            <strong>UCS WORLD TOUR AND TRAVELS</strong>
+                        </div>
+
+                        <div class="bank-detail-row">
+                            <span>Account Number</span>
+                            <strong>113126900000029</strong>
+                        </div>
+
+                        <div class="bank-detail-row">
+                            <span>IFSC Code</span>
+                            <strong>YESB0001131</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="bank-card-footer">
+                        <i class="fas fa-lock"></i>
+                        Secure Bank Transfer
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Payment Note -->
+            <div class="payment-note">
+                <div class="payment-note-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+
+                <div>
+                    <h4>Important Payment Information</h4>
+                    <p>
+                        Please verify the account details carefully before
+                        making any payment. Keep your payment transaction
+                        receipt for future reference.
+                    </p>
+                </div>
             </div>
 
         </div>
 
     </section>
-    <!-- Bank Information Section End -->
 
 
-    <!-- Footer will load here -->
+    <!-- Footer -->
     <div id="footer"></div>
 
-
+<script src="assets/js/script.js"></script>
     <!-- Header and Footer Include -->
     <script>
         fetch("includes/header.html")
@@ -158,7 +285,8 @@
                 document.getElementById("footer").innerHTML = data;
             });
     </script>
-
+<script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
 </body>
-
 </html>
