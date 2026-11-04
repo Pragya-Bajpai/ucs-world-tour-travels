@@ -1,0 +1,1970 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flight Search Results | UCS World Tour & Travels</title>
+    <meta name="description" content="Search and compare flight options with UCS World Tour and Travels.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+ <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --ucs-navy: #07123d;
+            --ucs-red: #ff0000;
+            --ucs-blue: #1769aa;
+            --ucs-bg: #f3f5f8;
+            --ucs-text: #17213b;
+            --ucs-muted: #718096;
+            --ucs-border: #e4e8ef;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ucs-bg);
+            color: var(--ucs-text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button, input, select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* FLIGHT SEARCH HEADER */
+
+        .flight-search-header {
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px rgba(7,18,61,.08);
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .flight-search-inner {
+            max-width: 1500px;
+            margin: auto;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .flight-logo {
+            flex: 0 0 120px;
+        }
+
+        .flight-logo img {
+            width: 120px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .flight-search-form {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 90px minmax(100px,1fr) 28px minmax(100px,1fr) minmax(110px,1fr) minmax(110px,1fr) 95px 105px 95px;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .flight-field {
+            min-width: 0;
+            height: 43px;
+            padding: 0px 9px;
+            border: 1px solid #d8dde6;
+            border-radius: 7px;
+            background: #fff;
+        }
+
+        .flight-field label {
+            display: block;
+            font-size: 9px;
+            color: #7b8494;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .flight-field input,
+        .flight-field select {
+            width: 100%;
+            border: 0;
+            outline: none;
+            background: transparent;
+            color: var(--ucs-navy);
+            font-size: 12px;
+            font-weight: 700;
+            min-width: 0;
+        }
+
+        .flight-swap {
+            border: 0;
+            background: transparent;
+            color: var(--ucs-blue);
+            font-size: 21px;
+        }
+
+        .flight-search-btn {
+            height: 42px;
+            border: 0;
+            border-radius: 7px;
+            background: var(--ucs-red);
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .flight-search-btn:hover {
+            background: #9e1028;
+        }
+
+        /* FARE TYPES */
+
+        .fare-types {
+            max-width: 1500px;
+            margin: auto;
+            padding: 0 18px 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .fare-types strong {
+            font-size: 10px;
+            color: #777;
+        }
+
+        .fare-chip {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #fafbfc;
+            border: 1px solid var(--ucs-border);
+            border-radius: 5px;
+            padding: 5px 8px;
+            font-size: 11px;
+        }
+
+        .fare-chip input {
+            accent-color: var(--ucs-red);
+        }
+
+        /* DATE STRIP */
+
+        .date-strip {
+            max-width: 1500px;
+            margin: 14px auto;
+            padding: 0 18px;
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .date-arrow {
+            min-width: 40px;
+            border: 0;
+            background: #fff;
+            color: var(--ucs-blue);
+            font-size: 20px;
+        }
+
+        .date-item {
+            min-width: 110px;
+            flex: 1;
+            background: #fff;
+            border-right: 1px solid var(--ucs-border);
+            text-align: center;
+            padding: 11px 7px;
+            font-size: 10px;
+            color: #596477;
+        }
+
+        .date-item b {
+            display: block;
+            color: #159653;
+            margin-top: 4px;
+            font-size: 12px;
+        }
+
+        .date-item.active {
+            background: #fff8f9;
+            border-bottom: 3px solid var(--ucs-red);
+            color: var(--ucs-navy);
+            font-weight: 700;
+        }
+
+        .date-item.active b {
+            color: var(--ucs-red);
+        }
+
+        /* MAIN LAYOUT */
+
+        .flight-page {
+            max-width: 1500px;
+            margin: auto;
+            padding: 0 18px 115px;
+            display: grid;
+            grid-template-columns: 225px minmax(0,1fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        /* FILTERS */
+
+        .flight-filters {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            position: sticky;
+            top: 125px;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--ucs-red) #edf0f4;
+        }
+
+        .flight-filters::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .flight-filters::-webkit-scrollbar-thumb {
+            background: var(--ucs-red);
+            border-radius: 10px;
+        }
+
+        .filter-heading {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--ucs-navy);
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .filter-heading small {
+            display: block;
+            font-size: 9px;
+            color: var(--ucs-muted);
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .filter-group {
+            padding: 13px 0;
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .filter-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--ucs-navy);
+            margin-bottom: 10px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #596477;
+        }
+
+        .filter-option label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .filter-option input {
+            accent-color: var(--ucs-red);
+        }
+
+        .filter-option small {
+            color: var(--ucs-muted);
+        }
+
+        .price-range {
+            width: 100%;
+            accent-color: var(--ucs-red);
+        }
+
+        .price-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--ucs-muted);
+            margin-top: 5px;
+        }
+
+        .clear-filters {
+            border: 0;
+            background: transparent;
+            color: var(--ucs-red);
+            font-weight: 700;
+        }
+
+        /* RESULTS */
+
+        .flight-results {
+            min-width: 0;
+        }
+
+        .results-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .results-heading h1 {
+            font-size: 19px;
+            color: var(--ucs-navy);
+            margin: 0;
+        }
+
+        .results-heading p {
+            font-size: 11px;
+            color: var(--ucs-muted);
+            margin: 5px 0 0;
+        }
+
+        .results-heading select,
+        .sort-select {
+            border: 1px solid var(--ucs-border);
+            background: #fff;
+            border-radius: 7px;
+            padding: 9px;
+            color: var(--ucs-text);
+        }
+
+        .flight-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .direction-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
+            color: var(--ucs-navy);
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .direction-title .sort-select {
+            font-size: 10px;
+            padding: 7px;
+        }
+
+        /* LOGIN OFFER */
+
+        .login-offer {
+            background: linear-gradient(105deg,#275f9d,#071f43);
+            border-radius: 12px;
+            color: #fff;
+            padding: 13px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .login-offer strong {
+            font-size: 12px;
+        }
+
+        .login-offer span {
+            display: block;
+            font-size: 10px;
+            margin-top: 5px;
+            opacity: .85;
+        }
+
+        .login-offer button {
+            background: #fff;
+            color: var(--ucs-navy);
+            border: 0;
+            border-radius: 20px;
+            padding: 7px 12px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        /* FLIGHT CARD */
+
+        .flight-card {
+            background: #fff;
+            border: 1px solid var(--ucs-border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .flight-card:hover {
+            border-color: #8db8ef;
+            box-shadow: 0 5px 18px rgba(7,18,61,.08);
+        }
+
+        .flight-card.selected {
+            border: 1.5px solid #1675df;
+            background: #fbfdff;
+        }
+
+        .airline-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--ucs-navy);
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .airline-logo {
+            width: 31px;
+            height: 31px;
+            background: #193d91;
+            color: #fff;
+            border-radius: 7px;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+        }
+
+        .airline-logo.red {
+            background: var(--ucs-red);
+        }
+
+        .flight-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .flight-time strong {
+            font-size: 16px;
+            color: #101a31;
+        }
+
+        .flight-time span {
+            display: block;
+            color: var(--ucs-muted);
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        .flight-duration {
+            text-align: center;
+            color: #596477;
+            font-size: 11px;
+        }
+
+        .flight-duration:after {
+            content: "";
+            display: block;
+            height: 1px;
+            background: #cbd2dd;
+            margin: 6px 5px;
+        }
+
+        .stops {
+            font-size: 10px;
+            color: var(--ucs-muted);
+        }
+
+        .flight-price {
+            font-size: 16px;
+            font-weight: 800;
+            white-space: nowrap;
+            color: #101a31;
+        }
+
+        .flight-tags {
+            display: flex;
+            gap: 7px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flight-tag {
+            font-size: 10px;
+            background: #f1f4f8;
+            color: #69758a;
+            border-radius: 20px;
+            padding: 5px 8px;
+        }
+
+        .no-results {
+            display: none;
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--ucs-muted);
+        }
+
+        /* BOTTOM SUMMARY */
+
+        .booking-summary {
+            position: fixed;
+            z-index: 90;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #202020ed;
+            color: #fff;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 -4px 18px rgba(0,0,0,.15);
+        }
+
+        .summary-flights {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        .summary-leg {
+            min-width: 150px;
+            border-right: 1px solid #ffffff55;
+            padding-right: 18px;
+        }
+
+        .summary-leg b {
+            display: block;
+            font-size: 12px;
+        }
+
+        .summary-leg span {
+            display: block;
+            font-size: 10px;
+            color: #d7dce4;
+            margin-top: 4px;
+        }
+
+        .summary-total {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .summary-total strong {
+            font-size: 17px;
+        }
+
+        .summary-total small {
+            display: block;
+            color: #ddd;
+            font-size: 10px;
+        }
+
+        .summary-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .summary-actions button {
+            border: 0;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-weight: 800;
+        }
+
+        .book-btn {
+            background: #1682e8;
+            color: #fff;
+        }
+
+        .lock-btn {
+            background: #fff;
+            color: var(--ucs-navy);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:1100px) {
+            .flight-search-inner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .flight-logo {
+                display: none;
+            }
+
+            .flight-search-form {
+                grid-template-columns: 80px 1fr 25px 1fr 1fr 1fr 90px 100px 90px;
+            }
+        }
+
+        @media(max-width:700px) {
+            .flight-search-header {
+                position: relative;
+            }
+
+            .flight-search-inner {
+                padding: 10px;
+            }
+
+            .flight-search-form {
+                grid-template-columns: 1fr 1fr;
+                gap: 7px;
+            }
+
+            .trip-field,
+            .flight-search-btn {
+                grid-column: span 2;
+            }
+
+            .flight-swap {
+                display: none;
+            }
+
+            .fare-types {
+                padding: 0 10px 10px;
+            }
+
+            .date-strip {
+                padding: 0 10px;
+            }
+
+            .flight-page {
+                display: block;
+                padding: 0 10px 145px;
+            }
+
+            .flight-filters {
+                position: static;
+                max-height: none;
+                margin-bottom: 14px;
+            }
+
+            .results-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .results-heading h1 {
+                font-size: 17px;
+            }
+
+            .flight-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-summary {
+                flex-wrap: wrap;
+                padding: 9px 10px;
+                gap: 8px;
+            }
+
+            .summary-flights {
+                width: 100%;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .summary-leg {
+                min-width: 0;
+                flex: 1;
+                padding-right: 7px;
+            }
+
+            .summary-actions button {
+                padding: 9px 11px;
+            }
+        }
+        /* =====================================
+   UCS FLIGHT SEARCH HEADER FIX
+===================================== */
+
+.flight-search-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 3px 15px rgba(7,18,61,.08);
+}
+
+.flight-search-inner {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 12px 18px;
+    display: grid;
+    grid-template-columns: 0 minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    transition: grid-template-columns .3s ease;
+}
+
+/* Search bar logo initially hidden */
+
+.flight-logo {
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+.flight-logo img {
+    width: 110px;
+    height: 55px;
+    object-fit: contain;
+}
+
+/* Show logo after scrolling */
+
+body.page-scrolled .flight-search-inner {
+    grid-template-columns: 110px minmax(0, 1fr);
+}
+
+body.page-scrolled .flight-logo {
+    width: 110px;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Search form width fix */
+
+.flight-search-header .flight-search-form {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+
+    grid-template-columns:
+        minmax(75px, .75fr)
+        minmax(90px, 1fr)
+        24px
+        minmax(90px, 1fr)
+        minmax(95px, 1fr)
+        minmax(95px, 1fr)
+        minmax(85px, .8fr)
+        minmax(95px, 1fr)
+        78px;
+
+    gap: 7px;
+    align-items: center;
+}
+
+.flight-search-header .flight-field {
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.flight-search-header .flight-field input,
+.flight-search-header .flight-field select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 12px;
+}
+
+.flight-search-header .flight-search-btn {
+    width: 100%;
+    min-width: 0;
+    padding: 0 8px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.flight-search-header .flight-swap {
+    width: 24px;
+    min-width: 24px;
+}
+
+/* Fare type alignment */
+
+.flight-search-header .fare-types {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 0 18px 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 1100px) {
+
+    .flight-search-inner,
+    body.page-scrolled .flight-search-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .flight-logo {
+        display: none;
+    }
+
+    .flight-search-header .flight-search-form {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .flight-search-header .flight-swap {
+        display: none;
+    }
+
+    .flight-search-header .trip-field {
+        grid-column: span 1;
+    }
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 700px) {
+
+    .flight-search-inner,
+    body.page-scrolled .flight-search-inner {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .flight-logo {
+        display: none;
+    }
+
+    .flight-search-header .flight-search-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .flight-search-header .trip-field,
+    .flight-search-header .flight-search-btn {
+        grid-column: span 2;
+    }
+
+    .flight-search-header .flight-field {
+        width: 100%;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<!-- WEBSITE HEADER -->
+<div id="header"></div>
+
+<!-- FLIGHT SEARCH FORM -->
+<header class="flight-search-header">
+
+    <div class="flight-search-inner">
+
+        <div class="flight-logo">
+            <img src="assets/images/logo-dark.png"
+                 alt="UCS World Tour and Travels">
+        </div>
+
+        <form class="flight-search-form" id="flightSearchForm">
+
+            <div class="flight-field trip-field">
+                <label>TRIP TYPE</label>
+                <select id="tripType">
+                    <option value="round">Round Trip</option>
+                    <option value="oneway">One Way</option>
+                </select>
+            </div>
+
+            <div class="flight-field">
+                <label>FROM</label>
+                <input type="text" id="from" required>
+            </div>
+
+            <button type="button" class="flight-swap" id="swapBtn">⇄</button>
+
+            <div class="flight-field">
+                <label>TO</label>
+                <input type="text" id="to" required>
+            </div>
+
+            <div class="flight-field">
+                <label>DEPART</label>
+                <input type="date" id="departDate" required>
+            </div>
+
+            <div class="flight-field return-field">
+                <label>RETURN</label>
+                <input type="date" id="returnDate">
+            </div>
+
+            <div class="flight-field">
+                <label>TRAVELLERS</label>
+                <select id="travellers">
+                    <option>1 Adult</option>
+                    <option>2 Adults</option>
+                    <option>3 Adults</option>
+                    <option>4 Adults</option>
+                    <option>5 Adults</option>
+                </select>
+            </div>
+
+            <div class="flight-field">
+                <label>CABIN CLASS</label>
+                <select id="cabin">
+                    <option>Economy</option>
+                    <option>Premium Economy</option>
+                    <option>Business</option>
+                    <option>First Class</option>
+                </select>
+            </div>
+
+            <button type="submit" class="flight-search-btn">
+                SEARCH
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="fare-types">
+        <strong>FARE TYPE:</strong>
+
+        <label class="fare-chip">
+            <input type="radio" name="fareType" checked> Regular
+        </label>
+
+        <label class="fare-chip">
+            <input type="radio" name="fareType"> Student
+        </label>
+
+        <label class="fare-chip">
+            <input type="radio" name="fareType"> Armed Forces
+        </label>
+
+        <label class="fare-chip">
+            <input type="radio" name="fareType"> Have a GST Number?
+        </label>
+
+        <label class="fare-chip">
+            <input type="radio" name="fareType"> Senior Citizen
+        </label>
+
+        <label class="fare-chip">
+            <input type="radio" name="fareType"> Doctor and Nurses
+        </label>
+
+        <label class="fare-chip">
+            <input type="checkbox"> Add Price Drop Protection
+        </label>
+    </div>
+
+</header>
+
+<!-- DATE STRIP -->
+<nav class="date-strip">
+
+    <button type="button" class="date-arrow">‹</button>
+
+    <div class="date-item">
+        Nov 06 - Nov 10
+        <b>₹20,329</b>
+    </div>
+
+    <div class="date-item">
+        Nov 07 - Nov 11
+        <b>View</b>
+    </div>
+
+    <div class="date-item">
+        Nov 08 - Nov 12
+        <b>View</b>
+    </div>
+
+    <div class="date-item active">
+        Nov 09 - Nov 13
+        <b>₹22,059</b>
+    </div>
+
+    <div class="date-item">
+        Nov 10 - Nov 14
+        <b>View</b>
+    </div>
+
+    <div class="date-item">
+        Nov 11 - Nov 15
+        <b>₹26,919</b>
+    </div>
+
+    <div class="date-item">
+        Nov 12 - Nov 16
+        <b>View</b>
+    </div>
+
+    <button type="button" class="date-arrow">›</button>
+
+</nav>
+
+<main class="flight-page">
+
+    <!-- FILTER SIDEBAR -->
+    <aside class="flight-filters">
+
+        <div class="filter-heading">
+            ✦ Smart Filters
+            <small>Powered by UCS Smart Search</small>
+        </div>
+
+        <div class="filter-group">
+
+            <div class="filter-title">Popular Filters</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="stop-filter" value="nonstop">
+                    Non Stop
+                </label>
+                <small>6</small>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="stop-filter" value="one">
+                    1 Stop
+                </label>
+                <small>139</small>
+            </div>
+
+        </div>
+
+        <div class="filter-group">
+
+            <div class="filter-title">Price Range</div>
+
+            <input type="range" class="price-range"
+                   id="priceRange" min="5000" max="90000" value="90000">
+
+            <div class="price-values">
+                <span>₹5,000</span>
+                <span id="priceValue">₹90,000</span>
+            </div>
+
+        </div>
+
+        <div class="filter-group">
+
+            <div class="filter-title">Departure Time</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="time-filter" value="morning">
+                    Morning (6 AM - 12 PM)
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="time-filter" value="afternoon">
+                    Afternoon (12 PM - 6 PM)
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="time-filter" value="evening">
+                    Evening (6 PM - 12 AM)
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="time-filter" value="night">
+                    Night (12 AM - 6 AM)
+                </label>
+            </div>
+
+        </div>
+
+        <div class="filter-group">
+
+            <div class="filter-title">Airlines</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="airline-filter" value="IndiGo">
+                    IndiGo
+                </label>
+                <small>123</small>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="airline-filter" value="Air India">
+                    Air India
+                </label>
+                <small>48</small>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="airline-filter" value="Akasa Air">
+                    Akasa Air
+                </label>
+                <small>21</small>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="airline-filter" value="Vistara">
+                    Vistara
+                </label>
+                <small>18</small>
+            </div>
+
+        </div>
+
+        <div class="filter-group">
+
+            <div class="filter-title">Baggage</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox"> Check-in Baggage
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox"> Cabin Baggage
+                </label>
+            </div>
+
+        </div>
+
+        <div class="filter-group">
+            <button type="button" class="clear-filters" id="clearFilters">
+                Clear All Filters
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- FLIGHT RESULTS -->
+    <section class="flight-results">
+
+        <div class="results-heading">
+
+            <div>
+                <h1 id="routeTitle">
+                    Flights from Mumbai to Thiruvananthapuram, and back
+                </h1>
+                <p id="resultCount">Available flight options for your journey</p>
+            </div>
+
+            <select id="globalSort">
+                <option value="price">Sort By: Price - Cheapest</option>
+                <option value="duration">Duration - Shortest</option>
+            </select>
+
+        </div>
+
+        <div class="flight-columns">
+
+            <!-- OUTBOUND FLIGHTS -->
+            <section>
+
+                <div class="direction-title">
+                    <span id="outRoute">BOM → TRV</span>
+
+                    <select class="sort-select">
+                        <option value="price">Sorted By: Price</option>
+                        <option value="duration">Duration</option>
+                    </select>
+                </div>
+
+                <div class="login-offer">
+
+                    <div>
+                        <strong>Log in and get exclusive discounts!</strong>
+                        <span>Unlock exclusive offers and wallet benefits.</span>
+                    </div>
+
+                    <button type="button"
+                            onclick="alert('Login feature will be connected soon.')">
+                        LOGIN NOW
+                    </button>
+
+                </div>
+
+                <div id="outbound">
+
+                    <article class="flight-card selected"
+                        data-airline="IndiGo"
+                        data-price="9682"
+                        data-duration="600"
+                        data-hour="22"
+                        data-stop="one">
+
+                        <div class="airline-row">
+                            <span class="airline-logo">✈</span>
+                            IndiGo
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>22:50</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                10h
+                                <br>
+                                <span class="stops">1 Stop • BLR</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>08:50</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-price">₹9,682</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                            <span class="flight-tag">1 Stop</span>
+                        </div>
+
+                    </article>
+
+                    <article class="flight-card"
+                        data-airline="Air India"
+                        data-price="11240"
+                        data-duration="470"
+                        data-hour="8"
+                        data-stop="one">
+
+                        <div class="airline-row">
+                            <span class="airline-logo red">AI</span>
+                            Air India
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>08:15</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                07h 50m
+                                <br>
+                                <span class="stops">1 Stop • BLR</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>16:05</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-price">₹11,240</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                            <span class="flight-tag">Check-in Baggage</span>
+                        </div>
+
+                    </article>
+
+                    <article class="flight-card"
+                        data-airline="Akasa Air"
+                        data-price="12480"
+                        data-duration="330"
+                        data-hour="14"
+                        data-stop="nonstop">
+
+                        <div class="airline-row">
+                            <span class="airline-logo">A</span>
+                            Akasa Air
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>14:20</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                05h 30m
+                                <br>
+                                <span class="stops">Non Stop</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>19:50</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-price">₹12,480</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                            <span class="flight-tag">Non Stop</span>
+                        </div>
+
+                    </article>
+
+                    <article class="flight-card"
+                        data-airline="Vistara"
+                        data-price="13890"
+                        data-duration="285"
+                        data-hour="9"
+                        data-stop="nonstop">
+
+                        <div class="airline-row">
+                            <span class="airline-logo red">V</span>
+                            Vistara
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>09:10</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                04h 45m
+                                <br>
+                                <span class="stops">Non Stop</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>13:55</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-price">₹13,890</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                            <span class="flight-tag">Non Stop</span>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- RETURN FLIGHTS -->
+            <section>
+
+                <div class="direction-title">
+                    <span id="returnRoute">TRV → BOM</span>
+
+                    <select class="sort-select">
+                        <option value="price">Sorted By: Price</option>
+                        <option value="duration">Duration</option>
+                    </select>
+                </div>
+
+                <div id="inbound">
+
+                    <article class="flight-card selected"
+                        data-airline="IndiGo"
+                        data-price="12377"
+                        data-duration="150"
+                        data-hour="7"
+                        data-stop="nonstop">
+
+                        <div class="airline-row">
+                            <span class="airline-logo">✈</span>
+                            IndiGo
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>07:10</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                02h 30m
+                                <br>
+                                <span class="stops">Non Stop</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>09:40</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-price">₹12,377</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                        </div>
+
+                    </article>
+
+                    <article class="flight-card"
+                        data-airline="Air India"
+                        data-price="13086"
+                        data-duration="290"
+                        data-hour="17"
+                        data-stop="one">
+
+                        <div class="airline-row">
+                            <span class="airline-logo red">AI</span>
+                            Air India
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>12:50</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                04h 50m
+                                <br>
+                                <span class="stops">1 Stop • BLR</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>17:40</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-price">₹13,086</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                            <span class="flight-tag">Check-in Baggage</span>
+                        </div>
+
+                    </article>
+
+                    <article class="flight-card"
+                        data-airline="Akasa Air"
+                        data-price="14650"
+                        data-duration="310"
+                        data-hour="20"
+                        data-stop="one">
+
+                        <div class="airline-row">
+                            <span class="airline-logo">A</span>
+                            Akasa Air
+                        </div>
+
+                        <div class="flight-info">
+
+                            <div class="flight-time">
+                                <strong>20:15</strong>
+                                <span>TRV</span>
+                            </div>
+
+                            <div class="flight-duration">
+                                05h 10m
+                                <br>
+                                <span class="stops">1 Stop • BLR</span>
+                            </div>
+
+                            <div class="flight-time">
+                                <strong>01:25</strong>
+                                <span>BOM</span>
+                            </div>
+
+                            <div class="flight-price">₹14,650</div>
+
+                        </div>
+
+                        <div class="flight-tags">
+                            <span class="flight-tag">Amenities</span>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            No flights match your selected filters.
+            Please change your filters.
+        </div>
+
+    </section>
+
+</main>
+
+<!-- BOTTOM BOOKING SUMMARY -->
+<div class="booking-summary">
+
+    <div class="summary-flights">
+
+        <div class="summary-leg">
+            <b>
+                ✈ <span id="summaryAirline1">IndiGo</span>
+                <small id="summaryRoute1">BOM-TRV</small>
+            </b>
+            <span id="summaryOutbound">22:50 → 08:50 · ₹9,682</span>
+            <span>10h 00m · 1 Stop</span>
+        </div>
+
+        <div class="summary-leg" id="returnSummary">
+            <b>
+                ✈ <span id="summaryAirline2">IndiGo</span>
+                <small id="summaryRoute2">TRV-BOM</small>
+            </b>
+            <span id="summaryInbound">07:10 → 09:40 · ₹12,377</span>
+            <span>02h 30m · Non Stop</span>
+        </div>
+
+    </div>
+
+    <div class="summary-total">
+        <strong id="totalPrice">₹22,059</strong>
+        <small>/adult</small>
+    </div>
+
+    <div class="summary-actions">
+        <button class="book-btn" id="bookBtn" type="button">
+            BOOK NOW
+        </button>
+
+        <button class="lock-btn" id="lockBtn" type="button">
+            LOCK PRICE
+        </button>
+    </div>
+
+</div>
+
+<!-- WEBSITE FOOTER -->
+<div id="footer"></div>
+
+<script>
+
+/* LOAD HEADER AND FOOTER */
+
+fetch("includes/header.html")
+    .then(response => {
+        if (!response.ok) throw new Error("Header could not be loaded");
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById("header").innerHTML = data;
+    })
+    .catch(error => console.error(error));
+
+fetch("includes/footer.html")
+    .then(response => {
+        if (!response.ok) throw new Error("Footer could not be loaded");
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById("footer").innerHTML = data;
+    })
+    .catch(error => console.error(error));
+
+
+/* SEARCH PARAMETERS */
+
+const params = new URLSearchParams(window.location.search);
+
+const $ = id => document.getElementById(id);
+
+$("from").value = params.get("from") || "Mumbai, India";
+$("to").value = params.get("to") || "Thiruvananthapuram";
+
+if (params.get("date")) {
+    $("departDate").value = params.get("date");
+}
+
+if (params.get("return")) {
+    $("returnDate").value = params.get("return");
+}
+
+if (params.get("tripType")) {
+    $("tripType").value = params.get("tripType");
+}
+
+if (params.get("travellers")) {
+    $("travellers").value = params.get("travellers");
+}
+
+if (params.get("cabin")) {
+    $("cabin").value = params.get("cabin");
+}
+
+
+/* AIRPORT CODES */
+
+function airportCode(city) {
+
+    const parts = city.trim().split(/\s+/);
+
+    if (parts.length > 1) {
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    return parts[0].substring(0, 3).toUpperCase();
+}
+
+
+/* UPDATE ROUTE */
+
+function updateRoute() {
+
+    const from = $("from").value || "Mumbai";
+    const to = $("to").value || "Thiruvananthapuram";
+
+    const fromCode = airportCode(from);
+    const toCode = airportCode(to);
+
+    $("outRoute").textContent = fromCode + " → " + toCode;
+    $("returnRoute").textContent = toCode + " → " + fromCode;
+
+    $("summaryRoute1").textContent = fromCode + "-" + toCode;
+    $("summaryRoute2").textContent = toCode + "-" + fromCode;
+
+    $("routeTitle").textContent =
+        "Flights from " + from + " to " + to +
+        ($("tripType").value === "oneway" ? "" : ", and back");
+
+    const isOneWay = $("tripType").value === "oneway";
+
+    document.querySelector(".return-field").style.display =
+        isOneWay ? "none" : "";
+
+    document.getElementById("returnSummary").style.display =
+        isOneWay ? "none" : "";
+
+    updateSummary();
+}
+
+updateRoute();
+
+
+/* SWAP CITIES */
+
+$("swapBtn").addEventListener("click", function () {
+
+    const from = $("from").value;
+
+    $("from").value = $("to").value;
+    $("to").value = from;
+
+    updateRoute();
+
+});
+
+$("tripType").addEventListener("change", updateRoute);
+
+
+/* SEARCH AGAIN */
+
+$("flightSearchForm").addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const searchParams = new URLSearchParams({
+        from: $("from").value,
+        to: $("to").value,
+        date: $("departDate").value,
+        return: $("returnDate").value,
+        tripType: $("tripType").value,
+        travellers: $("travellers").value,
+        cabin: $("cabin").value
+    });
+
+    window.location.href = "flight.html?" + searchParams.toString();
+
+});
+
+
+/* FLIGHT FILTERS */
+
+function filterFlights() {
+
+    const maxPrice = Number($("priceRange").value);
+
+    const airlines = [
+        ...document.querySelectorAll(".airline-filter:checked")
+    ].map(item => item.value);
+
+    const stops = [
+        ...document.querySelectorAll(".stop-filter:checked")
+    ].map(item => item.value);
+
+    const times = [
+        ...document.querySelectorAll(".time-filter:checked")
+    ].map(item => item.value);
+
+    let visible = 0;
+
+    document.querySelectorAll(".flight-card").forEach(card => {
+
+        const airline = card.dataset.airline;
+        const price = Number(card.dataset.price);
+        const stop = card.dataset.stop;
+        const hour = Number(card.dataset.hour);
+
+        let period;
+
+        if (hour >= 6 && hour < 12) {
+            period = "morning";
+        } else if (hour >= 12 && hour < 18) {
+            period = "afternoon";
+        } else if (hour >= 18) {
+            period = "evening";
+        } else {
+            period = "night";
+        }
+
+        let show = price <= maxPrice;
+
+        if (airlines.length && !airlines.includes(airline)) {
+            show = false;
+        }
+
+        if (stops.length && !stops.includes(stop)) {
+            show = false;
+        }
+
+        if (times.length && !times.includes(period)) {
+            show = false;
+        }
+
+        card.style.display = show ? "" : "none";
+
+        if (show) visible++;
+
+    });
+
+    $("noResults").style.display = visible ? "none" : "block";
+
+    $("resultCount").textContent =
+        visible + " flight options match your filters";
+
+}
+
+
+/* PRICE RANGE */
+
+$("priceRange").addEventListener("input", function () {
+
+    $("priceValue").textContent =
+        "₹" + Number(this.value).toLocaleString("en-IN");
+
+    filterFlights();
+
+});
+
+
+/* FILTER EVENTS */
+
+document.querySelectorAll(
+    ".airline-filter, .stop-filter, .time-filter"
+).forEach(item => {
+
+    item.addEventListener("change", filterFlights);
+
+});
+
+
+/* CLEAR FILTERS */
+
+$("clearFilters").addEventListener("click", function () {
+
+    document.querySelectorAll(
+        ".airline-filter, .stop-filter, .time-filter"
+    ).forEach(item => item.checked = false);
+
+    $("priceRange").value = 90000;
+    $("priceValue").textContent = "₹90,000";
+
+    filterFlights();
+
+});
+
+
+/* SORT FLIGHTS */
+
+function sortFlights(containerId, type) {
+
+    const parent = $(containerId);
+
+    if (!parent) return;
+
+    const cards = [...parent.querySelectorAll(".flight-card")];
+
+    cards.sort((a, b) => {
+
+        if (type === "duration") {
+            return Number(a.dataset.duration) -
+                   Number(b.dataset.duration);
+        }
+
+        return Number(a.dataset.price) -
+               Number(b.dataset.price);
+
+    });
+
+    cards.forEach(card => parent.appendChild(card));
+
+}
+
+$("globalSort").addEventListener("change", function () {
+
+    sortFlights("outbound", this.value);
+    sortFlights("inbound", this.value);
+
+});
+
+document.querySelectorAll(".direction-title .sort-select")
+.forEach(select => {
+
+    select.addEventListener("change", function () {
+
+        const section = this.closest("section");
+        const container = section.querySelector("[id='outbound'], [id='inbound']");
+
+        if (container) {
+            sortFlights(container.id, this.value);
+        }
+
+    });
+
+});
+
+
+/* SELECT FLIGHT */
+
+document.querySelectorAll(".flight-card").forEach(card => {
+
+    card.addEventListener("click", function () {
+
+        const parent = this.parentElement;
+
+        parent.querySelectorAll(".flight-card").forEach(item => {
+            item.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+
+        updateSummary();
+
+    });
+
+});
+
+
+/* UPDATE BOOKING SUMMARY */
+
+function updateSummary() {
+
+    const outbound = document.querySelector(
+        "#outbound .flight-card.selected"
+    );
+
+    const inbound = document.querySelector(
+        "#inbound .flight-card.selected"
+    );
+
+    if (!outbound) return;
+
+    const outPrice = Number(outbound.dataset.price);
+
+    const inPrice =
+        $("tripType").value === "oneway" || !inbound
+            ? 0
+            : Number(inbound.dataset.price);
+
+    const total = outPrice + inPrice;
+
+    $("totalPrice").textContent =
+        "₹" + total.toLocaleString("en-IN");
+
+    $("summaryAirline1").textContent = outbound.dataset.airline;
+
+    $("summaryOutbound").textContent =
+        outbound.querySelector(".flight-info").innerText
+            .replace(/\s+/g, " ");
+
+    if (inbound) {
+
+        $("summaryAirline2").textContent = inbound.dataset.airline;
+
+        $("summaryInbound").textContent =
+            inbound.querySelector(".flight-info").innerText
+                .replace(/\s+/g, " ");
+
+    }
+
+}
+
+
+/* BOOKING BUTTONS */
+
+$("bookBtn").addEventListener("click", function () {
+
+    alert("Flight booking will be available after connecting the flight booking API.");
+
+});
+
+$("lockBtn").addEventListener("click", function () {
+
+    alert("Price lock feature will be available after connecting the booking API.");
+
+});
+/* SHOW SEARCH LOGO ON SCROLL */
+
+window.addEventListener("scroll", function () {
+    if (window.scrollY > 80) {
+        document.body.classList.add("page-scrolled");
+    } else {
+        document.body.classList.remove("page-scrolled");
+    }
+});
+</script>
+
+</body>
+</html>

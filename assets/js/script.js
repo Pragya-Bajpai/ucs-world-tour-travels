@@ -697,3 +697,100 @@ document.addEventListener("click", function (e) {
         }
     }
 });
+
+// Booking Search Button Click
+document.addEventListener("click", function (e) {
+
+    const searchButton = e.target.closest("#bookingSearchBtn");
+
+    if (!searchButton) return;
+
+    const activeTab = document.querySelector(".booking-tab.active");
+    const selectedTab = activeTab?.dataset.tab;
+
+    const from = document.getElementById("busFrom")?.value.trim();
+    const to = document.getElementById("busTo")?.value.trim();
+    const date = document.getElementById("departDate")?.value;
+
+    // Validate common fields
+    if (!from || !to || !date) {
+        alert("Please enter From, To and Departure Date.");
+        return;
+    }
+
+    // FLIGHT SEARCH
+    if (selectedTab === "flight") {
+
+        const returnDate =
+            document.getElementById("returnDate")?.value || "";
+
+        const tripType =
+            document.querySelector('input[name="trip"]:checked')?.value || "oneway";
+
+        const adults = Number(
+            document.getElementById("adultsCount")?.textContent || 1
+        );
+
+        const children = Number(
+            document.getElementById("childrenCount")?.textContent || 0
+        );
+
+        const infants = Number(
+            document.getElementById("infantsCount")?.textContent || 0
+        );
+
+        const cabinClass =
+            document.getElementById("cabinClass")?.value || "Economy";
+
+        if (tripType === "roundtrip" && !returnDate) {
+            alert("Please select Return Date.");
+            return;
+        }
+
+        const params = new URLSearchParams({
+            from: from,
+            to: to,
+            date: date,
+            return: returnDate,
+            tripType: tripType,
+            adults: adults,
+            children: children,
+            infants: infants,
+            cabin: cabinClass
+        });
+
+        window.location.href = "flight.html?" + params.toString();
+        return;
+    }
+
+    // BUS SEARCH
+    if (selectedTab === "bus") {
+
+        const params = new URLSearchParams({
+            from: from,
+            to: to,
+            date: date
+        });
+
+        window.location.href = "search.html?" + params.toString();
+        return;
+    }
+
+    // CAR SEARCH
+    if (selectedTab === "car") {
+
+        const returnDate =
+            document.getElementById("returnDate")?.value || "";
+
+        const params = new URLSearchParams({
+            from: from,
+            to: to,
+            date: date,
+            return: returnDate
+        });
+
+        window.location.href = "car.html?" + params.toString();
+        return;
+    }
+
+});

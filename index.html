@@ -84,7 +84,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
               <!-- From -->
               <div class="search-field location-field" data-field="from">
                 <label>FROM</label>
-                <input type="text" placeholder="City or Airport" />
+                <input type="text" id="busFrom" name="from" placeholder="City or Airport" />
               </div>
 
               <!-- Swap Button -->
@@ -95,13 +95,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
               <!-- To -->
               <div class="search-field" data-field="to">
                 <label>TO</label>
-                <input type="text" placeholder="City or Airport" />
+                <input type="text" id="busTo" name="to" placeholder="City or Airport" />
               </div>
 
               <!-- Depart -->
               <div class="search-field" data-field="depart">
                 <label>DEPARTURE</label>
-                <input type="date" id="departDate" />
+                <input type="date" id="departDate" name="date" />
               </div>
 
               <!-- Return -->
@@ -233,10 +233,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
               </div>
 
               <!-- Search Button -->
-              <button type="button" class="search-btn">
-                <span>⌕</span>
-                Search
-              </button>
+             <!-- Search Button -->
+<button type="button" class="search-btn" id="bookingSearchBtn">
+    <span>⌕</span>
+    Search
+</button>
             </div>
 
             <!-- Booking Trust Text -->

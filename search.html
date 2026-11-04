@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Search Results | UCS World Tour & Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --navy: #07123d;
+            --red: #ff0000;
+            --muted: #778198;
+            --line: #e6e9f0;
+            --bg: #f4f6fb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--navy);
+            font-family: Arial, sans-serif;
+        }
+
+        button, input, select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* Search Header */
+        .search-top {
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 16px 0;
+        }
+
+        .top-inner,
+        .journey-strip,
+        .tabs-inner,
+        .layout {
+            max-width: 1240px;
+            margin: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .top-inner {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-logo img {
+            max-width: 105px;
+            max-height: 52px;
+            object-fit: contain;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.1fr 60px;
+            border: 1px solid #e0e4ed;
+            border-radius: 12px;
+            overflow: hidden;
+            min-height: 62px;
+        }
+
+        .search-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-right: 1px solid #edf0f5;
+            min-width: 0;
+        }
+
+        .search-field > i {
+            font-size: 16px;
+        }
+
+        .search-field label {
+            display: block;
+            color: #8992a5;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .search-field input {
+            width: 100%;
+            min-width: 0;
+            border: 0;
+            outline: 0;
+            color: var(--navy);
+            font-size: 13px;
+            font-weight: 700;
+            background: transparent;
+        }
+
+        .swap-button {
+            width: 27px;
+            height: 27px;
+            flex: 0 0 27px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--navy);
+            color: white;
+            font-size: 11px;
+        }
+
+        .search-submit {
+            margin: 7px;
+            border: 0;
+            border-radius: 9px;
+            background: var(--red);
+            color: white;
+        }
+
+        .search-submit:hover,
+        .seat-button:hover {
+            background: var(--navy);
+        }
+
+        /* Journey Details */
+        .journey-strip {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 13px;
+            font-size: 12px;
+        }
+
+        .route {
+            font-weight: 800;
+        }
+
+        .route span {
+            color: var(--red);
+        }
+
+        .journey-date {
+            color: var(--muted);
+        }
+
+        .journey-date strong {
+            color: var(--navy);
+        }
+
+        /* Tabs */
+        .search-tabs {
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .tabs-inner {
+            display: flex;
+            gap: 32px;
+        }
+
+        .search-tab {
+            padding: 14px 5px 12px;
+            border: 0;
+            border-bottom: 3px solid transparent;
+            background: none;
+            color: #8992a5;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .search-tab.active {
+            border-color: var(--red);
+            color: var(--navy);
+        }
+
+        .search-tab i {
+            margin-right: 7px;
+        }
+
+        /* Main Layout */
+        .layout {
+            display: grid;
+            grid-template-columns: 255px minmax(0, 1fr);
+            gap: 19px;
+            margin: 22px auto 45px;
+            align-items: start;
+        }
+
+        /* Filters */
+        .filter-panel {
+            position: sticky;
+            top: 15px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .filter-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 17px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .filter-heading h2 {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .clear-filters {
+            border: 0;
+            background: none;
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .filter-group {
+            padding: 16px 17px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .filter-group h3 {
+            font-size: 12px;
+            margin: 0 0 12px;
+        }
+
+        .filter-option {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin: 11px 0;
+            color: #505b73;
+            font-size: 12px;
+        }
+
+        .filter-option input {
+            accent-color: var(--red);
+        }
+
+        .filter-option small {
+            margin-left: auto;
+            color: #9aa2b1;
+        }
+
+        .filter-range {
+            width: 100%;
+            accent-color: var(--red);
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* Results */
+        .results-main {
+            min-width: 0;
+        }
+
+        .results-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .results-heading h1 {
+            font-size: 18px;
+            margin: 0 0 5px;
+        }
+
+        .results-heading p {
+            font-size: 11px;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .sort-control {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .sort-control select {
+            margin-left: 5px;
+            padding: 9px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #fff;
+            color: var(--navy);
+            font-size: 11px;
+        }
+
+        /* Bus Cards */
+        .bus-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            padding: 17px 18px 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 17px rgba(7,18,61,.045);
+            transition: .2s;
+        }
+
+        .bus-card:hover {
+            box-shadow: 0 8px 22px rgba(7,18,61,.09);
+        }
+
+        .bus-main {
+            display: grid;
+            grid-template-columns: minmax(135px, 1.25fr) 70px minmax(125px, 1fr) 85px auto;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .operator-name {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .bus-type {
+            font-size: 11px;
+            color: #858da0;
+        }
+
+        .rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 7px;
+            border-radius: 6px;
+            background: #fff3dc;
+            color: #a86c00;
+            font-size: 10px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .time-block strong {
+            display: block;
+            font-size: 16px;
+            color: #252b3a;
+        }
+
+        .time-block small,
+        .price-block small {
+            display: block;
+            color: #929aaa;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        .price-block {
+            text-align: right;
+        }
+
+        .price-block strong {
+            font-size: 17px;
+            color: #252b3a;
+        }
+
+        .seat-button {
+            border: 0;
+            border-radius: 25px;
+            padding: 13px 17px;
+            background: var(--red);
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .bus-divider {
+            border-top: 1px dashed #e5e8ef;
+            margin: 15px 0 0;
+        }
+
+        .bus-extra {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .bus-extra button {
+            flex: 0 0 auto;
+            padding: 11px 12px 2px;
+            border: 0;
+            background: none;
+            color: #6975bf;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .bus-extra button:first-child {
+            padding-left: 0;
+        }
+
+        .bus-extra button.active,
+        .bus-extra button:hover {
+            color: var(--red);
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 42px 15px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            color: var(--muted);
+        }
+
+        .empty-state i {
+            font-size: 28px;
+            color: #c5cad5;
+            margin-bottom: 10px;
+        }
+
+        .empty-state h3 {
+            font-size: 16px;
+            color: var(--navy);
+            margin: 0 0 6px;
+        }
+
+        .empty-state p {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .mobile-filter-toggle {
+            display: none;
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 7px;
+            padding: 9px 12px;
+            color: var(--navy);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media(max-width:1000px) {
+            .layout {
+                grid-template-columns: 225px minmax(0,1fr);
+                gap: 13px;
+            }
+
+            .bus-main {
+                grid-template-columns: 1.2fr .7fr 1fr auto;
+            }
+
+            .bus-main .price-block {
+                grid-column: 3;
+                grid-row: 2;
+                text-align: left;
+            }
+
+            .bus-main .seat-button {
+                grid-column: 4;
+                grid-row: 1 / span 2;
+            }
+        }
+
+        @media(max-width:700px) {
+            .top-inner {
+                grid-template-columns: 1fr;
+                gap: 11px;
+            }
+
+            .search-logo {
+                justify-content: flex-start;
+            }
+
+            .search-logo img {
+                max-height: 42px;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-field {
+                min-height: 56px;
+                padding: 9px;
+            }
+
+            .search-field:nth-child(2) {
+                border-right: 0;
+            }
+
+            .search-field:nth-child(3) {
+                border-top: 1px solid #edf0f5;
+            }
+
+            .search-submit {
+                margin: 6px;
+            }
+
+            .journey-strip {
+                flex-direction: column;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+                margin-top: 15px;
+            }
+
+            .mobile-filter-toggle {
+                display: inline-flex;
+                gap: 6px;
+                align-items: center;
+            }
+
+            .filter-panel {
+                display: none;
+                position: static;
+            }
+
+            .filter-panel.show {
+                display: block;
+            }
+
+            .results-heading {
+                flex-wrap: wrap;
+            }
+
+            .bus-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .bus-main .price-block {
+                grid-column: 1;
+                grid-row: 2;
+                text-align: left;
+            }
+
+            .bus-main .seat-button {
+                grid-column: 2;
+                grid-row: 2;
+                justify-self: end;
+            }
+        }
+
+        @media(max-width:420px) {
+            .top-inner,
+            .journey-strip,
+            .tabs-inner,
+            .layout {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .search-field {
+                gap: 6px;
+            }
+
+            .search-field input {
+                font-size: 11px;
+            }
+
+            .bus-card {
+                padding: 14px 12px 11px;
+            }
+
+            .operator-name {
+                font-size: 12px;
+            }
+
+            .time-block strong {
+                font-size: 14px;
+            }
+
+            .price-block strong {
+                font-size: 15px;
+            }
+
+            .seat-button {
+                padding: 11px 13px;
+                font-size: 11px;
+            }
+
+            .results-heading h1 {
+                font-size: 16px;
+            }
+        }
+        /* =====================================
+   STICKY SEARCH HEADER WITH SCROLL LOGO
+===================================== */
+
+.search-top {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-logo {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+body.page-scrolled .search-logo {
+    opacity: 1;
+    visibility: visible;
+    width: 110px;
+}
+
+body.page-scrolled .search-top {
+    box-shadow: 0 5px 18px rgba(7, 18, 61, 0.10);
+}
+
+/* Search form takes full width initially */
+.top-inner {
+    grid-template-columns: 0 minmax(0, 1fr);
+    transition: grid-template-columns 0.3s ease;
+}
+
+body.page-scrolled .top-inner {
+    grid-template-columns: 110px minmax(0, 1fr);
+}
+
+/* =====================================
+   FIXED FILTER SIDEBAR
+===================================== */
+
+.layout {
+    align-items: start;
+}
+
+.filter-panel {
+    position: sticky;
+    top: 165px;
+    height: calc(100vh - 185px);
+
+    /* Sidebar independent scrolling */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #ff0000 #e9edf4;
+}
+
+.filter-panel::-webkit-scrollbar {
+    width: 5px;
+}
+
+.filter-panel::-webkit-scrollbar-track {
+    background: #e9edf4;
+    border-radius: 10px;
+}
+
+.filter-panel::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 10px;
+}
+
+/* =====================================
+   ONLY BUS LIST WILL SCROLL
+===================================== */
+
+.results-main {
+    min-height: 0;
+    height: calc(100vh - 165px);
+    display: flex;
+    flex-direction: column;
+}
+
+.results-heading {
+    flex: 0 0 auto;
+    background: var(--bg);
+    padding-bottom: 10px;
+}
+
+#busResults {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 3px 8px 15px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #ff0000 #e9edf4;
+}
+
+#busResults::-webkit-scrollbar {
+    width: 6px;
+}
+
+#busResults::-webkit-scrollbar-track {
+    background: #e9edf4;
+    border-radius: 10px;
+}
+
+#busResults::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 10px;
+}
+
+/* Empty state */
+.empty-state {
+    flex: 0 0 auto;
+}
+
+/* =====================================
+   MOBILE RESPONSIVE
+===================================== */
+
+@media (max-width: 700px) {
+
+    .search-top {
+        position: relative;
+    }
+
+    .search-logo {
+        display: none;
+    }
+
+    .top-inner,
+    body.page-scrolled .top-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-panel {
+        position: static;
+        height: auto;
+        overflow: visible;
+    }
+
+    .results-main {
+        height: auto;
+        display: block;
+    }
+
+    #busResults {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+    }
+
+}
+    </style>
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main>
+
+    <!-- Search Form -->
+    <section class="search-top">
+        <div class="top-inner">
+
+            <a href="index.html" class="search-logo">
+                <img src="assets/images/logo-dark.png" alt="UCS World Tour and Travels">
+            </a>
+
+            <form class="search-form" id="busSearchForm" action="search.html" method="GET">
+
+                <div class="search-field">
+                    <i class="fas fa-bus-simple"></i>
+                    <div style="flex:1;min-width:0">
+                        <label for="from">From</label>
+                        <input type="text" id="from" name="from" placeholder="Leaving from" required>
+                    </div>
+                    <button type="button" class="swap-button" id="swapCities">
+                        <i class="fas fa-right-left"></i>
+                    </button>
+                </div>
+
+                <div class="search-field">
+                    <i class="fas fa-location-dot"></i>
+                    <div style="flex:1;min-width:0">
+                        <label for="to">To</label>
+                        <input type="text" id="to" name="to" placeholder="Going to" required>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <i class="far fa-calendar-days"></i>
+                    <div style="flex:1;min-width:0">
+                        <label for="journeyDate">Date of journey</label>
+                        <input type="date" id="journeyDate" name="date" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="search-submit">
+                    <i class="fas fa-search"></i>
+                </button>
+
+            </form>
+        </div>
+
+        <div class="journey-strip">
+            <div class="route">
+                <span id="routeFrom">Your city</span>
+                <i class="fas fa-arrow-right" style="color:#a1a8b6;margin:0 7px"></i>
+                <span id="routeTo">Destination</span>
+            </div>
+
+            <div class="journey-date">
+                Journey date:
+                <strong id="journeyDateText">Select date</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bus / Train Tabs -->
+    <nav class="search-tabs">
+        <div class="tabs-inner">
+            <button class="search-tab active">
+                <i class="fas fa-bus"></i>Bus
+            </button>
+           
+            
+        </div>
+    </nav>
+
+    <div class="layout">
+
+        <!-- Filters -->
+        <aside class="filter-panel" id="filterPanel">
+
+            <div class="filter-heading">
+                <h2><i class="fas fa-sliders" style="color:var(--red);margin-right:7px"></i>Filters</h2>
+                <button class="clear-filters" id="clearFilters" type="button">Clear all</button>
+            </div>
+
+            <div class="filter-group">
+                <h3>Bus Type</h3>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="bus-filter" value="ac">
+                    AC <small>12</small>
+                </label>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="bus-filter" value="sleeper">
+                    Sleeper <small>18</small>
+                </label>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="bus-filter" value="seater">
+                    Seater <small>9</small>
+                </label>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="bus-filter" value="nonac">
+                    Non AC <small>7</small>
+                </label>
+            </div>
+
+            <div class="filter-group">
+                <h3>Departure Time</h3>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="time-filter" value="morning">
+                    Morning (6 AM - 12 PM)
+                </label>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="time-filter" value="afternoon">
+                    Afternoon (12 PM - 6 PM)
+                </label>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="time-filter" value="evening">
+                    Evening / Night
+                </label>
+            </div>
+
+            <div class="filter-group">
+                <h3>Price Range</h3>
+
+                <input type="range" class="filter-range" id="priceRange"
+                    min="500" max="5000" value="5000" step="100">
+
+                <div class="range-labels">
+                    <span>₹500</span>
+                    <strong id="priceValue">Up to ₹5,000</strong>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Ratings</h3>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="rating-filter" value="4">
+                    4★ & above
+                </label>
+
+                <label class="filter-option">
+                    <input type="checkbox" class="rating-filter" value="3">
+                    3★ & above
+                </label>
+            </div>
+
+        </aside>
+
+        <!-- Bus Results -->
+        <section class="results-main">
+
+            <div class="results-heading">
+                <div>
+                    <h1>Available Buses</h1>
+                    <p id="resultSummary">Choose a bus that suits your journey</p>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:9px">
+
+                    <button class="mobile-filter-toggle" id="mobileFilterToggle" type="button">
+                        <i class="fas fa-filter"></i> Filters
+                    </button>
+
+                    <label class="sort-control">
+                        Sort by
+                        <select id="sortResults">
+                            <option value="recommended">Recommended</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </label>
+
+                </div>
+            </div>
+
+            <div id="busResults">
+
+                <!-- Bus Card 1 -->
+                <article class="bus-card"
+                    data-price="2301"
+                    data-rating="4.2"
+                    data-type="ac sleeper"
+                    data-time="evening">
+
+                    <div class="bus-main">
+
+                        <div>
+                            <div class="operator-name">UCS Royal Travels</div>
+                            <div class="bus-type">A/C Sleeper / Sleeper (2+1)</div>
+                        </div>
+
+                        <div>
+                            <span class="rating"><i class="fas fa-star"></i> 4.2</span>
+                        </div>
+
+                        <div class="time-block">
+                            <strong>23:55 <span style="color:#a5acb9;font-weight:400">—</span> 05:45</strong>
+                            <small>5h 50m · 24 Seats</small>
+                        </div>
+
+                        <div class="price-block">
+                            <strong>₹2,301</strong>
+                            <small>Onwards</small>
+                        </div>
+
+                        <button class="seat-button" type="button">View Seats</button>
+
+                    </div>
+
+                    <div class="bus-divider"></div>
+
+                    <div class="bus-extra">
+                        <button class="active">Highlights</button>
+                        <button>Boarding / Dropping Points</button>
+                        <button>Ratings & Reviews</button>
+                        <button>Bus Photos</button>
+                        <button>Cancellation Policies</button>
+                    </div>
+                </article>
+
+                <!-- Bus Card 2 -->
+                <article class="bus-card"
+                    data-price="1850"
+                    data-rating="4.5"
+                    data-type="ac seater"
+                    data-time="evening">
+
+                    <div class="bus-main">
+
+                        <div>
+                            <div class="operator-name">UCS Express Travels</div>
+                            <div class="bus-type">A/C Seater (2+2)</div>
+                        </div>
+
+                        <div>
+                            <span class="rating"><i class="fas fa-star"></i> 4.5</span>
+                        </div>
+
+                        <div class="time-block">
+                            <strong>22:30 <span style="color:#a5acb9;font-weight:400">—</span> 04:30</strong>
+                            <small>6h 00m · 18 Seats</small>
+                        </div>
+
+                        <div class="price-block">
+                            <strong>₹1,850</strong>
+                            <small>Onwards</small>
+                        </div>
+
+                        <button class="seat-button" type="button">View Seats</button>
+
+                    </div>
+
+                    <div class="bus-divider"></div>
+
+                    <div class="bus-extra">
+                        <button>Highlights</button>
+                        <button>Boarding / Dropping Points</button>
+                        <button>Ratings & Reviews</button>
+                        <button>Cancellation Policies</button>
+                    </div>
+                </article>
+
+                <!-- Bus Card 3 -->
+                <article class="bus-card"
+                    data-price="1450"
+                    data-rating="4.1"
+                    data-type="nonac sleeper"
+                    data-time="evening">
+
+                    <div class="bus-main">
+
+                        <div>
+                            <div class="operator-name">Shree Journey Travels</div>
+                            <div class="bus-type">Non A/C Sleeper (2+1)</div>
+                        </div>
+
+                        <div>
+                            <span class="rating"><i class="fas fa-star"></i> 4.1</span>
+                        </div>
+
+                        <div class="time-block">
+                            <strong>19:45 <span style="color:#a5acb9;font-weight:400">—</span> 05:30</strong>
+                            <small>9h 45m · 30 Seats</small>
+                        </div>
+
+                        <div class="price-block">
+                            <strong>₹1,450</strong>
+                            <small>Onwards</small>
+                        </div>
+
+                        <button class="seat-button" type="button">View Seats</button>
+
+                    </div>
+
+                    <div class="bus-divider"></div>
+
+                    <div class="bus-extra">
+                        <button>Highlights</button>
+                        <button>Boarding / Dropping Points</button>
+                        <button>Ratings & Reviews</button>
+                        <button>Cancellation Policies</button>
+                    </div>
+                </article>
+
+                <!-- Bus Card 4 -->
+                <article class="bus-card"
+                    data-price="980"
+                    data-rating="3.7"
+                    data-type="nonac seater"
+                    data-time="morning">
+
+                    <div class="bus-main">
+
+                        <div>
+                            <div class="operator-name">City Link Travels</div>
+                            <div class="bus-type">Non A/C Seater (2+2)</div>
+                        </div>
+
+                        <div>
+                            <span class="rating"><i class="fas fa-star"></i> 3.7</span>
+                        </div>
+
+                        <div class="time-block">
+                            <strong>08:15 <span style="color:#a5acb9;font-weight:400">—</span> 14:00</strong>
+                            <small>5h 45m · 16 Seats</small>
+                        </div>
+
+                        <div class="price-block">
+                            <strong>₹980</strong>
+                            <small>Onwards</small>
+                        </div>
+
+                        <button class="seat-button" type="button">View Seats</button>
+
+                    </div>
+
+                    <div class="bus-divider"></div>
+
+                    <div class="bus-extra">
+                        <button>Highlights</button>
+                        <button>Boarding / Dropping Points</button>
+                        <button>Ratings & Reviews</button>
+                        <button>Cancellation Policies</button>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-bus-simple"></i>
+                <h3>No buses match your filters</h3>
+                <p>Try changing or clearing your filters.</p>
+            </div>
+
+        </section>
+    </div>
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+    // Load common header and footer
+    fetch("includes/header.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header").innerHTML = data)
+        .catch(error => console.error("Header loading error:", error));
+
+    fetch("includes/footer.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer").innerHTML = data)
+        .catch(error => console.error("Footer loading error:", error));
+
+
+    // Get search details from URL
+    const params = new URLSearchParams(window.location.search);
+
+    const fromInput = document.getElementById("from");
+    const toInput = document.getElementById("to");
+    const dateInput = document.getElementById("journeyDate");
+
+    fromInput.value = params.get("from") || "";
+    toInput.value = params.get("to") || "";
+    dateInput.value = params.get("date") || "";
+
+
+    // Update journey details
+    function updateJourneyDetails() {
+
+        document.getElementById("routeFrom").textContent =
+            fromInput.value || "Your city";
+
+        document.getElementById("routeTo").textContent =
+            toInput.value || "Destination";
+
+        if (dateInput.value) {
+
+            const selectedDate = new Date(dateInput.value + "T00:00:00");
+
+            document.getElementById("journeyDateText").textContent =
+                selectedDate.toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                });
+
+        } else {
+
+            document.getElementById("journeyDateText").textContent = "Select date";
+
+        }
+    }
+
+    updateJourneyDetails();
+
+    [fromInput, toInput, dateInput].forEach(input => {
+        input.addEventListener("input", updateJourneyDetails);
+        input.addEventListener("change", updateJourneyDetails);
+    });
+
+
+    // Swap From and To
+    document.getElementById("swapCities").addEventListener("click", function () {
+
+        const oldFrom = fromInput.value;
+
+        fromInput.value = toInput.value;
+        toInput.value = oldFrom;
+
+        updateJourneyDetails();
+
+    });
+
+
+    // Bus filters
+    const resultsContainer = document.getElementById("busResults");
+
+    const busCards = Array.from(
+        resultsContainer.querySelectorAll(".bus-card")
+    );
+
+    function applyFilters() {
+
+        const selectedTypes = Array.from(
+            document.querySelectorAll(".bus-filter:checked")
+        ).map(input => input.value);
+
+        const selectedTimes = Array.from(
+            document.querySelectorAll(".time-filter:checked")
+        ).map(input => input.value);
+
+        const selectedRatings = Array.from(
+            document.querySelectorAll(".rating-filter:checked")
+        ).map(input => Number(input.value));
+
+        const maxPrice = Number(
+            document.getElementById("priceRange").value
+        );
+
+        let visibleCount = 0;
+
+        busCards.forEach(card => {
+
+            const types = card.dataset.type.split(" ");
+
+            const typeMatch =
+                selectedTypes.length === 0 ||
+                selectedTypes.every(type => types.includes(type));
+
+            const timeMatch =
+                selectedTimes.length === 0 ||
+                selectedTimes.includes(card.dataset.time);
+
+            const ratingMatch =
+                selectedRatings.length === 0 ||
+                selectedRatings.some(rating =>
+                    Number(card.dataset.rating) >= rating
+                );
+
+            const priceMatch =
+                Number(card.dataset.price) <= maxPrice;
+
+            const shouldShow =
+                typeMatch && timeMatch && ratingMatch && priceMatch;
+
+            card.style.display = shouldShow ? "" : "none";
+
+            if (shouldShow) visibleCount++;
+
+        });
+
+        document.getElementById("emptyState").style.display =
+            visibleCount ? "none" : "block";
+
+        document.getElementById("resultSummary").textContent =
+            visibleCount + " sample bus option(s) shown" +
+            (fromInput.value && toInput.value
+                ? " for " + fromInput.value + " to " + toInput.value
+                : "");
+
+    }
+
+
+    document.querySelectorAll(
+        ".bus-filter, .time-filter, .rating-filter"
+    ).forEach(input => {
+
+        input.addEventListener("change", applyFilters);
+
+    });
+
+
+    // Price range
+    document.getElementById("priceRange").addEventListener("input", function () {
+
+        document.getElementById("priceValue").textContent =
+            "Up to ₹" + Number(this.value).toLocaleString("en-IN");
+
+        applyFilters();
+
+    });
+
+
+    // Clear filters
+    document.getElementById("clearFilters").addEventListener("click", function () {
+
+        document.querySelectorAll(
+            ".bus-filter, .time-filter, .rating-filter"
+        ).forEach(input => input.checked = false);
+
+        document.getElementById("priceRange").value = 5000;
+
+        document.getElementById("priceValue").textContent = "Up to ₹5,000";
+
+        applyFilters();
+
+    });
+
+
+    // Sort bus results
+    document.getElementById("sortResults").addEventListener("change", function () {
+
+        const mode = this.value;
+
+        const visibleCards = busCards.filter(card =>
+            card.style.display !== "none"
+        );
+
+        visibleCards.sort((a, b) => {
+
+            if (mode === "price-low") {
+                return Number(a.dataset.price) - Number(b.dataset.price);
+            }
+
+            if (mode === "price-high") {
+                return Number(b.dataset.price) - Number(a.dataset.price);
+            }
+
+            if (mode === "rating") {
+                return Number(b.dataset.rating) - Number(a.dataset.rating);
+            }
+
+            return busCards.indexOf(a) - busCards.indexOf(b);
+
+        });
+
+        visibleCards.forEach(card => resultsContainer.appendChild(card));
+
+    });
+
+
+    // Mobile filters
+    document.getElementById("mobileFilterToggle").addEventListener("click", function () {
+
+        document.getElementById("filterPanel").classList.toggle("show");
+
+    });
+
+
+    // Details tabs UI
+    document.querySelectorAll(".bus-extra button").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            this.parentElement.querySelectorAll("button").forEach(item => {
+                item.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+        });
+
+    });
+
+
+    // Seat selection placeholder
+    document.querySelectorAll(".seat-button").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            alert("Seat selection will be available after connecting the bus booking API.");
+
+        });
+
+    });
+// Show logo after scrolling
+window.addEventListener("scroll", function () {
+
+    if (window.scrollY > 80) {
+        document.body.classList.add("page-scrolled");
+    } else {
+        document.body.classList.remove("page-scrolled");
+    }
+
+});
+</script>
+
+</body>
+</html>

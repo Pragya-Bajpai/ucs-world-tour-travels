@@ -4230,6 +4230,7 @@ a {
     background: #ffffff;
     box-shadow: 0 5px 18px rgba(20,25,45,0.06);
     overflow: visible;
+    padding: 16px;
 }
 
 .flight-search-form .search-field {
