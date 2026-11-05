@@ -12,7 +12,7 @@
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<link rel="stylesheet" href="assets/css/loader.css">
     <style>
         :root {
             --ucs-navy: #07123d;
@@ -265,7 +265,7 @@
             padding: 0 16px;
             border: 0;
             border-radius: 5px;
-            background: var(--ucs-red);
+            background: linear-gradient(135deg, #07123d 0%, #1769aa 55%, #ff0000 100%);
             color: #fff;
             font-size: 12px;
             font-weight: 700;
@@ -273,10 +273,11 @@
             transition: .2s ease;
         }
 
-        .register-btn:hover {
-            background: #c90000;
-            transform: translateY(-1px);
-        }
+       .register-btn:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #1769aa 55%, #07123d 100%);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
 
         .register-btn:focus-visible {
             outline: 3px solid rgba(255, 0, 0, .2);
@@ -624,6 +625,6 @@
         });
 
     </script>
-
+<script src="assets/js/loader.js"></script>
 </body>
 </html>

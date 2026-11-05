@@ -1,0 +1,138 @@
+
+/* ===== UCS Premium Circular Loader ===== */
+
+#ucs-page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .6s ease, visibility .6s ease;
+}
+
+#ucs-page-loader.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.ucs-loader-content {
+    text-align: center;
+}
+
+/* Circular Animation */
+
+.ucs-loader-circle {
+    width: 115px;
+    height: 115px;
+    position: relative;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ucs-loader-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+.ucs-ring-one {
+    inset: 0;
+    border-top-color: #07123d;
+    border-right-color: #07123d;
+    animation: ucs-rotate 1.5s linear infinite;
+}
+
+.ucs-ring-two {
+    inset: 10px;
+    border-bottom-color: #ff0000;
+    border-left-color: #ff0000;
+    animation: ucs-rotate-reverse 1.2s linear infinite;
+}
+
+.ucs-ring-three {
+    inset: 20px;
+    border-top-color: #1769aa;
+    border-right-color: #1769aa;
+    animation: ucs-rotate 2s linear infinite;
+}
+
+/* Center Logo */
+
+.ucs-loader-center {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 3px 15px rgba(7, 18, 61, .12);
+    z-index: 2;
+}
+
+.ucs-loader-center img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+/* Loading Text */
+
+.ucs-loader-title {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #07123d;
+    margin: 0 0 9px;
+}
+
+.ucs-loader-subtitle {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #718096;
+    margin: 0;
+}
+
+/* Animations */
+
+@keyframes ucs-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ucs-rotate-reverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .ucs-loader-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ucs-loader-title {
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ucs-loader-ring {
+        animation: none;
+    }
+}
