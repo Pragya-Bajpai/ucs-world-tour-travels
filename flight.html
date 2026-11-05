@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
  <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         :root {
             --ucs-navy: #07123d;
@@ -701,7 +702,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 .flight-search-header {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 999;
     width: 100%;
     background: #fff;
     box-shadow: 0 3px 15px rgba(7,18,61,.08);
@@ -867,7 +868,188 @@ body.page-scrolled .flight-logo {
         width: 100%;
     }
 }
+/* =====================================
+   FLIGHT RESULTS - UCS SCREENSHOT LAYOUT
+===================================== */
+
+.flight-columns {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 22px;
+    width: 100%;
+}
+
+.flight-columns > section {
+    width: 100%;
+    min-width: 0;
+}
+
+.direction-title {
+    margin-bottom: 12px;
+    padding: 10px 13px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.flight-card {
+    display: grid;
+    grid-template-columns: 55px minmax(0, 1fr) 150px;
+    gap: 12px;
+    align-items: stretch;
+    padding: 12px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.18);
+    margin-bottom: 20px;
+}
+
+.airline-row {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    align-self: start;
+    justify-content: center;
+    font-size: 0;
+}
+
+.airline-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+    font-size: 17px;
+}
+
+.flight-info {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: minmax(90px, 1fr) minmax(100px, 1fr) minmax(90px, 1fr);
+    align-items: center;
+    gap: 12px;
+}
+
+.flight-info .flight-price {
+    display: none;
+}
+
+.flight-time strong {
+    font-size: 16px;
+}
+
+.flight-time span {
+    font-size: 13px;
+}
+
+.flight-duration {
+    font-size: 12px;
+}
+
+.flight-duration:after {
+    margin: 7px 5px;
+}
+
+.flight-tags {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+    padding-top: 8px;
+}
+
+.flight-card::after {
+    content: attr(data-display-price);
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    border-left: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--ucs-navy);
+}
+
+.flight-card .flight-tags::after {
+    content: "View Details     View Fare Rules";
+    display: block;
+    color: var(--ucs-red);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 7px;
+}
+
+@media(max-width:700px) {
+    .flight-page {
+        display: block;
+        padding: 0 10px 170px;
+    }
+
+    .flight-columns {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .flight-card {
+        grid-template-columns: 38px minmax(0, 1fr);
+        gap: 9px;
+        padding: 12px;
+    }
+
+    .airline-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .flight-info {
+        grid-column: 2;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 8px;
+    }
+
+    .flight-card::after {
+        grid-column: 2;
+        grid-row: 3;
+        border-left: 0;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        justify-content: flex-start;
+        font-size: 16px;
+    }
+
+    .flight-tags {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
+.connecting-info {
+    grid-template-columns: minmax(90px, 1fr) minmax(90px, 1fr) minmax(90px, 1fr);
+    row-gap: 13px;
+}
+
+.layover-info {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 7px 9px;
+    background: #f8f9fc;
+    color: #718096;
+    font-size: 11px;
+}
+
+.layover-info strong {
+    color: #596477;
+}
+
+@media(max-width:700px) {
+    .connecting-info {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .layover-info {
+        grid-column: 1 / -1;
+    }
+}
     </style>
+    
 </head>
 
 <body>
@@ -946,37 +1128,7 @@ body.page-scrolled .flight-logo {
 
     </div>
 
-    <div class="fare-types">
-        <strong>FARE TYPE:</strong>
-
-        <label class="fare-chip">
-            <input type="radio" name="fareType" checked> Regular
-        </label>
-
-        <label class="fare-chip">
-            <input type="radio" name="fareType"> Student
-        </label>
-
-        <label class="fare-chip">
-            <input type="radio" name="fareType"> Armed Forces
-        </label>
-
-        <label class="fare-chip">
-            <input type="radio" name="fareType"> Have a GST Number?
-        </label>
-
-        <label class="fare-chip">
-            <input type="radio" name="fareType"> Senior Citizen
-        </label>
-
-        <label class="fare-chip">
-            <input type="radio" name="fareType"> Doctor and Nurses
-        </label>
-
-        <label class="fare-chip">
-            <input type="checkbox"> Add Price Drop Protection
-        </label>
-    </div>
+   
 
 </header>
 
@@ -1201,19 +1353,7 @@ body.page-scrolled .flight-logo {
                     </select>
                 </div>
 
-                <div class="login-offer">
-
-                    <div>
-                        <strong>Log in and get exclusive discounts!</strong>
-                        <span>Unlock exclusive offers and wallet benefits.</span>
-                    </div>
-
-                    <button type="button"
-                            onclick="alert('Login feature will be connected soon.')">
-                        LOGIN NOW
-                    </button>
-
-                </div>
+               
 
                 <div id="outbound">
 
@@ -1270,28 +1410,46 @@ body.page-scrolled .flight-logo {
                             Air India
                         </div>
 
-                        <div class="flight-info">
+                       <div class="flight-info connecting-info">
 
-                            <div class="flight-time">
-                                <strong>08:15</strong>
-                                <span>BOM</span>
-                            </div>
+    <div class="flight-time">
+        <strong>10:00 pm</strong>
+        <span>Mumbai (BOM)</span>
+    </div>
 
-                            <div class="flight-duration">
-                                07h 50m
-                                <br>
-                                <span class="stops">1 Stop • BLR</span>
-                            </div>
+    <div class="flight-duration">
+        1h 45m
+        <br>
+        <span class="stops">Nonstop</span>
+    </div>
 
-                            <div class="flight-time">
-                                <strong>16:05</strong>
-                                <span>TRV</span>
-                            </div>
+    <div class="flight-time">
+        <strong>11:45 pm</strong>
+        <span>Bengaluru (BLR)</span>
+    </div>
 
-                            <div class="flight-price">₹11,240</div>
+    <div class="layover-info">
+        <strong>Layover: 2h 15m</strong>
+        <span>Change planes at Bengaluru</span>
+    </div>
 
-                        </div>
+    <div class="flight-time">
+        <strong>02:00 am</strong>
+        <span>Bengaluru (BLR)</span>
+    </div>
 
+    <div class="flight-duration">
+        3h 00m
+        <br>
+        <span class="stops">Nonstop</span>
+    </div>
+
+    <div class="flight-time">
+        <strong>05:00 am</strong>
+        <span>Thiruvananthapuram (TRV)</span>
+    </div>
+
+</div>
                         <div class="flight-tags">
                             <span class="flight-tag">Amenities</span>
                             <span class="flight-tag">Check-in Baggage</span>
