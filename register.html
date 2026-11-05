@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | UCS World Tour & Travels</title>
+    <meta name="description" content="Create your UCS World Tour and Travels account to manage your travel bookings.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --ucs-navy: #07123d;
+            --ucs-red: #ff0000;
+            --ucs-blue: #1769aa;
+            --ucs-text: #17213b;
+            --ucs-muted: #718096;
+            --ucs-border: #dce2eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: var(--ucs-text);
+        }
+
+        /* REGISTER WRAPPER */
+
+        .register-wrapper {
+            width: 100%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 25px 50px;
+        }
+
+        /* HEADING */
+
+        .register-heading {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .register-heading small {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--ucs-red);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .register-heading h1 {
+            margin: 0;
+            color: var(--ucs-navy);
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .register-heading h1 span {
+            color: var(--ucs-red);
+        }
+
+        .register-heading p {
+            margin: 10px 0 0;
+            color: var(--ucs-muted);
+            font-size: 14px;
+        }
+
+        .register-heading p a {
+            color: var(--ucs-red);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .register-heading p a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN LAYOUT */
+
+        .register-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        /* TRAVEL IMAGE */
+
+        .register-image {
+            position: relative;
+            min-height: 440px;
+            overflow: hidden;
+            border-radius: 12px;
+            background:
+                linear-gradient(180deg, transparent 35%, rgba(7,18,61,.88)),
+                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1000")
+                center/cover no-repeat;
+        }
+
+        .register-image-content {
+            position: absolute;
+            right: 25px;
+            bottom: 25px;
+            left: 25px;
+            color: #fff;
+        }
+
+        .register-image-content h2 {
+            margin: 0 0 10px;
+            font-size: 28px;
+        }
+
+        .register-image-content p {
+            max-width: 380px;
+            margin: 0;
+            color: #f0f3fa;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .travel-label {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 7px 13px;
+            border-radius: 30px;
+            background: var(--ucs-red);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* REGISTER FORM */
+
+        .register-form-wrapper {
+            width: 100%;
+            padding: 5px 0;
+        }
+
+        .register-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px 20px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--ucs-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 43px;
+            padding: 0 12px;
+            border: 1px solid var(--ucs-border);
+            border-radius: 6px;
+            outline: none;
+            background: #fff;
+            color: var(--ucs-text);
+            font-size: 13px;
+            transition: .2s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--ucs-blue);
+            box-shadow: 0 0 0 3px rgba(23,105,170,.09);
+        }
+
+        .form-control::placeholder {
+            color: #929baa;
+        }
+
+        /* PASSWORD */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .form-control {
+            padding-right: 40px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 13px;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: var(--ucs-red);
+            cursor: pointer;
+        }
+
+        /* TERMS */
+
+        .terms-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .terms-row input {
+            width: 15px;
+            height: 15px;
+            margin: 0;
+            accent-color: var(--ucs-red);
+        }
+
+        .terms-row label {
+            margin: 0;
+            color: var(--ucs-text);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .terms-row a {
+            color: var(--ucs-red);
+            text-decoration: none;
+        }
+
+        .terms-row a:hover {
+            text-decoration: underline;
+        }
+
+        .terms-note {
+            grid-column: 1 / -1;
+            margin: -5px 0 0;
+            color: var(--ucs-muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* REGISTER BUTTON */
+
+        .register-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-width: 115px;
+            height: 38px;
+            padding: 0 16px;
+            border: 0;
+            border-radius: 5px;
+            background: var(--ucs-red);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .register-btn:hover {
+            background: #c90000;
+            transform: translateY(-1px);
+        }
+
+        .register-btn:focus-visible {
+            outline: 3px solid rgba(255, 0, 0, .2);
+            outline-offset: 3px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            .register-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .register-image {
+                min-height: 280px;
+            }
+
+            .register-form-wrapper {
+                max-width: 650px;
+                margin: auto;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .register-wrapper {
+                padding: 25px 15px 35px;
+            }
+
+            .register-heading {
+                margin-bottom: 22px;
+            }
+
+            .register-heading h1 {
+                font-size: 27px;
+            }
+
+            .register-image {
+                min-height: 220px;
+            }
+
+            .register-image-content {
+                right: 18px;
+                bottom: 18px;
+                left: 18px;
+            }
+
+            .register-image-content h2 {
+                font-size: 22px;
+            }
+
+            .register-image-content p {
+                font-size: 12px;
+            }
+
+            .register-form {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .form-group.full-width,
+            .terms-note {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- WEBSITE HEADER -->
+    <div id="header"></div>
+
+    <!-- REGISTER PAGE -->
+    <main class="register-wrapper">
+
+        <!-- HEADING -->
+        <div class="register-heading">
+
+            <small>UCS WORLD TOUR AND TRAVELS</small>
+
+            <h1>Create Your <span>Account</span></h1>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </div>
+
+        <div class="register-content">
+
+            <!-- TRAVEL BANNER -->
+            <div class="register-image">
+
+                <div class="register-image-content">
+
+                    <span class="travel-label">EXPLORE THE WORLD</span>
+
+                    <h2>Your Journey Starts Here!</h2>
+
+                    <p>
+                        Create your account and make your next travel
+                        experience simple, comfortable and memorable.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- REGISTRATION FORM -->
+            <div class="register-form-wrapper">
+
+                <form class="register-form" id="registerForm">
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="firstName"
+                               name="firstName"
+                               placeholder="Enter first name"
+                               autocomplete="given-name"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="lastName"
+                               name="lastName"
+                               placeholder="Enter last name"
+                               autocomplete="family-name"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Your Phone</label>
+
+                        <input type="tel"
+                               class="form-control"
+                               id="phone"
+                               name="phone"
+                               placeholder="+91 XXXXX XXXXX"
+                               pattern="[0-9+\-\s]{10,15}"
+                               autocomplete="tel"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+
+                        <input type="email"
+                               class="form-control"
+                               id="email"
+                               name="email"
+                               placeholder="example@gmail.com"
+                               autocomplete="email"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <div class="password-wrapper">
+
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Enter password"
+                                   minlength="8"
+                                   autocomplete="new-password"
+                                   required>
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    data-target="password"
+                                    aria-label="Show password">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+
+                        <div class="password-wrapper">
+
+                            <input type="password"
+                                   class="form-control"
+                                   id="confirmPassword"
+                                   name="confirmPassword"
+                                   placeholder="Confirm password"
+                                   minlength="8"
+                                   autocomplete="new-password"
+                                   required>
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    data-target="confirmPassword"
+                                    aria-label="Show password">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- TERMS -->
+                    <div class="form-group full-width">
+
+                        <div class="terms-row">
+
+                            <input type="checkbox"
+                                   id="terms"
+                                   name="terms"
+                                   required>
+
+                            <label for="terms">
+                                I agree to the
+                                <a href="terms.html">Terms & Conditions</a>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <p class="terms-note">
+                        By signing up, I agree to UCS Terms of Use and Privacy Policy.
+                    </p>
+
+                    <!-- SUBMIT BUTTON -->
+                    <div class="form-group full-width">
+
+                        <button type="submit" class="register-btn">
+                            Register
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- WEBSITE FOOTER -->
+    <div id="footer"></div>
+
+    <script>
+
+        /* LOAD WEBSITE HEADER */
+
+        fetch("includes/header.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Header could not be loaded");
+                }
+
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            })
+            .catch(error => console.error(error));
+
+
+        /* LOAD WEBSITE FOOTER */
+
+        fetch("includes/footer.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Footer could not be loaded");
+                }
+
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error(error));
+
+
+        /* SHOW / HIDE PASSWORD */
+
+        document.querySelectorAll(".password-toggle").forEach(button => {
+
+            button.addEventListener("click", function () {
+
+                const input = document.getElementById(this.dataset.target);
+                const icon = this.querySelector("i");
+
+                if (input.type === "password") {
+
+                    input.type = "text";
+
+                    icon.classList.replace("fa-eye", "fa-eye-slash");
+
+                    this.setAttribute("aria-label", "Hide password");
+
+                } else {
+
+                    input.type = "password";
+
+                    icon.classList.replace("fa-eye-slash", "fa-eye");
+
+                    this.setAttribute("aria-label", "Show password");
+
+                }
+
+            });
+
+        });
+
+
+        /* REGISTRATION FORM */
+
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+            e.preventDefault();
+
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+
+                alert("Password and Confirm Password do not match.");
+
+                document.getElementById("confirmPassword").focus();
+
+                return;
+            }
+
+            alert("Registration form submitted successfully. Connect your registration API to create an account.");
+
+        });
+
+    </script>
+
+</body>
+</html>
