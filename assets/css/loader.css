@@ -1,5 +1,7 @@
 
-/* ===== UCS Premium Circular Loader ===== */
+/* =========================================
+   UCS PREMIUM TRAVEL PAGE LOADER
+========================================= */
 
 #ucs-page-loader {
     position: fixed;
@@ -8,7 +10,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 50% 42%, rgba(16, 105, 170, .30), transparent 38%),
+        radial-gradient(circle at 15% 85%, rgba(255, 0, 0, .10), transparent 35%),
+        linear-gradient(135deg, #050d29 0%, #071b49 50%, #02091e 100%);
+
     opacity: 1;
     visibility: visible;
     transition: opacity .6s ease, visibility .6s ease;
@@ -20,119 +28,292 @@
     pointer-events: none;
 }
 
-.ucs-loader-content {
-    text-align: center;
+/* Background Glow */
+
+#ucs-page-loader::before,
+#ucs-page-loader::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
 }
 
-/* Circular Animation */
+#ucs-page-loader::before {
+    background: rgba(0, 145, 255, .12);
+    top: -180px;
+    left: -150px;
+}
+
+#ucs-page-loader::after {
+    background: rgba(255, 30, 30, .09);
+    bottom: -200px;
+    right: -150px;
+}
+
+/* Background Decorative Dots */
+
+.ucs-loader-dots {
+    position: absolute;
+    inset: 0;
+    opacity: .20;
+    background-image: radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px);
+    background-size: 35px 35px;
+    mask-image: linear-gradient(transparent, black 25%, black 75%, transparent);
+}
+
+/* Main Content */
+
+.ucs-loader-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 25px;
+}
+
+/* Circular Logo Animation */
 
 .ucs-loader-circle {
-    width: 115px;
-    height: 115px;
+    width: 140px;
+    height: 140px;
     position: relative;
-    margin: 0 auto 30px;
+    margin: 0 auto 32px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Rings */
+
 .ucs-loader-ring {
     position: absolute;
     border-radius: 50%;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
 }
 
 .ucs-ring-one {
     inset: 0;
-    border-top-color: #07123d;
-    border-right-color: #07123d;
-    animation: ucs-rotate 1.5s linear infinite;
+    border-top-color: #ffffff;
+    border-right-color: #ffffff;
+    animation: ucs-rotate 2s linear infinite;
+    box-shadow: 0 0 12px rgba(255,255,255,.12);
 }
 
 .ucs-ring-two {
-    inset: 10px;
-    border-bottom-color: #ff0000;
-    border-left-color: #ff0000;
-    animation: ucs-rotate-reverse 1.2s linear infinite;
+    inset: 11px;
+    border-bottom-color: #ff2929;
+    border-left-color: #ff2929;
+    animation: ucs-rotate-reverse 1.6s linear infinite;
+    box-shadow: 0 0 12px rgba(255,0,0,.18);
 }
 
 .ucs-ring-three {
-    inset: 20px;
-    border-top-color: #1769aa;
-    border-right-color: #1769aa;
-    animation: ucs-rotate 2s linear infinite;
+    inset: 23px;
+    border-top-color: #21a8ff;
+    border-right-color: #21a8ff;
+    animation: ucs-rotate 2.8s linear infinite;
 }
 
 /* Center Logo */
 
 .ucs-loader-center {
-    width: 55px;
-    height: 55px;
+    width: 68px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 3px 15px rgba(7, 18, 61, .12);
+    background: #ffffff;
+    box-shadow: 0 0 30px rgba(35, 157, 255, .35);
     z-index: 2;
 }
 
 .ucs-loader-center img {
-    width: 38px;
-    height: 38px;
+    width: 47px;
+    height: 47px;
     object-fit: contain;
 }
 
-/* Loading Text */
+/* Brand Text */
 
 .ucs-loader-title {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 800;
     letter-spacing: 2px;
-    color: #07123d;
-    margin: 0 0 9px;
+    color: #ffffff;
+    margin: 0 0 11px;
+    text-shadow: 0 2px 15px rgba(0,0,0,.2);
 }
 
 .ucs-loader-subtitle {
-    font-size: 12px;
-    letter-spacing: 1px;
-    color: #718096;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: #b8cce8;
     margin: 0;
+}
+
+/* Loading Progress Line */
+
+.ucs-loader-progress {
+    width: 180px;
+    height: 3px;
+    margin: 25px auto 0;
+    background: rgba(255,255,255,.15);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.ucs-loader-progress span {
+    display: block;
+    height: 100%;
+    width: 35%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #168bdb, #ffffff, #ff2525);
+    animation: ucs-progress 1.8s ease-in-out infinite;
+}
+
+/* =========================================
+   FLYING AEROPLANE
+========================================= */
+
+.ucs-flight-plane {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    left: -100px;
+    top: 12%;
+    z-index: 3;
+    pointer-events: none;
+    animation: ucs-plane-flight 7s linear infinite;
+    filter: drop-shadow(0 5px 12px rgba(0, 150, 255, .35));
+}
+
+.ucs-flight-plane svg {
+    width: 100%;
+    height: 100%;
+    fill: #ffffff;
+}
+
+/* Plane Flight Trail */
+
+.ucs-flight-trail {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    top: 50%;
+    right: 65%;
+    border-top: 2px dashed rgba(255,255,255,.65);
+    transform: rotate(-10deg);
+}
+
+/* Zigzag Flight Route */
+
+@keyframes ucs-plane-flight {
+    0% {
+        left: -100px;
+        top: 12%;
+        transform: rotate(12deg);
+    }
+
+    15% {
+        left: 15%;
+        top: 34%;
+        transform: rotate(-12deg);
+    }
+
+    30% {
+        left: 32%;
+        top: 10%;
+        transform: rotate(12deg);
+    }
+
+    45% {
+        left: 48%;
+        top: 37%;
+        transform: rotate(-12deg);
+    }
+
+    60% {
+        left: 65%;
+        top: 13%;
+        transform: rotate(12deg);
+    }
+
+    75% {
+        left: 80%;
+        top: 35%;
+        transform: rotate(-12deg);
+    }
+
+    100% {
+        left: 110%;
+        top: 12%;
+        transform: rotate(12deg);
+    }
 }
 
 /* Animations */
 
 @keyframes ucs-rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes ucs-rotate-reverse {
-    from {
-        transform: rotate(360deg);
-    }
-    to {
-        transform: rotate(0deg);
-    }
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
 }
 
-@media (max-width: 480px) {
+@keyframes ucs-progress {
+    0% { transform: translateX(-120%); }
+    100% { transform: translateX(400%); }
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+
     .ucs-loader-circle {
-        width: 100px;
-        height: 100px;
+        width: 115px;
+        height: 115px;
+    }
+
+    .ucs-loader-center {
+        width: 58px;
+        height: 58px;
+    }
+
+    .ucs-loader-center img {
+        width: 40px;
+        height: 40px;
     }
 
     .ucs-loader-title {
-        font-size: 13px;
+        font-size: 14px;
+        letter-spacing: 1.3px;
+    }
+
+    .ucs-loader-subtitle {
+        font-size: 11px;
+    }
+
+    .ucs-flight-plane {
+        width: 52px;
+        height: 52px;
+        animation-duration: 5.5s;
+    }
+
+    .ucs-loader-progress {
+        width: 150px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .ucs-loader-ring {
+    .ucs-loader-ring,
+    .ucs-flight-plane,
+    .ucs-loader-progress span {
         animation: none;
     }
 }

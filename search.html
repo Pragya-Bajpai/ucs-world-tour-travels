@@ -383,7 +383,7 @@
         .seat-button {
             border: 0;
             border-radius: 25px;
-            padding: 13px 17px;
+            padding: 8px 13px;
             background: var(--red);
             color: white;
             font-size: 12px;
@@ -765,1027 +765,6 @@ body.page-scrolled .top-inner {
     }
 
 }
-
-/* =========================================
-   UCS PREMIUM BUS BOOKING MODAL
-========================================= */
-
-.booking-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 10005;
-    background: rgba(3, 9, 32, .78);
-    backdrop-filter: blur(7px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-}
-
-.booking-modal.active {
-    display: flex;
-}
-
-.booking-dialog {
-    width: 100%;
-    max-width: 1050px;
-    max-height: 94vh;
-    background: #f5f7fc;
-    border-radius: 18px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 25px 80px rgba(0,0,0,.3);
-    animation: bookingOpen .3s ease;
-}
-
-@keyframes bookingOpen {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Header */
-
-.booking-header {
-    background: linear-gradient(120deg, #07123d, #162d70, #ff0000);
-    padding: 20px 24px;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-}
-
-.booking-header h2 {
-    margin: 0 0 6px;
-    font-size: 19px;
-}
-
-.booking-header p {
-    margin: 0;
-    font-size: 12px;
-    color: rgba(255,255,255,.8);
-}
-
-.booking-close {
-    width: 36px;
-    height: 36px;
-    border: 1px solid rgba(255,255,255,.3);
-    border-radius: 50%;
-    background: rgba(255,255,255,.12);
-    color: #fff;
-    font-size: 17px;
-    cursor: pointer;
-}
-
-/* Steps */
-
-.booking-steps {
-    display: flex;
-    justify-content: center;
-    padding: 17px 12px;
-    background: #fff;
-    border-bottom: 1px solid #e7eaf1;
-    gap: 0;
-}
-
-.booking-step {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #9aa3b5;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.booking-step span {
-    width: 27px;
-    height: 27px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: #edf0f6;
-    color: #7c8598;
-}
-
-.booking-step.active,
-.booking-step.completed {
-    color: #07123d;
-}
-
-.booking-step.active span,
-.booking-step.completed span {
-    background: linear-gradient(135deg,#07123d,#ff0000);
-    color: white;
-}
-
-.step-line {
-    width: 45px;
-    height: 2px;
-    background: #e6e9f0;
-    margin: 0 10px;
-}
-
-/* Body */
-
-.booking-body {
-    padding: 22px;
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
-}
-
-.booking-section {
-    display: none;
-}
-
-.booking-section.active {
-    display: block;
-}
-
-.booking-section-title {
-    margin-bottom: 18px;
-}
-
-.booking-section-title h3 {
-    margin: 0 0 5px;
-    font-size: 17px;
-    color: #07123d;
-}
-
-.booking-section-title p {
-    margin: 0;
-    color: #7b8498;
-    font-size: 12px;
-}
-
-/* Bus Seat Legend */
-
-.seat-legend {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
-    margin-bottom: 18px;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: #626d82;
-}
-
-.legend-box {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    border: 1px solid #cbd2df;
-}
-
-.legend-available {
-    background: #fff;
-}
-
-.legend-selected {
-    background: #07123d;
-    border-color: #07123d;
-}
-
-.legend-booked {
-    background: #d9dee8;
-}
-
-/* Seat Layout */
-
-.seat-layout-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
-
-.bus-layout {
-    width: 100%;
-    max-width: 440px;
-    background: #fff;
-    border: 2px solid #dce2ed;
-    border-radius: 45px 45px 16px 16px;
-    padding: 23px 18px;
-    box-shadow: 0 5px 20px rgba(7,18,61,.05);
-}
-
-.driver-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 18px;
-    margin-bottom: 15px;
-    border-bottom: 1px dashed #dce2ed;
-    font-size: 11px;
-    color: #7d879a;
-}
-
-.driver-section i {
-    font-size: 20px;
-    color: #07123d;
-}
-
-.seat-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 20px 1fr;
-    gap: 8px;
-    margin-bottom: 11px;
-    align-items: center;
-}
-
-.seat-gap {
-    width: 20px;
-}
-
-.bus-seat {
-    height: 43px;
-    min-width: 0;
-    border: 1px solid #cbd3e0;
-    border-radius: 7px 7px 4px 4px;
-    background: #fff;
-    color: #07123d;
-    font-size: 11px;
-    font-weight: 800;
-    cursor: pointer;
-    position: relative;
-    transition: .2s;
-}
-
-.bus-seat::before {
-    content: "";
-    position: absolute;
-    top: -4px;
-    left: 5px;
-    right: 5px;
-    height: 5px;
-    background: #dce2ed;
-    border-radius: 4px 4px 0 0;
-}
-
-.bus-seat:hover:not(:disabled) {
-    border-color: #ff0000;
-    color: #ff0000;
-}
-
-.bus-seat.selected {
-    background: linear-gradient(135deg,#07123d,#253d83);
-    color: #fff;
-    border-color: #07123d;
-}
-
-.bus-seat.selected::before {
-    background: #ff0000;
-}
-
-.bus-seat.booked {
-    background: #e1e5ed;
-    color: #a5adbb;
-    border-color: #e1e5ed;
-    cursor: not-allowed;
-}
-
-.bus-seat.booked::before {
-    background: #cbd1dc;
-}
-
-/* Selected Seat Summary */
-
-.selected-seat-panel {
-    width: 100%;
-    max-width: 270px;
-    background: #fff;
-    padding: 17px;
-    border: 1px solid #e5e9f1;
-    border-radius: 12px;
-}
-
-.selected-seat-panel h4 {
-    margin: 0 0 14px;
-    font-size: 14px;
-}
-
-.selected-seat-list {
-    min-height: 65px;
-    color: #8b94a7;
-    font-size: 12px;
-}
-
-.selected-seat-chip {
-    display: inline-block;
-    padding: 7px 9px;
-    margin: 3px;
-    border-radius: 6px;
-    background: #eef1f8;
-    color: #07123d;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.seat-total {
-    border-top: 1px solid #edf0f5;
-    padding-top: 13px;
-    margin-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.seat-total strong {
-    color: #ff0000;
-    font-size: 18px;
-}
-
-/* Forms */
-
-.booking-form-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
-}
-
-.booking-field label {
-    display: block;
-    margin-bottom: 7px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #34405b;
-}
-
-.booking-field input,
-.booking-field select {
-    width: 100%;
-    height: 44px;
-    padding: 0 12px;
-    border: 1px solid #dfe4ed;
-    border-radius: 8px;
-    outline: none;
-    background: #fff;
-    color: #07123d;
-    font-size: 12px;
-}
-
-.booking-field input:focus,
-.booking-field select:focus {
-    border-color: #ff0000;
-    box-shadow: 0 0 0 3px rgba(255,0,0,.07);
-}
-
-.passenger-card {
-    background: #fff;
-    border: 1px solid #e5e9f1;
-    padding: 17px;
-    border-radius: 12px;
-    margin-bottom: 14px;
-}
-
-.passenger-card h4 {
-    margin: 0 0 15px;
-    font-size: 14px;
-    color: #07123d;
-}
-
-/* Booking Summary */
-
-.booking-summary-card {
-    background: #fff;
-    padding: 19px;
-    border: 1px solid #e4e8f0;
-    border-radius: 12px;
-}
-
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin: 12px 0;
-    font-size: 12px;
-    color: #68748a;
-}
-
-.summary-row strong {
-    color: #07123d;
-    text-align: right;
-}
-
-.summary-grand-total {
-    border-top: 1px dashed #dce2ed;
-    padding-top: 15px;
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 800;
-}
-
-.summary-grand-total strong {
-    color: #ff0000;
-    font-size: 20px;
-}
-
-/* Footer */
-
-.booking-footer {
-    background: #fff;
-    padding: 15px 22px;
-    border-top: 1px solid #e8ebf2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-}
-
-.booking-footer-price small {
-    display: block;
-    font-size: 10px;
-    color: #8992a5;
-}
-
-.booking-footer-price strong {
-    font-size: 19px;
-    color: #07123d;
-}
-
-.booking-actions {
-    display: flex;
-    gap: 9px;
-}
-
-.booking-action-btn {
-    border: 0;
-    border-radius: 8px;
-    padding: 12px 21px;
-    font-size: 12px;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.booking-back {
-    background: #edf0f6;
-    color: #07123d;
-}
-
-.booking-next {
-    background: linear-gradient(110deg,#07123d,#ff0000);
-    color: #fff;
-}
-
-.booking-next:hover {
-    opacity: .9;
-}
-
-.booking-action-btn:disabled {
-    opacity: .4;
-    cursor: not-allowed;
-}
-
-.booking-success {
-    text-align: center;
-    padding: 30px 10px;
-}
-
-.booking-success i {
-    font-size: 55px;
-    color: #20a46b;
-    margin-bottom: 15px;
-}
-
-.booking-success h3 {
-    font-size: 21px;
-    color: #07123d;
-}
-
-.booking-success p {
-    color: #7b8498;
-    font-size: 13px;
-}
-
-/* Mobile */
-
-@media(max-width:700px) {
-    .booking-modal {
-        padding: 0;
-        align-items: flex-end;
-    }
-
-    .booking-dialog {
-        max-height: 96vh;
-        border-radius: 18px 18px 0 0;
-    }
-
-    .booking-header {
-        padding: 15px;
-    }
-
-    .booking-header h2 {
-        font-size: 16px;
-    }
-
-    .booking-body {
-        padding: 16px 12px;
-    }
-
-    .booking-step {
-        flex-direction: column;
-        gap: 5px;
-        font-size: 9px;
-    }
-
-    .step-line {
-        width: 20px;
-        margin: 0 4px;
-    }
-
-    .booking-form-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .seat-layout-wrapper {
-        gap: 14px;
-    }
-
-    .bus-layout {
-        padding: 20px 12px;
-    }
-
-    .selected-seat-panel {
-        max-width: 100%;
-    }
-
-    .booking-footer {
-        padding: 12px;
-    }
-
-    .booking-action-btn {
-        padding: 11px 14px;
-    }
-}
-
-/* =========================================
-   UCS BOOKING MODAL - DESIGN FIX
-========================================= */
-
-.booking-dialog {
-    height: min(90vh, 760px) !important;
-    max-height: 94vh !important;
-}
-
-/* Fix step navigation CSS conflict */
-
-.booking-steps {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0 !important;
-    padding: 16px 12px !important;
-    background: #fff !important;
-    flex: 0 0 auto;
-}
-
-.booking-steps .booking-step {
-    flex: 0 0 auto !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    width: auto !important;
-    min-width: 0 !important;
-    height: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    color: #929bad;
-    font-size: 11px !important;
-}
-
-.booking-steps .booking-step span {
-    width: 29px !important;
-    height: 29px !important;
-    min-width: 29px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: grid !important;
-    place-items: center !important;
-    border-radius: 50% !important;
-    background: #edf0f6 !important;
-    color: #7b8498 !important;
-    font-size: 11px !important;
-}
-
-.booking-steps .booking-step.active span,
-.booking-steps .booking-step.completed span {
-    background: linear-gradient(135deg,#07123d,#ff0000) !important;
-    color: #fff !important;
-}
-
-.booking-steps .booking-step.active,
-.booking-steps .booking-step.completed {
-    color: #07123d !important;
-}
-
-.booking-steps .step-line {
-    flex: 0 0 40px !important;
-    width: 40px !important;
-    height: 2px !important;
-    margin: 0 12px !important;
-    padding: 0 !important;
-    background: #e2e6ef !important;
-}
-
-/* Body scrolling fix */
-
-.booking-body {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    padding: 22px !important;
-    scroll-behavior: auto !important;
-}
-
-/* Seat layout positioning */
-
-.booking-section.active {
-    display: block !important;
-}
-
-.seat-layout-wrapper {
-    align-items: flex-start !important;
-    justify-content: center !important;
-}
-
-.bus-layout {
-    flex: 0 1 440px;
-    align-self: flex-start;
-}
-
-.selected-seat-panel {
-    align-self: flex-start;
-}
-
-/* Footer always visible */
-
-.booking-footer {
-    flex: 0 0 auto !important;
-    position: relative !important;
-    z-index: 2;
-}
-
-/* Mobile */
-
-@media(max-width:700px) {
-
-    .booking-dialog {
-        height: 96vh !important;
-        max-height: 96vh !important;
-    }
-
-    .booking-steps {
-        padding: 12px 5px !important;
-    }
-
-    .booking-steps .booking-step {
-        flex-direction: column !important;
-        gap: 5px !important;
-        font-size: 9px !important;
-    }
-
-    .booking-steps .step-line {
-        flex: 0 0 18px !important;
-        width: 18px !important;
-        margin: 0 4px !important;
-    }
-
-    .booking-body {
-        padding: 15px 12px !important;
-    }
-
-}
-
-/* =========================================
-   UCS BOOKING MODAL - MOBILE RESPONSIVE FIX
-========================================= */
-
-@media screen and (max-width: 700px) {
-
-    /* Modal */
-    .booking-modal {
-        padding: 0 !important;
-        align-items: flex-end !important;
-    }
-
-    .booking-dialog {
-        width: 100% !important;
-        height: 94dvh !important;
-        max-height: 94dvh !important;
-        min-height: 0 !important;
-        border-radius: 17px 17px 0 0 !important;
-    }
-
-    /* Header */
-    .booking-header {
-        padding: 15px 14px !important;
-        min-height: 85px;
-        gap: 10px;
-    }
-
-    .booking-header h2 {
-        font-size: 16px !important;
-        line-height: 1.4;
-    }
-
-    .booking-header p {
-        font-size: 10px !important;
-        line-height: 1.5;
-    }
-
-    .booking-close {
-        flex: 0 0 34px;
-        width: 34px;
-        height: 34px;
-    }
-
-    /* Progress Steps - Horizontal */
-    .booking-steps {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        justify-content: space-around !important;
-        gap: 0 !important;
-        width: 100% !important;
-        padding: 14px 5px !important;
-        overflow: hidden !important;
-        background: #fff !important;
-    }
-
-    .booking-steps > .booking-step {
-        display: flex !important;
-        flex: 0 1 auto !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: auto !important;
-        min-width: 0 !important;
-        height: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        gap: 5px !important;
-        white-space: nowrap !important;
-        font-size: 10px !important;
-        line-height: 1.3 !important;
-        background: transparent !important;
-        border: 0 !important;
-        box-shadow: none !important;
-    }
-
-    .booking-steps > .booking-step span {
-        width: 27px !important;
-        height: 27px !important;
-        min-width: 27px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 11px !important;
-        border-radius: 50% !important;
-        display: grid !important;
-        place-items: center !important;
-    }
-
-    .booking-steps > .step-line {
-        flex: 1 1 12px !important;
-        min-width: 8px !important;
-        max-width: 25px !important;
-        width: auto !important;
-        height: 2px !important;
-        margin: 0 3px !important;
-        padding: 0 !important;
-    }
-
-    /* Modal Body */
-    .booking-body {
-        flex: 1 1 auto !important;
-        min-height: 0 !important;
-        padding: 18px 13px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-    }
-
-    .booking-section-title {
-        margin-bottom: 17px !important;
-    }
-
-    .booking-section-title h3 {
-        font-size: 17px !important;
-    }
-
-    .booking-section-title p {
-        font-size: 11px !important;
-        line-height: 1.5;
-    }
-
-    /* Seat Layout - Vertical Stack */
-    .seat-layout-wrapper {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        justify-content: flex-start !important;
-        width: 100% !important;
-        gap: 15px !important;
-    }
-
-    .bus-layout {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: 0 0 auto !important;
-        padding: 19px 11px !important;
-        border-radius: 30px 30px 13px 13px !important;
-        overflow: hidden !important;
-    }
-
-    .driver-section {
-        font-size: 10px !important;
-        padding-bottom: 14px !important;
-    }
-
-    .seat-row {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 13px minmax(0, 1fr) !important;
-        gap: 6px !important;
-        margin-bottom: 10px !important;
-        width: 100% !important;
-    }
-
-    .seat-gap {
-        width: 13px !important;
-    }
-
-    .bus-seat {
-        width: 100% !important;
-        min-width: 0 !important;
-        height: 42px !important;
-        font-size: 11px !important;
-    }
-
-    /* Selected Seats Panel */
-    .selected-seat-panel {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 15px !important;
-        margin: 0 !important;
-        align-self: stretch !important;
-    }
-
-    .selected-seat-panel h4 {
-        font-size: 14px !important;
-    }
-
-    .selected-seat-list {
-        min-height: 35px !important;
-    }
-
-    /* Boarding and Passenger Forms */
-    .booking-form-grid {
-        grid-template-columns: minmax(0, 1fr) !important;
-        gap: 12px !important;
-    }
-
-    .booking-field input,
-    .booking-field select {
-        height: 45px !important;
-        font-size: 13px !important;
-    }
-
-    .passenger-card {
-        padding: 14px !important;
-    }
-
-    .passenger-card h4 {
-        font-size: 13px !important;
-    }
-
-    /* Booking Summary */
-    .booking-summary-card {
-        padding: 14px !important;
-        overflow: hidden;
-    }
-
-    .summary-row {
-        align-items: flex-start !important;
-        gap: 10px !important;
-        font-size: 11px !important;
-        line-height: 1.5;
-        margin: 13px 0 !important;
-    }
-
-    .summary-row > span {
-        flex: 0 0 38%;
-    }
-
-    .summary-row > strong {
-        flex: 1;
-        min-width: 0;
-        overflow-wrap: anywhere;
-        text-align: right;
-    }
-
-    .summary-grand-total {
-        font-size: 14px !important;
-    }
-
-    .summary-grand-total strong {
-        font-size: 18px !important;
-    }
-
-    /* Fixed Bottom Footer */
-    .booking-footer {
-        flex: 0 0 auto !important;
-        width: 100% !important;
-        padding: 12px 13px !important;
-        gap: 8px !important;
-        background: #fff !important;
-        box-shadow: 0 -4px 15px rgba(7,18,61,.06);
-    }
-
-    .booking-footer-price {
-        min-width: 0;
-    }
-
-    .booking-footer-price small {
-        font-size: 10px !important;
-    }
-
-    .booking-footer-price strong {
-        font-size: 18px !important;
-    }
-
-    .booking-actions {
-        gap: 7px !important;
-    }
-
-    .booking-action-btn {
-        padding: 12px 13px !important;
-        font-size: 11px !important;
-        white-space: nowrap !important;
-    }
-
-    /* Success */
-    .booking-success {
-        padding: 35px 12px !important;
-    }
-
-    .booking-success h3 {
-        font-size: 18px !important;
-    }
-
-}
-
-/* Extra Small Screens */
-@media screen and (max-width: 380px) {
-
-    .booking-steps {
-        padding-left: 3px !important;
-        padding-right: 3px !important;
-    }
-
-    .booking-steps > .booking-step {
-        font-size: 9px !important;
-    }
-
-    .booking-steps > .step-line {
-        max-width: 17px !important;
-        min-width: 5px !important;
-        margin: 0 2px !important;
-    }
-
-    .booking-footer {
-        padding: 10px !important;
-    }
-
-    .booking-action-btn {
-        padding: 11px 10px !important;
-        font-size: 10px !important;
-    }
-
-}
-
-
     </style>
 </head>
 
@@ -1859,9 +838,8 @@ body.page-scrolled .top-inner {
             <button class="search-tab active">
                 <i class="fas fa-bus"></i>Bus
             </button>
-            <button class="search-tab">
-                <i class="fas fa-train"></i>Train
-            </button>
+           
+            
         </div>
     </nav>
 
@@ -2157,255 +1135,109 @@ body.page-scrolled .top-inner {
     </div>
 
 </main>
+<!-- BUS SEAT BOOKING MODAL -->
+<div class="booking-modal-overlay" id="bookingModal">
 
-<!-- =====================================
-     UCS BUS BOOKING MODAL
-===================================== -->
+    <div class="booking-modal">
 
-<div class="booking-modal" id="bookingModal">
-
-    <div class="booking-dialog">
-
-        <!-- Header -->
-        <div class="booking-header">
+        <div class="booking-modal-header">
             <div>
-                <h2><i class="fas fa-bus-simple"></i> Complete Your Booking</h2>
-                <p id="modalBusName">Select your preferred seats</p>
+                <h2>Select Your Seats</h2>
+                <p>Choose your preferred seats to continue</p>
             </div>
 
-            <button type="button" class="booking-close" id="closeBooking">
+            <button type="button" id="closeBookingModal" class="modal-close">
                 <i class="fas fa-times"></i>
             </button>
         </div>
 
-        <!-- Progress -->
-        <div class="booking-steps">
-
-            <div class="booking-step active">
-                <span>1</span>
-                Seats
+        <!-- Selected Bus Details -->
+        <div class="modal-bus-details">
+            <div>
+                <h3 id="modalBusName">Bus Name</h3>
+                <p id="modalBusType">Bus Type</p>
             </div>
 
-            <div class="step-line"></div>
-
-            <div class="booking-step">
-                <span>2</span>
-                Points
+            <div class="modal-bus-price">
+                <small>Starting from</small>
+                <strong id="modalSeatPrice">₹0</strong>
             </div>
-
-            <div class="step-line"></div>
-
-            <div class="booking-step">
-                <span>3</span>
-                Passenger
-            </div>
-
-            <div class="step-line"></div>
-
-            <div class="booking-step">
-                <span>4</span>
-                Summary
-            </div>
-
         </div>
 
-        <!-- Modal Body -->
-        <div class="booking-body">
+        <div class="modal-route-details">
+            <div>
+                <small>FROM</small>
+                <strong id="modalFrom">Your City</strong>
+            </div>
 
-            <!-- STEP 1: SEAT SELECTION -->
-            <div class="booking-section active" data-step="1">
+            <i class="fas fa-arrow-right"></i>
 
-                <div class="booking-section-title">
-                    <h3>Select Your Seats</h3>
-                    <p>Choose your preferred seats from the available layout.</p>
+            <div>
+                <small>TO</small>
+                <strong id="modalTo">Destination</strong>
+            </div>
+
+            <div class="modal-date">
+                <small>JOURNEY DATE</small>
+                <strong id="modalJourneyDate">Select Date</strong>
+            </div>
+        </div>
+
+        <!-- Seat Layout -->
+        <div class="seat-selection-content">
+
+            <div class="seat-layout-area">
+
+                <div class="seat-layout-heading">
+                    <h3>Seat Layout</h3>
+                    <div class="driver-label">
+                        <i class="fas fa-steering-wheel"></i>
+                        Driver
+                    </div>
                 </div>
 
                 <div class="seat-legend">
-
-                    <div class="legend-item">
-                        <span class="legend-box legend-available"></span>
-                        Available
-                    </div>
-
-                    <div class="legend-item">
-                        <span class="legend-box legend-selected"></span>
-                        Selected
-                    </div>
-
-                    <div class="legend-item">
-                        <span class="legend-box legend-booked"></span>
-                        Booked
-                    </div>
-
+                    <span><i class="legend-seat available"></i> Available</span>
+                    <span><i class="legend-seat selected"></i> Selected</span>
+                    <span><i class="legend-seat booked"></i> Booked</span>
                 </div>
 
-                <div class="seat-layout-wrapper">
-
-                    <div class="bus-layout">
-
-                        <div class="driver-section">
-                            <span><i class="fas fa-steering-wheel"></i> Driver</span>
-                            <span>FRONT SIDE</span>
-                        </div>
-
-                        <div id="seatLayout"></div>
-
-                    </div>
-
-                    <div class="selected-seat-panel">
-
-                        <h4>Selected Seats</h4>
-
-                        <div class="selected-seat-list" id="selectedSeats">
-                            No seats selected
-                        </div>
-
-                        <div class="seat-total">
-                            <span>Total Fare</span>
-                            <strong id="seatTotal">₹0</strong>
-                        </div>
-
-                        <p style="font-size:10px;color:#929aaa;margin-top:12px">
-                            Select at least one seat to continue.
-                        </p>
-
-                    </div>
-
-                </div>
+                <div id="seatLayout" class="seat-layout"></div>
 
             </div>
 
-            <!-- STEP 2: BOARDING / DROPPING -->
-            <div class="booking-section" data-step="2">
+            <!-- Selection Summary -->
+            <div class="seat-summary">
 
-                <div class="booking-section-title">
-                    <h3>Boarding & Dropping Points</h3>
-                    <p>Select your preferred pickup and drop locations.</p>
+                <h3>Booking Summary</h3>
+
+                <div class="summary-row">
+                    <span>Selected Seats</span>
+                    <strong id="selectedSeatCount">0</strong>
                 </div>
 
-                <div class="booking-form-grid">
-
-                    <div class="booking-field">
-                        <label>Boarding Point *</label>
-                        <select id="boardingPoint" required>
-                            <option value="">Select Boarding Point</option>
-                            <option value="City Bus Stand - 09:00 PM">
-                                City Bus Stand - 09:00 PM
-                            </option>
-                            <option value="Main Road - 09:30 PM">
-                                Main Road - 09:30 PM
-                            </option>
-                            <option value="Railway Station - 10:00 PM">
-                                Railway Station - 10:00 PM
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="booking-field">
-                        <label>Dropping Point *</label>
-                        <select id="droppingPoint" required>
-                            <option value="">Select Dropping Point</option>
-                            <option value="Central Bus Stand - 05:00 AM">
-                                Central Bus Stand - 05:00 AM
-                            </option>
-                            <option value="Railway Station - 05:30 AM">
-                                Railway Station - 05:30 AM
-                            </option>
-                            <option value="City Centre - 06:00 AM">
-                                City Centre - 06:00 AM
-                            </option>
-                        </select>
-                    </div>
-
+                <div id="selectedSeats" class="selected-seats">
+                    No seats selected
                 </div>
 
-            </div>
+                <div class="summary-divider"></div>
 
-            <!-- STEP 3: PASSENGER DETAILS -->
-            <div class="booking-section" data-step="3">
-
-                <div class="booking-section-title">
-                    <h3>Passenger Details</h3>
-                    <p>Enter passenger details for each selected seat.</p>
+                <div class="summary-row">
+                    <span>Price per seat</span>
+                    <strong id="summarySeatPrice">₹0</strong>
                 </div>
 
-                <div id="passengerForms"></div>
-
-                <div class="booking-form-grid">
-
-                    <div class="booking-field">
-                        <label>Contact Mobile Number *</label>
-                        <input type="tel" id="contactMobile"
-                            placeholder="Enter mobile number"
-                            maxlength="10"
-                            pattern="[0-9]{10}"
-                            required>
-                    </div>
-
-                    <div class="booking-field">
-                        <label>Email Address *</label>
-                        <input type="email" id="contactEmail"
-                            placeholder="Enter email address"
-                            required>
-                    </div>
-
+                <div class="summary-row total-row">
+                    <span>Total Amount</span>
+                    <strong id="seatTotal">₹0</strong>
                 </div>
 
-            </div>
-
-            <!-- STEP 4: SUMMARY -->
-            <div class="booking-section" data-step="4">
-
-                <div class="booking-section-title">
-                    <h3>Review Your Booking</h3>
-                    <p>Please verify your journey and passenger details.</p>
-                </div>
-
-                <div class="booking-summary-card" id="bookingSummary"></div>
-
-            </div>
-
-            <!-- SUCCESS -->
-            <div class="booking-section" data-step="5">
-
-                <div class="booking-success">
-
-                    <i class="fas fa-circle-check"></i>
-
-                    <h3>Booking Details Submitted!</h3>
-
-                    <p id="successMessage">
-                        Your booking demo has been completed successfully.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Footer -->
-        <div class="booking-footer" id="bookingFooter">
-
-            <div class="booking-footer-price">
-                <small>Total Amount</small>
-                <strong id="footerTotal">₹0</strong>
-            </div>
-
-            <div class="booking-actions">
-
-                <button type="button"
-                    class="booking-action-btn booking-back"
-                    id="bookingBack"
-                    style="display:none">
-                    Back
+                <button type="button" id="bookingNext" class="booking-next-btn" disabled>
+                    Continue
+                    <i class="fas fa-arrow-right"></i>
                 </button>
 
-                <button type="button"
-                    class="booking-action-btn booking-next"
-                    id="bookingNext">
-                    Continue <i class="fas fa-arrow-right"></i>
-                </button>
+                <p class="seat-note">You can select up to 6 seats.</p>
 
             </div>
 
@@ -2414,7 +1246,6 @@ body.page-scrolled .top-inner {
     </div>
 
 </div>
-
 <div id="footer"></div>
 
 <script>
@@ -2651,565 +1482,199 @@ body.page-scrolled .top-inner {
     });
 
 
-   
-/* =========================================
-   UCS BUS BOOKING SYSTEM
-========================================= */
+  // =====================================
+// BUS SEAT SELECTION
+// =====================================
 
 const bookingModal = document.getElementById("bookingModal");
-
-let currentStep = 1;
-let selectedSeats = [];
-let currentBus = {};
-
-const seatPrice = 1500;
-
 const seatLayout = document.getElementById("seatLayout");
 
-const currency = amount =>
-    "₹" + Number(amount).toLocaleString("en-IN");
+let currentBus = {};
+let selectedSeats = [];
+
+const bookedSeats = [2, 5, 11, 17, 24, 29, 34];
+const maxSeats = 6;
 
 
-/* Generate Bus Seats */
+// Format currency
+function formatPrice(amount) {
+    return "₹" + Number(amount).toLocaleString("en-IN");
+}
 
+
+// Open booking modal
+function openBookingModal(busData) {
+
+    currentBus = busData;
+    selectedSeats = [];
+
+    document.getElementById("modalBusName").textContent = busData.name;
+    document.getElementById("modalBusType").textContent = busData.type;
+    document.getElementById("modalSeatPrice").textContent = formatPrice(busData.price);
+
+    document.getElementById("summarySeatPrice").textContent =
+        formatPrice(busData.price);
+
+    document.getElementById("modalFrom").textContent = busData.from;
+    document.getElementById("modalTo").textContent = busData.to;
+
+    document.getElementById("modalJourneyDate").textContent =
+        busData.date || "Not selected";
+
+    generateSeats();
+
+    updateSeatSummary();
+
+    bookingModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+
+// Generate seat layout
 function generateSeats() {
 
     seatLayout.innerHTML = "";
 
-    // 12 rows, 3 seats per row (2+1)
-    const bookedSeats = [2, 5, 11, 17, 24, 29, 34];
-
-    for (let row = 0; row < 12; row++) {
+    for (let row = 0; row < 9; row++) {
 
         const rowElement = document.createElement("div");
         rowElement.className = "seat-row";
 
-        for (let col = 0; col < 3; col++) {
+        for (let col = 0; col < 4; col++) {
 
             if (col === 2) {
-
-                const gap = document.createElement("div");
-                gap.className = "seat-gap";
-                rowElement.appendChild(gap);
-
+                const aisle = document.createElement("div");
+                aisle.className = "seat-aisle";
+                rowElement.appendChild(aisle);
             }
 
-            const seatNumber = row * 3 + col + 1;
+            const seatNumber = row * 4 + col + 1;
 
             const seat = document.createElement("button");
 
             seat.type = "button";
-            seat.className = "bus-seat";
+            seat.className = "modal-seat-button";
             seat.textContent = seatNumber;
-
-            seat.dataset.seat = seatNumber;
 
             if (bookedSeats.includes(seatNumber)) {
 
                 seat.classList.add("booked");
                 seat.disabled = true;
-                seat.title = "Already booked";
 
             } else {
 
+                seat.classList.add("available");
+
                 seat.addEventListener("click", function () {
-                    toggleSeat(seatNumber, this);
+                    toggleSeat(seatNumber, seat);
                 });
 
             }
 
             rowElement.appendChild(seat);
-
         }
 
         seatLayout.appendChild(rowElement);
-
     }
-
 }
 
 
-/* Open Booking Modal */
+// Select / Deselect seats
+function toggleSeat(seatNumber, seatElement) {
 
-document.querySelectorAll(".seat-button").forEach(button => {
+    if (selectedSeats.includes(seatNumber)) {
+
+        selectedSeats = selectedSeats.filter(
+            seat => seat !== seatNumber
+        );
+
+        seatElement.classList.remove("selected");
+        seatElement.classList.add("available");
+
+    } else {
+
+        if (selectedSeats.length >= maxSeats) {
+            alert("You can select a maximum of 6 seats.");
+            return;
+        }
+
+        selectedSeats.push(seatNumber);
+
+        seatElement.classList.remove("available");
+        seatElement.classList.add("selected");
+
+    }
+
+    updateSeatSummary();
+}
+
+
+// Update booking summary
+function updateSeatSummary() {
+
+    selectedSeats.sort((a, b) => a - b);
+
+    const count = selectedSeats.length;
+    const total = count * currentBus.price;
+
+    document.getElementById("selectedSeatCount").textContent = count;
+
+    document.getElementById("selectedSeats").textContent =
+        count ? selectedSeats.map(seat => "Seat " + seat).join(", ") :
+        "No seats selected";
+
+    document.getElementById("seatTotal").textContent =
+        formatPrice(total);
+
+    document.getElementById("bookingNext").disabled = count === 0;
+}
+
+
+// View Seats button click
+document.querySelectorAll(".bus-card .seat-button").forEach(button => {
 
     button.addEventListener("click", function () {
 
         const card = this.closest(".bus-card");
 
-        currentBus = {
+        const busData = {
+
             name: card.querySelector(".operator-name").textContent.trim(),
+
             type: card.querySelector(".bus-type").textContent.trim(),
+
             price: Number(card.dataset.price),
-            rating: card.dataset.rating,
-            timing: card.querySelector(".time-block strong").textContent.trim(),
-            duration: card.querySelector(".time-block small").textContent.trim(),
-            from: fromInput.value || "Your City",
-            to: toInput.value || "Destination",
-            date: dateInput.value || "Not selected"
+
+            from: fromInput.value.trim() || "Your city",
+
+            to: toInput.value.trim() || "Destination",
+
+            date: dateInput.value
+
         };
 
-        selectedSeats = [];
-        currentStep = 1;
-
-        document.getElementById("modalBusName").textContent =
-            currentBus.name + " | " + currentBus.type;
-
-        generateSeats();
-
-        updateSeatSummary();
-        showBookingStep(1);
-
-        bookingModal.classList.add("active");
-        document.body.style.overflow = "hidden";
+        openBookingModal(busData);
 
     });
 
 });
 
 
-/* Seat Selection */
-
-function toggleSeat(number, button) {
-
-    const existingIndex = selectedSeats.findIndex(
-        seat => seat.number === number
-    );
-
-    if (existingIndex !== -1) {
-
-        selectedSeats.splice(existingIndex, 1);
-        button.classList.remove("selected");
-
-    } else {
-
-        if (selectedSeats.length >= 6) {
-
-            alert("You can select a maximum of 6 seats.");
-            return;
-
-        }
-
-        selectedSeats.push({
-            number: number,
-            price: currentBus.price
-        });
-
-        button.classList.add("selected");
-
-    }
-
-    updateSeatSummary();
-
-}
-
-
-/* Update Fare */
-
-function getTotalFare() {
-
-    return selectedSeats.reduce(
-        (total, seat) => total + seat.price, 0
-    );
-
-}
-
-
-function updateSeatSummary() {
-
-    const selectedContainer =
-        document.getElementById("selectedSeats");
-
-    if (selectedSeats.length === 0) {
-
-        selectedContainer.textContent = "No seats selected";
-
-    } else {
-
-        selectedContainer.innerHTML = selectedSeats.map(seat =>
-            `<span class="selected-seat-chip">Seat ${seat.number}</span>`
-        ).join("");
-
-    }
-
-    document.getElementById("seatTotal").textContent =
-        currency(getTotalFare());
-
-    document.getElementById("footerTotal").textContent =
-        currency(getTotalFare());
-
-}
-
-
-/* Passenger Forms */
-
-function generatePassengerForms() {
-
-    const container = document.getElementById("passengerForms");
-
-    container.innerHTML = "";
-
-    selectedSeats.forEach((seat, index) => {
-
-        const card = document.createElement("div");
-
-        card.className = "passenger-card";
-
-        card.innerHTML = `
-            <h4>
-                <i class="fas fa-user-circle"></i>
-                Passenger ${index + 1} — Seat ${seat.number}
-            </h4>
-
-            <div class="booking-form-grid">
-
-                <div class="booking-field">
-                    <label>Full Name *</label>
-                    <input type="text"
-                        class="passenger-name"
-                        placeholder="Enter passenger name"
-                        required>
-                </div>
-
-                <div class="booking-field">
-                    <label>Age *</label>
-                    <input type="number"
-                        class="passenger-age"
-                        min="1"
-                        max="100"
-                        placeholder="Enter age"
-                        required>
-                </div>
-
-                <div class="booking-field">
-                    <label>Gender *</label>
-                    <select class="passenger-gender" required>
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-
-            </div>
-        `;
-
-        container.appendChild(card);
-
-    });
-
-}
-
-
-/* Validate Passenger Details */
-
-function validatePassengerDetails() {
-
-    const fields = document.querySelectorAll(
-        "#passengerForms input, #passengerForms select, #contactMobile, #contactEmail"
-    );
-
-    let valid = true;
-
-    fields.forEach(field => {
-
-        field.setCustomValidity("");
-
-        if (!field.checkValidity()) {
-
-            field.reportValidity();
-            valid = false;
-
-        }
-
-    });
-
-    const mobile = document.getElementById("contactMobile");
-
-    if (mobile.value.trim() && !/^[6-9]\d{9}$/.test(mobile.value)) {
-
-        mobile.setCustomValidity("Enter a valid 10-digit mobile number.");
-        mobile.reportValidity();
-
-        valid = false;
-
-    }
-
-    return valid;
-
-}
-
-
-/* Booking Summary */
-
-function generateBookingSummary() {
-
-    const passengers = [];
-
-    document.querySelectorAll(".passenger-card").forEach((card, index) => {
-
-        passengers.push({
-            name: card.querySelector(".passenger-name").value,
-            age: card.querySelector(".passenger-age").value,
-            gender: card.querySelector(".passenger-gender").value,
-            seat: selectedSeats[index].number
-        });
-
-    });
-
-    const subtotal = getTotalFare();
-    const tax = Math.round(subtotal * 0.05);
-    const total = subtotal + tax;
-
-    document.getElementById("bookingSummary").innerHTML = `
-
-        <div class="summary-row">
-            <span>Bus Operator</span>
-            <strong>${currentBus.name}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Bus Type</span>
-            <strong>${currentBus.type}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Journey</span>
-            <strong>${currentBus.from} → ${currentBus.to}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Journey Date</span>
-            <strong>${currentBus.date}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Departure / Arrival</span>
-            <strong>${currentBus.timing}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Boarding Point</span>
-            <strong>${document.getElementById("boardingPoint").value}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Dropping Point</span>
-            <strong>${document.getElementById("droppingPoint").value}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Selected Seats</span>
-            <strong>${selectedSeats.map(s => s.number).join(", ")}</strong>
-        </div>
-
-        <hr style="border:0;border-top:1px dashed #dce2ed">
-
-        <h4>Passenger Information</h4>
-
-        ${passengers.map((p, index) => `
-            <div class="summary-row">
-                <span>Passenger ${index + 1} (Seat ${p.seat})</span>
-                <strong>${escapeHTML(p.name)} / ${p.age} yrs / ${p.gender}</strong>
-            </div>
-        `).join("")}
-
-        <div class="summary-row">
-            <span>Contact Number</span>
-            <strong>${escapeHTML(document.getElementById("contactMobile").value)}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Email</span>
-            <strong>${escapeHTML(document.getElementById("contactEmail").value)}</strong>
-        </div>
-
-        <hr style="border:0;border-top:1px dashed #dce2ed">
-
-        <div class="summary-row">
-            <span>Base Fare</span>
-            <strong>${currency(subtotal)}</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Tax (5%)</span>
-            <strong>${currency(tax)}</strong>
-        </div>
-
-        <div class="summary-row summary-grand-total">
-            <span>Total Amount</span>
-            <strong>${currency(total)}</strong>
-        </div>
-
-    `;
-
-    document.getElementById("footerTotal").textContent =
-        currency(total);
-
-}
-
-
-/* Safe HTML Text */
-
-function escapeHTML(value) {
-
-    return String(value).replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    })[char]);
-
-}
-
-
-/* Step Navigation */
-
-function showBookingStep(step) {
-
-    currentStep = step;
-
-    document.querySelectorAll(".booking-section").forEach(section => {
-
-        section.classList.toggle(
-            "active",
-            Number(section.dataset.step) === step
-        );
-
-    });
-
-    document.querySelectorAll(".booking-step").forEach((item, index) => {
-
-        item.classList.toggle("active", index + 1 === step);
-        item.classList.toggle("completed", index + 1 < step);
-
-    });
-
-    document.getElementById("bookingBack").style.display =
-        step === 1 || step === 5 ? "none" : "inline-block";
-
-    document.getElementById("bookingNext").style.display =
-        step === 5 ? "none" : "inline-block";
-
-    document.getElementById("bookingFooter").style.display =
-        step === 5 ? "none" : "flex";
-
-    document.querySelector(".booking-body").scrollTop = 0;
-
-}
-
-
-/* Continue Button */
-
-document.getElementById("bookingNext").addEventListener("click", function () {
-
-    if (currentStep === 1) {
-
-        if (selectedSeats.length === 0) {
-
-            alert("Please select at least one seat.");
-            return;
-
-        }
-
-        showBookingStep(2);
-
-    }
-
-    else if (currentStep === 2) {
-
-        if (!document.getElementById("boardingPoint").value ||
-            !document.getElementById("droppingPoint").value) {
-
-            alert("Please select both boarding and dropping points.");
-            return;
-
-        }
-
-        if (
-            document.getElementById("boardingPoint").value ===
-            document.getElementById("droppingPoint").value
-        ) {
-
-            alert("Boarding and dropping points cannot be the same.");
-            return;
-
-        }
-
-        generatePassengerForms();
-        showBookingStep(3);
-
-    }
-
-    else if (currentStep === 3) {
-
-        if (!validatePassengerDetails()) return;
-
-        generateBookingSummary();
-        showBookingStep(4);
-
-        this.innerHTML = 'Confirm Booking <i class="fas fa-check"></i>';
-
-    }
-
-    else if (currentStep === 4) {
-
-        // Demo only: real booking requires a connected API.
-        document.getElementById("successMessage").textContent =
-            "Your demo booking for " +
-            selectedSeats.length +
-            " seat(s) has been submitted. No payment has been processed.";
-
-        showBookingStep(5);
-
-    }
-
-});
-
-
-/* Back Button */
-
-document.getElementById("bookingBack").addEventListener("click", function () {
-
-    if (currentStep > 1) {
-
-        showBookingStep(currentStep - 1);
-
-        document.getElementById("bookingNext").innerHTML =
-            currentStep === 4
-                ? 'Confirm Booking <i class="fas fa-check"></i>'
-                : 'Continue <i class="fas fa-arrow-right"></i>';
-
-    }
-
-});
-
-
-/* Close Modal */
-
+// Close modal
 function closeBookingModal() {
 
-   bookingModal.classList.add("active");
-document.body.style.overflow = "hidden";
-
-requestAnimationFrame(() => {
-    const bookingBody = document.querySelector(".booking-body");
-
-    bookingBody.scrollTop = 0;
-});
-
-    document.getElementById("bookingNext").innerHTML =
-        'Continue <i class="fas fa-arrow-right"></i>';
+    bookingModal.classList.remove("active");
+    document.body.style.overflow = "";
 
 }
 
-
-document.getElementById("closeBooking").addEventListener(
-    "click", closeBookingModal
+document.getElementById("closeBookingModal").addEventListener(
+    "click",
+    closeBookingModal
 );
 
 
+// Close on outside click
 bookingModal.addEventListener("click", function (event) {
 
     if (event.target === bookingModal) {
@@ -3219,6 +1684,7 @@ bookingModal.addEventListener("click", function (event) {
 });
 
 
+// Close on Escape key
 document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape" && bookingModal.classList.contains("active")) {
@@ -3227,6 +1693,43 @@ document.addEventListener("keydown", function (event) {
 
 });
 
+
+// Continue to boarding page
+document.getElementById("bookingNext").addEventListener("click", function () {
+
+    if (selectedSeats.length === 0) {
+        alert("Please select at least one seat.");
+        return;
+    }
+
+    const bookingData = {
+
+        busName: currentBus.name,
+
+        busType: currentBus.type,
+
+        from: currentBus.from,
+
+        to: currentBus.to,
+
+        journeyDate: currentBus.date,
+
+        pricePerSeat: currentBus.price,
+
+        selectedSeats: selectedSeats,
+
+        totalAmount: selectedSeats.length * currentBus.price
+
+    };
+
+    sessionStorage.setItem(
+        "ucsBookingData",
+        JSON.stringify(bookingData)
+    );
+
+    window.location.href = "boarding.html";
+
+});
 // Show logo after scrolling
 window.addEventListener("scroll", function () {
 
