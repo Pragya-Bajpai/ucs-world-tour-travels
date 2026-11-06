@@ -68,7 +68,7 @@ button {
     border: 1px solid #dce3ed;
     border-radius: 5px;
     background: #fff;
-    color: #1769aa;
+    color: #ff0000;
     font-size: 11px;
     font-weight: 600;
     transition: all .2s ease;
@@ -1049,7 +1049,463 @@ body.page-scrolled .flight-logo {
         font-size: 11px;
     }
 }
+/* =====================================
+   FLIGHT DETAILS MODAL
+===================================== */
 
+.flight-details-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(7, 18, 61, .72);
+    backdrop-filter: blur(4px);
+}
+
+.flight-details-modal.active {
+    display: flex;
+}
+
+.flight-modal-content {
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, .25);
+    animation: flightModalOpen .25s ease;
+}
+
+@keyframes flightModalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.flight-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+    background: var(--ucs-navy);
+    color: #fff;
+}
+
+.flight-modal-header h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.flight-modal-header small {
+    display: block;
+    margin-top: 5px;
+    color: #d7dfef;
+    font-size: 12px;
+}
+
+.flight-modal-close {
+    width: 33px;
+    height: 33px;
+    border: 1px solid #ffffff55;
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.flight-modal-body {
+    padding: 22px;
+}
+
+.flight-modal-route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid var(--ucs-border);
+    border-radius: 9px;
+    background: #fafbfe;
+}
+
+.flight-modal-airline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    color: var(--ucs-navy);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.flight-modal-airline img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.flight-modal-time {
+    min-width: 0;
+    flex: 1;
+}
+
+.flight-modal-time strong {
+    display: block;
+    color: var(--ucs-navy);
+    font-size: 21px;
+}
+
+.flight-modal-time b {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.flight-modal-time span {
+    display: block;
+    margin-top: 5px;
+    color: var(--ucs-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.flight-modal-middle {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    color: var(--ucs-muted);
+    font-size: 11px;
+}
+
+.flight-modal-middle img {
+    display: block;
+    width: 35px;
+    height: 25px;
+    margin: 9px auto;
+    object-fit: contain;
+}
+
+.flight-modal-middle::after {
+    content: "";
+    display: block;
+    height: 1px;
+    margin-top: 5px;
+    background: #cbd2dd;
+}
+
+.flight-modal-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.flight-info-item {
+    padding: 13px;
+    border: 1px solid var(--ucs-border);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.flight-info-item small {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--ucs-muted);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.flight-info-item strong {
+    color: var(--ucs-navy);
+    font-size: 12px;
+}
+
+.flight-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px 20px;
+    border-top: 1px solid var(--ucs-border);
+}
+
+.flight-modal-done {
+    padding: 10px 24px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--ucs-red);
+    color: #fff;
+    font-weight: 700;
+}
+
+.flight-modal-done:hover {
+    background: #bd0000;
+}
+
+@media(max-width: 500px) {
+    .flight-modal-body {
+        padding: 13px;
+    }
+
+    .flight-modal-route {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    .flight-modal-time strong {
+        font-size: 17px;
+    }
+
+    .flight-modal-time b {
+        font-size: 10px;
+    }
+
+    .flight-modal-time span {
+        font-size: 10px;
+    }
+
+    .flight-modal-middle {
+        min-width: 55px;
+        font-size: 10px;
+    }
+
+    .flight-modal-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* FARE RULES MODAL */
+.fare-rules-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 10, 32, 0.72);
+    backdrop-filter: blur(4px);
+    z-index: 10010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+
+.fare-rules-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fare-rules-content {
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+    transform: translateY(20px);
+    transition: .3s ease;
+}
+
+.fare-rules-modal.active .fare-rules-content {
+    transform: translateY(0);
+}
+
+.fare-rules-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--ucs-border);
+}
+
+.fare-rules-header h3 {
+    color: var(--ucs-navy);
+    font-size: 21px;
+    margin: 0 0 5px;
+}
+
+.fare-rules-header h3 i {
+    color: var(--ucs-red);
+    margin-right: 7px;
+}
+
+.fare-rules-header p {
+    margin: 0;
+    color: var(--ucs-muted);
+    font-size: 13px;
+}
+
+.fare-close-btn {
+    background: #fff0f0;
+    color: var(--ucs-red);
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.fare-airline-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 24px;
+    background: #f6f8fc;
+}
+
+.fare-airline-info strong {
+    display: block;
+    color: var(--ucs-navy);
+    font-size: 15px;
+}
+
+.fare-airline-info span {
+    color: var(--ucs-muted);
+    font-size: 12px;
+}
+
+.fare-airline-info .fare-type {
+    background: #fff0f0;
+    color: var(--ucs-red);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.fare-route-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--ucs-border);
+}
+
+.fare-route-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fare-route-info strong {
+    color: var(--ucs-navy);
+    font-size: 18px;
+}
+
+.fare-route-info span {
+    color: var(--ucs-muted);
+    font-size: 12px;
+}
+
+.fare-route-info > i {
+    color: var(--ucs-red);
+    font-size: 18px;
+}
+
+.fare-rules-list {
+    padding: 10px 24px;
+}
+
+.fare-rule-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--ucs-border);
+}
+
+.fare-rule-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: #fff0f0;
+    color: var(--ucs-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+.fare-rule-item h4 {
+    margin: 0 0 7px;
+    color: var(--ucs-navy);
+    font-size: 15px;
+}
+
+.fare-rule-item p,
+.fare-rule-item li {
+    color: var(--ucs-muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.fare-rule-item p {
+    margin: 0 0 5px;
+}
+
+.fare-rule-item ul {
+    padding-left: 18px;
+    margin: 5px 0 0;
+}
+
+.fare-rules-footer {
+    padding: 16px 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.fare-rules-footer p {
+    color: var(--ucs-muted);
+    font-size: 11px;
+    margin: 0;
+}
+
+.fare-rules-footer p i {
+    color: var(--ucs-red);
+}
+
+.fare-rules-footer button {
+    background: var(--ucs-red);
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 576px) {
+    .fare-rules-modal {
+        padding: 10px;
+    }
+
+    .fare-rules-content {
+        max-height: 94vh;
+    }
+
+    .fare-rules-header,
+    .fare-rules-list,
+    .fare-route-info,
+    .fare-rules-footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .fare-rules-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
    </style>
     
 </head>
@@ -1403,7 +1859,7 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
             View Fare Rules
         </button>
@@ -1474,7 +1930,7 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
             View Fare Rules
         </button>
@@ -1527,7 +1983,7 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
             View Fare Rules
         </button>
@@ -1580,7 +2036,7 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
             View Fare Rules
         </button>
@@ -1651,9 +2107,9 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
-            View Fare Rules
+            View Fare Rules 
         </button>
     </div>
 </div>
@@ -1704,7 +2160,7 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
             View Fare Rules
         </button>
@@ -1757,7 +2213,7 @@ body.page-scrolled .flight-logo {
             View Details
         </button>
 
-        <button type="button" class="flight-action-btn fare-rules-btn">
+        <button type="button" class="flight-action-btn fare-btn">
             <i class="fa-solid fa-file-lines"></i>
             View Fare Rules
         </button>
@@ -1822,7 +2278,225 @@ body.page-scrolled .flight-logo {
     </div>
 
 </div>
+<!-- FLIGHT DETAILS MODAL -->
 
+<div class="flight-details-modal" id="flightDetailsModal">
+
+    <div class="flight-modal-content">
+
+        <div class="flight-modal-header">
+
+            <div>
+                <h3>Flight Details</h3>
+                <small id="modalDepartDate">Depart • Mon, Nov 23</small>
+            </div>
+
+            <button type="button" class="flight-modal-close"
+                id="closeFlightModal">&times;</button>
+
+        </div>
+
+        <div class="flight-modal-body">
+
+            <div class="flight-modal-airline">
+
+                <img src="https://ucsworldtourandtravel.com/public/frontend/asset/img/flights/1.png"
+                     alt="IndiGo">
+
+                <div>
+                    <div id="modalAirline">IndiGo 6587</div>
+                    <small style="color:#718096;font-weight:400;">
+                        <span id="modalCabin">Economy</span> Class
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="flight-modal-route">
+
+                <div class="flight-modal-time">
+
+                    <strong id="modalDepartureTime">07:10 am</strong>
+
+                    <b id="modalDepartureAirport">Amausi (LKO)</b>
+
+                    <span>
+                        Terminal: <span id="modalDepartureTerminal">3</span>
+                    </span>
+
+                </div>
+
+                <div class="flight-modal-middle">
+
+                    <span id="modalDuration">1h 15m</span>
+
+                    <img src="https://ucsworldtourandtravel.com/public/frontend/asset/img/flights/plane.svg"
+                         alt="Flight">
+
+                </div>
+
+                <div class="flight-modal-time" style="text-align:right;">
+
+                    <strong id="modalArrivalTime">08:25 am</strong>
+
+                    <b id="modalArrivalAirport">Indira Gandhi Airport (DEL)</b>
+
+                    <span>
+                        Terminal: <span id="modalArrivalTerminal">1</span>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="flight-modal-info">
+
+                <div class="flight-info-item">
+                    <small>Aircraft</small>
+                    <strong id="modalAircraft">321</strong>
+                </div>
+
+                <div class="flight-info-item">
+                    <small>Cabin Class</small>
+                    <strong id="modalCabinInfo">Economy</strong>
+                </div>
+
+                <div class="flight-info-item">
+                    <small>Flight Number</small>
+                    <strong id="modalFlightNumber">6587</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="flight-modal-footer">
+
+            <button type="button" class="flight-modal-done"
+                id="doneFlightModal">
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- FARE RULES MODAL -->
+<div class="fare-rules-modal" id="fareRulesModal">
+    <div class="fare-rules-content">
+
+        <div class="fare-rules-header">
+            <div>
+                <h3><i class="fas fa-file-contract"></i> Fare Rules</h3>
+                <p>Important information about your flight fare</p>
+            </div>
+            <button type="button" class="fare-close-btn" id="closeFareRules">
+                &times;
+            </button>
+        </div>
+
+        <div class="fare-airline-info">
+            <div>
+                <strong id="fareAirlineName">IndiGo</strong>
+                <span id="fareFlightNumber">6E - 6587</span>
+            </div>
+            <span class="fare-type">Economy</span>
+        </div>
+
+        <div class="fare-route-info">
+            <div>
+                <strong>07:10 AM</strong>
+                <span>Lucknow (LKO)</span>
+            </div>
+            <i class="fas fa-plane"></i>
+            <div>
+                <strong>08:25 AM</strong>
+                <span>Delhi (DEL)</span>
+            </div>
+        </div>
+
+        <div class="fare-rules-list">
+
+            <div class="fare-rule-item">
+                <div class="fare-rule-icon">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div>
+                    <h4>Cancellation Policy</h4>
+                    <p>Cancellation charges may apply depending on the time of cancellation.</p>
+                    <ul>
+                        <li>More than 72 hours before departure: ₹2,500</li>
+                        <li>24–72 hours before departure: ₹3,500</li>
+                        <li>Less than 24 hours before departure: ₹4,500</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fare-rule-item">
+                <div class="fare-rule-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div>
+                    <h4>Date Change Policy</h4>
+                    <p>Date change is subject to seat availability and airline approval.</p>
+                    <ul>
+                        <li>Change fee: ₹3,000 per passenger</li>
+                        <li>Fare difference, if any, will be charged separately.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fare-rule-item">
+                <div class="fare-rule-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div>
+                    <h4>Refund Policy</h4>
+                    <p>Eligible refunds will be processed to the original payment method after applicable deductions.</p>
+                    <ul>
+                        <li>Refund processing may take 7–10 working days.</li>
+                        <li>Convenience fees may be non-refundable.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fare-rule-item">
+                <div class="fare-rule-icon">
+                    <i class="fas fa-suitcase"></i>
+                </div>
+                <div>
+                    <h4>Baggage Allowance</h4>
+                    <ul>
+                        <li>Check-in baggage: 15 KG</li>
+                        <li>Cabin baggage: 7 KG</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fare-rule-item">
+                <div class="fare-rule-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div>
+                    <h4>Important Information</h4>
+                    <ul>
+                        <li>Passengers must carry a valid government-issued photo ID.</li>
+                        <li>Report at the airport at least 2 hours before departure.</li>
+                        <li>All charges are subject to airline fare rules.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="fare-rules-footer">
+            <p><i class="fas fa-info-circle"></i> Actual fare conditions are subject to airline policy.</p>
+            <button type="button" id="doneFareRules">Done</button>
+        </div>
+
+    </div>
+</div>
 <!-- WEBSITE FOOTER -->
 <div id="footer"></div>
 
@@ -2210,11 +2884,183 @@ window.addEventListener("scroll", function () {
         document.body.classList.remove("page-scrolled");
     }
 });
+/* =====================================
+   FLIGHT DETAILS MODAL
+===================================== */
+
+const flightModal = $("flightDetailsModal");
+
+function closeFlightDetails() {
+    flightModal.classList.remove("active");
+}
+
+document.querySelectorAll(".details-btn").forEach(button => {
+
+    button.addEventListener("click", function (e) {
+
+        e.stopPropagation();
+
+        const card = this.closest(".flight-card");
+
+        const airline = card.dataset.airline;
+
+        const flightData = {
+
+            "IndiGo": {
+                number: "6587",
+                departure: "07:10 am",
+                arrival: "08:25 am",
+                departureAirport: "Amausi (LKO)",
+                arrivalAirport: "Indira Gandhi Airport (DEL)",
+                duration: "1h 15m",
+                departureTerminal: "3",
+                arrivalTerminal: "1",
+                aircraft: "321"
+            },
+
+            "Air India": {
+                number: "202",
+                departure: "10:00 pm",
+                arrival: "05:00 am",
+                departureAirport: "Mumbai (BOM)",
+                arrivalAirport: "Thiruvananthapuram (TRV)",
+                duration: "7h 00m",
+                departureTerminal: "2",
+                arrivalTerminal: "1",
+                aircraft: "A320"
+            },
+
+            "Akasa Air": {
+                number: "183",
+                departure: "02:20 pm",
+                arrival: "07:50 pm",
+                departureAirport: "Mumbai (BOM)",
+                arrivalAirport: "Thiruvananthapuram (TRV)",
+                duration: "5h 30m",
+                departureTerminal: "1",
+                arrivalTerminal: "1",
+                aircraft: "B737"
+            },
+
+            "Vistara": {
+                number: "315",
+                departure: "09:10 am",
+                arrival: "01:55 pm",
+                departureAirport: "Mumbai (BOM)",
+                arrivalAirport: "Thiruvananthapuram (TRV)",
+                duration: "4h 45m",
+                departureTerminal: "2",
+                arrivalTerminal: "1",
+                aircraft: "A320"
+            }
+
+        };
+
+        const details = flightData[airline] || flightData["IndiGo"];
+
+        $("modalAirline").textContent = airline + " " + details.number;
+
+        $("modalFlightNumber").textContent = details.number;
+
+        $("modalDepartureTime").textContent = details.departure;
+
+        $("modalArrivalTime").textContent = details.arrival;
+
+        $("modalDepartureAirport").textContent = details.departureAirport;
+
+        $("modalArrivalAirport").textContent = details.arrivalAirport;
+
+        $("modalDuration").textContent = details.duration;
+
+        $("modalDepartureTerminal").textContent = details.departureTerminal;
+
+        $("modalArrivalTerminal").textContent = details.arrivalTerminal;
+
+        $("modalAircraft").textContent = details.aircraft;
+
+        $("modalCabin").textContent = $("cabin").value;
+
+        $("modalCabinInfo").textContent = $("cabin").value;
+
+        $("modalDepartDate").textContent =
+            "Depart • " +
+            new Date(($("departDate").value || "2026-11-23") + "T00:00:00")
+                .toLocaleDateString("en-US", {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric"
+                });
+
+        flightModal.classList.add("active");
+
+    });
+
+});
+
+$("closeFlightModal").addEventListener("click", closeFlightDetails);
+
+$("doneFlightModal").addEventListener("click", closeFlightDetails);
+
+flightModal.addEventListener("click", function(e) {
+
+    if (e.target === flightModal) {
+        closeFlightDetails();
+    }
+
+});
+
+document.addEventListener("keydown", function(e) {
+
+    if (e.key === "Escape") {
+        closeFlightDetails();
+    }
+
+});
+// FARE RULES MODAL
+const fareRulesModal = document.getElementById('fareRulesModal');
+
+document.querySelectorAll('.fare-btn').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.stopPropagation();
+
+        const card = this.closest('.flight-card');
+
+        const airline = card?.querySelector('.airline-name')?.textContent.trim();
+        const flightNumber = card?.querySelector('.flight-number')?.textContent.trim();
+
+        document.getElementById('fareAirlineName').textContent = airline || 'Flight Airline';
+        document.getElementById('fareFlightNumber').textContent = flightNumber || 'Flight Details';
+
+        fareRulesModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+function closeFareRulesModal() {
+    fareRulesModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('closeFareRules').addEventListener('click', closeFareRulesModal);
+document.getElementById('doneFareRules').addEventListener('click', closeFareRulesModal);
+
+fareRulesModal.addEventListener('click', function (e) {
+    if (e.target === fareRulesModal) {
+        closeFareRulesModal();
+    }
+});
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && fareRulesModal.classList.contains('active')) {
+        closeFareRulesModal();
+    }
+});
 </script>
 <script src="assets/js/script.js"></script>
 <script type="text/javascript"
     src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script>
 <script src="assets/js/loader.js"></script>
+
 </body>
 </html>
