@@ -1,0 +1,1206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Car Booking History | UCS World Tour & Travels</title>
+    <meta name="description" content="View and manage your car booking history with UCS World Tour & Travels.">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+
+    <style>
+        /* =====================================
+           CAR BOOKING HISTORY
+           Same layout as Flight Booking History
+        ===================================== */
+
+        :root {
+            --car-navy: #07123d;
+            --car-red: #ff0808;
+            --car-text: #18233d;
+            --car-muted: #78849a;
+            --car-border: #e8ebf1;
+            --car-bg: #f4f6fa;
+        }
+
+        /* Main content - positioning inherited from account.css */
+        .car-history-main {
+            background: var(--car-bg);
+            padding: 30px 34px;
+            box-sizing: border-box;
+        }
+
+        .car-history-container {
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* Main booking panel */
+        .car-booking-panel {
+            width: 100%;
+            background: #fff;
+            border: 1px solid var(--car-border);
+            border-radius: 12px;
+            box-shadow: 0 5px 22px rgba(7, 18, 61, .045);
+            overflow: hidden;
+        }
+
+        /* Panel top header */
+        .car-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--car-border);
+        }
+
+        .car-panel-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .car-title-mark {
+            width: 4px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 5px;
+            background: var(--car-red);
+        }
+
+        .car-panel-title h2 {
+            margin: 0 0 6px;
+            color: var(--car-navy);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .car-panel-title p {
+            margin: 0;
+            color: var(--car-muted);
+            font-size: 13px;
+        }
+
+        .car-panel-count {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 14px;
+            border: 1px solid #e5eaf2;
+            border-radius: 7px;
+            background: #f5f7fb;
+            color: var(--car-muted);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .car-panel-count strong {
+            color: var(--car-navy);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Booking details heading */
+        .car-table-heading {
+            padding: 25px 24px 0;
+        }
+
+        .car-table-heading h3 {
+            margin: 0 0 7px;
+            color: var(--car-navy);
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .car-table-heading p {
+            margin: 0;
+            color: var(--car-muted);
+            font-size: 13px;
+        }
+
+        /* Filter and search toolbar */
+        .car-table-toolbar {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 21px 24px 17px;
+        }
+
+        .car-filter-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .car-date-field {
+            width: 155px;
+        }
+
+        .car-date-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--car-navy);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .car-date-field input {
+            display: block;
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            border: 1px solid #dfe4ed;
+            border-radius: 6px;
+            outline: none;
+            background: #fff;
+            color: var(--car-text);
+            font-family: inherit;
+            font-size: 12px;
+            box-sizing: border-box;
+            transition: .2s ease;
+        }
+
+        .car-date-field input:focus {
+            border-color: var(--car-navy);
+            box-shadow: 0 0 0 3px rgba(7, 18, 61, .06);
+        }
+
+        .car-filter-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .car-filter-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            height: 40px;
+            padding: 0 18px;
+            border: 1px solid var(--car-red);
+            border-radius: 6px;
+            background: var(--car-red);
+            color: #fff;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .car-filter-btn:hover {
+            background: #df0000;
+            border-color: #df0000;
+        }
+
+        .car-reset-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 15px;
+            border: 1px solid #dce2eb;
+            border-radius: 6px;
+            background: #fff;
+            color: #46536c;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .car-reset-btn:hover {
+            border-color: var(--car-navy);
+            color: var(--car-navy);
+        }
+
+        /* Search */
+        .car-table-search {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            width: 215px;
+            height: 40px;
+            flex-shrink: 0;
+            padding: 0 11px;
+            border: 1px solid #dfe4ed;
+            border-radius: 6px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .car-table-search span {
+            color: #8791a4;
+            font-size: 18px;
+        }
+
+        .car-table-search input {
+            width: 100%;
+            min-width: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--car-text);
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .car-table-search input::placeholder {
+            color: #929caf;
+        }
+
+        /* Table */
+        .car-table-wrapper {
+            width: calc(100% - 48px);
+            margin: 0 24px;
+            overflow-x: auto;
+            border: 1px solid #e8ebf1;
+            border-radius: 8px;
+        }
+
+        .car-booking-table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .car-booking-table thead {
+            background: #f3f5f9;
+        }
+
+        .car-booking-table th {
+            padding: 17px 17px;
+            border-bottom: 1px solid #e6eaf1;
+            color: var(--car-navy);
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .car-booking-table td {
+            padding: 17px;
+            border-bottom: 1px solid #edf0f5;
+            color: var(--car-text);
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .car-booking-table tbody tr.booking-row {
+            background: #fff;
+            transition: background .2s ease;
+        }
+
+        .car-booking-table tbody tr.booking-row:hover {
+            background: #fafbfe;
+        }
+
+        .car-ref {
+            color: #8993a5;
+            font-size: 12px;
+        }
+
+        /* Passenger */
+        .car-passenger-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 155px;
+        }
+
+        .car-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #edf3ff;
+            color: #2360b5;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .car-avatar.red {
+            background: #fff0f1;
+            color: #e51d2a;
+        }
+
+        .car-avatar.purple {
+            background: #f2edfc;
+            color: #7251b5;
+        }
+
+        .car-passenger-name {
+            color: var(--car-navy);
+            font-size: 12px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        /* Contact */
+        .car-contact-cell {
+            min-width: 180px;
+        }
+
+        .car-contact-cell a {
+            color: #344c78;
+            font-size: 12px;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .car-contact-cell a:hover {
+            color: var(--car-red);
+        }
+
+        /* Amount */
+        .car-amount {
+            color: var(--car-navy);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Status */
+        .car-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 11px;
+            border-radius: 30px;
+            background: #fff0f1;
+            color: #e50919;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .car-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ed101b;
+        }
+
+        /* Details link */
+        .car-details-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            height: 34px;
+            padding: 0 11px;
+            border: 1px solid #e1e6ef;
+            border-radius: 6px;
+            background: #fff;
+            color: var(--car-navy);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: .2s ease;
+        }
+
+        .car-details-btn:hover {
+            border-color: var(--car-navy);
+            background: var(--car-navy);
+            color: #fff;
+        }
+
+        /* Detail rows */
+        .car-detail-row {
+            display: none;
+        }
+
+        .car-detail-row.show {
+            display: table-row;
+        }
+
+        .car-detail-row td {
+            padding: 0 17px 17px;
+            background: #fafbfe;
+        }
+
+        .car-detail-panel {
+            padding: 17px;
+            border: 1px solid #e7ebf2;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .car-detail-panel h4 {
+            margin: 0 0 14px;
+            color: var(--car-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .car-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .car-detail-item span {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--car-muted);
+            font-size: 11px;
+        }
+
+        .car-detail-item strong {
+            color: var(--car-text);
+            font-size: 12px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        /* No results */
+        .car-no-results {
+            display: none;
+            padding: 45px 15px;
+            text-align: center;
+        }
+
+        .car-no-results.show {
+            display: block;
+        }
+
+        .car-empty-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background: #f0f3f9;
+            color: var(--car-navy);
+            font-size: 22px;
+        }
+
+        .car-no-results h3 {
+            margin: 0 0 6px;
+            color: var(--car-navy);
+            font-size: 15px;
+        }
+
+        .car-no-results p {
+            margin: 0;
+            color: var(--car-muted);
+            font-size: 12px;
+        }
+
+        /* Footer */
+        .car-table-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 17px 24px 20px;
+        }
+
+        .car-table-footer p {
+            margin: 0;
+            color: var(--car-muted);
+            font-size: 11px;
+        }
+
+        .car-table-footer strong {
+            color: var(--car-navy);
+            font-weight: 700;
+        }
+
+        /* Support note */
+        .car-history-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 17px;
+            padding: 13px 15px;
+            border: 1px solid #e4eaf4;
+            border-radius: 8px;
+            background: #eef3fb;
+        }
+
+        .car-note-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--car-navy);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .car-history-note p {
+            margin: 0;
+            color: #586680;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .car-history-main {
+                padding: 25px;
+            }
+
+            .car-table-toolbar {
+                flex-wrap: wrap;
+            }
+
+            .car-table-search {
+                width: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .car-history-main {
+                padding: 20px 15px;
+            }
+
+            .car-panel-header {
+                padding: 18px;
+            }
+
+            .car-panel-title h2 {
+                font-size: 16px;
+            }
+
+            .car-panel-title p {
+                font-size: 11px;
+            }
+
+            .car-table-heading {
+                padding: 21px 17px 0;
+            }
+
+            .car-table-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+                padding: 18px 17px;
+            }
+
+            .car-filter-form {
+                width: 100%;
+            }
+
+            .car-date-field {
+                flex: 1 1 140px;
+                width: auto;
+            }
+
+            .car-table-search {
+                width: 100%;
+            }
+
+            .car-table-wrapper {
+                width: calc(100% - 34px);
+                margin: 0 17px;
+            }
+
+            .car-detail-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .car-table-footer {
+                padding: 16px 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .car-history-main {
+                padding: 15px 10px;
+            }
+
+            .car-panel-header {
+                padding: 15px 12px;
+            }
+
+            .car-title-mark {
+                height: 35px;
+            }
+
+            .car-panel-title h2 {
+                font-size: 15px;
+            }
+
+            .car-panel-title p {
+                font-size: 10px;
+            }
+
+            .car-panel-count {
+                gap: 5px;
+                padding: 9px;
+                font-size: 10px;
+            }
+
+            .car-panel-count strong {
+                font-size: 15px;
+            }
+
+            .car-table-heading {
+                padding: 19px 13px 0;
+            }
+
+            .car-table-heading h3 {
+                font-size: 15px;
+            }
+
+            .car-table-heading p {
+                font-size: 11px;
+            }
+
+            .car-table-toolbar {
+                padding: 16px 13px;
+            }
+
+            .car-filter-form {
+                gap: 9px;
+            }
+
+            .car-date-field {
+                flex-basis: 100%;
+            }
+
+            .car-filter-actions {
+                width: 100%;
+            }
+
+            .car-filter-btn {
+                flex: 1;
+            }
+
+            .car-table-wrapper {
+                width: calc(100% - 26px);
+                margin: 0 13px;
+            }
+
+            .car-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .car-table-footer {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 15px 13px;
+            }
+        }
+    </style>
+</head>
+
+<body class="account-page">
+
+    <!-- Shared Header -->
+    <div id="accountHeader"></div>
+
+    <!-- Shared Sidebar -->
+    <div id="accountSidebarContainer"></div>
+
+    <div class="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="account-main car-history-main">
+
+        <div class="car-history-container">
+
+            <section class="car-booking-panel">
+
+                <!-- Panel Header -->
+                <div class="car-panel-header">
+
+                    <div class="car-panel-title">
+                        <span class="car-title-mark"></span>
+
+                        <div>
+                            <h2>All Car Booking</h2>
+                            <p>View your passenger and booking information.</p>
+                        </div>
+                    </div>
+
+                    <span class="car-panel-count">
+                        <strong id="carPanelCount">3</strong>
+                        Bookings
+                    </span>
+
+                </div>
+
+                <!-- Booking Details Heading -->
+                <div class="car-table-heading">
+                    <h3>Booking Details</h3>
+                    <p>Your recent car booking records</p>
+                </div>
+
+                <!-- Filter and Search -->
+                <div class="car-table-toolbar">
+
+                    <form class="car-filter-form" id="carFilterForm">
+
+                        <div class="car-date-field">
+                            <label for="carFromDate">From Date</label>
+                            <input type="date" id="carFromDate" name="from_date">
+                        </div>
+
+                        <div class="car-date-field">
+                            <label for="carToDate">To Date</label>
+                            <input type="date" id="carToDate" name="to_date">
+                        </div>
+
+                        <div class="car-filter-actions">
+
+                            <button type="submit" class="car-filter-btn">
+                                ⌕ Filter
+                            </button>
+
+                            <button type="button" class="car-reset-btn" id="carResetBtn">
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <label class="car-table-search">
+                        <span>⌕</span>
+                        <input
+                            type="search"
+                            id="carBookingSearch"
+                            placeholder="Search bookings..."
+                            aria-label="Search car bookings"
+                        >
+                    </label>
+
+                </div>
+
+                <!-- Booking Table -->
+                <div class="car-table-wrapper">
+
+                    <table class="car-booking-table">
+
+                        <thead>
+                            <tr>
+                                <th>Booking Ref</th>
+                                <th>Passenger</th>
+                                <th>Contact</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="carBookingBody">
+
+                            <!-- Booking 1 -->
+                            <tr class="booking-row" data-booking-date="2026-11-16">
+
+                                <td><span class="car-ref">—</span></td>
+
+                                <td>
+                                    <div class="car-passenger-cell">
+                                        <div class="car-avatar red">R</div>
+                                        <span class="car-passenger-name">Sample Passenger 1</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="car-contact-cell">
+                                        <a href="mailto:passenger1@example.com">
+                                            passenger1@example.com
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <strong class="car-amount">₹5,500.00</strong>
+                                </td>
+
+                                <td>
+                                    <span class="car-status">
+                                        <span class="car-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <a href="car-booking-details.html" class="car-details-btn">
+                                        Show Details
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="car-detail-row">
+                                <td colspan="6">
+                                    <div class="car-detail-panel">
+                                        <h4>Booking Information</h4>
+
+                                        <div class="car-detail-grid">
+
+                                            <div class="car-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Sample Passenger 1</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Email Address</span>
+                                                <strong>passenger1@example.com</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Booking Amount</span>
+                                                <strong>₹5,500.00</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Booking Date</span>
+                                                <strong>16 Nov 2026</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Payment Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Booking 2 -->
+                            <tr class="booking-row" data-booking-date="2026-11-15">
+
+                                <td><span class="car-ref">—</span></td>
+
+                                <td>
+                                    <div class="car-passenger-cell">
+                                        <div class="car-avatar">A</div>
+                                        <span class="car-passenger-name">Sample Passenger 2</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="car-contact-cell">
+                                        <a href="mailto:passenger2@example.com">
+                                            passenger2@example.com
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <strong class="car-amount">₹3,200.00</strong>
+                                </td>
+
+                                <td>
+                                    <span class="car-status">
+                                        <span class="car-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <a href="car-booking-details.html" class="car-details-btn">
+                                        Show Details
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="car-detail-row">
+                                <td colspan="6">
+                                    <div class="car-detail-panel">
+                                        <h4>Booking Information</h4>
+
+                                        <div class="car-detail-grid">
+
+                                            <div class="car-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Sample Passenger 2</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Email Address</span>
+                                                <strong>passenger2@example.com</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Booking Amount</span>
+                                                <strong>₹3,200.00</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Booking Date</span>
+                                                <strong>15 Nov 2026</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Payment Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Booking 3 -->
+                            <tr class="booking-row" data-booking-date="2026-11-14">
+
+                                <td><span class="car-ref">—</span></td>
+
+                                <td>
+                                    <div class="car-passenger-cell">
+                                        <div class="car-avatar purple">S</div>
+                                        <span class="car-passenger-name">Sample Passenger 3</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="car-contact-cell">
+                                        <a href="mailto:passenger3@example.com">
+                                            passenger3@example.com
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <strong class="car-amount">₹4,800.00</strong>
+                                </td>
+
+                                <td>
+                                    <span class="car-status">
+                                        <span class="car-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <a href="car-booking-details.html" class="car-details-btn">
+                                        Show Details
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="car-detail-row">
+                                <td colspan="6">
+                                    <div class="car-detail-panel">
+                                        <h4>Booking Information</h4>
+
+                                        <div class="car-detail-grid">
+
+                                            <div class="car-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Sample Passenger 3</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Email Address</span>
+                                                <strong>passenger3@example.com</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Booking Amount</span>
+                                                <strong>₹4,800.00</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Booking Date</span>
+                                                <strong>14 Nov 2026</strong>
+                                            </div>
+
+                                            <div class="car-detail-item">
+                                                <span>Payment Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <!-- Empty State -->
+                    <div class="car-no-results" id="carNoResults">
+                        <div class="car-empty-icon">⌕</div>
+                        <h3>No bookings found</h3>
+                        <p>Try another date range or search keyword.</p>
+                    </div>
+
+                </div>
+
+                <!-- Table Footer -->
+                <div class="car-table-footer">
+
+                    <p>
+                        Showing <strong id="carShowingCount">3</strong> booking(s)
+                    </p>
+
+                    <p>
+                        Total Records: <strong id="carTotalCount">3</strong>
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- Support Note -->
+            <div class="car-history-note">
+                <span class="car-note-icon">i</span>
+                <p>
+                    Need help with your car booking? Contact our support team for assistance.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Shared Layout JS -->
+    <script src="assets/js/account-layout.js"></script>
+
+    <!-- Car Booking Page JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const filterForm = document.getElementById("carFilterForm");
+            const fromDate = document.getElementById("carFromDate");
+            const toDate = document.getElementById("carToDate");
+            const resetBtn = document.getElementById("carResetBtn");
+            const searchInput = document.getElementById("carBookingSearch");
+
+            const bookingBody = document.getElementById("carBookingBody");
+            const noResults = document.getElementById("carNoResults");
+
+            const showingCount = document.getElementById("carShowingCount");
+            const totalCount = document.getElementById("carTotalCount");
+            const panelCount = document.getElementById("carPanelCount");
+
+            const bookingRows = Array.from(
+                bookingBody.querySelectorAll(".booking-row")
+            );
+
+            const originalCount = bookingRows.length;
+
+            totalCount.textContent = originalCount;
+            showingCount.textContent = originalCount;
+            panelCount.textContent = originalCount;
+
+            // Close expanded detail rows
+            function closeAllDetails() {
+                bookingRows.forEach(function (row) {
+                    const detailRow = row.nextElementSibling;
+
+                    if (
+                        detailRow &&
+                        detailRow.classList.contains("car-detail-row")
+                    ) {
+                        detailRow.classList.remove("show");
+                    }
+                });
+            }
+
+            // Apply date and search filters
+            function applyFilters() {
+
+                const start = fromDate.value;
+                const end = toDate.value;
+                const keyword = searchInput.value.trim().toLowerCase();
+
+                let visibleCount = 0;
+
+                closeAllDetails();
+
+                bookingRows.forEach(function (row) {
+
+                    const date = row.dataset.bookingDate || "";
+                    const rowText = row.textContent.toLowerCase();
+
+                    const matchesStart = !start || date >= start;
+                    const matchesEnd = !end || date <= end;
+                    const matchesSearch = !keyword || rowText.includes(keyword);
+
+                    const show = matchesStart && matchesEnd && matchesSearch;
+
+                    row.style.display = show ? "" : "none";
+
+                    const detailRow = row.nextElementSibling;
+
+                    if (
+                        detailRow &&
+                        detailRow.classList.contains("car-detail-row")
+                    ) {
+                        detailRow.style.display = show ? "none" : "none";
+                    }
+
+                    if (show) {
+                        visibleCount++;
+                    }
+
+                });
+
+                showingCount.textContent = visibleCount;
+                panelCount.textContent = visibleCount;
+
+                noResults.classList.toggle("show", visibleCount === 0);
+            }
+
+            // Date filter submit
+            filterForm.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                if (
+                    fromDate.value &&
+                    toDate.value &&
+                    fromDate.value > toDate.value
+                ) {
+                    alert("From Date cannot be greater than To Date.");
+                    toDate.focus();
+                    return;
+                }
+
+                applyFilters();
+
+            });
+
+            // Live search
+            searchInput.addEventListener("input", applyFilters);
+
+            // Reset filter
+            resetBtn.addEventListener("click", function () {
+
+                fromDate.value = "";
+                toDate.value = "";
+                searchInput.value = "";
+
+                applyFilters();
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

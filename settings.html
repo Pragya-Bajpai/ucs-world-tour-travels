@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Account Settings | UCS World Tour & Travels</title>
+    <meta name="description" content="Manage your UCS account preferences, notifications and security settings.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --settings-navy: #071b49;
+            --settings-red: #ed101b;
+            --settings-text: #26334a;
+            --settings-muted: #8792a3;
+            --settings-border: #e8ecf3;
+            --settings-bg: #f5f7fb;
+        }
+
+        .settings-page {
+            width: 100%;
+            max-width: 1450px;
+            margin: 0 auto;
+        }
+
+        .settings-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .settings-heading h1 {
+            color: var(--settings-navy);
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 0 6px;
+        }
+
+        .settings-heading p {
+            color: var(--settings-muted);
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .settings-content {
+            display: grid;
+            grid-template-columns: 235px minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        /* SETTINGS NAVIGATION */
+
+        .settings-nav {
+            background: #fff;
+            border: 1px solid var(--settings-border);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 4px 18px rgba(7, 27, 73, .035);
+        }
+
+        .settings-nav-title {
+            padding: 10px 11px 13px;
+            color: var(--settings-muted);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .settings-nav button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 12px 11px;
+            margin-bottom: 4px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            color: #536078;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .settings-nav button i {
+            width: 18px;
+            color: #71809a;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .settings-nav button:hover {
+            background: #f5f7fb;
+            color: var(--settings-navy);
+        }
+
+        .settings-nav button.active {
+            background: #f0f2fa;
+            color: var(--settings-navy);
+        }
+
+        .settings-nav button.active i {
+            color: var(--settings-red);
+        }
+
+        /* SETTINGS PANELS */
+
+        .settings-panel {
+            display: none;
+            background: #fff;
+            border: 1px solid var(--settings-border);
+            border-radius: 10px;
+            box-shadow: 0 4px 18px rgba(7, 27, 73, .035);
+            overflow: hidden;
+        }
+
+        .settings-panel.active {
+            display: block;
+            animation: panelFade .2s ease;
+        }
+
+        @keyframes panelFade {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel-header {
+            padding: 21px 23px;
+            border-bottom: 1px solid var(--settings-border);
+        }
+
+        .panel-header h3 {
+            color: var(--settings-navy);
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 6px;
+        }
+
+        .panel-header p {
+            color: var(--settings-muted);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .panel-body {
+            padding: 23px;
+        }
+
+        /* FORM */
+
+        .settings-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 19px 20px;
+        }
+
+        .settings-form-group {
+            min-width: 0;
+        }
+
+        .settings-form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .settings-form-group label {
+            display: block;
+            color: #344158;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .settings-form-group label span {
+            color: var(--settings-red);
+        }
+
+        .settings-input {
+            width: 100%;
+            height: 43px;
+            padding: 0 13px;
+            border: 1px solid #dfe4ed;
+            border-radius: 6px;
+            outline: none;
+            background: #fff;
+            color: var(--settings-text);
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .settings-input:focus {
+            border-color: var(--settings-navy);
+            box-shadow: 0 0 0 3px rgba(7, 27, 73, .06);
+        }
+
+        .settings-input:disabled {
+            background: #f5f7fa;
+            color: #8993a3;
+            cursor: not-allowed;
+        }
+
+        .settings-input::placeholder {
+            color: #a1a9b6;
+        }
+
+        .settings-form-group small {
+            display: block;
+            margin-top: 6px;
+            color: var(--settings-muted);
+            font-size: 10px;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .settings-input {
+            padding-right: 43px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 13px;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: #8490a3;
+            cursor: pointer;
+        }
+
+        /* PREFERENCE ROWS */
+
+        .preference-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preference-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .preference-row:first-child {
+            padding-top: 2px;
+        }
+
+        .preference-row:last-child {
+            border-bottom: 0;
+            padding-bottom: 2px;
+        }
+
+        .preference-info {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .preference-icon {
+            width: 39px;
+            height: 39px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f3fa;
+            color: var(--settings-navy);
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .preference-info h4 {
+            color: var(--settings-navy);
+            font-size: 13px;
+            font-weight: 700;
+            margin: 0 0 5px;
+        }
+
+        .preference-info p {
+            color: var(--settings-muted);
+            font-size: 11px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* TOGGLE SWITCH */
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 43px;
+            height: 23px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            inset: 0;
+            background: #d7dce5;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .switch-slider::before {
+            content: "";
+            position: absolute;
+            height: 17px;
+            width: 17px;
+            left: 3px;
+            top: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: .25s;
+        }
+
+        .switch input:checked + .switch-slider {
+            background: var(--settings-red);
+        }
+
+        .switch input:checked + .switch-slider::before {
+            transform: translateX(20px);
+        }
+
+        /* SECURITY INFO */
+
+        .security-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            padding: 14px;
+            background: #f3f6fc;
+            border: 1px solid #e7edf8;
+            border-radius: 7px;
+            margin-bottom: 22px;
+        }
+
+        .security-note i {
+            color: var(--settings-navy);
+            margin-top: 2px;
+        }
+
+        .security-note p {
+            color: #5c6a82;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* PANEL FOOTER */
+
+        .panel-footer {
+            padding: 17px 23px;
+            background: #fff;
+            border-top: 1px solid var(--settings-border);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .settings-btn {
+            height: 40px;
+            padding: 0 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .settings-btn-cancel {
+            background: #fff;
+            border: 1px solid #dfe4ed;
+            color: #536078;
+        }
+
+        .settings-btn-save {
+            background: var(--settings-red);
+            border: 1px solid var(--settings-red);
+            color: #fff;
+        }
+
+        .settings-btn-save:hover {
+            background: #c9000b;
+            border-color: #c9000b;
+        }
+
+        .settings-btn-cancel:hover {
+            background: #f5f7fb;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 950px) {
+            .settings-content {
+                grid-template-columns: 200px minmax(0, 1fr);
+                gap: 15px;
+            }
+
+            .panel-body {
+                padding: 19px;
+            }
+        }
+
+        @media(max-width: 700px) {
+            .settings-content {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-nav {
+                display: flex;
+                gap: 5px;
+                overflow-x: auto;
+                padding: 9px;
+            }
+
+            .settings-nav-title {
+                display: none;
+            }
+
+            .settings-nav button {
+                width: auto;
+                min-width: max-content;
+                margin: 0;
+                padding: 11px 13px;
+            }
+
+            .settings-nav button span {
+                white-space: nowrap;
+            }
+
+            .settings-nav button i {
+                width: auto;
+            }
+
+            .settings-heading h1 {
+                font-size: 23px;
+            }
+        }
+
+        @media(max-width: 500px) {
+            .settings-form-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .settings-form-group.full {
+                grid-column: auto;
+            }
+
+            .panel-header {
+                padding: 17px;
+            }
+
+            .panel-body {
+                padding: 17px;
+            }
+
+            .panel-footer {
+                padding: 14px 17px;
+            }
+
+            .settings-btn {
+                flex: 1;
+                padding: 0 10px;
+            }
+
+            .preference-info {
+                gap: 9px;
+            }
+
+            .preference-icon {
+                width: 34px;
+                height: 34px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="account-layout">
+
+    <!-- EXISTING DASHBOARD HEADER -->
+    <div id="accountHeader"></div>
+
+    <!-- EXISTING DASHBOARD SIDEBAR -->
+    <div id="accountSidebarContainer"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="account-main">
+
+        <div class="settings-page">
+
+            <div class="settings-heading">
+                <div>
+                    <h1>Account Settings</h1>
+                    <p>Manage your account preferences, notifications and security.</p>
+                </div>
+            </div>
+
+            <div class="settings-content">
+
+                <!-- SETTINGS NAVIGATION -->
+                <aside class="settings-nav">
+
+                    <div class="settings-nav-title">Settings Menu</div>
+
+                    <button type="button" class="active" data-panel="general">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>General Settings</span>
+                    </button>
+
+                    <button type="button" data-panel="notifications">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Notifications</span>
+                    </button>
+
+                    <button type="button" data-panel="security">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Password & Security</span>
+                    </button>
+
+                    <button type="button" data-panel="preferences">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>Preferences</span>
+                    </button>
+
+                </aside>
+
+                <!-- SETTINGS PANELS -->
+                <div class="settings-panels">
+
+                    <!-- GENERAL SETTINGS -->
+                    <section class="settings-panel active" id="general">
+
+                        <div class="panel-header">
+                            <h3>General Settings</h3>
+                            <p>Manage your basic account information and preferences.</p>
+                        </div>
+
+                        <form class="settings-form" data-form="general">
+
+                            <div class="panel-body">
+
+                                <div class="settings-form-grid">
+
+                                    <div class="settings-form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" id="fullName"
+                                               class="settings-input"
+                                               placeholder="Enter your full name">
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="emailAddress">Email Address</label>
+                                        <input type="email" id="emailAddress"
+                                               class="settings-input"
+                                               placeholder="Enter your email address">
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="mobileNumber">Mobile Number</label>
+                                        <input type="tel" id="mobileNumber"
+                                               class="settings-input"
+                                               placeholder="Enter mobile number">
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="dateOfBirth">Date of Birth</label>
+                                        <input type="date" id="dateOfBirth"
+                                               class="settings-input">
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="gender">Gender</label>
+                                        <select id="gender" class="settings-input">
+                                            <option value="">Select Gender</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="timezone">Time Zone</label>
+                                        <select id="timezone" class="settings-input">
+                                            <option value="Asia/Kolkata">India Standard Time (IST)</option>
+                                            <option value="UTC">UTC</option>
+                                            <option value="Asia/Dubai">Dubai</option>
+                                            <option value="Europe/London">London</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="panel-footer">
+                                <button type="reset" class="settings-btn settings-btn-cancel">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="settings-btn settings-btn-save">
+                                    <i class="fa-solid fa-check"></i> Save Changes
+                                </button>
+                            </div>
+
+                        </form>
+                    </section>
+
+                    <!-- NOTIFICATION SETTINGS -->
+                    <section class="settings-panel" id="notifications">
+
+                        <div class="panel-header">
+                            <h3>Notification Settings</h3>
+                            <p>Choose how you want to receive updates from UCS.</p>
+                        </div>
+
+                        <form class="settings-form" data-form="notifications">
+
+                            <div class="panel-body">
+
+                                <div class="preference-list">
+
+                                    <div class="preference-row">
+                                        <div class="preference-info">
+                                            <div class="preference-icon">
+                                                <i class="fa-regular fa-envelope"></i>
+                                            </div>
+                                            <div>
+                                                <h4>Email Notifications</h4>
+                                                <p>Receive booking updates and important information through email.</p>
+                                            </div>
+                                        </div>
+
+                                        <label class="switch">
+                                            <input type="checkbox" name="email_notifications" checked>
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="preference-row">
+                                        <div class="preference-info">
+                                            <div class="preference-icon">
+                                                <i class="fa-solid fa-mobile-screen"></i>
+                                            </div>
+                                            <div>
+                                                <h4>SMS Notifications</h4>
+                                                <p>Get booking confirmations and travel alerts through SMS.</p>
+                                            </div>
+                                        </div>
+
+                                        <label class="switch">
+                                            <input type="checkbox" name="sms_notifications" checked>
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="preference-row">
+                                        <div class="preference-info">
+                                            <div class="preference-icon">
+                                                <i class="fa-solid fa-plane"></i>
+                                            </div>
+                                            <div>
+                                                <h4>Booking Updates</h4>
+                                                <p>Receive updates about booking status, cancellation and confirmation.</p>
+                                            </div>
+                                        </div>
+
+                                        <label class="switch">
+                                            <input type="checkbox" name="booking_updates" checked>
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="preference-row">
+                                        <div class="preference-info">
+                                            <div class="preference-icon">
+                                                <i class="fa-solid fa-tag"></i>
+                                            </div>
+                                            <div>
+                                                <h4>Offers & Promotions</h4>
+                                                <p>Receive special offers, deals and travel promotions.</p>
+                                            </div>
+                                        </div>
+
+                                        <label class="switch">
+                                            <input type="checkbox" name="promotions">
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="panel-footer">
+                                <button type="reset" class="settings-btn settings-btn-cancel">
+                                    Reset
+                                </button>
+                                <button type="submit" class="settings-btn settings-btn-save">
+                                    <i class="fa-solid fa-check"></i> Save Preferences
+                                </button>
+                            </div>
+
+                        </form>
+                    </section>
+
+                    <!-- PASSWORD AND SECURITY -->
+                    <section class="settings-panel" id="security">
+
+                        <div class="panel-header">
+                            <h3>Password & Security</h3>
+                            <p>Keep your account protected with a strong password.</p>
+                        </div>
+
+                        <form class="settings-form" data-form="security">
+
+                            <div class="panel-body">
+
+                                <div class="security-note">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <p>
+                                        For your account security, enter your current password
+                                        before setting a new password.
+                                    </p>
+                                </div>
+
+                                <div class="settings-form-grid">
+
+                                    <div class="settings-form-group full">
+                                        <label for="currentPassword">Current Password <span>*</span></label>
+                                        <div class="password-wrapper">
+                                            <input type="password" id="currentPassword"
+                                                   class="settings-input"
+                                                   placeholder="Enter current password" required>
+                                            <button type="button" class="password-toggle"
+                                                    data-target="currentPassword">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="newPassword">New Password <span>*</span></label>
+                                        <div class="password-wrapper">
+                                            <input type="password" id="newPassword"
+                                                   class="settings-input"
+                                                   placeholder="Enter new password" required minlength="8">
+                                            <button type="button" class="password-toggle"
+                                                    data-target="newPassword">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <small>Use at least 8 characters.</small>
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="confirmPassword">Confirm New Password <span>*</span></label>
+                                        <div class="password-wrapper">
+                                            <input type="password" id="confirmPassword"
+                                                   class="settings-input"
+                                                   placeholder="Confirm new password" required minlength="8">
+                                            <button type="button" class="password-toggle"
+                                                    data-target="confirmPassword">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="panel-footer">
+                                <button type="reset" class="settings-btn settings-btn-cancel">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="settings-btn settings-btn-save">
+                                    <i class="fa-solid fa-lock"></i> Update Password
+                                </button>
+                            </div>
+
+                        </form>
+                    </section>
+
+                    <!-- ACCOUNT PREFERENCES -->
+                    <section class="settings-panel" id="preferences">
+
+                        <div class="panel-header">
+                            <h3>Account Preferences</h3>
+                            <p>Customize your travel website experience.</p>
+                        </div>
+
+                        <form class="settings-form" data-form="preferences">
+
+                            <div class="panel-body">
+
+                                <div class="settings-form-grid">
+
+                                    <div class="settings-form-group">
+                                        <label for="language">Preferred Language</label>
+                                        <select id="language" class="settings-input">
+                                            <option value="en">English</option>
+                                            <option value="hi">Hindi</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="settings-form-group">
+                                        <label for="currency">Preferred Currency</label>
+                                        <select id="currency" class="settings-input">
+                                            <option value="INR">INR - Indian Rupee (₹)</option>
+                                            <option value="USD">USD - US Dollar ($)</option>
+                                            <option value="AED">AED - UAE Dirham</option>
+                                            <option value="EUR">EUR - Euro (€)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="settings-form-group full">
+                                        <label for="travelPreference">Preferred Travel Type</label>
+                                        <select id="travelPreference" class="settings-input">
+                                            <option value="">Select Travel Type</option>
+                                            <option>Flight</option>
+                                            <option>Bus</option>
+                                            <option>Car</option>
+                                            <option>Holiday Packages</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="panel-footer">
+                                <button type="reset" class="settings-btn settings-btn-cancel">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="settings-btn settings-btn-save">
+                                    <i class="fa-solid fa-check"></i> Save Preferences
+                                </button>
+                            </div>
+
+                        </form>
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- EXISTING DASHBOARD LAYOUT JS -->
+<script src="assets/js/account-layout.js"></script>
+
+<script>
+    // Settings tab navigation
+    const settingsNavButtons = document.querySelectorAll(".settings-nav button");
+    const settingsPanels = document.querySelectorAll(".settings-panel");
+
+    settingsNavButtons.forEach(button => {
+        button.addEventListener("click", function () {
+
+            const targetPanel = this.dataset.panel;
+
+            settingsNavButtons.forEach(item => item.classList.remove("active"));
+            settingsPanels.forEach(panel => panel.classList.remove("active"));
+
+            this.classList.add("active");
+
+            const selectedPanel = document.getElementById(targetPanel);
+
+            if (selectedPanel) {
+                selectedPanel.classList.add("active");
+            }
+        });
+    });
+
+    // Password visibility
+    document.querySelectorAll(".password-toggle").forEach(button => {
+        button.addEventListener("click", function () {
+
+            const input = document.getElementById(this.dataset.target);
+            const icon = this.querySelector("i");
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("fa-eye", "fa-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.replace("fa-eye-slash", "fa-eye");
+            }
+        });
+    });
+
+    // Settings form handling
+    document.querySelectorAll(".settings-form").forEach(form => {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Password validation
+            if (this.dataset.form === "security") {
+                const newPassword = document.getElementById("newPassword").value;
+                const confirmPassword = document.getElementById("confirmPassword").value;
+
+                if (newPassword.length < 8) {
+                    alert("New password must contain at least 8 characters.");
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    alert("New password and confirm password do not match.");
+                    return;
+                }
+            }
+
+            alert("Settings validated. Connect the backend API to save changes permanently.");
+        });
+    });
+</script>
+
+</body>
+</html>

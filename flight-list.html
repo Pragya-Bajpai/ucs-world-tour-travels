@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flight Booking History | UCS World Tour & Travels</title>
+    <meta name="description" content="View and manage your flight booking history with UCS World Tour & Travels.">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="assets/css/flight-list.css">
+</head>
+
+<body class="account-page">
+
+    <!-- Shared Header -->
+    <div id="accountHeader"></div>
+
+    <!-- Shared Sidebar -->
+    <div id="accountSidebarContainer"></div>
+
+    <div class="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="account-main flight-history-main">
+
+        <div class="flight-history-container">
+
+            <!-- Page Heading -->
+           
+            
+
+            <!-- Booking History Card -->
+            <section class="flight-booking-card">
+
+                <!-- Card Header -->
+                <div class="flight-card-header">
+
+                    <div class="flight-card-title">
+                        <span class="flight-title-indicator"></span>
+
+                        <div>
+                            <h2>All Flight Booking</h2>
+                            <p>Check your flight booking details and payment status.</p>
+                        </div>
+                    </div>
+
+                    <div class="flight-booking-count">
+                        <span id="bookingCount">3</span>
+                        <small>Bookings</small>
+                    </div>
+
+                </div>
+
+                <!-- Table Section -->
+                <div class="flight-table-section">
+
+                    <div class="flight-table-topbar">
+
+                        <div>
+                            <h3>Booking Details</h3>
+                            <p>Your recent flight booking records</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Date Filter and Search -->
+                    <div class="flight-table-tools">
+
+                        <form id="flightFilterForm" class="flight-filter-form">
+
+                            <div class="flight-date-field">
+                                <label for="flightFromDate">From Date</label>
+
+                                <div class="flight-input-wrap">
+                                    <input
+                                        type="date"
+                                        id="flightFromDate"
+                                        name="from_date"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="flight-date-field">
+                                <label for="flightToDate">To Date</label>
+
+                                <div class="flight-input-wrap">
+                                    <input
+                                        type="date"
+                                        id="flightToDate"
+                                        name="to_date"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="flight-filter-actions">
+
+                                <button type="submit" class="flight-filter-btn">
+                                    <span>⌕</span>
+                                    Filter
+                                </button>
+
+                                <button
+                                    type="button"
+                                    id="resetFlightFilter"
+                                    class="flight-reset-btn"
+                                >
+                                    Reset
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                        <!-- Search -->
+                        <div class="flight-table-search">
+                            <span>⌕</span>
+
+                            <input
+                                type="search"
+                                id="flightBookingSearch"
+                                placeholder="Search bookings..."
+                                aria-label="Search bookings"
+                            >
+                        </div>
+
+                    </div>
+
+                    <!-- Responsive Table -->
+                    <div class="flight-table-wrapper">
+
+                        <table class="flight-booking-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Booking Ref</th>
+                                    <th>Passenger</th>
+                                    <th>Contact</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="flightBookingTableBody">
+
+                                <!-- Booking 1 -->
+                                <tr data-booking-date="2026-11-16">
+
+                                    <td>
+                                        <span class="flight-booking-ref">—</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="flight-passenger">
+                                            <div class="flight-passenger-avatar">M</div>
+                                            <span>Mr de wgh</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="flight-contact">
+                                            <a href="mailto:sameer@gmail.com">sameer@gmail.com</a>
+                                            <span>91987654321</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <strong class="flight-amount">₹7,032.39</strong>
+                                    </td>
+
+                                    <td>
+                                        <span class="flight-status pending">
+                                            <span class="status-dot"></span>
+                                            Pending_payment
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                                <!-- Booking 2 -->
+                                <tr data-booking-date="2026-11-15">
+
+                                    <td>
+                                        <span class="flight-booking-ref">—</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="flight-passenger">
+                                            <div class="flight-passenger-avatar avatar-blue">R</div>
+                                            <span>Mr rr avba</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="flight-contact">
+                                            <a href="mailto:rohitchaudhary0691@gmail.com">
+                                                rohitchaudhary0691@gmail.com
+                                            </a>
+                                            <span>919876543210</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <strong class="flight-amount">₹14,226.21</strong>
+                                    </td>
+
+                                    <td>
+                                        <span class="flight-status pending">
+                                            <span class="status-dot"></span>
+                                            Pending_payment
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                                <!-- Booking 3 -->
+                                <tr data-booking-date="2026-11-14">
+
+                                    <td>
+                                        <span class="flight-booking-ref">—</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="flight-passenger">
+                                            <div class="flight-passenger-avatar avatar-purple">S</div>
+                                            <span>Mr sameer husain</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="flight-contact">
+                                            <a href="mailto:rohitjaiswal1504@gmail.com">
+                                                rohitjaiswal1504@gmail.com
+                                            </a>
+                                            <span>919876543210</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <strong class="flight-amount">₹58,668.00</strong>
+                                    </td>
+
+                                    <td>
+                                        <span class="flight-status pending">
+                                            <span class="status-dot"></span>
+                                            Pending_payment
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <!-- No Results -->
+                        <div class="flight-no-results" id="flightNoResults">
+                            <div class="flight-no-results-icon">✈</div>
+                            <h3>No bookings found</h3>
+                            <p>Try changing your date range or search keyword.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Table Footer -->
+                    <div class="flight-table-footer">
+
+                        <p>
+                            Showing <strong id="showingBookings">3</strong>
+                            booking(s)
+                        </p>
+
+                        <span class="flight-table-footer-note">
+                            <span class="footer-live-dot"></span>
+                            Booking history
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Bottom Note -->
+            <div class="flight-history-note">
+
+                <span class="flight-note-icon">i</span>
+
+                <p>
+                    For assistance with your flight booking, please contact our support team.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Shared Layout JS -->
+    <script src="assets/js/account-layout.js"></script>
+
+    <!-- Page JS -->
+    <script src="assets/js/flight-list.js"></script>
+
+</body>
+</html>

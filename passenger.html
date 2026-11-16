@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Passenger Details | UCS World Tour & Travels</title>
+    <meta name="description" content="Enter passenger and contact details to continue your flight booking with UCS World Tour & Travels.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --ucs-navy: #07123d;
+            --ucs-red: #ff0000;
+            --ucs-blue: #1769aa;
+            --ucs-bg: #f3f5f8;
+            --ucs-text: #17213b;
+            --ucs-muted: #758198;
+            --ucs-border: #e3e8f0;
+            --ucs-shadow: 0 5px 22px rgba(7, 18, 61, .07);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ucs-bg);
+            color: var(--ucs-text);
+            font-family: Arial, sans-serif;
+        }
+
+        .passenger-page {
+            padding: 35px 15px 55px;
+        }
+
+        .passenger-container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .booking-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ucs-muted);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progress-step span {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e5e9f0;
+            color: var(--ucs-muted);
+        }
+
+        .progress-step.active {
+            color: var(--ucs-navy);
+        }
+
+        .progress-step.active span {
+            background: var(--ucs-red);
+            color: #fff;
+        }
+
+        .progress-line {
+            width: 55px;
+            height: 2px;
+            background: #dce1e9;
+        }
+
+        .passenger-heading {
+            margin-bottom: 22px;
+        }
+
+        .passenger-heading h1 {
+            color: var(--ucs-navy);
+            font-size: 27px;
+            margin: 0 0 7px;
+        }
+
+        .passenger-heading p {
+            color: var(--ucs-muted);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .booking-card,
+        .flight-summary {
+            background: #fff;
+            border: 1px solid var(--ucs-border);
+            border-radius: 12px;
+            box-shadow: var(--ucs-shadow);
+        }
+
+        .booking-card {
+            padding: 23px;
+            margin-bottom: 20px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 20px;
+        }
+
+        .section-heading .heading-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff0f0;
+            color: var(--ucs-red);
+            border-radius: 9px;
+        }
+
+        .section-heading h2 {
+            color: var(--ucs-navy);
+            font-size: 18px;
+            margin: 0 0 4px;
+        }
+
+        .section-heading p {
+            color: var(--ucs-muted);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: var(--ucs-text);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group label span {
+            color: var(--ucs-red);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 44px;
+            padding: 0 12px;
+            border: 1px solid var(--ucs-border);
+            border-radius: 6px;
+            outline: none;
+            color: var(--ucs-text);
+            background: #fff;
+            font-size: 13px;
+            transition: .2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--ucs-blue);
+            box-shadow: 0 0 0 3px rgba(23, 105, 170, .09);
+        }
+
+        .form-group input::placeholder {
+            color: #a0a8b6;
+        }
+
+        .passenger-card {
+            padding: 18px;
+            border: 1px solid var(--ucs-border);
+            border-radius: 9px;
+            margin-bottom: 16px;
+            background: #fff;
+        }
+
+        .passenger-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 17px;
+        }
+
+        .passenger-card-header h3 {
+            margin: 0;
+            font-size: 15px;
+            color: var(--ucs-navy);
+        }
+
+        .remove-passenger {
+            border: 0;
+            background: #fff0f0;
+            color: var(--ucs-red);
+            padding: 7px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .add-passenger-btn {
+            border: 1px dashed var(--ucs-red);
+            background: #fff8f8;
+            color: var(--ucs-red);
+            padding: 11px 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .add-passenger-btn:hover {
+            background: #fff0f0;
+        }
+
+        .form-note {
+            color: var(--ucs-muted);
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 14px 0 0;
+        }
+
+        .flight-summary {
+            position: sticky;
+            top: 95px;
+            overflow: hidden;
+        }
+
+        .summary-header {
+            background: var(--ucs-navy);
+            color: #fff;
+            padding: 17px 19px;
+        }
+
+        .summary-header h3 {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .summary-header p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #d6deef;
+        }
+
+        .summary-body {
+            padding: 19px;
+        }
+
+        .summary-airline {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding-bottom: 17px;
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .summary-airline img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .summary-airline strong {
+            display: block;
+            color: var(--ucs-navy);
+            font-size: 14px;
+        }
+
+        .summary-airline span {
+            color: var(--ucs-muted);
+            font-size: 11px;
+        }
+
+        .summary-route {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .summary-route div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .summary-route strong {
+            color: var(--ucs-navy);
+            font-size: 19px;
+        }
+
+        .summary-route span {
+            color: var(--ucs-muted);
+            font-size: 11px;
+        }
+
+        .summary-route i {
+            color: var(--ucs-red);
+        }
+
+        .summary-date {
+            color: var(--ucs-muted);
+            font-size: 12px;
+            margin: 15px 0;
+        }
+
+        .summary-price-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 12px 0;
+            color: var(--ucs-muted);
+            font-size: 13px;
+        }
+
+        .summary-price-row strong {
+            color: var(--ucs-text);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--ucs-border);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .summary-total span {
+            color: var(--ucs-navy);
+            font-weight: 700;
+        }
+
+        .summary-total strong {
+            color: var(--ucs-red);
+            font-size: 21px;
+        }
+
+        .continue-btn {
+            width: 100%;
+            margin-top: 20px;
+            background: var(--ucs-red);
+            color: #fff;
+            border: 0;
+            border-radius: 6px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .continue-btn:hover {
+            background: #d90000;
+        }
+
+        .secure-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            color: var(--ucs-muted);
+            font-size: 11px;
+            margin-top: 13px;
+        }
+
+        .secure-note i {
+            color: #15966b;
+        }
+
+        @media (max-width: 900px) {
+            .booking-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .flight-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .passenger-page {
+                padding: 25px 12px 40px;
+            }
+
+            .passenger-heading h1 {
+                font-size: 22px;
+            }
+
+            .booking-card {
+                padding: 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .progress-step {
+                font-size: 11px;
+                gap: 5px;
+            }
+
+            .progress-line {
+                width: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main class="passenger-page">
+        <div class="passenger-container">
+
+            <!-- BOOKING PROGRESS -->
+            <div class="booking-progress">
+                <div class="progress-step">
+                    <span><i class="fas fa-check"></i></span>
+                    Flight
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div class="progress-step active">
+                    <span>2</span>
+                    Passenger
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div class="progress-step">
+                    <span>3</span>
+                    Payment
+                </div>
+            </div>
+
+            <div class="passenger-heading">
+                <h1>Passenger Details</h1>
+                <p>Please enter the details exactly as mentioned on your government ID.</p>
+            </div>
+
+            <form id="passengerForm">
+
+                <div class="booking-layout">
+
+                    <!-- LEFT CONTENT -->
+                    <div>
+
+                        <!-- CONTACT DETAILS -->
+                        <div class="booking-card">
+                            <div class="section-heading">
+                                <div class="heading-icon">
+                                    <i class="fas fa-address-book"></i>
+                                </div>
+                                <div>
+                                    <h2>Contact Details</h2>
+                                    <p>Your booking confirmation will be sent here.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="contactName">Contact Person <span>*</span></label>
+                                    <input type="text" id="contactName" name="contact_name"
+                                           placeholder="Enter full name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contactMobile">Mobile Number <span>*</span></label>
+                                    <input type="tel" id="contactMobile" name="contact_mobile"
+                                           placeholder="10-digit mobile number"
+                                           pattern="[6-9][0-9]{9}" maxlength="10" required>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="contactEmail">Email Address <span>*</span></label>
+                                    <input type="email" id="contactEmail" name="contact_email"
+                                           placeholder="Enter your email address" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PASSENGER DETAILS -->
+                        <div class="booking-card">
+                            <div class="section-heading">
+                                <div class="heading-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h2>Passenger Information</h2>
+                                    <p>Enter details of all passengers travelling.</p>
+                                </div>
+                            </div>
+
+                            <div id="passengerList">
+
+                                <div class="passenger-card">
+                                    <div class="passenger-card-header">
+                                        <h3>Adult 1</h3>
+                                    </div>
+
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label>First Name <span>*</span></label>
+                                            <input type="text" name="first_name[]" placeholder="First name" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Last Name <span>*</span></label>
+                                            <input type="text" name="last_name[]" placeholder="Last name" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Gender <span>*</span></label>
+                                            <select name="gender[]" required>
+                                                <option value="">Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Date of Birth <span>*</span></label>
+                                            <input type="date" name="dob[]" required>
+                                        </div>
+
+                                        <div class="form-group full-width">
+                                            <label>Nationality <span>*</span></label>
+                                            <select name="nationality[]" required>
+                                                <option value="Indian" selected>Indian</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button type="button" class="add-passenger-btn" id="addPassenger">
+                                <i class="fas fa-plus"></i> Add Another Passenger
+                            </button>
+
+                            <p class="form-note">
+                                Please ensure that passenger names match the government-issued identity proof.
+                                Incorrect details may cause issues during airport check-in.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT FLIGHT SUMMARY -->
+                    <aside class="flight-summary">
+
+                        <div class="summary-header">
+                            <h3>Flight Summary</h3>
+                            <p>Your selected flight details</p>
+                        </div>
+
+                        <div class="summary-body">
+
+                            <div class="summary-airline">
+                                <img src="https://ucsworldtourandtravel.com/public/frontend/asset/img/flights/1.png"
+                                     alt="Airline Logo">
+
+                                <div>
+                                    <strong id="summaryAirline">IndiGo</strong>
+                                    <span id="summaryFlightNumber">6E - 6587 | Economy</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-route">
+                                <div>
+                                    <strong id="summaryDepartureTime">07:10</strong>
+                                    <span id="summaryDepartureCity">Lucknow (LKO)</span>
+                                </div>
+
+                                <i class="fas fa-plane"></i>
+
+                                <div>
+                                    <strong id="summaryArrivalTime">08:25</strong>
+                                    <span id="summaryArrivalCity">Delhi (DEL)</span>
+                                </div>
+                            </div>
+
+                            <p class="summary-date" id="summaryDate">
+                                <i class="far fa-calendar-alt"></i> Mon, Nov 23
+                                &nbsp; | &nbsp; 1h 15m
+                            </p>
+
+                            <div class="summary-price-row">
+                                <span>Base Fare</span>
+                                <strong id="baseFare">₹4,500</strong>
+                            </div>
+
+                            <div class="summary-price-row">
+                                <span>Taxes & Fees</span>
+                                <strong id="taxFare">₹500</strong>
+                            </div>
+
+                            <div class="summary-price-row">
+                                <span>Passengers</span>
+                                <strong id="passengerCount">1 Adult</strong>
+                            </div>
+
+                            <div class="summary-total">
+                                <span>Total Amount</span>
+                                <strong id="totalFare">₹5,000</strong>
+                            </div>
+
+                            <button type="submit" class="continue-btn">
+                                Continue to Payment <i class="fas fa-arrow-right"></i>
+                            </button>
+
+                            <div class="secure-note">
+                                <i class="fas fa-lock"></i>
+                                Secure booking with UCS World Tour & Travels
+                            </div>
+
+                        </div>
+                    </aside>
+
+                </div>
+            </form>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script>
+        // LOAD HEADER AND FOOTER
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data)
+            .catch(error => console.error('Header loading error:', error));
+
+        fetch('includes/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data)
+            .catch(error => console.error('Footer loading error:', error));
+
+
+        // ADD / REMOVE PASSENGERS
+        const passengerList = document.getElementById('passengerList');
+        const passengerCount = document.getElementById('passengerCount');
+        const baseFare = document.getElementById('baseFare');
+        const taxFare = document.getElementById('taxFare');
+        const totalFare = document.getElementById('totalFare');
+
+        const baseFareAmount = 4500;
+        const taxAmount = 500;
+
+        function updatePassengerSummary() {
+            const count = passengerList.querySelectorAll('.passenger-card').length;
+
+            passengerCount.textContent = count + (count === 1 ? ' Adult' : ' Adults');
+
+            const total = (baseFareAmount + taxAmount) * count;
+
+            baseFare.textContent = '₹' + (baseFareAmount * count).toLocaleString('en-IN');
+            taxFare.textContent = '₹' + (taxAmount * count).toLocaleString('en-IN');
+            totalFare.textContent = '₹' + total.toLocaleString('en-IN');
+        }
+
+        function updatePassengerLabels() {
+            const cards = passengerList.querySelectorAll('.passenger-card');
+
+            cards.forEach((card, index) => {
+                card.querySelector('h3').textContent = 'Adult ' + (index + 1);
+
+                const removeButton = card.querySelector('.remove-passenger');
+
+                if (index === 0) {
+                    if (removeButton) removeButton.remove();
+                } else if (!removeButton) {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'remove-passenger';
+                    button.innerHTML = '<i class="fas fa-trash"></i> Remove';
+                    button.addEventListener('click', function () {
+                        card.remove();
+                        updatePassengerLabels();
+                        updatePassengerSummary();
+                    });
+
+                    card.querySelector('.passenger-card-header').appendChild(button);
+                }
+            });
+        }
+
+        document.getElementById('addPassenger').addEventListener('click', function () {
+            const firstCard = passengerList.querySelector('.passenger-card');
+            const newCard = firstCard.cloneNode(true);
+
+            newCard.querySelectorAll('input').forEach(input => {
+                input.value = '';
+            });
+
+            newCard.querySelectorAll('select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+
+            passengerList.appendChild(newCard);
+
+            updatePassengerLabels();
+            updatePassengerSummary();
+        });
+
+
+        // LOAD SELECTED FLIGHT DATA IF AVAILABLE
+        // Expected sessionStorage key: selectedFlight
+        try {
+            const selectedFlight = JSON.parse(sessionStorage.getItem('selectedFlight'));
+
+            if (selectedFlight) {
+                document.getElementById('summaryAirline').textContent =
+                    selectedFlight.airline || 'IndiGo';
+
+                document.getElementById('summaryFlightNumber').textContent =
+                    (selectedFlight.flightNumber || '6E - 6587') + ' | ' +
+                    (selectedFlight.cabin || 'Economy');
+
+                document.getElementById('summaryDepartureTime').textContent =
+                    selectedFlight.departureTime || '07:10';
+
+                document.getElementById('summaryArrivalTime').textContent =
+                    selectedFlight.arrivalTime || '08:25';
+
+                document.getElementById('summaryDepartureCity').textContent =
+                    selectedFlight.from || 'Lucknow (LKO)';
+
+                document.getElementById('summaryArrivalCity').textContent =
+                    selectedFlight.to || 'Delhi (DEL)';
+
+                if (selectedFlight.date) {
+                    document.getElementById('summaryDate').innerHTML =
+                        '<i class="far fa-calendar-alt"></i> ' +
+                        selectedFlight.date + ' | ' +
+                        (selectedFlight.duration || '1h 15m');
+                }
+            }
+        } catch (error) {
+            console.error('Flight data loading error:', error);
+        }
+
+
+        // FORM SUBMISSION
+        document.getElementById('passengerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (!this.checkValidity()) {
+                this.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(this);
+
+            const passengers = [];
+            const firstNames = formData.getAll('first_name[]');
+            const lastNames = formData.getAll('last_name[]');
+            const genders = formData.getAll('gender[]');
+            const datesOfBirth = formData.getAll('dob[]');
+            const nationalities = formData.getAll('nationality[]');
+
+            for (let i = 0; i < firstNames.length; i++) {
+                passengers.push({
+                    firstName: firstNames[i],
+                    lastName: lastNames[i],
+                    gender: genders[i],
+                    dob: datesOfBirth[i],
+                    nationality: nationalities[i]
+                });
+            }
+
+            const bookingData = {
+                contactName: formData.get('contact_name'),
+                contactMobile: formData.get('contact_mobile'),
+                contactEmail: formData.get('contact_email'),
+                passengers: passengers,
+                totalFare: totalFare.textContent
+            };
+
+            sessionStorage.setItem('passengerDetails', JSON.stringify(bookingData));
+
+            window.location.href = 'payment.html';
+        });
+
+        updatePassengerSummary();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Package Booking History | UCS World Tour & Travels</title>
+    <meta name="description" content="View and manage your package booking history with UCS World Tour & Travels.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+
+    <style>
+        /* ==========================================
+           UCS PREMIUM PACKAGE BOOKING HISTORY
+        ========================================== */
+
+        :root {
+            --pkg-navy: #071b49;
+            --pkg-navy-light: #102b60;
+            --pkg-red: #ed101b;
+            --pkg-text: #192642;
+            --pkg-muted: #7b879c;
+            --pkg-border: #e8edf4;
+            --pkg-bg: #f4f6fa;
+            --pkg-white: #ffffff;
+            --pkg-green: #12833b;
+        }
+
+        .package-history-main {
+            background: var(--pkg-bg);
+            padding: 30px 36px 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .package-history-container {
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* PAGE HEADER */
+
+        .package-page-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .package-heading-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .package-heading-icon {
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: #fff0f1;
+            border: 1px solid #ffdcdf;
+            border-radius: 13px;
+            color: var(--pkg-red);
+            font-size: 25px;
+        }
+
+        .package-heading-label {
+            display: block;
+            color: var(--pkg-red);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            margin-bottom: 5px;
+        }
+
+        .package-page-heading h1 {
+            margin: 0;
+            color: var(--pkg-navy);
+            font-size: 27px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .package-page-heading p {
+            margin: 6px 0 0;
+            color: var(--pkg-muted);
+            font-size: 13px;
+        }
+
+        .package-heading-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid var(--pkg-border);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--pkg-navy);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .package-heading-tag span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #18a36c;
+        }
+
+        /* SUMMARY CARDS */
+
+        .package-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 23px;
+        }
+
+        .package-summary-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 91px;
+            padding: 17px 19px;
+            background: #fff;
+            border: 1px solid var(--pkg-border);
+            border-radius: 11px;
+            box-shadow: 0 3px 15px rgba(7, 27, 73, .035);
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .package-summary-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--pkg-navy);
+        }
+
+        .package-summary-card.payment-summary::after {
+            background: var(--pkg-red);
+        }
+
+        .package-summary-card.ticket-summary::after {
+            background: var(--pkg-green);
+        }
+
+        .package-summary-icon {
+            width: 43px;
+            height: 43px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: #edf2fc;
+            color: var(--pkg-navy);
+            font-size: 21px;
+        }
+
+        .payment-summary .package-summary-icon {
+            background: #fff0f1;
+            color: var(--pkg-red);
+        }
+
+        .ticket-summary .package-summary-icon {
+            background: #eaf7ef;
+            color: var(--pkg-green);
+        }
+
+        .package-summary-info span {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--pkg-muted);
+            font-size: 12px;
+        }
+
+        .package-summary-info strong {
+            display: block;
+            color: var(--pkg-navy);
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* MAIN PANEL */
+
+        .package-booking-panel {
+            background: #fff;
+            border: 1px solid var(--pkg-border);
+            border-radius: 12px;
+            box-shadow: 0 5px 22px rgba(7, 27, 73, .045);
+            overflow: hidden;
+        }
+
+        .package-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 22px 25px;
+            border-bottom: 1px solid var(--pkg-border);
+        }
+
+        .package-panel-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .package-title-mark {
+            width: 4px;
+            height: 40px;
+            border-radius: 5px;
+            background: var(--pkg-red);
+        }
+
+        .package-panel-title h2 {
+            margin: 0 0 5px;
+            color: var(--pkg-navy);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .package-panel-title p {
+            margin: 0;
+            color: var(--pkg-muted);
+            font-size: 12px;
+        }
+
+        .package-record-count {
+            padding: 8px 12px;
+            border: 1px solid #e5eaf2;
+            border-radius: 7px;
+            background: #f4f6fa;
+            color: var(--pkg-navy);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* FILTER PANEL */
+
+        .package-filter-area {
+            margin: 21px 25px 0;
+            padding: 18px 19px;
+            border: 1px solid #e8edf4;
+            border-radius: 9px;
+            background: #fafbfe;
+        }
+
+        .package-filter-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .package-filter-top h3 {
+            margin: 0;
+            color: var(--pkg-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .package-filter-top p {
+            margin: 0;
+            color: var(--pkg-muted);
+            font-size: 11px;
+        }
+
+        .package-filter-form {
+            display: flex;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .package-date-field {
+            width: 190px;
+        }
+
+        .package-date-field label {
+            display: block;
+            margin-bottom: 7px;
+            color: #46536c;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .package-date-field input {
+            width: 100%;
+            height: 40px;
+            padding: 0 11px;
+            border: 1px solid #dfe4ed;
+            border-radius: 7px;
+            outline: none;
+            background: #fff;
+            color: var(--pkg-text);
+            font-family: inherit;
+            font-size: 12px;
+            box-sizing: border-box;
+            transition: .2s;
+        }
+
+        .package-date-field input:focus {
+            border-color: var(--pkg-navy);
+            box-shadow: 0 0 0 3px rgba(7, 27, 73, .07);
+        }
+
+        .package-filter-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .package-filter-btn {
+            height: 40px;
+            padding: 0 19px;
+            border: 1px solid var(--pkg-red);
+            border-radius: 7px;
+            background: var(--pkg-red);
+            color: #fff;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .package-filter-btn:hover {
+            background: #cc0711;
+            border-color: #cc0711;
+        }
+
+        .package-reset-btn {
+            display: none;
+            height: 40px;
+            padding: 0 14px;
+            border: 1px solid #dce2eb;
+            border-radius: 7px;
+            background: #fff;
+            color: var(--pkg-navy);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .package-reset-btn.show {
+            display: inline-block;
+        }
+
+        /* TABLE HEADER */
+
+        .package-table-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 23px 25px 15px;
+        }
+
+        .package-table-heading h3 {
+            margin: 0 0 5px;
+            color: var(--pkg-navy);
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .package-table-heading p {
+            margin: 0;
+            color: var(--pkg-muted);
+            font-size: 11px;
+        }
+
+        .package-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 230px;
+            height: 38px;
+            padding: 0 11px;
+            border: 1px solid #e1e6ef;
+            border-radius: 7px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .package-search span {
+            color: #8791a4;
+            font-size: 18px;
+        }
+
+        .package-search input {
+            width: 100%;
+            min-width: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--pkg-text);
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .package-search input::placeholder {
+            color: #9aa3b3;
+        }
+
+        /* TABLE */
+
+        .package-table-wrapper {
+            width: calc(100% - 50px);
+            margin: 0 25px;
+            overflow-x: auto;
+            border: 1px solid #e8edf4;
+            border-radius: 9px;
+        }
+
+        .package-booking-table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .package-booking-table thead {
+            background: #f2f5fa;
+        }
+
+        .package-booking-table th {
+            padding: 16px 15px;
+            color: #263653;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            border-bottom: 1px solid #e5eaf1;
+        }
+
+        .package-booking-table td {
+            padding: 17px 15px;
+            color: var(--pkg-text);
+            font-size: 12px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .package-booking-table tbody tr.booking-row {
+            background: #fff;
+            transition: background .2s;
+        }
+
+        .package-booking-table tbody tr.booking-row:hover {
+            background: #fafbfe;
+        }
+
+        .package-booking-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* BOOKING REFERENCE */
+
+        .package-ref {
+            display: inline-block;
+            color: var(--pkg-navy);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            max-width: 120px;
+        }
+
+        /* PASSENGER */
+
+        .package-passenger {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-width: 125px;
+        }
+
+        .package-avatar {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #edf2fc;
+            color: var(--pkg-navy);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .package-avatar.red {
+            background: #fff0f1;
+            color: var(--pkg-red);
+        }
+
+        .package-avatar.purple {
+            background: #f2edfc;
+            color: #7652bd;
+        }
+
+        .package-passenger-name {
+            max-width: 115px;
+            color: var(--pkg-navy);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
+        }
+
+        /* PAYMENT MODE */
+
+        .package-payment-mode {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #3b4c69;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .package-mode-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #3a80c5;
+        }
+
+        .package-payment-mode.cash .package-mode-dot {
+            background: #159b68;
+        }
+
+        /* AMOUNT */
+
+        .package-amount {
+            color: var(--pkg-navy);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* STATUS BADGES */
+
+        .package-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 11px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .package-status.pending {
+            border: 1px solid #ffe1c3;
+            background: #fff7ed;
+            color: #bd6816;
+        }
+
+        .package-status.confirmed {
+            border: 1px solid #ccebd7;
+            background: #eaf8ef;
+            color: #16803c;
+        }
+
+        .package-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* DETAILS BUTTON */
+
+        .package-details-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-width: 105px;
+            height: 35px;
+            padding: 0 10px;
+            border: 1px solid #e0e6ef;
+            border-radius: 6px;
+            background: #fff;
+            color: var(--pkg-navy);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .package-details-btn:hover,
+        .package-details-btn[aria-expanded="true"] {
+            border-color: var(--pkg-navy);
+            background: var(--pkg-navy);
+            color: #fff;
+        }
+
+        .package-details-btn .arrow {
+            font-size: 14px;
+            transition: transform .2s;
+        }
+
+        .package-details-btn[aria-expanded="true"] .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* EXPANDED DETAILS */
+
+        .package-detail-row {
+            display: none;
+        }
+
+        .package-detail-row.show {
+            display: table-row;
+        }
+
+        .package-detail-row td {
+            padding: 0 15px 17px;
+            background: #fafbfe;
+        }
+
+        .package-detail-panel {
+            padding: 17px;
+            border: 1px solid #e7ebf2;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .package-detail-panel h4 {
+            margin: 0 0 14px;
+            color: var(--pkg-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .package-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .package-detail-item span {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--pkg-muted);
+            font-size: 11px;
+        }
+
+        .package-detail-item strong {
+            color: var(--pkg-text);
+            font-size: 12px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        /* EMPTY STATE */
+
+        .package-no-results {
+            display: none;
+            padding: 45px 15px;
+            text-align: center;
+        }
+
+        .package-no-results.show {
+            display: block;
+        }
+
+        .package-empty-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background: #f0f3f9;
+            color: var(--pkg-navy);
+            font-size: 22px;
+        }
+
+        .package-no-results h3 {
+            margin: 0 0 6px;
+            color: var(--pkg-navy);
+            font-size: 15px;
+        }
+
+        .package-no-results p {
+            margin: 0;
+            color: var(--pkg-muted);
+            font-size: 12px;
+        }
+
+        /* TABLE FOOTER */
+
+        .package-table-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 25px 20px;
+        }
+
+        .package-table-footer p {
+            margin: 0;
+            color: var(--pkg-muted);
+            font-size: 11px;
+        }
+
+        .package-table-footer strong {
+            color: var(--pkg-navy);
+            font-weight: 700;
+        }
+
+        /* HELP NOTE */
+
+        .package-help-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 17px;
+            padding: 13px 15px;
+            border: 1px solid #e1e8f3;
+            border-radius: 8px;
+            background: #edf3fc;
+        }
+
+        .package-help-icon {
+            width: 21px;
+            height: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--pkg-navy);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .package-help-note p {
+            margin: 0;
+            color: #586680;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .package-history-main {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .package-summary-grid {
+                gap: 11px;
+            }
+
+            .package-summary-card {
+                padding: 14px;
+            }
+
+            .package-table-wrapper {
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .package-history-main {
+                padding: 22px 15px 30px;
+            }
+
+            .package-page-heading h1 {
+                font-size: 23px;
+            }
+
+            .package-heading-tag {
+                display: none;
+            }
+
+            .package-summary-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .package-summary-card {
+                min-height: 76px;
+            }
+
+            .package-panel-header {
+                padding: 18px;
+            }
+
+            .package-filter-area {
+                margin: 17px 17px 0;
+            }
+
+            .package-filter-form {
+                gap: 10px;
+            }
+
+            .package-date-field {
+                width: auto;
+                flex: 1 1 150px;
+            }
+
+            .package-table-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 20px 17px 14px;
+            }
+
+            .package-search {
+                width: 100%;
+            }
+
+            .package-table-wrapper {
+                width: calc(100% - 34px);
+                margin: 0 17px;
+            }
+
+            .package-detail-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .package-table-footer {
+                padding: 15px 17px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .package-history-main {
+                padding: 18px 11px 25px;
+            }
+
+            .package-heading-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 21px;
+            }
+
+            .package-page-heading h1 {
+                font-size: 20px;
+            }
+
+            .package-page-heading p {
+                font-size: 11px;
+            }
+
+            .package-panel-header {
+                padding: 16px 13px;
+            }
+
+            .package-panel-title h2 {
+                font-size: 16px;
+            }
+
+            .package-panel-title p {
+                font-size: 11px;
+            }
+
+            .package-record-count {
+                padding: 6px 8px;
+                font-size: 10px;
+            }
+
+            .package-filter-area {
+                margin: 13px 12px 0;
+                padding: 14px;
+            }
+
+            .package-filter-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .package-date-field {
+                flex-basis: 100%;
+            }
+
+            .package-filter-actions {
+                width: 100%;
+            }
+
+            .package-filter-btn {
+                flex: 1;
+            }
+
+            .package-table-heading {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .package-table-wrapper {
+                width: calc(100% - 24px);
+                margin: 0 12px;
+            }
+
+            .package-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .package-table-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body class="account-page">
+
+    <!-- SHARED HEADER -->
+    <div id="accountHeader"></div>
+
+    <!-- SHARED SIDEBAR -->
+    <div id="accountSidebarContainer"></div>
+
+    <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="account-main package-history-main">
+
+        <div class="package-history-container">
+
+            <!-- PAGE HEADING -->
+            <div class="package-page-heading">
+
+                <div class="package-heading-left">
+
+                    <div class="package-heading-icon">▣</div>
+
+                    <div>
+                        <span class="package-heading-label">MY BOOKINGS</span>
+                        <h1>Package Booking History</h1>
+                        <p>Manage and track all your package bookings.</p>
+                    </div>
+
+                </div>
+
+                <div class="package-heading-tag">
+                    <span></span>
+                    Booking Overview
+                </div>
+
+            </div>
+
+            <!-- SUMMARY CARDS -->
+            <section class="package-summary-grid">
+
+                <div class="package-summary-card">
+                    <div class="package-summary-icon">▣</div>
+
+                    <div class="package-summary-info">
+                        <span>Total Package Bookings</span>
+                        <strong id="totalPackageBookings">3</strong>
+                    </div>
+                </div>
+
+                <div class="package-summary-card payment-summary">
+                    <div class="package-summary-icon">◷</div>
+
+                    <div class="package-summary-info">
+                        <span>Pending Payments</span>
+                        <strong id="pendingPackagePayments">3</strong>
+                    </div>
+                </div>
+
+                <div class="package-summary-card ticket-summary">
+                    <div class="package-summary-icon">✓</div>
+
+                    <div class="package-summary-info">
+                        <span>Confirmed Tickets</span>
+                        <strong id="confirmedPackageTickets">2</strong>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- BOOKING PANEL -->
+            <section class="package-booking-panel">
+
+                <!-- PANEL HEADER -->
+                <div class="package-panel-header">
+
+                    <div class="package-panel-title">
+                        <span class="package-title-mark"></span>
+
+                        <div>
+                            <h2>All Package Booking</h2>
+                            <p>View passenger, payment and ticket details.</p>
+                        </div>
+                    </div>
+
+                    <span class="package-record-count">
+                        <span id="packagePanelCount">3</span> Records
+                    </span>
+
+                </div>
+
+                <!-- DATE FILTER -->
+                <div class="package-filter-area">
+
+                    <div class="package-filter-top">
+                        <h3>Filter Bookings</h3>
+                        <p>Choose a date range to find your bookings.</p>
+                    </div>
+
+                    <form class="package-filter-form" id="packageFilterForm">
+
+                        <div class="package-date-field">
+                            <label for="packageFromDate">From Date</label>
+                            <input type="date" id="packageFromDate" name="from_date">
+                        </div>
+
+                        <div class="package-date-field">
+                            <label for="packageToDate">To Date</label>
+                            <input type="date" id="packageToDate" name="to_date">
+                        </div>
+
+                        <div class="package-filter-actions">
+
+                            <button type="submit" class="package-filter-btn">
+                                Filter
+                            </button>
+
+                            <button
+                                type="button"
+                                class="package-reset-btn"
+                                id="packageResetBtn"
+                            >
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- TABLE HEADING -->
+                <div class="package-table-heading">
+
+                    <div>
+                        <h3>Booking Details</h3>
+                        <p>Your package booking records and payment information.</p>
+                    </div>
+
+                    <label class="package-search">
+                        <span>⌕</span>
+                        <input
+                            type="search"
+                            id="packageSearch"
+                            placeholder="Search bookings..."
+                            aria-label="Search package bookings"
+                        >
+                    </label>
+
+                </div>
+
+                <!-- BOOKING TABLE -->
+                <div class="package-table-wrapper">
+
+                    <table class="package-booking-table">
+
+                        <thead>
+                            <tr>
+                                <th>Booking Ref</th>
+                                <th>Passenger</th>
+                                <th>Payment Mode</th>
+                                <th>Amount</th>
+                                <th>Payment Status</th>
+                                <th>Ticket Status</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="packageBookingBody">
+
+                            <!-- PACKAGE BOOKING 1 -->
+                            <tr class="package-booking-row">
+
+                                <td>
+                                    <span class="package-ref">UCSPACKAGE-3</span>
+                                </td>
+
+                                <td>
+                                    <div class="package-passenger">
+                                        <div class="package-avatar red">U</div>
+                                        <span class="package-passenger-name">UPENDRA</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="package-payment-mode">
+                                        <span class="package-mode-dot"></span>
+                                        online
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <strong class="package-amount">₹19,999</strong>
+                                </td>
+
+                                <td>
+                                    <span class="package-status pending">
+                                        <span class="package-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="package-status pending">
+                                        <span class="package-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="package-details-btn"
+                                        aria-expanded="false"
+                                    >
+                                         <a href="package-details.html"
+                                         >
+    Show Details
+</a>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="package-detail-row">
+                                <td colspan="7">
+                                    <div class="package-detail-panel">
+                                        <h4>Package Booking Information</h4>
+
+                                        <div class="package-detail-grid">
+
+                                            <div class="package-detail-item">
+                                                <span>Booking Reference</span>
+                                                <strong>UCSPACKAGE-3</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>UPENDRA</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Payment Mode</span>
+                                                <strong>Online</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Amount</span>
+                                                <strong>₹19,999</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Payment Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Ticket Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- PACKAGE BOOKING 2 -->
+                            <tr class="package-booking-row">
+
+                                <td>
+                                    <span class="package-ref">UCSPACKAGE-2</span>
+                                </td>
+
+                                <td>
+                                    <div class="package-passenger">
+                                        <div class="package-avatar">U</div>
+                                        <span class="package-passenger-name">UPENDRA YADAV</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="package-payment-mode cash">
+                                        <span class="package-mode-dot"></span>
+                                        cash
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <strong class="package-amount">₹19,999</strong>
+                                </td>
+
+                                <td>
+                                    <span class="package-status pending">
+                                        <span class="package-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="package-status confirmed">
+                                        <span class="package-status-dot"></span>
+                                        Confirmed
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="package-details-btn"
+                                        aria-expanded="false"
+                                    >
+                                        <a href="package-details.html">
+    Show Details
+</a>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="package-detail-row">
+                                <td colspan="7">
+                                    <div class="package-detail-panel">
+                                        <h4>Package Booking Information</h4>
+
+                                        <div class="package-detail-grid">
+
+                                            <div class="package-detail-item">
+                                                <span>Booking Reference</span>
+                                                <strong>UCSPACKAGE-2</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>UPENDRA YADAV</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Payment Mode</span>
+                                                <strong>Cash</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Amount</span>
+                                                <strong>₹19,999</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Payment Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Ticket Status</span>
+                                                <strong>Confirmed</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- PACKAGE BOOKING 3 -->
+                            <tr class="package-booking-row">
+
+                                <td>
+                                    <span class="package-ref">UCSPACKAGE-1</span>
+                                </td>
+
+                                <td>
+                                    <div class="package-passenger">
+                                        <div class="package-avatar purple">M</div>
+                                        <span class="package-passenger-name">Mohd Washil Sameer</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="package-payment-mode cash">
+                                        <span class="package-mode-dot"></span>
+                                        cash
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <strong class="package-amount">₹39,998</strong>
+                                </td>
+
+                                <td>
+                                    <span class="package-status pending">
+                                        <span class="package-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="package-status confirmed">
+                                        <span class="package-status-dot"></span>
+                                        Confirmed
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="package-details-btn"
+                                        aria-expanded="false"
+                                    >
+                                        <a href="package-details.html">
+    Show Details
+</a>
+                                        
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="package-detail-row">
+                                <td colspan="7">
+                                    <div class="package-detail-panel">
+                                        <h4>Package Booking Information</h4>
+
+                                        <div class="package-detail-grid">
+
+                                            <div class="package-detail-item">
+                                                <span>Booking Reference</span>
+                                                <strong>UCSPACKAGE-1</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Mohd Washil Sameer</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Payment Mode</span>
+                                                <strong>Cash</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Amount</span>
+                                                <strong>₹39,998</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Payment Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+
+                                            <div class="package-detail-item">
+                                                <span>Ticket Status</span>
+                                                <strong>Confirmed</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <!-- NO RESULTS -->
+                    <div class="package-no-results" id="packageNoResults">
+                        <div class="package-empty-icon">⌕</div>
+                        <h3>No bookings found</h3>
+                        <p>Try another search keyword.</p>
+                    </div>
+
+                </div>
+
+                <!-- TABLE FOOTER -->
+                <div class="package-table-footer">
+                    <p>
+                        Showing <strong id="packageShowingCount">3</strong> booking(s)
+                    </p>
+
+                    <p>
+                        Total Records: <strong id="packageTotalCount">3</strong>
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- HELP NOTE -->
+            <div class="package-help-note">
+                <span class="package-help-icon">i</span>
+                <p>
+                    For assistance with your package booking or payment, please contact our support team.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- SHARED LAYOUT JS -->
+    <script src="assets/js/account-layout.js"></script>
+
+    <!-- PACKAGE PAGE JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const filterForm = document.getElementById("packageFilterForm");
+            const fromDate = document.getElementById("packageFromDate");
+            const toDate = document.getElementById("packageToDate");
+            const resetBtn = document.getElementById("packageResetBtn");
+            const searchInput = document.getElementById("packageSearch");
+
+            const bookingBody = document.getElementById("packageBookingBody");
+            const noResults = document.getElementById("packageNoResults");
+
+            const showingCount = document.getElementById("packageShowingCount");
+            const totalCount = document.getElementById("packageTotalCount");
+            const panelCount = document.getElementById("packagePanelCount");
+
+            const bookingRows = Array.from(
+                bookingBody.querySelectorAll(".package-booking-row")
+            );
+
+            const totalRecords = bookingRows.length;
+
+            totalCount.textContent = totalRecords;
+            showingCount.textContent = totalRecords;
+            panelCount.textContent = totalRecords;
+
+            // Close all expanded detail rows
+            function closeAllDetails() {
+
+                bookingRows.forEach(function (row) {
+
+                    const detailRow = row.nextElementSibling;
+                    const button = row.querySelector(".package-details-btn");
+
+                    if (
+                        detailRow &&
+                        detailRow.classList.contains("package-detail-row")
+                    ) {
+                        detailRow.classList.remove("show");
+                    }
+
+                    if (button) {
+                        button.setAttribute("aria-expanded", "false");
+                    }
+
+                });
+
+            }
+
+            // Search filter
+            function applySearch() {
+
+                const keyword = searchInput.value.trim().toLowerCase();
+
+                let visibleCount = 0;
+
+                closeAllDetails();
+
+                bookingRows.forEach(function (row) {
+
+                    const rowText = row.textContent.toLowerCase();
+
+                    const show = !keyword || rowText.includes(keyword);
+
+                    row.style.display = show ? "" : "none";
+
+                    const detailRow = row.nextElementSibling;
+
+                    if (
+                        detailRow &&
+                        detailRow.classList.contains("package-detail-row")
+                    ) {
+                        detailRow.style.display = show ? "" : "none";
+                    }
+
+                    if (show) {
+                        visibleCount++;
+                    }
+
+                });
+
+                showingCount.textContent = visibleCount;
+                panelCount.textContent = visibleCount;
+
+                if (visibleCount === 0) {
+                    noResults.classList.add("show");
+                } else {
+                    noResults.classList.remove("show");
+                }
+
+                resetBtn.classList.toggle(
+                    "show",
+                    Boolean(keyword || fromDate.value || toDate.value)
+                );
+
+            }
+
+            // Date filter validation
+            filterForm.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                if (
+                    fromDate.value &&
+                    toDate.value &&
+                    fromDate.value > toDate.value
+                ) {
+                    alert("From Date cannot be greater than To Date.");
+                    toDate.focus();
+                    return;
+                }
+
+                if (fromDate.value || toDate.value) {
+                    alert(
+                        "Booking date information is not present in the displayed sample records. Connect the booking date field from your database to enable date filtering."
+                    );
+                    return;
+                }
+
+                applySearch();
+
+            });
+
+            // Live search
+            searchInput.addEventListener("input", applySearch);
+
+            // Reset filters
+            resetBtn.addEventListener("click", function () {
+
+                fromDate.value = "";
+                toDate.value = "";
+                searchInput.value = "";
+
+                applySearch();
+
+            });
+
+            
+
+        });
+    </script>
+
+</body>
+</html>

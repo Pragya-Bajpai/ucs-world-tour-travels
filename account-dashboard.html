@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Dashboard | UCS World Tour & Travels</title>
+    <meta name="description" content="Manage your flight, bus, car and holiday bookings with UCS World Tour & Travels.">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="accountHeader"></div>
+
+    <!-- Sidebar -->
+    <div id="accountSidebarContainer"></div>
+
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="account-main">
+
+        <div class="dashboard-container">
+
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+
+                <div class="welcome-content">
+                    <span class="welcome-label">YOUR TRAVEL SPACE</span>
+                    <h1>Welcome to Your Dashboard</h1>
+                    <p>Everything about your journeys, bookings and travel plans — all in one place.</p>
+                </div>
+
+                <div class="welcome-date">
+                    <span class="date-icon">▦</span>
+                    <span id="currentDate">Today</span>
+                </div>
+
+            </section>
+
+            <!-- Statistics -->
+            <section class="dashboard-stats">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon flight-icon">✈</div>
+                        <span class="stat-tag">Flights</span>
+                    </div>
+                    <h2>33</h2>
+                    <p>Total Flight Bookings</p>
+                    <div class="stat-bottom">
+                        <span>View flight history</span>
+                        <a href="flight-list.html">→</a>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon bus-icon">▰</div>
+                        <span class="stat-tag">Bus</span>
+                    </div>
+                    <h2>41</h2>
+                    <p>Total Bus Bookings</p>
+                    <div class="stat-bottom">
+                        <span>View bus history</span>
+                        <a href="bus-list.html">→</a>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon car-icon">▣</div>
+                        <span class="stat-tag">Cars</span>
+                    </div>
+                    <h2>05</h2>
+                    <p>Total Car Bookings</p>
+                    <div class="stat-bottom">
+                        <span>View car history</span>
+                        <a href="car-list.html">→</a>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon package-icon">◇</div>
+                        <span class="stat-tag">Holidays</span>
+                    </div>
+                    <h2>02</h2>
+                    <p>Total Holiday Packages</p>
+                    <div class="stat-bottom">
+                        <span>Explore your packages</span>
+                        <a href="package-list.html">→</a>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions-section">
+
+                <div class="section-title">
+                    <div>
+                        <span class="section-eyebrow">GET STARTED</span>
+                        <h2>Plan Your Next Journey</h2>
+                    </div>
+                    <p>Find your next travel experience</p>
+                </div>
+
+                <div class="quick-actions">
+
+                    <a href="index.html" class="quick-action-card">
+                        <span class="quick-action-icon">✈</span>
+                        <span class="quick-action-text">
+                            <strong>Book a Flight</strong>
+                            <small>Explore flight options</small>
+                        </span>
+                        <span class="quick-arrow">→</span>
+                    </a>
+
+                    <a href="index.html" class="quick-action-card">
+                        <span class="quick-action-icon">▰</span>
+                        <span class="quick-action-text">
+                            <strong>Book a Bus</strong>
+                            <small>Find your bus journey</small>
+                        </span>
+                        <span class="quick-arrow">→</span>
+                    </a>
+
+                    <a href="index.html" class="quick-action-card">
+                        <span class="quick-action-icon">▣</span>
+                        <span class="quick-action-text">
+                            <strong>Book a Car</strong>
+                            <small>Choose your ride</small>
+                        </span>
+                        <span class="quick-arrow">→</span>
+                    </a>
+
+                    <a href="index.html" class="quick-action-card">
+                        <span class="quick-action-icon">◇</span>
+                        <span class="quick-action-text">
+                            <strong>Holiday Packages</strong>
+                            <small>Discover destinations</small>
+                        </span>
+                        <span class="quick-arrow">→</span>
+                    </a>
+
+                </div>
+
+            </section>
+
+            <!-- Recent Bookings -->
+            <section class="recent-bookings-section">
+
+                <div class="section-title booking-section-title">
+                    <div>
+                        <span class="section-eyebrow">YOUR ACTIVITY</span>
+                        <h2>Recent Bookings</h2>
+                    </div>
+
+                    <a href="flight-list.html" class="view-all-btn">View All Bookings →</a>
+                </div>
+
+                <div class="booking-table-wrapper">
+
+                    <table class="booking-table">
+                        <thead>
+                            <tr>
+                                <th>BOOKING ID</th>
+                                <th>TRAVEL TYPE</th>
+                                <th>BOOKING DATE</th>
+                                <th>TRAVEL DETAILS</th>
+                                <th>AMOUNT</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentBookingsBody">
+                            <tr>
+                                <td colspan="7">
+                                    <div class="empty-state">
+                                        <div class="empty-state-icon">▤</div>
+                                        <h3>No Recent Bookings</h3>
+                                        <p>Your recent travel bookings will appear here.</p>
+                                        <a href="index.html">Start Exploring →</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+            <!-- Help Banner -->
+            <section class="dashboard-help-banner">
+
+                <div class="help-banner-icon">✦</div>
+
+                <div class="help-banner-content">
+                    <h3>Need help with your travel plans?</h3>
+                    <p>Get assistance from our support team for bookings, cancellations and travel queries.</p>
+                </div>
+
+                <a href="support-ticket.html" class="help-banner-btn">
+                    Get Support <span>→</span>
+                </a>
+
+            </section>
+
+            <footer class="dashboard-footer">
+                <p>© 2026 UCS World Tour & Travels. All Rights Reserved.</p>
+                <div>
+                    <a href="terms.html">Terms & Conditions</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                </div>
+            </footer>
+
+        </div>
+
+    </main>
+
+    <script src="assets/js/account-layout.js"></script>
+    <script src="assets/js/script.js"></script>
+
+</body>
+</html>

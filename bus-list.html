@@ -1,0 +1,1307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bus Booking History | UCS World Tour & Travels</title>
+    <meta name="description" content="View and manage your bus booking history with UCS World Tour & Travels.">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* =====================================
+           BUS BOOKING HISTORY
+           Same Theme as Car Booking History
+        ===================================== */
+
+        :root {
+            --bus-navy: #07123d;
+            --bus-red: #ff0808;
+            --bus-text: #18233d;
+            --bus-muted: #78849a;
+            --bus-border: #e8ebf1;
+            --bus-bg: #f4f6fa;
+        }
+
+        /* MAIN CONTENT */
+
+        .bus-history-main {
+            background: var(--bus-bg);
+            padding: 30px 34px;
+            box-sizing: border-box;
+        }
+
+        .bus-history-container {
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* BOOKING PANEL */
+
+        .bus-booking-panel {
+            width: 100%;
+            background: #fff;
+            border: 1px solid var(--bus-border);
+            border-radius: 12px;
+            box-shadow: 0 5px 22px rgba(7, 18, 61, .045);
+            overflow: hidden;
+        }
+
+        /* PANEL HEADER */
+
+        .bus-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--bus-border);
+        }
+
+        .bus-panel-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bus-title-mark {
+            width: 4px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 5px;
+            background: var(--bus-red);
+        }
+
+        .bus-panel-title h2 {
+            margin: 0 0 6px;
+            color: var(--bus-navy);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .bus-panel-title p {
+            margin: 0;
+            color: var(--bus-muted);
+            font-size: 13px;
+        }
+
+        .bus-panel-count {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 14px;
+            border: 1px solid #e5eaf2;
+            border-radius: 7px;
+            background: #f5f7fb;
+            color: var(--bus-muted);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .bus-panel-count strong {
+            color: var(--bus-navy);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* BOOKING DETAILS HEADING */
+
+        .bus-table-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 25px 24px 0;
+        }
+
+        .bus-table-title h3 {
+            margin: 0 0 7px;
+            color: var(--bus-navy);
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .bus-table-title p {
+            margin: 0;
+            color: var(--bus-muted);
+            font-size: 13px;
+        }
+
+        /* FILTER AND SEARCH */
+
+        .bus-table-tools {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .bus-filter-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .bus-date-field {
+            width: 155px;
+        }
+
+        .bus-date-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--bus-navy);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .bus-date-field input {
+            display: block;
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            border: 1px solid #dfe4ed;
+            border-radius: 6px;
+            outline: none;
+            background: #fff;
+            color: var(--bus-text);
+            font-family: inherit;
+            font-size: 12px;
+            box-sizing: border-box;
+            transition: .2s ease;
+        }
+
+        .bus-date-field input:focus {
+            border-color: var(--bus-navy);
+            box-shadow: 0 0 0 3px rgba(7, 18, 61, .06);
+        }
+
+        .bus-filter-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bus-filter-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            height: 40px;
+            padding: 0 18px;
+            border: 1px solid var(--bus-red);
+            border-radius: 6px;
+            background: var(--bus-red);
+            color: #fff;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .bus-filter-btn:hover {
+            background: #df0000;
+            border-color: #df0000;
+        }
+
+        .bus-reset-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 15px;
+            border: 1px solid #dce2eb;
+            border-radius: 6px;
+            background: #fff;
+            color: #46536c;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .bus-reset-btn:hover {
+            border-color: var(--bus-navy);
+            color: var(--bus-navy);
+        }
+
+        /* SEARCH */
+
+        .bus-table-search {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            width: 215px;
+            height: 40px;
+            flex-shrink: 0;
+            padding: 0 11px;
+            border: 1px solid #dfe4ed;
+            border-radius: 6px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .bus-table-search i {
+            color: #8791a4;
+            font-size: 13px;
+        }
+
+        .bus-table-search input {
+            width: 100%;
+            min-width: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--bus-text);
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .bus-table-search input::placeholder {
+            color: #929caf;
+        }
+
+        /* TABLE */
+
+        .bus-table-wrapper {
+            width: calc(100% - 48px);
+            margin: 21px 24px 0;
+            overflow-x: auto;
+            border: 1px solid #e8ebf1;
+            border-radius: 8px;
+        }
+
+        .bus-booking-table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .bus-booking-table thead {
+            background: #f3f5f9;
+        }
+
+        .bus-booking-table th {
+            padding: 17px;
+            border-bottom: 1px solid #e6eaf1;
+            color: var(--bus-navy);
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .bus-booking-table td {
+            padding: 17px;
+            border-bottom: 1px solid #edf0f5;
+            color: var(--bus-text);
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .bus-booking-table tbody tr.bus-booking-row {
+            background: #fff;
+            transition: background .2s ease;
+        }
+
+        .bus-booking-table tbody tr.bus-booking-row:hover {
+            background: #fafbfe;
+        }
+
+        .bus-booking-id {
+            color: #8993a5;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* PASSENGER */
+
+        .bus-passenger-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 175px;
+        }
+
+        .bus-passenger-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #edf3ff;
+            color: #2360b5;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .bus-passenger-avatar.red {
+            background: #fff0f1;
+            color: #e51d2a;
+        }
+
+        .bus-passenger-avatar.purple {
+            background: #f2edfc;
+            color: #7251b5;
+        }
+
+        .bus-passenger-name {
+            color: var(--bus-navy);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .bus-passenger-email {
+            display: block;
+            margin-top: 4px;
+            color: var(--bus-muted);
+            font-size: 11px;
+            overflow-wrap: anywhere;
+        }
+
+        /* AMOUNT */
+
+        .bus-amount {
+            color: var(--bus-navy);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* STATUS */
+
+        .bus-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 11px;
+            border-radius: 30px;
+            background: #fff0f1;
+            color: #e50919;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .bus-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ed101b;
+        }
+
+        /* VIEW DETAILS */
+
+        .bus-view-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-width: 105px;
+            height: 34px;
+            padding: 0 11px;
+            border: 1px solid #e1e6ef;
+            border-radius: 6px;
+            background: #fff;
+            color: var(--bus-navy);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .bus-view-btn:hover,
+        .bus-view-btn.active {
+            border-color: var(--bus-navy);
+            background: var(--bus-navy);
+            color: #fff;
+        }
+
+        /* DETAIL ROW */
+
+        .bus-detail-row {
+            display: none;
+        }
+
+        .bus-detail-row.show {
+            display: table-row;
+        }
+
+        .bus-detail-row td {
+            padding: 0 17px 17px;
+            background: #fafbfe;
+        }
+
+        .bus-detail-panel {
+            padding: 17px;
+            border: 1px solid #e7ebf2;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .bus-detail-panel h4 {
+            margin: 0 0 14px;
+            color: var(--bus-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .bus-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .bus-detail-item span {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--bus-muted);
+            font-size: 11px;
+        }
+
+        .bus-detail-item strong {
+            color: var(--bus-text);
+            font-size: 12px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        /* EMPTY STATE */
+
+        .bus-no-results {
+            display: none;
+            padding: 45px 15px;
+            text-align: center;
+        }
+
+        .bus-empty-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background: #f0f3f9;
+            color: var(--bus-navy);
+            font-size: 20px;
+        }
+
+        .bus-no-results h3 {
+            margin: 0 0 6px;
+            color: var(--bus-navy);
+            font-size: 15px;
+        }
+
+        .bus-no-results p {
+            margin: 0;
+            color: var(--bus-muted);
+            font-size: 12px;
+        }
+
+        /* TABLE FOOTER */
+
+        .bus-table-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 17px 24px 20px;
+        }
+
+        .bus-table-footer p {
+            margin: 0;
+            color: var(--bus-muted);
+            font-size: 11px;
+        }
+
+        .bus-table-footer strong {
+            color: var(--bus-navy);
+            font-weight: 700;
+        }
+
+        /* SUPPORT NOTE */
+
+        .bus-history-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 17px;
+            padding: 13px 15px;
+            border: 1px solid #e4eaf4;
+            border-radius: 8px;
+            background: #eef3fb;
+        }
+
+        .bus-note-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--bus-navy);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .bus-history-note p {
+            margin: 0;
+            color: #586680;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .bus-history-main {
+                padding: 25px;
+            }
+
+            .bus-table-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .bus-table-tools {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bus-history-main {
+                padding: 20px 15px;
+            }
+
+            .bus-panel-header {
+                padding: 18px;
+            }
+
+            .bus-panel-title h2 {
+                font-size: 16px;
+            }
+
+            .bus-panel-title p {
+                font-size: 11px;
+            }
+
+            .bus-table-heading {
+                padding: 21px 17px 0;
+            }
+
+            .bus-table-tools {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .bus-filter-form {
+                width: 100%;
+            }
+
+            .bus-date-field {
+                flex: 1 1 140px;
+                width: auto;
+            }
+
+            .bus-table-search {
+                width: 100%;
+            }
+
+            .bus-table-wrapper {
+                width: calc(100% - 34px);
+                margin: 18px 17px 0;
+            }
+
+            .bus-detail-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .bus-table-footer {
+                padding: 16px 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bus-history-main {
+                padding: 15px 10px;
+            }
+
+            .bus-panel-header {
+                padding: 15px 12px;
+            }
+
+            .bus-title-mark {
+                height: 35px;
+            }
+
+            .bus-panel-title h2 {
+                font-size: 15px;
+            }
+
+            .bus-panel-title p {
+                font-size: 10px;
+            }
+
+            .bus-panel-count {
+                gap: 5px;
+                padding: 9px;
+                font-size: 10px;
+            }
+
+            .bus-panel-count strong {
+                font-size: 15px;
+            }
+
+            .bus-table-heading {
+                padding: 19px 13px 0;
+            }
+
+            .bus-table-title h3 {
+                font-size: 15px;
+            }
+
+            .bus-table-title p {
+                font-size: 11px;
+            }
+
+            .bus-table-tools {
+                gap: 10px;
+            }
+
+            .bus-filter-form {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
+            }
+
+            .bus-date-field {
+                width: auto;
+                min-width: 0;
+            }
+
+            .bus-filter-actions {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .bus-filter-btn,
+            .bus-reset-btn {
+                flex: 1;
+            }
+
+            .bus-table-wrapper {
+                width: calc(100% - 26px);
+                margin: 16px 13px 0;
+            }
+
+            .bus-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bus-table-footer {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 15px 13px;
+            }
+        }
+    </style>
+</head>
+
+<body class="account-page">
+
+    <!-- SHARED HEADER -->
+    <div id="accountHeader"></div>
+
+    <!-- SHARED SIDEBAR -->
+    <div id="accountSidebarContainer"></div>
+
+    <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="account-main bus-history-main">
+
+        <div class="bus-history-container">
+
+            <section class="bus-booking-panel">
+
+                <!-- PANEL HEADER -->
+                <div class="bus-panel-header">
+
+                    <div class="bus-panel-title">
+                        <span class="bus-title-mark"></span>
+
+                        <div>
+                            <h2>All Bus Bookings</h2>
+                            <p>View your passenger and booking information.</p>
+                        </div>
+                    </div>
+
+                    <span class="bus-panel-count">
+                        <strong id="busPanelCount">3</strong>
+                        Bookings
+                    </span>
+
+                </div>
+
+                <!-- BOOKING DETAILS -->
+                <div class="bus-table-heading">
+
+                    <div class="bus-table-title">
+                        <h3>Booking Details</h3>
+                        <p>Your recent bus booking records</p>
+                    </div>
+
+                    <div class="bus-table-tools">
+
+                        <form class="bus-filter-form" id="busFilterForm">
+
+                            <div class="bus-date-field">
+                                <label for="busFromDate">From Date</label>
+                                <input type="date" id="busFromDate" name="from_date">
+                            </div>
+
+                            <div class="bus-date-field">
+                                <label for="busToDate">To Date</label>
+                                <input type="date" id="busToDate" name="to_date">
+                            </div>
+
+                            <div class="bus-filter-actions">
+
+                                <button type="submit" class="bus-filter-btn">
+                                    <i class="fa-solid fa-filter"></i> Filter
+                                </button>
+
+                                <button type="button" class="bus-reset-btn" id="busResetBtn">
+                                    Reset
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                        <label class="bus-table-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                                type="search"
+                                id="busBookingSearch"
+                                placeholder="Search bookings..."
+                                aria-label="Search bus bookings"
+                            >
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <!-- BOOKING TABLE -->
+                <div class="bus-table-wrapper">
+
+                    <table class="bus-booking-table">
+
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Passenger Details</th>
+                                <th>Booking Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="busBookingBody">
+
+                            <!-- BOOKING 1 -->
+                            <tr class="bus-booking-row" data-booking-date="2026-11-16">
+
+                                <td>
+                                    <span class="bus-booking-id">BUS-001</span>
+                                </td>
+
+                                <td>
+                                    <div class="bus-passenger-info">
+                                        <div class="bus-passenger-avatar red">T</div>
+                                        <div>
+                                            <strong class="bus-passenger-name">Mr test dgg</strong>
+                                            <span class="bus-passenger-email">rohitjaiswal1504@gmail.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>16 Nov 2026</td>
+
+                                <td>
+                                    <strong class="bus-amount">₹10,498.95</strong>
+                                </td>
+
+                                <td>
+                                    <span class="bus-status">
+                                        <span class="bus-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button class="bus-view-btn" type="button">
+                                        View Details <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="bus-detail-row">
+                                <td colspan="6">
+                                    <div class="bus-detail-panel">
+                                        <h4>Booking Information</h4>
+
+                                        <div class="bus-detail-grid">
+                                            <div class="bus-detail-item">
+                                                <span>Booking ID</span>
+                                                <strong>BUS-001</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Mr test dgg</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Email Address</span>
+                                                <strong>rohitjaiswal1504@gmail.com</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Date</span>
+                                                <strong>16 Nov 2026</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Amount</span>
+                                                <strong>₹10,498.95</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- BOOKING 2 -->
+                            <tr class="bus-booking-row" data-booking-date="2026-11-15">
+
+                                <td>
+                                    <span class="bus-booking-id">BUS-002</span>
+                                </td>
+
+                                <td>
+                                    <div class="bus-passenger-info">
+                                        <div class="bus-passenger-avatar">G</div>
+                                        <div>
+                                            <strong class="bus-passenger-name">Mr geh whhhe</strong>
+                                            <span class="bus-passenger-email">sameer@gmail.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>15 Nov 2026</td>
+
+                                <td>
+                                    <strong class="bus-amount">₹1,529.00</strong>
+                                </td>
+
+                                <td>
+                                    <span class="bus-status">
+                                        <span class="bus-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button class="bus-view-btn" type="button">
+                                        View Details <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="bus-detail-row">
+                                <td colspan="6">
+                                    <div class="bus-detail-panel">
+                                        <h4>Booking Information</h4>
+
+                                        <div class="bus-detail-grid">
+                                            <div class="bus-detail-item">
+                                                <span>Booking ID</span>
+                                                <strong>BUS-002</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Mr geh whhhe</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Email Address</span>
+                                                <strong>sameer@gmail.com</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Date</span>
+                                                <strong>15 Nov 2026</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Amount</span>
+                                                <strong>₹1,529.00</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- BOOKING 3 -->
+                            <tr class="bus-booking-row" data-booking-date="2026-11-14">
+
+                                <td>
+                                    <span class="bus-booking-id">BUS-003</span>
+                                </td>
+
+                                <td>
+                                    <div class="bus-passenger-info">
+                                        <div class="bus-passenger-avatar purple">H</div>
+                                        <div>
+                                            <strong class="bus-passenger-name">Mr hbh hbh</strong>
+                                            <span class="bus-passenger-email">sa@gmail.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>14 Nov 2026</td>
+
+                                <td>
+                                    <strong class="bus-amount">₹1,583.95</strong>
+                                </td>
+
+                                <td>
+                                    <span class="bus-status">
+                                        <span class="bus-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button class="bus-view-btn" type="button">
+                                        View Details <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            <tr class="bus-detail-row">
+                                <td colspan="6">
+                                    <div class="bus-detail-panel">
+                                        <h4>Booking Information</h4>
+
+                                        <div class="bus-detail-grid">
+                                            <div class="bus-detail-item">
+                                                <span>Booking ID</span>
+                                                <strong>BUS-003</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Passenger Name</span>
+                                                <strong>Mr hbh hbh</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Email Address</span>
+                                                <strong>sa@gmail.com</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Date</span>
+                                                <strong>14 Nov 2026</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Amount</span>
+                                                <strong>₹1,583.95</strong>
+                                            </div>
+                                            <div class="bus-detail-item">
+                                                <span>Booking Status</span>
+                                                <strong>Pending</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <!-- NO RESULTS -->
+                    <div class="bus-no-results" id="busNoResults">
+                        <div class="bus-empty-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <h3>No bookings found</h3>
+                        <p>Try changing your search or date filters.</p>
+                    </div>
+
+                </div>
+
+                <!-- TABLE FOOTER -->
+                <div class="bus-table-footer">
+                    <p>
+                        Showing <strong id="busShowingCount">3</strong> booking(s)
+                    </p>
+
+                    <p>
+                        Total Records: <strong id="busTotalCount">3</strong>
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- SUPPORT NOTE -->
+            <div class="bus-history-note">
+                <span class="bus-note-icon">i</span>
+                <p>
+                    Need help with your bus booking? Contact our support team for assistance.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- SHARED ACCOUNT LAYOUT -->
+    <script src="assets/js/account-layout.js"></script>
+
+    <!-- BUS BOOKING HISTORY JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const filterForm = document.getElementById("busFilterForm");
+            const fromDate = document.getElementById("busFromDate");
+            const toDate = document.getElementById("busToDate");
+            const resetBtn = document.getElementById("busResetBtn");
+            const searchInput = document.getElementById("busBookingSearch");
+
+            const bookingBody = document.getElementById("busBookingBody");
+            const noResults = document.getElementById("busNoResults");
+
+            const showingCount = document.getElementById("busShowingCount");
+            const totalCount = document.getElementById("busTotalCount");
+            const panelCount = document.getElementById("busPanelCount");
+
+            const totalBookings = document.getElementById("busTotalBookings");
+            const pendingBookings = document.getElementById("busPendingBookings");
+            const totalAmount = document.getElementById("busTotalAmount");
+
+            const bookingRows = Array.from(
+                bookingBody.querySelectorAll(".bus-booking-row")
+            );
+
+            const originalTotal = bookingRows.length;
+
+            totalCount.textContent = originalTotal;
+
+            /* UPDATE SUMMARY CARDS */
+
+            function updateSummary() {
+
+                let pending = 0;
+                let amount = 0;
+
+                bookingRows.forEach(function (row) {
+
+                    const status = row.querySelector(".bus-status");
+                    const amountElement = row.querySelector(".bus-amount");
+
+                    if (
+                        status &&
+                        status.textContent.trim().toLowerCase().includes("pending")
+                    ) {
+                        pending++;
+                    }
+
+                    if (amountElement) {
+                        amount += parseFloat(
+                            amountElement.textContent.replace(/[₹,\s]/g, "")
+                        ) || 0;
+                    }
+
+                });
+
+                totalBookings.textContent = originalTotal;
+                pendingBookings.textContent = pending;
+
+                totalAmount.textContent = amount.toLocaleString("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                    minimumFractionDigits: 2
+                });
+
+            }
+
+            /* CLOSE ALL DETAIL ROWS */
+
+            function closeAllDetails() {
+
+                bookingRows.forEach(function (row) {
+
+                    const detailRow = row.nextElementSibling;
+                    const button = row.querySelector(".bus-view-btn");
+
+                    if (
+                        detailRow &&
+                        detailRow.classList.contains("bus-detail-row")
+                    ) {
+                        detailRow.classList.remove("show");
+                    }
+
+                    if (button) {
+                        button.classList.remove("active");
+                        button.innerHTML =
+                            'View Details <i class="fa-solid fa-chevron-down"></i>';
+                    }
+
+                });
+
+            }
+
+            /* FILTER BOOKINGS */
+
+            function applyFilters() {
+
+                const from = fromDate.value;
+                const to = toDate.value;
+                const search = searchInput.value.trim().toLowerCase();
+
+                let visibleCount = 0;
+
+                closeAllDetails();
+
+                bookingRows.forEach(function (row) {
+
+                    const bookingDate = row.dataset.bookingDate || "";
+                    const rowText = row.textContent.toLowerCase();
+
+                    const dateMatch =
+                        (!from || bookingDate >= from) &&
+                        (!to || bookingDate <= to);
+
+                    const searchMatch =
+                        !search || rowText.includes(search);
+
+                    const isVisible = dateMatch && searchMatch;
+
+                    row.style.display = isVisible ? "" : "none";
+
+                    if (isVisible) {
+                        visibleCount++;
+                    }
+
+                });
+
+                showingCount.textContent = visibleCount;
+                panelCount.textContent = visibleCount;
+
+                noResults.style.display =
+                    visibleCount === 0 ? "block" : "none";
+
+                resetBtn.style.display =
+                    (from || to || search) ? "inline-flex" : "none";
+
+            }
+
+            /* FILTER FORM */
+
+            filterForm.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                if (
+                    fromDate.value &&
+                    toDate.value &&
+                    fromDate.value > toDate.value
+                ) {
+                    alert("From Date cannot be greater than To Date.");
+                    toDate.focus();
+                    return;
+                }
+
+                applyFilters();
+
+            });
+
+            /* LIVE SEARCH */
+
+            searchInput.addEventListener("input", applyFilters);
+
+            /* RESET FILTER */
+
+            resetBtn.addEventListener("click", function () {
+
+                fromDate.value = "";
+                toDate.value = "";
+                searchInput.value = "";
+
+                applyFilters();
+
+            });
+
+            /* VIEW BOOKING DETAILS */
+
+            bookingRows.forEach(function (row) {
+
+                const button = row.querySelector(".bus-view-btn");
+                const detailRow = row.nextElementSibling;
+
+                if (!button || !detailRow) return;
+
+                button.addEventListener("click", function () {
+
+                    const isOpen = detailRow.classList.contains("show");
+
+                    closeAllDetails();
+
+                    if (!isOpen && row.style.display !== "none") {
+
+                        detailRow.classList.add("show");
+                        button.classList.add("active");
+
+                        button.innerHTML =
+                            'Hide Details <i class="fa-solid fa-chevron-up"></i>';
+
+                    }
+
+                });
+
+            });
+
+            /* INITIALIZE */
+
+            updateSummary();
+            applyFilters();
+
+        });
+    </script>
+
+</body>
+</html>

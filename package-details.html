@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Details | UCS World Tour & Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f6f8;
+            color: #07123d;
+            font-family: Arial, sans-serif;
+        }
+
+        .package-details-page {
+            padding: 35px 15px 40px;
+        }
+
+        .package-ticket {
+            max-width: 670px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #dce2ea;
+            border-radius: 6px;
+            box-shadow: 0 5px 20px rgba(7,18,61,.08);
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 12px 14px;
+            background: #1d527f;
+            color: #fff;
+        }
+
+        .ticket-header-left {
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .ticket-header-left strong {
+            font-size: 13px;
+        }
+
+        .ticket-header-right {
+            text-align: right;
+        }
+
+        .ticket-header-right img {
+            width: 100px;
+            height: 48px;
+            padding: 2px;
+            object-fit: contain;
+            background: #fff;
+        }
+
+        .ticket-header-right p {
+            margin: 5px 0 0;
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        .ticket-overview {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px;
+            background: #fafafa;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .ticket-overview strong {
+            font-size: 15px;
+        }
+
+        .ticket-section {
+            margin: 12px 0 0;
+            padding: 0 12px;
+        }
+
+        .ticket-section-title {
+            padding: 8px;
+            background: #f1f3f6;
+            border: 1px solid #d5d9df;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #07123d;
+        }
+
+        .ticket-subtitle {
+            padding: 7px 9px;
+            background: #fafafa;
+            border: 1px solid #d5d9df;
+            border-top: 0;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .ticket-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .ticket-table td {
+            padding: 8px;
+            border: 1px solid #d5d9df;
+            line-height: 1.4;
+        }
+
+        .ticket-table td:nth-child(odd) {
+            width: 27%;
+            color: #07123d;
+            font-weight: 700;
+        }
+
+        .ticket-table td:nth-child(even) {
+            color: #183c70;
+        }
+
+        .ticket-actions {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+            margin: 12px 0 18px;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 13px;
+            border: 0;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back-btn {
+            background: #737b83;
+            color: #fff;
+        }
+
+        .download-btn {
+            background: #08b9d9;
+            color: #07123d;
+        }
+
+        .ticket-btn:hover {
+            opacity: .85;
+        }
+
+        @media(max-width: 500px) {
+            .package-details-page {
+                padding: 20px 10px;
+            }
+
+            .ticket-header {
+                padding: 10px;
+            }
+
+            .ticket-header-right img {
+                width: 78px;
+                height: 40px;
+            }
+
+            .ticket-header-right p {
+                font-size: 9px;
+            }
+
+            .ticket-overview {
+                padding: 11px;
+            }
+
+            .ticket-overview strong {
+                font-size: 12px;
+            }
+
+            .ticket-section {
+                padding: 0 8px;
+            }
+
+            .ticket-table td {
+                padding: 7px 5px;
+                font-size: 10px;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 12mm;
+            }
+
+            body {
+                background: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            #header, #footer, .ticket-actions {
+                display: none !important;
+            }
+
+            .package-details-page {
+                padding: 0;
+            }
+
+            .package-ticket {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Website Header -->
+    <div id="header"></div>
+
+    <main class="package-details-page">
+
+        <div class="package-ticket">
+
+            <!-- Booking Header -->
+            <div class="ticket-header">
+
+                <div class="ticket-header-left">
+                    Booking : Pending
+                    <br>
+                    Booking No: <strong>UCSPACKAGE-3</strong>
+                </div>
+
+                <div class="ticket-header-right">
+                    <img src="assets/images/logo-dark.png" alt="UCS Logo">
+
+                    <p>
+                        Customer Helpline no: +91 74044 39938, +918840622478
+                        <br>
+                        Whatsapp Complaint no: +917068952646
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Package Overview -->
+            <div class="ticket-overview">
+                <strong>Package Date: 25 Aug, 2026</strong>
+                <strong>Total Amount: 19999</strong>
+            </div>
+
+            <!-- Traveller Details -->
+            <section class="ticket-section">
+
+                <div class="ticket-section-title">
+                    TRAVELLER DETAILS
+                </div>
+
+                <div class="ticket-subtitle">Adults:</div>
+
+                <table class="ticket-table">
+                    <tr>
+                        <td>Name:</td>
+                        <td>UPENDRA</td>
+                        <td>DOB:</td>
+                        <td>2001-03-30</td>
+                    </tr>
+
+                    <tr>
+                        <td>Email:</td>
+                        <td colspan="3">ucsworldtourtravel2@gmail.com</td>
+                    </tr>
+
+                    <tr>
+                        <td>Mobile no:</td>
+                        <td colspan="3">08840622478</td>
+                    </tr>
+                </table>
+
+            </section>
+
+            <!-- Package Details -->
+            <section class="ticket-section">
+
+                <div class="ticket-section-title">
+                    PACKAGE DETAILS
+                </div>
+
+                <table class="ticket-table">
+                    <tr>
+                        <td>Package Name:</td>
+                        <td>CAMBODIA 4N/5DAY</td>
+                        <td>Duration:</td>
+                        <td>4</td>
+                    </tr>
+
+                    <tr>
+                        <td>City Name:</td>
+                        <td colspan="3">Siem Reap</td>
+                    </tr>
+                </table>
+
+            </section>
+
+            <!-- Buttons -->
+            <div class="ticket-actions">
+
+                <a href="package-list.html" class="ticket-btn back-btn">
+                    Back to Home
+                </a>
+
+                <button class="ticket-btn download-btn" onclick="window.print()">
+                    <i class="fas fa-print"></i>
+                    Download Ticket
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Website Footer -->
+    <div id="footer"></div>
+
+    <script>
+        fetch("includes/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+
+        fetch("includes/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+
+    <script src="assets/js/script.js"></script>
+
+    <script
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+    <script src="assets/js/loader.js"></script>
+
+</body>
+</html>
