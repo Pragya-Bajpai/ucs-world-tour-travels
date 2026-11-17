@@ -1571,7 +1571,7 @@
 
 .fare-modal {
     width: 100%;
-    max-width: 1120px;
+    max-width: 1321px;
     max-height: 90vh;
     overflow-y: auto;
     background: #fff;
@@ -1595,7 +1595,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 23px 30px;
+    padding: 12px 30px;
     border-bottom: 1px solid #e8ebf1;
     background: #fff;
     position: sticky;
@@ -1732,6 +1732,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
     align-items: stretch;
+    margin-top: 36px 0px;
 }
 
 .fare-option {
@@ -2974,7 +2975,7 @@
             </button>
         </div>
 
-        <div class="fare-flight-summary">
+        <!-- <div class="fare-flight-summary">
             <div class="fare-airline-icon">
                 <i class="fa-solid fa-plane"></i>
             </div>
@@ -2988,16 +2989,11 @@
                 <i class="fa-solid fa-check-circle"></i>
                 Selected Flight
             </div>
-        </div>
+        </div> -->
 
         <div class="fare-modal-body">
-            <div class="fare-section-heading">
-                <div>
-                    <h3>Choose Your Fare</h3>
-                    <p>Compare benefits and select the fare that suits you.</p>
-                </div>
-                <span class="fare-count">3 FARE OPTIONS</span>
-            </div>
+          
+            
 
             <div class="fare-options">
 
@@ -3623,9 +3619,6 @@
         }
       });
 
-/* =========================================
-   FLIGHT FARE MODAL FUNCTIONALITY
-========================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -3638,6 +3631,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const fareRoute = document.getElementById("fareRoute");
     const fareJourneyDate = document.getElementById("fareJourneyDate");
+
+    // These elements are optional because the flight summary is removed.
     const fareAirline = document.getElementById("fareAirline");
     const fareFlightNumber = document.getElementById("fareFlightNumber");
 
@@ -3646,9 +3641,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const flexiPrice = document.getElementById("flexiPrice");
 
     function formatFare(value) {
-        const number = Number(String(value).replace(/[₹,\s]/g, ""));
+        const number = Number(
+            String(value).replace(/[₹,\s]/g, "")
+        );
 
-        if (!Number.isFinite(number)) return "Price unavailable";
+        if (!Number.isFinite(number)) {
+            return "Price unavailable";
+        }
 
         return "₹" + number.toLocaleString("en-IN", {
             minimumFractionDigits: 2,
@@ -3662,41 +3661,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!flightCard) return;
 
-        // Flight price from existing price element
         const priceElement = flightCard.querySelector(
             ".flight-price-box strong, .flight-price"
         );
 
         const basePrice = Number(
-            (button.dataset.saverPrice ||
-            priceElement?.textContent ||
-            "0").replace(/[₹,\s]/g, "")
+            String(
+                button.dataset.saverPrice ||
+                priceElement?.textContent ||
+                "0"
+            ).replace(/[₹,\s]/g, "")
         ) || 0;
 
-        // Flight details from button data attributes
         const route = button.dataset.route || "Selected Flight";
         const journeyDate = button.dataset.date || "Journey Date";
         const airline = button.dataset.airline || "Selected Airline";
         const flightNumber = button.dataset.flight || "Flight details";
 
-        fareRoute.textContent = route;
-        fareJourneyDate.textContent = journeyDate;
-        fareAirline.textContent = airline;
-        fareFlightNumber.textContent = flightNumber;
+        // Update only if these elements exist.
+        if (fareRoute) {
+            fareRoute.textContent = route;
+        }
 
-        // Use actual fare values when provided.
-        // Otherwise show the available base price.
-        saverPrice.textContent = formatFare(
-            button.dataset.saverPrice || basePrice
-        );
+        if (fareJourneyDate) {
+            fareJourneyDate.textContent = journeyDate;
+        }
 
-        corporatePrice.textContent = formatFare(
-            button.dataset.corporatePrice || basePrice
-        );
+        if (fareAirline) {
+            fareAirline.textContent = airline;
+        }
 
-        flexiPrice.textContent = formatFare(
-            button.dataset.flexiPrice || basePrice
-        );
+        if (fareFlightNumber) {
+            fareFlightNumber.textContent = flightNumber;
+        }
+
+        // Update fare prices.
+        if (saverPrice) {
+            saverPrice.textContent = formatFare(
+                button.dataset.saverPrice || basePrice
+            );
+        }
+
+        if (corporatePrice) {
+            corporatePrice.textContent = formatFare(
+                button.dataset.corporatePrice || basePrice
+            );
+        }
+
+        if (flexiPrice) {
+            flexiPrice.textContent = formatFare(
+                button.dataset.flexiPrice || basePrice
+            );
+        }
 
         fareModal.classList.add("active");
         document.body.style.overflow = "hidden";
@@ -3707,11 +3723,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.style.overflow = "";
     }
 
-    // VIEW PRICE BUTTON
+    // VIEW PRICE BUTTONS
     document.querySelectorAll(".view-price-btn").forEach(function (button) {
 
         button.addEventListener("click", function (event) {
-
             event.preventDefault();
             event.stopPropagation();
 
@@ -3721,47 +3736,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // CLOSE BUTTONS
-    closeFareModal.addEventListener("click", closeModal);
-    closeFareModalBottom.addEventListener("click", closeModal);
+    if (closeFareModal) {
+        closeFareModal.addEventListener("click", closeModal);
+    }
 
-    // Click outside modal
+    if (closeFareModalBottom) {
+        closeFareModalBottom.addEventListener("click", closeModal);
+    }
+
+    // CLICK OUTSIDE MODAL
     fareModal.addEventListener("click", function (event) {
         if (event.target === fareModal) {
             closeModal();
         }
     });
 
-    // ESC key
+    // ESC KEY
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && fareModal.classList.contains("active")) {
+        if (
+            event.key === "Escape" &&
+            fareModal.classList.contains("active")
+        ) {
             closeModal();
         }
     });
 
-   document.querySelectorAll(".proceed-booking-btn").forEach(button => {
-    button.addEventListener("click", function () {
+    // PROCEED TO BOOKING BUTTONS
+    document.querySelectorAll(".proceed-booking-btn").forEach(function (button) {
 
-        const selectedFare = this.dataset.fare;
+        button.addEventListener("click", function () {
 
-        const farePrices = {
-            "Saver": document.getElementById("saverPrice").textContent,
-            "Corporate": document.getElementById("corporatePrice").textContent,
-            "Flexi Plus": document.getElementById("flexiPrice").textContent
-        };
+            const selectedFare = this.dataset.fare;
 
-        const selectedPrice = farePrices[selectedFare];
+            const farePrices = {
+                "Saver": saverPrice?.textContent || "",
+                "Corporate": corporatePrice?.textContent || "",
+                "Flexi Plus": flexiPrice?.textContent || ""
+            };
 
-        sessionStorage.setItem("selectedFlightFare", selectedFare);
-        sessionStorage.setItem("selectedFlightFarePrice", selectedPrice);
+            const selectedPrice = farePrices[selectedFare];
 
-        // Close fare modal
-        document.getElementById("fareModal").classList.remove("active");
+            if (!selectedFare || !selectedPrice) {
+                alert("Please select a valid fare.");
+                return;
+            }
 
-        // Continue to booking page
-        window.location.href = "booking.html";
+            sessionStorage.setItem("selectedFlightFare", selectedFare);
+            sessionStorage.setItem("selectedFlightFarePrice", selectedPrice);
+
+            closeModal();
+
+            window.location.href = "booking.html";
+        });
+
     });
+
 });
-});
+
+
 
     </script>
     
