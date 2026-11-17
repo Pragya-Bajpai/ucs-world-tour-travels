@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="assets/css/loader.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/loader.css">
+
     <style>
         :root {
             --ucs-navy: #07123d;
@@ -192,6 +194,33 @@
             color: #929baa;
         }
 
+        /* INPUT ICONS */
+
+        .register-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .register-input-wrapper > .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 14px;
+            transform: translateY(-50%);
+            color: #8792a5;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 2;
+            transition: color .2s ease;
+        }
+
+        .register-input-wrapper .form-control {
+            padding-left: 40px;
+        }
+
+        .register-input-wrapper:focus-within > .input-icon {
+            color: var(--ucs-blue);
+        }
+
         /* PASSWORD */
 
         .password-wrapper {
@@ -199,18 +228,26 @@
         }
 
         .password-wrapper .form-control {
-            padding-right: 40px;
+            padding-right: 42px;
         }
 
-        .password-toggle {
+        .password-wrapper .password-toggle {
             position: absolute;
             top: 50%;
             right: 13px;
             transform: translateY(-50%);
             border: 0;
+            padding: 0;
             background: transparent;
             color: var(--ucs-red);
             cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            z-index: 3;
+        }
+
+        .password-wrapper .password-toggle:focus {
+            outline: none;
         }
 
         /* TERMS */
@@ -273,11 +310,11 @@
             transition: .2s ease;
         }
 
-       .register-btn:hover {
-    background: linear-gradient(135deg, #ff0000 0%, #1769aa 55%, #07123d 100%);
-    color: #ffffff;
-    transform: translateY(-2px);
-}
+        .register-btn:hover {
+            background: linear-gradient(135deg, #ff0000 0%, #1769aa 55%, #07123d 100%);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
 
         .register-btn:focus-visible {
             outline: 3px solid rgba(255, 0, 0, .2);
@@ -398,56 +435,74 @@
                     <div class="form-group">
                         <label for="firstName">First Name</label>
 
-                        <input type="text"
-                               class="form-control"
-                               id="firstName"
-                               name="firstName"
-                               placeholder="Enter first name"
-                               autocomplete="given-name"
-                               required>
+                        <div class="register-input-wrapper">
+                            <i class="fa-regular fa-user input-icon"></i>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="firstName"
+                                   name="firstName"
+                                   placeholder="Enter first name"
+                                   autocomplete="given-name"
+                                   required>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
 
-                        <input type="text"
-                               class="form-control"
-                               id="lastName"
-                               name="lastName"
-                               placeholder="Enter last name"
-                               autocomplete="family-name"
-                               required>
+                        <div class="register-input-wrapper">
+                            <i class="fa-regular fa-user input-icon"></i>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="lastName"
+                                   name="lastName"
+                                   placeholder="Enter last name"
+                                   autocomplete="family-name"
+                                   required>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Your Phone</label>
 
-                        <input type="tel"
-                               class="form-control"
-                               id="phone"
-                               name="phone"
-                               placeholder="+91 XXXXX XXXXX"
-                               pattern="[0-9+\-\s]{10,15}"
-                               autocomplete="tel"
-                               required>
+                        <div class="register-input-wrapper">
+                            <i class="fa-solid fa-phone input-icon"></i>
+
+                            <input type="tel"
+                                   class="form-control"
+                                   id="phone"
+                                   name="phone"
+                                   placeholder="+91 XXXXX XXXXX"
+                                   pattern="[0-9+\-\s]{10,15}"
+                                   autocomplete="tel"
+                                   required>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email Address</label>
 
-                        <input type="email"
-                               class="form-control"
-                               id="email"
-                               name="email"
-                               placeholder="example@gmail.com"
-                               autocomplete="email"
-                               required>
+                        <div class="register-input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+
+                            <input type="email"
+                                   class="form-control"
+                                   id="email"
+                                   name="email"
+                                   placeholder="example@gmail.com"
+                                   autocomplete="email"
+                                   required>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
 
-                        <div class="password-wrapper">
+                        <div class="register-input-wrapper password-wrapper">
+
+                            <i class="fa-solid fa-lock input-icon"></i>
 
                             <input type="password"
                                    class="form-control"
@@ -471,7 +526,9 @@
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password</label>
 
-                        <div class="password-wrapper">
+                        <div class="register-input-wrapper password-wrapper">
+
+                            <i class="fa-solid fa-shield-halved input-icon"></i>
 
                             <input type="password"
                                    class="form-control"
@@ -625,12 +682,16 @@
         });
 
     </script>
-    <!-- js-->
+
+    <!-- JS -->
     <script src="assets/js/script.js"></script>
+
     <!-- Google Translate -->
     <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
-<script src="assets/js/loader.js"></script>
+
+    <script src="assets/js/loader.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,2361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Holiday Packages | UCS World Tour & Travels</title>
+    <meta name="description" content="Explore and compare domestic and international holiday packages with UCS World Tour and Travels.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+
+    <style>
+    :root {
+        --ucs-navy: #07123d;
+        --ucs-red: #ff0000;
+        --ucs-blue: #1769aa;
+        --ucs-bg: #f3f5f8;
+        --ucs-text: #17213b;
+        --ucs-muted: #718096;
+        --ucs-border: #e4e8ef;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        background: var(--ucs-bg);
+        color: var(--ucs-text);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, input, select {
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    /* =====================================
+       HOLIDAY SEARCH HEADER
+    ===================================== */
+
+    .holiday-search-header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        width: 100%;
+        background: #fff;
+        border-bottom: 1px solid var(--ucs-border);
+        box-shadow: 0 3px 15px rgba(7,18,61,.08);
+    }
+
+    .holiday-search-inner {
+        width: 100%;
+        max-width: 1500px;
+        margin: auto;
+        padding: 13px 18px;
+        display: grid;
+        grid-template-columns: 0 minmax(0,1fr);
+        gap: 15px;
+        align-items: center;
+        transition: .3s ease;
+    }
+
+    .holiday-logo {
+        width: 0;
+        height: 55px;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        transition: .3s ease;
+    }
+
+    .holiday-logo img {
+        width: 110px;
+        height: 55px;
+        object-fit: contain;
+    }
+
+    body.page-scrolled .holiday-search-inner {
+        grid-template-columns: 110px minmax(0,1fr);
+    }
+
+    body.page-scrolled .holiday-logo {
+        width: 110px;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .holiday-search-form {
+        display: grid;
+        grid-template-columns:
+            minmax(130px,1.4fr)
+            minmax(110px,1fr)
+            minmax(125px,1fr)
+            minmax(110px,.8fr)
+            minmax(110px,.8fr)
+            105px;
+        gap: 9px;
+        align-items: center;
+    }
+
+    .holiday-field {
+        height: 46px;
+        min-width: 0;
+        padding: 5px 10px;
+        border: 1px solid #d8dde6;
+        border-radius: 7px;
+        background: #fff;
+    }
+
+    .holiday-field label {
+        display: block;
+        margin-bottom: 4px;
+        color: #7b8494;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .holiday-field input,
+    .holiday-field select {
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--ucs-navy);
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .holiday-search-btn {
+        height: 45px;
+        border: 0;
+        border-radius: 7px;
+        background: var(--ucs-red);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .holiday-search-btn:hover {
+        background: #b90000;
+    }
+
+    /* =====================================
+       PAGE INTRO
+    ===================================== */
+
+    .holiday-intro {
+        max-width: 1500px;
+        margin: auto;
+        padding: 23px 18px 10px;
+    }
+
+    .holiday-breadcrumb {
+        margin-bottom: 10px;
+        color: var(--ucs-muted);
+        font-size: 11px;
+    }
+
+    .holiday-breadcrumb a {
+        color: var(--ucs-blue);
+        text-decoration: none;
+    }
+
+    .holiday-intro h1 {
+        margin: 0;
+        color: var(--ucs-navy);
+        font-size: 23px;
+    }
+
+    .holiday-intro p {
+        margin: 7px 0 0;
+        color: var(--ucs-muted);
+        font-size: 12px;
+    }
+
+    /* =====================================
+       MAIN LAYOUT
+    ===================================== */
+
+    .holiday-page {
+        width: 100%;
+        max-width: 1500px;
+        margin: auto;
+        padding: 15px 18px 80px;
+        display: grid;
+        grid-template-columns: 240px minmax(0,1fr);
+        gap: 20px;
+        align-items: start;
+    }
+
+    /* =====================================
+       FILTER SIDEBAR
+    ===================================== */
+
+    .holiday-filters {
+        position: sticky;
+        top: 115px;
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        padding: 17px;
+        border-radius: 10px;
+        background: #fff;
+        scrollbar-width: thin;
+        scrollbar-color: var(--ucs-red) #edf0f4;
+    }
+
+    .holiday-filters::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .holiday-filters::-webkit-scrollbar-thumb {
+        background: var(--ucs-red);
+        border-radius: 10px;
+    }
+
+    .filter-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 13px;
+        border-bottom: 1px solid var(--ucs-border);
+        color: var(--ucs-navy);
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .filter-heading button {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--ucs-red);
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .filter-subtitle {
+        display: block;
+        margin-top: 5px;
+        color: var(--ucs-muted);
+        font-size: 10px;
+        font-weight: 400;
+    }
+
+    .filter-group {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--ucs-border);
+    }
+
+    .filter-title {
+        margin-bottom: 12px;
+        color: var(--ucs-navy);
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        margin: 11px 0;
+        color: #596477;
+        font-size: 11px;
+    }
+
+    .filter-option label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        cursor: pointer;
+    }
+
+    .filter-option input {
+        accent-color: var(--ucs-red);
+    }
+
+    .filter-option small {
+        color: var(--ucs-muted);
+    }
+
+    .price-range {
+        width: 100%;
+        accent-color: var(--ucs-red);
+    }
+
+    .price-values {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 7px;
+        color: var(--ucs-muted);
+        font-size: 10px;
+    }
+
+    /* =====================================
+       RESULTS HEADING
+    ===================================== */
+
+    .holiday-results {
+        min-width: 0;
+    }
+
+    .results-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 15px;
+        padding: 13px 15px;
+        border-radius: 9px;
+        background: #fff;
+    }
+
+    .results-heading h2 {
+        margin: 0;
+        color: var(--ucs-navy);
+        font-size: 16px;
+    }
+
+    .results-heading p {
+        margin: 5px 0 0;
+        color: var(--ucs-muted);
+        font-size: 11px;
+    }
+
+    .results-heading select {
+        max-width: 180px;
+        padding: 9px;
+        border: 1px solid var(--ucs-border);
+        border-radius: 6px;
+        background: #fff;
+        color: var(--ucs-text);
+        font-size: 11px;
+        outline: none;
+    }
+
+    /* =====================================
+       PACKAGE CARD
+    ===================================== */
+
+    .holiday-card {
+        display: grid;
+        grid-template-columns: 230px minmax(0,1fr) 175px;
+        gap: 15px;
+        margin-bottom: 17px;
+        padding: 12px;
+        border: 1px solid var(--ucs-border);
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(7,18,61,.05);
+        transition: .2s ease;
+    }
+
+    .holiday-card:hover {
+        border-color: #b4cbe8;
+        box-shadow: 0 6px 20px rgba(7,18,61,.09);
+        transform: translateY(-2px);
+    }
+
+    .package-image {
+        position: relative;
+        min-height: 190px;
+        overflow: hidden;
+        border-radius: 7px;
+        background: #e9edf3;
+    }
+
+    .package-image img {
+        width: 100%;
+        height: 100%;
+        min-height: 190px;
+        position: absolute;
+        inset: 0;
+        object-fit: cover;
+        transition: transform .35s ease;
+    }
+
+    .holiday-card:hover .package-image img {
+        transform: scale(1.05);
+    }
+
+    .package-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
+        padding: 6px 9px;
+        border-radius: 4px;
+        background: var(--ucs-red);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 800;
+    }
+
+    .package-info {
+        min-width: 0;
+        padding: 5px 0;
+    }
+
+    .package-location {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 9px;
+        color: var(--ucs-blue);
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .package-info h3 {
+        margin: 0 0 8px;
+        color: var(--ucs-navy);
+        font-size: 17px;
+        line-height: 1.4;
+    }
+
+    .package-description {
+        margin: 0 0 12px;
+        color: var(--ucs-muted);
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .package-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 13px;
+    }
+
+    .package-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #596477;
+        font-size: 10px;
+    }
+
+    .package-meta i {
+        color: var(--ucs-red);
+    }
+
+    .package-inclusions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+    }
+
+    .inclusion {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 8px;
+        border-radius: 4px;
+        background: #f3f6fa;
+        color: #596477;
+        font-size: 9px;
+    }
+
+    .inclusion i {
+        color: #159653;
+    }
+
+    /* =====================================
+       PRICE SECTION
+    ===================================== */
+
+    .package-price {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 10px 5px 10px 13px;
+        border-left: 1px solid var(--ucs-border);
+        text-align: right;
+    }
+
+    .package-price .price-label {
+        color: var(--ucs-muted);
+        font-size: 10px;
+    }
+
+    .package-price del {
+        margin-top: 7px;
+        color: #9aa3b2;
+        font-size: 11px;
+    }
+
+    .package-price strong {
+        display: block;
+        margin-top: 5px;
+        color: var(--ucs-navy);
+        font-size: 21px;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .package-price small {
+        margin-top: 4px;
+        color: var(--ucs-muted);
+        font-size: 10px;
+    }
+
+    .package-price .discount {
+        margin-top: 8px;
+        padding: 5px 8px;
+        border-radius: 4px;
+        background: #eaf8f0;
+        color: #159653;
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .package-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    .package-actions button {
+        width: 100%;
+        padding: 10px 7px;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .view-package-btn {
+        border: 1px solid var(--ucs-blue);
+        background: #fff;
+        color: var(--ucs-blue);
+    }
+
+    .view-package-btn:hover {
+        background: #eef6ff;
+    }
+
+    .enquire-package-btn {
+        border: 1px solid var(--ucs-red);
+        background: var(--ucs-red);
+        color: #fff;
+    }
+
+    .enquire-package-btn:hover {
+        background: #b90000;
+    }
+
+    /* =====================================
+       NO RESULTS
+    ===================================== */
+
+    .no-results {
+        display: none;
+        padding: 50px 20px;
+        border-radius: 10px;
+        background: #fff;
+        text-align: center;
+    }
+
+    .no-results i {
+        color: var(--ucs-muted);
+        font-size: 35px;
+    }
+
+    .no-results h3 {
+        color: var(--ucs-navy);
+        font-size: 17px;
+    }
+
+    .no-results p {
+        color: var(--ucs-muted);
+        font-size: 12px;
+    }
+
+    /* =====================================
+       PACKAGE DETAILS MODAL
+    ===================================== */
+
+    .package-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        background: rgba(7,18,61,.75);
+        backdrop-filter: blur(4px);
+    }
+
+    .package-modal.active {
+        display: flex;
+    }
+
+    .package-modal-content {
+        width: 100%;
+        max-width: 700px;
+        max-height: 90vh;
+        overflow-y: auto;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 15px 50px rgba(0,0,0,.25);
+        animation: packageOpen .25s ease;
+    }
+
+    @keyframes packageOpen {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .package-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 18px 22px;
+        background: var(--ucs-navy);
+        color: #fff;
+    }
+
+    .package-modal-header h3 {
+        margin: 0;
+        font-size: 17px;
+    }
+
+    .package-modal-header p {
+        margin: 5px 0 0;
+        color: #d7dfef;
+        font-size: 11px;
+    }
+
+    .package-close {
+        width: 34px;
+        height: 34px;
+        border: 1px solid #ffffff55;
+        border-radius: 50%;
+        background: transparent;
+        color: #fff;
+        font-size: 22px;
+    }
+
+    .package-modal-body {
+        padding: 20px;
+    }
+
+    .modal-package-banner {
+        width: 100%;
+        height: 190px;
+        margin-bottom: 17px;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .modal-package-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .modal-package-details {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .modal-detail-item {
+        padding: 12px;
+        border: 1px solid var(--ucs-border);
+        border-radius: 7px;
+    }
+
+    .modal-detail-item small {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ucs-muted);
+        font-size: 10px;
+    }
+
+    .modal-detail-item strong {
+        color: var(--ucs-navy);
+        font-size: 12px;
+    }
+
+    .modal-section-title {
+        margin: 20px 0 12px;
+        color: var(--ucs-navy);
+        font-size: 14px;
+    }
+
+    .itinerary-item {
+        position: relative;
+        padding: 0 0 15px 25px;
+        border-left: 1px solid #dce3ed;
+    }
+
+    .itinerary-item:last-child {
+        border-left-color: transparent;
+    }
+
+    .itinerary-item::before {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: -5px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--ucs-red);
+    }
+
+    .itinerary-item strong {
+        display: block;
+        color: var(--ucs-navy);
+        font-size: 12px;
+    }
+
+    .itinerary-item p {
+        margin: 5px 0 0;
+        color: var(--ucs-muted);
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .modal-inclusions {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+    }
+
+    .modal-inclusions span {
+        color: #596477;
+        font-size: 11px;
+    }
+
+    .modal-inclusions i {
+        margin-right: 6px;
+        color: #159653;
+    }
+
+    .package-modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 15px 20px;
+        border-top: 1px solid var(--ucs-border);
+    }
+
+    .package-modal-footer button {
+        padding: 11px 20px;
+        border: 0;
+        border-radius: 5px;
+        background: var(--ucs-red);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+    }
+
+    /* =====================================
+       ENQUIRY MODAL
+    ===================================== */
+
+    .enquiry-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        background: rgba(7,18,61,.75);
+    }
+
+    .enquiry-modal.active {
+        display: flex;
+    }
+
+    .enquiry-content {
+        width: 100%;
+        max-width: 460px;
+        padding: 22px;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .enquiry-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+    }
+
+    .enquiry-header h3 {
+        margin: 0;
+        color: var(--ucs-navy);
+        font-size: 17px;
+    }
+
+    .enquiry-header button {
+        border: 0;
+        background: transparent;
+        color: var(--ucs-red);
+        font-size: 23px;
+    }
+
+    .enquiry-content label {
+        display: block;
+        margin: 12px 0 6px;
+        color: var(--ucs-navy);
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .enquiry-content input,
+    .enquiry-content textarea {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid var(--ucs-border);
+        border-radius: 6px;
+        outline: none;
+        font-size: 12px;
+    }
+
+    .enquiry-content input:focus,
+    .enquiry-content textarea:focus {
+        border-color: var(--ucs-blue);
+    }
+
+    .enquiry-content textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .send-enquiry {
+        width: 100%;
+        margin-top: 16px;
+        padding: 12px;
+        border: 0;
+        border-radius: 6px;
+        background: var(--ucs-red);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    /* =====================================
+       RESPONSIVE TABLET
+    ===================================== */
+
+    @media(max-width:1100px) {
+
+        .holiday-search-inner,
+        body.page-scrolled .holiday-search-inner {
+            grid-template-columns: 1fr;
+        }
+
+        .holiday-logo {
+            display: none;
+        }
+
+        .holiday-search-form {
+            grid-template-columns: repeat(3,minmax(0,1fr));
+        }
+
+        .holiday-page {
+            grid-template-columns: 205px minmax(0,1fr);
+            gap: 12px;
+        }
+
+        .holiday-card {
+            grid-template-columns: 180px minmax(0,1fr);
+        }
+
+        .package-price {
+            grid-column: 1/-1;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 12px 0 0;
+            border-top: 1px solid var(--ucs-border);
+            border-left: 0;
+            text-align: left;
+        }
+
+        .package-price strong {
+            font-size: 19px;
+        }
+
+        .package-actions {
+            width: auto;
+            flex-direction: row;
+            margin: 0;
+        }
+
+        .package-actions button {
+            min-width: 110px;
+        }
+    }
+
+    /* =====================================
+       RESPONSIVE MOBILE
+    ===================================== */
+
+    @media(max-width:700px) {
+
+        .holiday-search-header {
+            position: relative;
+        }
+
+        .holiday-search-inner,
+        body.page-scrolled .holiday-search-inner {
+            display: block;
+            padding: 10px;
+        }
+
+        .holiday-logo {
+            display: none;
+        }
+
+        .holiday-search-form {
+            grid-template-columns: repeat(2,minmax(0,1fr));
+            gap: 7px;
+        }
+
+        .holiday-field {
+            width: 100%;
+        }
+
+        .holiday-search-btn {
+            grid-column: 1/-1;
+        }
+
+        .holiday-intro {
+            padding: 18px 10px 5px;
+        }
+
+        .holiday-intro h1 {
+            font-size: 19px;
+        }
+
+        .holiday-page {
+            display: block;
+            padding: 10px 10px 50px;
+        }
+
+        .holiday-filters {
+            position: static;
+            max-height: none;
+            margin-bottom: 13px;
+        }
+
+        .results-heading {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .results-heading select {
+            width: 100%;
+            max-width: none;
+        }
+
+        .holiday-card {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .package-image {
+            min-height: 190px;
+        }
+
+        .package-image img {
+            min-height: 190px;
+        }
+
+        .package-info {
+            padding: 3px;
+        }
+
+        .package-info h3 {
+            font-size: 16px;
+        }
+
+        .package-price {
+            grid-column: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 5px;
+            padding-top: 12px;
+        }
+
+        .package-price .price-label,
+        .package-price del,
+        .package-price strong,
+        .package-price small,
+        .package-price .discount {
+            margin-top: 3px;
+        }
+
+        .package-price strong {
+            font-size: 19px;
+        }
+
+        .package-actions {
+            grid-column: 1/-1;
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .package-actions button {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-package-details {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .package-modal-body {
+            padding: 13px;
+        }
+    }
+
+    @media(max-width:380px) {
+
+        .holiday-search-form {
+            gap: 6px;
+        }
+
+        .holiday-field {
+            padding: 5px 7px;
+        }
+
+        .holiday-field input {
+            font-size: 11px;
+        }
+
+        .package-image,
+        .package-image img {
+            min-height: 160px;
+        }
+
+        .package-meta {
+            gap: 8px;
+        }
+
+        .package-actions button {
+            padding: 9px 5px;
+            font-size: 9px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+<!-- WEBSITE HEADER -->
+<div id="header"></div>
+
+<!-- HOLIDAY SEARCH HEADER -->
+<header class="holiday-search-header">
+
+    <div class="holiday-search-inner">
+
+        <div class="holiday-logo">
+            <img src="assets/images/logo-dark.png"
+                 alt="UCS World Tour and Travels">
+        </div>
+
+        <form class="holiday-search-form" id="holidaySearchForm">
+
+            <div class="holiday-field">
+                <label>Destination</label>
+                <input type="text" id="destination"
+                       placeholder="Search destination" required>
+            </div>
+
+            <div class="holiday-field">
+                <label>Departure City</label>
+                <input type="text" id="departureCity"
+                       placeholder="Enter city">
+            </div>
+
+            <div class="holiday-field">
+                <label>Travel Date</label>
+                <input type="date" id="travelDate">
+            </div>
+
+            <div class="holiday-field">
+                <label>Duration</label>
+                <select id="duration">
+                    <option value="all">Any Duration</option>
+                    <option value="1-3">1 - 3 Days</option>
+                    <option value="4-5">4 - 5 Days</option>
+                    <option value="6-7">6 - 7 Days</option>
+                    <option value="8+">8+ Days</option>
+                </select>
+            </div>
+
+            <div class="holiday-field">
+                <label>Travellers</label>
+                <select id="travellers">
+                    <option value="1">1 Traveller</option>
+                    <option value="2" selected>2 Travellers</option>
+                    <option value="3">3 Travellers</option>
+                    <option value="4">4 Travellers</option>
+                    <option value="5">5 Travellers</option>
+                    <option value="6">6 Travellers</option>
+                </select>
+            </div>
+
+            <button type="submit" class="holiday-search-btn">
+                <i class="fas fa-search"></i> SEARCH
+            </button>
+
+        </form>
+    </div>
+</header>
+
+<!-- PAGE INTRO -->
+<section class="holiday-intro">
+
+    <div class="holiday-breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-angle-right"></i>
+        Holiday Packages
+    </div>
+
+    <h1 id="pageTitle">Explore Holiday Packages</h1>
+
+    <p id="pageSubtitle">
+        Discover amazing destinations and find the perfect holiday package for your next journey.
+    </p>
+
+</section>
+
+<main class="holiday-page">
+
+    <!-- FILTER SIDEBAR -->
+    <aside class="holiday-filters">
+
+        <div class="filter-heading">
+            <div>
+                <i class="fas fa-sliders-h"></i> Filters
+                <span class="filter-subtitle">Find your perfect holiday</span>
+            </div>
+
+            <button type="button" id="clearFilters">CLEAR ALL</button>
+        </div>
+
+        <!-- DESTINATION -->
+        <div class="filter-group">
+
+            <div class="filter-title">Destinations</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="destination-filter"
+                           value="Pattaya">
+                    Pattaya
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="destination-filter"
+                           value="Kathmandu">
+                    Kathmandu
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="destination-filter"
+                           value="Pokhara">
+                    Pokhara
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="destination-filter"
+                           value="Cambodia">
+                    Cambodia
+                </label>
+            </div>
+
+        </div>
+
+        <!-- PRICE -->
+        <div class="filter-group">
+
+            <div class="filter-title">Price Per Person</div>
+
+            <input type="range" class="price-range"
+                   id="priceRange" min="5000"
+                   max="100000" step="1000" value="100000">
+
+            <div class="price-values">
+                <span>₹5,000</span>
+                <span id="priceValue">₹1,00,000</span>
+            </div>
+
+        </div>
+
+        <!-- DURATION -->
+        <div class="filter-group">
+
+            <div class="filter-title">Duration</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="duration-filter"
+                           value="1-3">
+                    1 - 3 Days
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="duration-filter"
+                           value="4-5">
+                    4 - 5 Days
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="duration-filter"
+                           value="6-7">
+                    6 - 7 Days
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="duration-filter"
+                           value="8+">
+                    8+ Days
+                </label>
+            </div>
+
+        </div>
+
+        <!-- PACKAGE TYPE -->
+        <div class="filter-group">
+
+            <div class="filter-title">Package Type</div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="type-filter"
+                           value="Family">
+                    Family Tour
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="type-filter"
+                           value="Adventure">
+                    Adventure
+                </label>
+            </div>
+
+            <div class="filter-option">
+                <label>
+                    <input type="checkbox" class="type-filter"
+                           value="International">
+                    International
+                </label>
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- PACKAGE RESULTS -->
+    <section class="holiday-results">
+
+        <div class="results-heading">
+
+            <div>
+                <h2>Available Holiday Packages</h2>
+                <p id="resultCount">Explore our popular tour packages</p>
+            </div>
+
+            <select id="sortPackages">
+                <option value="recommended">Sort: Recommended</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="duration">Duration: Shortest</option>
+            </select>
+
+        </div>
+
+        <div id="packageList">
+
+            <!-- PACKAGE 1 -->
+            <article class="holiday-card"
+                data-name="Adventurous Pattaya"
+                data-destination="Pattaya"
+                data-price="19999"
+                data-duration="4"
+                data-type="Adventure International">
+
+                <div class="package-image">
+
+                    <span class="package-badge">POPULAR</span>
+
+                    <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800&auto=format&fit=crop"
+                         alt="Pattaya Thailand">
+
+                </div>
+
+                <div class="package-info">
+
+                    <div class="package-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Pattaya, Thailand
+                    </div>
+
+                    <h3>Adventurous Pattaya</h3>
+
+                    <p class="package-description">
+                        Experience beautiful beaches, exciting water sports,
+                        island tours and the vibrant nightlife of Pattaya.
+                    </p>
+
+                    <div class="package-meta">
+                        <span><i class="far fa-calendar-alt"></i> 4 Days / 3 Nights</span>
+                        <span><i class="fas fa-hotel"></i> Hotel Stay</span>
+                        <span><i class="fas fa-users"></i> Family Friendly</span>
+                    </div>
+
+                    <div class="package-inclusions">
+                        <span class="inclusion"><i class="fas fa-check"></i> Hotel</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Transfers</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Sightseeing</span>
+                    </div>
+
+                </div>
+
+                <div class="package-price">
+
+                    <span class="price-label">Starting from</span>
+
+                    <strong>₹19,999</strong>
+
+                    <small>Per Person</small>
+
+                    <span class="discount">Popular Package</span>
+
+                    <div class="package-actions">
+                        <button type="button" class="view-package-btn">
+                            VIEW DETAILS
+                        </button>
+
+                        <button type="button" class="enquire-package-btn">
+                            ENQUIRE NOW
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- PACKAGE 2 -->
+            <article class="holiday-card"
+                data-name="Kathmandu or Pokhara"
+                data-destination="Kathmandu Pokhara"
+                data-price="6999"
+                data-duration="6"
+                data-type="Family Adventure">
+
+                <div class="package-image">
+
+                    <span class="package-badge">BEST VALUE</span>
+
+                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&auto=format&fit=crop"
+                         alt="Nepal Himalayan mountains">
+
+                </div>
+
+                <div class="package-info">
+
+                    <div class="package-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Kathmandu & Pokhara, Nepal
+                    </div>
+
+                    <h3>Kathmandu or Pokhara</h3>
+
+                    <p class="package-description">
+                        Discover Nepal's beautiful landscapes, mountain
+                        views, cultural attractions and memorable experiences.
+                    </p>
+
+                    <div class="package-meta">
+                        <span><i class="far fa-calendar-alt"></i> 6 Days / 5 Nights</span>
+                        <span><i class="fas fa-hotel"></i> Hotel Stay</span>
+                        <span><i class="fas fa-mountain"></i> Mountain Tour</span>
+                    </div>
+
+                    <div class="package-inclusions">
+                        <span class="inclusion"><i class="fas fa-check"></i> Hotel</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Transfers</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Sightseeing</span>
+                    </div>
+
+                </div>
+
+                <div class="package-price">
+
+                    <span class="price-label">Starting from</span>
+
+                    <strong>₹6,999</strong>
+
+                    <small>Per Person</small>
+
+                    <span class="discount">Budget Friendly</span>
+
+                    <div class="package-actions">
+                        <button type="button" class="view-package-btn">
+                            VIEW DETAILS
+                        </button>
+
+                        <button type="button" class="enquire-package-btn">
+                            ENQUIRE NOW
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- PACKAGE 3 -->
+            <article class="holiday-card"
+                data-name="Kathmandu Tour"
+                data-destination="Kathmandu"
+                data-price="4999"
+                data-duration="4"
+                data-type="Family">
+
+                <div class="package-image">
+
+                    <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800&auto=format&fit=crop"
+                         alt="Kathmandu Nepal">
+
+                </div>
+
+                <div class="package-info">
+
+                    <div class="package-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Kathmandu, Nepal
+                    </div>
+
+                    <h3>Kathmandu Tour</h3>
+
+                    <p class="package-description">
+                        Explore Kathmandu's historic temples, traditional
+                        markets, cultural heritage and famous attractions.
+                    </p>
+
+                    <div class="package-meta">
+                        <span><i class="far fa-calendar-alt"></i> 4 Days / 3 Nights</span>
+                        <span><i class="fas fa-hotel"></i> Hotel Stay</span>
+                        <span><i class="fas fa-landmark"></i> City Tour</span>
+                    </div>
+
+                    <div class="package-inclusions">
+                        <span class="inclusion"><i class="fas fa-check"></i> Hotel</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Transfers</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Sightseeing</span>
+                    </div>
+
+                </div>
+
+                <div class="package-price">
+
+                    <span class="price-label">Starting from</span>
+
+                    <strong>₹4,999</strong>
+
+                    <small>Per Person</small>
+
+                    <span class="discount">Budget Friendly</span>
+
+                    <div class="package-actions">
+                        <button type="button" class="view-package-btn">
+                            VIEW DETAILS
+                        </button>
+
+                        <button type="button" class="enquire-package-btn">
+                            ENQUIRE NOW
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- PACKAGE 4 -->
+            <article class="holiday-card"
+                data-name="Cambodia 4N 5Day"
+                data-destination="Cambodia"
+                data-price="19999"
+                data-duration="5"
+                data-type="Adventure International">
+
+               <div class="package-image">
+    <span class="package-badge">INTERNATIONAL</span>
+
+    <img src="assets/images/banner.avif"
+         alt="Cambodia Angkor Wat"
+         loading="lazy">
+</div>
+
+                <div class="package-info">
+
+                    <div class="package-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Siem Reap, Cambodia
+                    </div>
+
+                    <h3>Cambodia 4N / 5Day</h3>
+
+                    <p class="package-description">
+                        Explore Cambodia's ancient temples, stunning
+                        architecture and fascinating cultural heritage.
+                    </p>
+
+                    <div class="package-meta">
+                        <span><i class="far fa-calendar-alt"></i> 5 Days / 4 Nights</span>
+                        <span><i class="fas fa-hotel"></i> Hotel Stay</span>
+                        <span><i class="fas fa-globe"></i> International</span>
+                    </div>
+
+                    <div class="package-inclusions">
+                        <span class="inclusion"><i class="fas fa-check"></i> Hotel</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Transfers</span>
+                        <span class="inclusion"><i class="fas fa-check"></i> Sightseeing</span>
+                    </div>
+
+                </div>
+
+                <div class="package-price">
+
+                    <span class="price-label">Starting from</span>
+
+                    <strong>₹19,999</strong>
+
+                    <small>Per Person</small>
+
+                    <span class="discount">International Tour</span>
+
+                    <div class="package-actions">
+                        <button type="button" class="view-package-btn">
+                            VIEW DETAILS
+                        </button>
+
+                        <button type="button" class="enquire-package-btn">
+                            ENQUIRE NOW
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+
+            <i class="fas fa-suitcase-rolling"></i>
+
+            <h3>No Packages Found</h3>
+
+            <p>
+                We couldn't find any holiday packages matching your filters.
+                Please try changing your search.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- PACKAGE DETAILS MODAL -->
+<div class="package-modal" id="packageModal">
+
+    <div class="package-modal-content">
+
+        <div class="package-modal-header">
+
+            <div>
+                <h3 id="modalPackageName">Holiday Package Details</h3>
+                <p id="modalPackageLocation">Destination</p>
+            </div>
+
+            <button type="button" class="package-close"
+                    id="closePackageModal">&times;</button>
+
+        </div>
+
+        <div class="package-modal-body">
+
+            <div class="modal-package-banner">
+                <img id="modalPackageImage" src="" alt="Holiday Destination">
+            </div>
+
+            <div class="modal-package-details">
+
+                <div class="modal-detail-item">
+                    <small>Duration</small>
+                    <strong id="modalDuration">4 Days / 3 Nights</strong>
+                </div>
+
+                <div class="modal-detail-item">
+                    <small>Destination</small>
+                    <strong id="modalDestination">Pattaya</strong>
+                </div>
+
+                <div class="modal-detail-item">
+                    <small>Starting Price</small>
+                    <strong id="modalPrice">₹19,999</strong>
+                </div>
+
+            </div>
+
+            <h4 class="modal-section-title">
+                <i class="fas fa-route"></i> Tour Itinerary
+            </h4>
+
+            <div id="modalItinerary">
+
+                <div class="itinerary-item">
+                    <strong>Day 1 - Arrival</strong>
+                    <p>Arrival at destination and hotel check-in.</p>
+                </div>
+
+                <div class="itinerary-item">
+                    <strong>Day 2 - Sightseeing</strong>
+                    <p>Explore popular attractions and local experiences.</p>
+                </div>
+
+                <div class="itinerary-item">
+                    <strong>Day 3 - Leisure</strong>
+                    <p>Enjoy local activities and explore the destination.</p>
+                </div>
+
+                <div class="itinerary-item">
+                    <strong>Day 4 - Departure</strong>
+                    <p>Breakfast and checkout for departure.</p>
+                </div>
+
+            </div>
+
+            <h4 class="modal-section-title">
+                <i class="fas fa-check-circle"></i> Package Inclusions
+            </h4>
+
+            <div class="modal-inclusions">
+                <span><i class="fas fa-check"></i> Hotel Accommodation</span>
+                <span><i class="fas fa-check"></i> Sightseeing</span>
+                <span><i class="fas fa-check"></i> Transfers</span>
+                <span><i class="fas fa-check"></i> Tour Assistance</span>
+            </div>
+
+        </div>
+
+        <div class="package-modal-footer">
+            <button type="button" id="modalEnquireBtn">
+                ENQUIRE NOW
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ENQUIRY MODAL -->
+<div class="enquiry-modal" id="enquiryModal">
+
+    <div class="enquiry-content">
+
+        <div class="enquiry-header">
+            <h3>Holiday Package Enquiry</h3>
+
+            <button type="button" id="closeEnquiry">
+                &times;
+            </button>
+        </div>
+
+        <form id="enquiryForm">
+
+            <label>Selected Package</label>
+            <input type="text" id="enquiryPackage" readonly>
+
+            <label>Your Name</label>
+            <input type="text" id="enquiryName"
+                   placeholder="Enter your name" required>
+
+            <label>Email Address</label>
+            <input type="email" id="enquiryEmail"
+                   placeholder="Enter your email" required>
+
+            <label>Mobile Number</label>
+            <input type="tel" id="enquiryPhone"
+                   placeholder="Enter mobile number"
+                   pattern="[0-9]{10}" maxlength="10" required>
+
+            <label>Travel Requirements</label>
+            <textarea id="enquiryMessage"
+                      placeholder="Tell us about your travel requirements"></textarea>
+
+            <button type="submit" class="send-enquiry">
+                SUBMIT ENQUIRY
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- WEBSITE FOOTER -->
+<div id="footer"></div>
+
+<script>
+
+/* =====================================
+   LOAD WEBSITE HEADER AND FOOTER
+===================================== */
+
+fetch("includes/header.html")
+    .then(response => {
+        if (!response.ok) throw new Error("Header could not be loaded");
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById("header").innerHTML = data;
+    })
+    .catch(error => console.error(error));
+
+fetch("includes/footer.html")
+    .then(response => {
+        if (!response.ok) throw new Error("Footer could not be loaded");
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById("footer").innerHTML = data;
+    })
+    .catch(error => console.error(error));
+
+
+/* =====================================
+   ELEMENT SELECTOR
+===================================== */
+
+const $ = id => document.getElementById(id);
+
+const params = new URLSearchParams(window.location.search);
+
+
+/* =====================================
+   READ SEARCH PARAMETERS
+===================================== */
+
+$("destination").value =
+    params.get("destination") || "";
+
+$("departureCity").value =
+    params.get("from") || "";
+
+$("travelDate").value =
+    params.get("date") || "";
+
+$("travellers").value =
+    params.get("travellers") || "2";
+
+if ($("destination").value) {
+
+    $("pageTitle").textContent =
+        "Holiday Packages for " + $("destination").value;
+
+}
+
+
+/* =====================================
+   SEARCH FORM
+===================================== */
+
+$("holidaySearchForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const searchParams = new URLSearchParams({
+
+        destination: $("destination").value.trim(),
+        from: $("departureCity").value.trim(),
+        date: $("travelDate").value,
+        duration: $("duration").value,
+        travellers: $("travellers").value
+
+    });
+
+    window.location.href =
+        "holiday.html?" + searchParams.toString();
+
+});
+
+
+/* =====================================
+   PACKAGE FILTERS
+===================================== */
+
+function filterPackages() {
+
+    const maxPrice = Number($("priceRange").value);
+
+    const destinations = [
+        ...document.querySelectorAll(".destination-filter:checked")
+    ].map(item => item.value.toLowerCase());
+
+    const durations = [
+        ...document.querySelectorAll(".duration-filter:checked")
+    ].map(item => item.value);
+
+    const types = [
+        ...document.querySelectorAll(".type-filter:checked")
+    ].map(item => item.value.toLowerCase());
+
+    const searchDestination =
+        $("destination").value.trim().toLowerCase();
+
+    let visible = 0;
+
+    document.querySelectorAll(".holiday-card").forEach(card => {
+
+        const name = card.dataset.name.toLowerCase();
+
+        const destination =
+            card.dataset.destination.toLowerCase();
+
+        const price = Number(card.dataset.price);
+
+        const duration = Number(card.dataset.duration);
+
+        const type = card.dataset.type.toLowerCase();
+
+        let show = price <= maxPrice;
+
+        if (destinations.length &&
+            !destinations.some(value =>
+                destination.includes(value)
+            )) {
+            show = false;
+        }
+
+        if (searchDestination &&
+            !name.includes(searchDestination) &&
+            !destination.includes(searchDestination)) {
+            show = false;
+        }
+
+        if (durations.length) {
+
+            const matched = durations.some(value => {
+
+                if (value === "1-3") return duration >= 1 && duration <= 3;
+
+                if (value === "4-5") return duration >= 4 && duration <= 5;
+
+                if (value === "6-7") return duration >= 6 && duration <= 7;
+
+                if (value === "8+") return duration >= 8;
+
+                return false;
+
+            });
+
+            if (!matched) show = false;
+
+        }
+
+        if (types.length &&
+            !types.some(value => type.includes(value))) {
+            show = false;
+        }
+
+        card.style.display = show ? "" : "none";
+
+        if (show) visible++;
+
+    });
+
+    $("resultCount").textContent =
+        visible + " holiday packages available";
+
+    $("noResults").style.display =
+        visible ? "none" : "block";
+
+}
+
+
+/* =====================================
+   PRICE RANGE
+===================================== */
+
+$("priceRange").addEventListener("input", function() {
+
+    $("priceValue").textContent =
+        "₹" + Number(this.value).toLocaleString("en-IN");
+
+    filterPackages();
+
+});
+
+
+/* =====================================
+   FILTER EVENTS
+===================================== */
+
+document.querySelectorAll(
+    ".destination-filter, .duration-filter, .type-filter"
+).forEach(item => {
+
+    item.addEventListener("change", filterPackages);
+
+});
+
+
+/* =====================================
+   CLEAR FILTERS
+===================================== */
+
+$("clearFilters").addEventListener("click", function() {
+
+    document.querySelectorAll(
+        ".destination-filter, .duration-filter, .type-filter"
+    ).forEach(item => item.checked = false);
+
+    $("priceRange").value = 100000;
+
+    $("priceValue").textContent = "₹1,00,000";
+
+    $("destination").value = "";
+
+    $("duration").value = "all";
+
+    filterPackages();
+
+});
+
+
+/* =====================================
+   SORT PACKAGES
+===================================== */
+
+$("sortPackages").addEventListener("change", function() {
+
+    const type = this.value;
+
+    const container = $("packageList");
+
+    const cards = [
+        ...container.querySelectorAll(".holiday-card")
+    ];
+
+    cards.sort((a,b) => {
+
+        const priceA = Number(a.dataset.price);
+        const priceB = Number(b.dataset.price);
+
+        const durationA = Number(a.dataset.duration);
+        const durationB = Number(b.dataset.duration);
+
+        if (type === "low") return priceA - priceB;
+
+        if (type === "high") return priceB - priceA;
+
+        if (type === "duration") return durationA - durationB;
+
+        return 0;
+
+    });
+
+    cards.forEach(card => container.appendChild(card));
+
+});
+
+
+/* =====================================
+   PACKAGE DETAILS DATA
+===================================== */
+
+const packageDetails = {
+
+    "Adventurous Pattaya": {
+        location: "Pattaya, Thailand",
+        duration: "4 Days / 3 Nights",
+        destination: "Pattaya",
+        itinerary: [
+            ["Day 1 - Arrival in Pattaya",
+             "Arrive at Pattaya, transfer to hotel and enjoy leisure time."],
+
+            ["Day 2 - Coral Island",
+             "Enjoy island sightseeing, beaches and optional water activities."],
+
+            ["Day 3 - City Exploration",
+             "Explore Pattaya attractions and local experiences."],
+
+            ["Day 4 - Departure",
+             "Breakfast, checkout and departure."]
+        ]
+    },
+
+    "Kathmandu or Pokhara": {
+        location: "Kathmandu & Pokhara, Nepal",
+        duration: "6 Days / 5 Nights",
+        destination: "Nepal",
+        itinerary: [
+            ["Day 1 - Arrival",
+             "Arrival in Nepal and hotel check-in."],
+
+            ["Day 2 - Kathmandu Sightseeing",
+             "Explore famous temples and cultural attractions."],
+
+            ["Day 3 - Travel to Pokhara",
+             "Enjoy a scenic journey towards Pokhara."],
+
+            ["Day 4 - Pokhara Exploration",
+             "Explore the beautiful lakes and mountain views."],
+
+            ["Day 5 - Local Sightseeing",
+             "Enjoy local sightseeing and leisure activities."],
+
+            ["Day 6 - Departure",
+             "Checkout and departure."]
+        ]
+    },
+
+    "Kathmandu Tour": {
+        location: "Kathmandu, Nepal",
+        duration: "4 Days / 3 Nights",
+        destination: "Kathmandu",
+        itinerary: [
+            ["Day 1 - Arrival",
+             "Arrive in Kathmandu and transfer to the hotel."],
+
+            ["Day 2 - Temple Tour",
+             "Visit popular temples and cultural attractions."],
+
+            ["Day 3 - City Exploration",
+             "Explore local markets and historical sites."],
+
+            ["Day 4 - Departure",
+             "Breakfast and departure."]
+        ]
+    },
+
+    "Cambodia 4N 5Day": {
+        location: "Siem Reap, Cambodia",
+        duration: "5 Days / 4 Nights",
+        destination: "Cambodia",
+        itinerary: [
+            ["Day 1 - Arrival",
+             "Arrival in Cambodia and hotel transfer."],
+
+            ["Day 2 - Angkor Wat",
+             "Explore the famous Angkor temple complex."],
+
+            ["Day 3 - Cultural Exploration",
+             "Discover local culture and historic attractions."],
+
+            ["Day 4 - Leisure Day",
+             "Enjoy local experiences and sightseeing."],
+
+            ["Day 5 - Departure",
+             "Hotel checkout and departure."]
+        ]
+    }
+
+};
+
+
+/* =====================================
+   PACKAGE DETAILS MODAL
+===================================== */
+
+const packageModal = $("packageModal");
+
+let currentPackage = "";
+
+function openPackageModal(card) {
+
+    const name = card.dataset.name;
+
+    currentPackage = name;
+
+    const details = packageDetails[name];
+
+    $("modalPackageName").textContent = name;
+
+    $("modalPackageLocation").textContent =
+        details.location;
+
+    $("modalDuration").textContent =
+        details.duration;
+
+    $("modalDestination").textContent =
+        details.destination;
+
+    $("modalPrice").textContent =
+        "₹" + Number(card.dataset.price).toLocaleString("en-IN");
+
+    $("modalPackageImage").src =
+        card.querySelector(".package-image img").src;
+
+    const itinerary = $("modalItinerary");
+
+    itinerary.innerHTML = "";
+
+    details.itinerary.forEach(item => {
+
+        const div = document.createElement("div");
+
+        div.className = "itinerary-item";
+
+        const title = document.createElement("strong");
+        title.textContent = item[0];
+
+        const description = document.createElement("p");
+        description.textContent = item[1];
+
+        div.append(title, description);
+
+        itinerary.appendChild(div);
+
+    });
+
+    packageModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+document.querySelectorAll(".view-package-btn").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        openPackageModal(
+            this.closest(".holiday-card")
+        );
+
+    });
+
+});
+
+
+function closePackageModal() {
+
+    packageModal.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+}
+
+$("closePackageModal").addEventListener(
+    "click", closePackageModal
+);
+
+packageModal.addEventListener("click", function(e) {
+
+    if (e.target === packageModal) {
+        closePackageModal();
+    }
+
+});
+
+
+/* =====================================
+   ENQUIRY MODAL
+===================================== */
+
+const enquiryModal = $("enquiryModal");
+
+function openEnquiry(name) {
+
+    currentPackage = name;
+
+    $("enquiryPackage").value = name;
+
+    enquiryModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeEnquiry() {
+
+    enquiryModal.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+}
+
+document.querySelectorAll(".enquire-package-btn").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        const card = this.closest(".holiday-card");
+
+        openEnquiry(card.dataset.name);
+
+    });
+
+});
+
+
+$("modalEnquireBtn").addEventListener("click", function() {
+
+    closePackageModal();
+
+    openEnquiry(currentPackage);
+
+});
+
+
+$("closeEnquiry").addEventListener("click", closeEnquiry);
+
+enquiryModal.addEventListener("click", function(e) {
+
+    if (e.target === enquiryModal) {
+        closeEnquiry();
+    }
+
+});
+
+
+/* =====================================
+   ENQUIRY FORM
+===================================== */
+
+$("enquiryForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const name = $("enquiryName").value.trim();
+
+    const email = $("enquiryEmail").value.trim();
+
+    const phone = $("enquiryPhone").value.trim();
+
+    const packageName = $("enquiryPackage").value;
+
+    const message = $("enquiryMessage").value.trim();
+
+    const subject = encodeURIComponent(
+        "Holiday Package Enquiry - " + packageName
+    );
+
+    const body = encodeURIComponent(
+        "Holiday Package: " + packageName +
+        "\nName: " + name +
+        "\nEmail: " + email +
+        "\nPhone: " + phone +
+        "\nRequirements: " + message
+    );
+
+    alert(
+        "Your enquiry details are ready. Please connect the enquiry form to the UCS booking backend to submit it."
+    );
+
+    // Backend integration required for actual enquiry submission.
+
+});
+
+
+/* =====================================
+   SHOW LOGO ON SCROLL
+===================================== */
+
+window.addEventListener("scroll", function() {
+
+    if (window.scrollY > 80) {
+
+        document.body.classList.add("page-scrolled");
+
+    } else {
+
+        document.body.classList.remove("page-scrolled");
+
+    }
+
+});
+
+
+/* =====================================
+   ESCAPE KEY
+===================================== */
+
+document.addEventListener("keydown", function(e) {
+
+    if (e.key === "Escape") {
+
+        closePackageModal();
+
+        closeEnquiry();
+
+    }
+
+});
+
+
+/* =====================================
+   INITIAL FILTER
+===================================== */
+
+filterPackages();
+
+</script>
+
+<script src="assets/js/script.js"></script>
+
+<script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+<script src="assets/js/loader.js"></script>
+
+</body>
+</html>

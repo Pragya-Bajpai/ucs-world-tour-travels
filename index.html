@@ -3,147 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>UCS World Tour and Travels</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="assets/css/loader.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      [data-aos] {
+        will-change: transform, opacity;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        [data-aos] {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Header will load here -->
     <div id="header"></div>
-
-    <!-- ================= HERO SECTION START ================= -->
+    
     <section class="hero-section">
       <div class="hero-content container">
-        <!-- Main Heading -->
-
-        <div class="hero-heading">
+        <div class="hero-heading" data-aos="fade-down" data-aos-duration="1000">
           <span class="hero-eyebrow">UCS WORLD TOUR AND TRAVELS</span>
           <h1>Explore The World, <span>Beyond Limits.</span></h1>
         </div>
-
-        <!-- Booking Section -->
-        <div class="booking-wrapper">
-          <!-- Booking Tabs -->
-          <div class="booking-tabs">
+        <div
+          class="booking-wrapper"
+          data-aos="fade-up"
+          data-aos-duration="1100"
+          data-aos-delay="150"
+        >
+          <div
+            class="booking-tabs"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="100"
+          >
             <button type="button" class="booking-tab active" data-tab="flight">
-              <span class="tab-icon">✈</span>
-              <span>Flight</span>
-            </button>
-
-            <button type="button" class="booking-tab" data-tab="bus">
-              <i class="fa-duotone fa-solid fa-bus tab-icon"></i>
-              <span>Bus</span>
-            </button>
-
-            <button type="button" class="booking-tab" data-tab="car">
-              <i class="fa-duotone fa-solid fa-car tab-icon"></i>
-              <span>Car</span>
-            </button>
-
-            <button type="button" class="booking-tab" data-tab="holiday">
-              <i class="fa-duotone fa-solid fa-suitcase tab-icon"></i>
-              <span>Holiday</span>
+              <span class="tab-icon">✈</span><span>Flight</span></button
+            ><button type="button" class="booking-tab" data-tab="bus">
+              <i class="fa-duotone fa-solid fa-bus tab-icon"></i
+              ><span>Bus</span></button
+            ><button type="button" class="booking-tab" data-tab="car">
+              <i class="fa-duotone fa-solid fa-car tab-icon"></i
+              ><span>Car</span></button
+            ><button type="button" class="booking-tab" data-tab="holiday">
+              <i class="fa-duotone fa-solid fa-suitcase tab-icon"></i
+              ><span>Holiday</span>
             </button>
           </div>
-
-          <!-- Booking Card -->
-          <div class="booking-card">
-            <!-- Booking Card Heading -->
+          <div
+            class="booking-card"
+            data-aos="zoom-in"
+            data-aos-duration="900"
+            data-aos-delay="200"
+          >
             <div class="booking-intro">
               <div class="booking-intro-icon">✈</div>
               <div>
                 <span class="booking-subtitle">START YOUR NEXT ADVENTURE</span>
               </div>
             </div>
-
-            <!-- Trip Type Tabs -->
             <div class="trip-type" id="tripTypeTabs">
-              <label class="trip-option active-trip">
-                <input type="radio" name="trip" value="oneway" checked />
-                <span>Oneway</span>
-              </label>
-
-              <label class="trip-option">
-                <input type="radio" name="trip" value="roundtrip" />
-                <span>Round Trip</span>
-              </label>
-
-              <label class="trip-option">
-                <input type="radio" name="trip" value="multicity" />
-                <span>Multi City</span>
-              </label>
+              <label class="trip-option active-trip"
+                ><input type="radio" name="trip" value="oneway" checked /><span
+                  >Oneway</span
+                ></label
+              ><label class="trip-option"
+                ><input type="radio" name="trip" value="roundtrip" /><span
+                  >Round Trip</span
+                ></label
+              ><label class="trip-option"
+                ><input type="radio" name="trip" value="multicity" /><span
+                  >Multi City</span
+                ></label
+              >
             </div>
-            <!-- Search Form -->
             <div class="flight-search-form" id="bookingSearchForm">
-              <!-- From -->
               <div class="search-field location-field" data-field="from">
-                <label>FROM</label>
-                <input
+                <label>FROM</label
+                ><input
                   type="text"
                   id="busFrom"
                   name="from"
                   placeholder="City or Airport"
                 />
               </div>
-
-              <!-- Swap Button -->
               <button type="button" class="swap-btn" data-field="swap">
                 ⇄
               </button>
-
-              <!-- To -->
               <div class="search-field" data-field="to">
-                <label>TO</label>
-                <input
+                <label>TO</label
+                ><input
                   type="text"
                   id="busTo"
                   name="to"
                   placeholder="City or Airport"
                 />
               </div>
-
-              <!-- Depart -->
               <div class="search-field" data-field="depart">
-                <label>DEPARTURE</label>
-                <input type="date" id="departDate" name="date" />
+                <label>DEPARTURE</label
+                ><input type="date" id="departDate" name="date" />
               </div>
-
-              <!-- Return -->
               <div class="search-field return-field" data-field="return" hidden>
-                <label>RETURN</label>
-                <input type="date" id="returnDate" />
+                <label>RETURN</label><input type="date" id="returnDate" />
               </div>
-
-              <!-- Travellers & Class -->
               <div
                 class="search-field travellers-field"
                 data-field="travellers"
               >
-                <label>TRAVELLERS & CLASS</label>
-
-                <input
+                <label>TRAVELLERS & CLASS</label
+                ><input
                   type="text"
                   id="travellerSummary"
                   value="1 Passenger"
                   readonly
                   placeholder="Travellers & Class"
                 />
-
-                <!-- Travellers Popup -->
                 <div class="travellers-popup" id="travellersPopup">
                   <div class="travellers-popup-grid">
-                    <!-- Adults -->
                     <div class="traveller-item">
                       <label>Adults</label>
-
                       <div class="traveller-counter">
                         <button
                           type="button"
@@ -151,12 +145,9 @@
                           data-counter="adults"
                           data-action="minus"
                         >
-                          −
-                        </button>
-
-                        <span id="adultsCount">1</span>
-
-                        <button
+                          −</button
+                        ><span id="adultsCount">1</span
+                        ><button
                           type="button"
                           class="counter-btn"
                           data-counter="adults"
@@ -166,12 +157,8 @@
                         </button>
                       </div>
                     </div>
-
-                    <!-- Children -->
                     <div class="traveller-item">
-                      <label>Children</label>
-                      <small>Ages 2 - 17</small>
-
+                      <label>Children</label><small>Ages 2 - 17</small>
                       <div class="traveller-counter">
                         <button
                           type="button"
@@ -179,12 +166,9 @@
                           data-counter="children"
                           data-action="minus"
                         >
-                          −
-                        </button>
-
-                        <span id="childrenCount">0</span>
-
-                        <button
+                          −</button
+                        ><span id="childrenCount">0</span
+                        ><button
                           type="button"
                           class="counter-btn"
                           data-counter="children"
@@ -194,12 +178,8 @@
                         </button>
                       </div>
                     </div>
-
-                    <!-- Infants -->
                     <div class="traveller-item">
-                      <label>Infants</label>
-                      <small>Under 2 years</small>
-
+                      <label>Infants</label><small>Under 2 years</small>
                       <div class="traveller-counter">
                         <button
                           type="button"
@@ -207,12 +187,9 @@
                           data-counter="infants"
                           data-action="minus"
                         >
-                          −
-                        </button>
-
-                        <span id="infantsCount">0</span>
-
-                        <button
+                          −</button
+                        ><span id="infantsCount">0</span
+                        ><button
                           type="button"
                           class="counter-btn"
                           data-counter="infants"
@@ -222,12 +199,9 @@
                         </button>
                       </div>
                     </div>
-
-                    <!-- Cabin Class -->
                     <div class="traveller-item cabin-class">
-                      <label>Cabin Class</label>
-
-                      <select id="cabinClass">
+                      <label>Cabin Class</label
+                      ><select id="cabinClass">
                         <option value="Economy">Economy</option>
                         <option value="Premium Economy">Premium Economy</option>
                         <option value="Business">Business</option>
@@ -237,15 +211,10 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Holiday Destination -->
               <div class="search-field" data-field="destination" hidden>
-                <label>SEARCH DESTINATION</label>
-                <input type="text" placeholder="Search Destination" />
+                <label>SEARCH DESTINATION</label
+                ><input type="text" placeholder="Search Destination" />
               </div>
-
-              <!-- Search Button -->
-              <!-- Search Button -->
               <button type="button" class="search-btn" id="bookingSearchBtn">
                 <span>⌕</span>
                 Search
@@ -255,110 +224,89 @@
         </div>
       </div>
     </section>
-    <!-- ================= HERO SECTION END ================= -->
-
-    <!-- ================= SPECIAL OFFERS SECTION START ================= -->
-
     <section class="special-offers-section">
       <div class="offers-container">
-        <!-- Section Heading -->
-        <div class="offers-heading">
+        <div class="offers-heading" data-aos="fade-up" data-aos-duration="900">
           <span class="offers-subtitle">EXPLORE & SAVE</span>
-
           <h2>Special Offers</h2>
-
           <p>
             Explore top destinations with UCS Tour and Travels and enjoy
             exclusive deals on flights, buses, and car rentals.
           </p>
         </div>
-
-        <!-- Offers Slider -->
-        <div class="offers-slider-wrapper">
-          <!-- Previous Button -->
+        <div
+          class="offers-slider-wrapper"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          data-aos-delay="150"
+        >
           <button
             type="button"
             class="offer-arrow offer-prev"
             aria-label="Previous offers"
           >
-            &#10094;
+            ❮
           </button>
-
-          <!-- Slider -->
           <div class="offers-slider">
             <div class="offers-track">
-              <!-- Offer 1 -->
               <div class="offer-slide">
                 <img src="assets/images/ucs.jpeg" alt="UCS Travel Offer 1" />
               </div>
-
-              <!-- Offer 2 -->
               <div class="offer-slide">
                 <img src="assets/images/ucs.jpeg" alt="UCS Travel Offer 2" />
               </div>
-
-              <!-- Offer 3 -->
               <div class="offer-slide">
                 <img src="assets/images/ucs.jpeg" alt="UCS Travel Offer 3" />
               </div>
-
-              <!-- Offer 4 -->
               <div class="offer-slide">
                 <img src="assets/images/ucs.jpeg" alt="UCS Travel Offer 4" />
               </div>
-
-              <!-- Offer 5 -->
               <div class="offer-slide">
                 <img src="assets/images/ucs.jpeg" alt="UCS Travel Offer 5" />
               </div>
-
-              <!-- Offer 6 -->
               <div class="offer-slide">
                 <img src="assets/images/ucs.jpeg" alt="UCS Travel Offer 6" />
               </div>
             </div>
           </div>
-
-          <!-- Next Button -->
           <button
             type="button"
             class="offer-arrow offer-next"
             aria-label="Next offers"
           >
-            &#10095;
+            ❯
           </button>
         </div>
-
-        <!-- Slider Dots -->
         <div class="offer-dots"></div>
       </div>
     </section>
-
-    <!-- ================= SPECIAL OFFERS SECTION END ================= -->
-
-    <!-- PREMIUM POPULAR CAR HIRE SECTION START -->
     <section class="popular-car-section">
       <div class="container">
-        <div class="car-section-heading">
+        <div
+          class="car-section-heading"
+          data-aos="fade-up"
+          data-aos-duration="900"
+        >
           <span class="car-heading-label">TRAVEL IN COMFORT</span>
           <h2>Choose Your <span>Perfect Ride</span></h2>
           <p>Find the right car for every destination and every journey.</p>
         </div>
-
         <div class="car-grid">
-          <!-- CAR 1 -->
-          <div class="car-hire-card">
+          <div
+            class="car-hire-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="100"
+          >
             <div class="car-image">
-              <img src="assets/images/car.jpg" alt="Mahindra XUV300" />
-
-              <span class="car-category">SUV</span>
-
+              <img src="assets/images/car.jpg" alt="Mahindra XUV300" /><span
+                class="car-category"
+                >SUV</span
+              >
               <div class="car-passenger-badge">
-                <i class="fas fa-users"></i>
-                <span>4 Seats</span>
+                <i class="fas fa-users"></i><span>4 Seats</span>
               </div>
             </div>
-
             <div class="car-card-content">
               <div class="car-card-top">
                 <div>
@@ -367,38 +315,35 @@
                 </div>
                 <div class="car-rating"><i class="fas fa-star"></i> 4.8</div>
               </div>
-
               <div class="car-divider"></div>
-
               <div class="car-card-bottom">
                 <div class="car-review">
                   <i class="fas fa-award"></i>
                   <div>
-                    <strong>Exceptional</strong>
-                    <span>3,014 reviews</span>
+                    <strong>Exceptional</strong><span>3,014 reviews</span>
                   </div>
                 </div>
-
                 <div class="car-card-icon">
                   <i class="fas fa-arrow-right"></i>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- CAR 2 -->
-          <div class="car-hire-card">
+          <div
+            class="car-hire-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="220"
+          >
             <div class="car-image">
-              <img src="assets/images/car1.jpg" alt="Ertiga VXI" />
-
-              <span class="car-category">MUV</span>
-
+              <img src="assets/images/car1.jpg" alt="Ertiga VXI" /><span
+                class="car-category"
+                >MUV</span
+              >
               <div class="car-passenger-badge">
-                <i class="fas fa-users"></i>
-                <span>7 Seats</span>
+                <i class="fas fa-users"></i><span>7 Seats</span>
               </div>
             </div>
-
             <div class="car-card-content">
               <div class="car-card-top">
                 <div>
@@ -407,38 +352,35 @@
                 </div>
                 <div class="car-rating"><i class="fas fa-star"></i> 4.8</div>
               </div>
-
               <div class="car-divider"></div>
-
               <div class="car-card-bottom">
                 <div class="car-review">
                   <i class="fas fa-award"></i>
                   <div>
-                    <strong>Exceptional</strong>
-                    <span>3,014 reviews</span>
+                    <strong>Exceptional</strong><span>3,014 reviews</span>
                   </div>
                 </div>
-
                 <div class="car-card-icon">
                   <i class="fas fa-arrow-right"></i>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- CAR 3 -->
-          <div class="car-hire-card">
+          <div
+            class="car-hire-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="340"
+          >
             <div class="car-image">
-              <img src="assets/images/car2.jpg" alt="Swift" />
-
-              <span class="car-category">HATCHBACK</span>
-
+              <img src="assets/images/car2.jpg" alt="Swift" /><span
+                class="car-category"
+                >HATCHBACK</span
+              >
               <div class="car-passenger-badge">
-                <i class="fas fa-users"></i>
-                <span>5 Seats</span>
+                <i class="fas fa-users"></i><span>5 Seats</span>
               </div>
             </div>
-
             <div class="car-card-content">
               <div class="car-card-top">
                 <div>
@@ -447,38 +389,35 @@
                 </div>
                 <div class="car-rating"><i class="fas fa-star"></i> 4.8</div>
               </div>
-
               <div class="car-divider"></div>
-
               <div class="car-card-bottom">
                 <div class="car-review">
                   <i class="fas fa-award"></i>
                   <div>
-                    <strong>Exceptional</strong>
-                    <span>3,014 reviews</span>
+                    <strong>Exceptional</strong><span>3,014 reviews</span>
                   </div>
                 </div>
-
                 <div class="car-card-icon">
                   <i class="fas fa-arrow-right"></i>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- CAR 4 -->
-          <div class="car-hire-card">
+          <div
+            class="car-hire-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="460"
+          >
             <div class="car-image">
-              <img src="assets/images/car3.jpg" alt="Alto" />
-
-              <span class="car-category">ECONOMY</span>
-
+              <img src="assets/images/car3.jpg" alt="Alto" /><span
+                class="car-category"
+                >ECONOMY</span
+              >
               <div class="car-passenger-badge">
-                <i class="fas fa-users"></i>
-                <span>4 Seats</span>
+                <i class="fas fa-users"></i><span>4 Seats</span>
               </div>
             </div>
-
             <div class="car-card-content">
               <div class="car-card-top">
                 <div>
@@ -487,18 +426,14 @@
                 </div>
                 <div class="car-rating"><i class="fas fa-star"></i> 4.8</div>
               </div>
-
               <div class="car-divider"></div>
-
               <div class="car-card-bottom">
                 <div class="car-review">
                   <i class="fas fa-award"></i>
                   <div>
-                    <strong>Exceptional</strong>
-                    <span>3,014 reviews</span>
+                    <strong>Exceptional</strong><span>3,014 reviews</span>
                   </div>
                 </div>
-
                 <div class="car-card-icon">
                   <i class="fas fa-arrow-right"></i>
                 </div>
@@ -508,13 +443,9 @@
         </div>
       </div>
     </section>
-    <!-- PREMIUM POPULAR CAR HIRE SECTION END -->
-
-    <!-- Why Choose Us Section Start -->
     <section class="why-choose-section">
       <div class="container">
-        <!-- Section Heading -->
-        <div class="why-heading">
+        <div class="why-heading" data-aos="fade-up" data-aos-duration="900">
           <span class="why-subtitle">WHY TRAVEL WITH UCS</span>
           <h2>Why Choose Us</h2>
           <p>
@@ -522,257 +453,229 @@
             booking services for a smooth and comfortable journey.
           </p>
         </div>
-
-        <!-- Feature Cards -->
         <div class="why-cards">
-          <!-- Card 1 -->
-          <div class="why-card">
+          <div
+            class="why-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="100"
+          >
             <div class="feature-icon">
               <img
                 src="assets/images/guarantee.svg"
                 alt="Best Price Guarantee"
               />
             </div>
-
             <h3>Best Price Guarantee</h3>
-
             <p>
               Experience top destinations without overpaying. Our pricing is
               fair, transparent, and guaranteed.
             </p>
-
             <div class="why-card-line"></div>
           </div>
-
-          <!-- Card 2 -->
-          <div class="why-card">
+          <div
+            class="why-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="250"
+          >
             <div class="feature-icon">
               <img
                 src="assets/images/booking.svg"
                 alt="Easy and Quick Booking"
               />
             </div>
-
-            <h3>Easy &amp; Quick Booking</h3>
-
+            <h3>Easy & Quick Booking</h3>
             <p>
               Plan your trip in minutes with our smooth and user-friendly
               booking system.
             </p>
-
             <div class="why-card-line"></div>
           </div>
-
-          <!-- Card 3 -->
-          <div class="why-card">
+          <div
+            class="why-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="400"
+          >
             <div class="feature-icon">
               <img src="assets/images/customer_care.svg" alt="Customer Care" />
             </div>
-
             <h3>Customer Care 24/7</h3>
-
             <p>
               Our support team is here for you anytime, anywhere — before,
               during, and after your trip.
             </p>
-
             <div class="why-card-line"></div>
           </div>
         </div>
       </div>
     </section>
-    <!-- Why Choose Us Section End -->
-
-    <!-- MOST POPULAR TOURS SECTION START -->
     <section class="popular-tours-section">
       <div class="container">
-        <!-- Section Heading -->
-        <div class="tours-heading">
+        <div class="tours-heading" data-aos="fade-up" data-aos-duration="900">
           <div class="tours-subtitle">
             <span></span> EXPLORE OUR DESTINATIONS
           </div>
-
           <h2>Most Popular <span>Tours</span></h2>
-
           <p>
             Explore our most booked tours, handpicked for adventure lovers,
             families, and first-time travelers.
           </p>
         </div>
-
-        <!-- Tours Grid -->
         <div class="tours-grid">
-          <!-- Tour 1 -->
-          <div class="tour-card">
+          <div
+            class="tour-card"
+            data-aos="zoom-in"
+            data-aos-duration="900"
+            data-aos-delay="100"
+          >
             <div class="tour-image">
               <img
                 src="assets/images/1760754636_63e3c62ef0c5d.webp"
                 alt="Adventurous Pattaya"
-              />
-
-              <span class="tour-duration">
-                <i class="far fa-clock"></i> 4 Day Tours
-              </span>
-
-              <span class="tour-image-label">POPULAR</span>
+              /><span class="tour-duration"
+                ><i class="far fa-clock"></i> 4 Day Tours </span
+              ><span class="tour-image-label">POPULAR</span>
             </div>
-
             <div class="tour-content">
               <div class="tour-location">
                 <i class="fas fa-map-marker-alt"></i>
                 Pattaya
               </div>
-
               <h3>Adventurous Pattaya</h3>
-
               <div class="tour-bottom">
                 <div class="tour-price">
-                  <small>Starting from</small>
-                  <strong>INR 19,999</strong>
+                  <small>Starting from</small><strong>INR 19,999</strong>
                 </div>
-
-                <a
-                  href="#"
-                  class="tour-arrow"
-                  aria-label="Explore Pattaya tour"
-                >
-                  <i class="fas fa-arrow-right"></i>
-                </a>
+                <a href="#" class="tour-arrow" aria-label="Explore Pattaya tour"
+                  ><i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
-
-          <!-- Tour 2 -->
-          <div class="tour-card">
+          <div
+            class="tour-card"
+            data-aos="zoom-in"
+            data-aos-duration="900"
+            data-aos-delay="220"
+          >
             <div class="tour-image">
               <img
                 src="assets/images/1760879165_SightSeeingXeukQQ.jpg"
                 alt="Kathmandu or Pokhara"
-              />
-
-              <span class="tour-duration">
-                <i class="far fa-clock"></i> 6 Day Tours
+              /><span class="tour-duration"
+                ><i class="far fa-clock"></i> 6 Day Tours
               </span>
             </div>
-
             <div class="tour-content">
               <div class="tour-location">
                 <i class="fas fa-map-marker-alt"></i>
                 Pokhara (NEP)
               </div>
-
               <h3>Kathmandu or Pokhara</h3>
-
               <div class="tour-bottom">
                 <div class="tour-price">
-                  <small>Starting from</small>
-                  <strong>INR 6,999</strong>
+                  <small>Starting from</small><strong>INR 6,999</strong>
                 </div>
-
                 <a
                   href="#"
                   class="tour-arrow"
                   aria-label="Explore Kathmandu or Pokhara tour"
-                >
-                  <i class="fas fa-arrow-right"></i>
-                </a>
+                  ><i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
-
-          <!-- Tour 3 -->
-          <div class="tour-card">
+          <div
+            class="tour-card"
+            data-aos="zoom-in"
+            data-aos-duration="900"
+            data-aos-delay="340"
+          >
             <div class="tour-image">
               <img
                 src="assets/images/1760886554_unnamed.webp"
                 alt="Kathmandu Tour"
-              />
-
-              <span class="tour-duration">
-                <i class="far fa-clock"></i> 4 Day Tours
+              /><span class="tour-duration"
+                ><i class="far fa-clock"></i> 4 Day Tours
               </span>
             </div>
-
             <div class="tour-content">
               <div class="tour-location">
                 <i class="fas fa-map-marker-alt"></i>
                 Kathmandu (NEP)
               </div>
-
               <h3>Kathmandu Tour</h3>
-
               <div class="tour-bottom">
                 <div class="tour-price">
-                  <small>Starting from</small>
-                  <strong>INR 4,999</strong>
+                  <small>Starting from</small><strong>INR 4,999</strong>
                 </div>
-
                 <a
                   href="#"
                   class="tour-arrow"
                   aria-label="Explore Kathmandu tour"
-                >
-                  <i class="fas fa-arrow-right"></i>
-                </a>
+                  ><i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
-
-          <!-- Tour 4 -->
-          <div class="tour-card">
+          <div
+            class="tour-card"
+            data-aos="zoom-in"
+            data-aos-duration="900"
+            data-aos-delay="460"
+          >
             <div class="tour-image">
               <img
                 src="assets/images/1761971893_63db2eb197944654a85f1a5eb7e50fd3428ca466a9b11e8598ac6ce1a1f6009a.avif"
                 alt="Cambodia Tour"
-              />
-
-              <span class="tour-duration">
-                <i class="far fa-clock"></i> 4 Day Tours
+              /><span class="tour-duration"
+                ><i class="far fa-clock"></i> 4 Day Tours
               </span>
             </div>
-
             <div class="tour-content">
               <div class="tour-location">
                 <i class="fas fa-map-marker-alt"></i>
                 Siem Reap
               </div>
-
               <h3>Cambodia 4N/5Day</h3>
-
               <div class="tour-bottom">
                 <div class="tour-price">
-                  <small>Starting from</small>
-                  <strong>INR 19,999</strong>
+                  <small>Starting from</small><strong>INR 19,999</strong>
                 </div>
-
                 <a
                   href="#"
                   class="tour-arrow"
                   aria-label="Explore Cambodia tour"
-                >
-                  <i class="fas fa-arrow-right"></i>
-                </a>
+                  ><i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- MOST POPULAR TOURS SECTION END -->
-    <!-- ================= OUR TRAVEL SERVICES START ================= -->
     <section class="travel-services-section">
       <div class="container">
-        <div class="travel-section-heading">
+        <div
+          class="travel-section-heading"
+          data-aos="fade-up"
+          data-aos-duration="900"
+          data-aos-delay="0"
+        >
           <span>WHAT WE OFFER</span>
           <h2>Our Travel <strong>Services</strong></h2>
           <p>Everything you need for a comfortable and memorable journey.</p>
         </div>
-
         <div class="travel-services-grid">
-          <div class="travel-service-card">
-            <div class="service-icon">
-              <i class="fas fa-plane"></i>
-            </div>
+          <div
+            class="travel-service-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="100"
+          >
+            <div class="service-icon"><i class="fas fa-plane"></i></div>
             <h3>Flight Booking</h3>
             <p>
               Book domestic and international flights with a smooth booking
@@ -782,22 +685,26 @@
               >Explore Service <i class="fas fa-arrow-right"></i
             ></a>
           </div>
-
-          <div class="travel-service-card">
-            <div class="service-icon">
-              <i class="fas fa-bus"></i>
-            </div>
+          <div
+            class="travel-service-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="230"
+          >
+            <div class="service-icon"><i class="fas fa-bus"></i></div>
             <h3>Bus Booking</h3>
             <p>Find convenient bus travel options for your next destination.</p>
             <a href="contact.html"
               >Explore Service <i class="fas fa-arrow-right"></i
             ></a>
           </div>
-
-          <div class="travel-service-card">
-            <div class="service-icon">
-              <i class="fas fa-car"></i>
-            </div>
+          <div
+            class="travel-service-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="360"
+          >
+            <div class="service-icon"><i class="fas fa-car"></i></div>
             <h3>Car Rental</h3>
             <p>
               Choose a comfortable ride for family trips, business travel and
@@ -807,8 +714,12 @@
               >Explore Service <i class="fas fa-arrow-right"></i
             ></a>
           </div>
-
-          <div class="travel-service-card">
+          <div
+            class="travel-service-card"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="490"
+          >
             <div class="service-icon">
               <i class="fas fa-umbrella-beach"></i>
             </div>
@@ -823,65 +734,68 @@
         </div>
       </div>
     </section>
-    <!-- ================= OUR TRAVEL SERVICES END ================= -->
-
-    <!-- ================= HOW IT WORKS START ================= -->
     <section class="how-it-works-section">
       <div class="container">
-        <div class="travel-section-heading">
+        <div
+          class="travel-section-heading"
+          data-aos="fade-up"
+          data-aos-duration="900"
+          data-aos-delay="100"
+        >
           <span>YOUR JOURNEY STARTS HERE</span>
           <h2>How It <strong>Works</strong></h2>
           <p>
             Booking your next journey is simple with UCS World Tour and Travels.
           </p>
         </div>
-
         <div class="booking-steps">
-          <div class="booking-step">
+          <div
+            class="booking-step"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="100"
+          >
             <div class="step-number">01</div>
-            <div class="step-icon">
-              <i class="fas fa-search-location"></i>
-            </div>
+            <div class="step-icon"><i class="fas fa-search-location"></i></div>
             <h3>Choose Your Destination</h3>
             <p>
               Select your destination and choose the travel service you need.
             </p>
           </div>
-
-          <div class="step-connector">
-            <i class="fas fa-arrow-right"></i>
-          </div>
-
-          <div class="booking-step">
+          <div class="step-connector"><i class="fas fa-arrow-right"></i></div>
+          <div
+            class="booking-step"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="250"
+          >
             <div class="step-number">02</div>
-            <div class="step-icon">
-              <i class="fas fa-calendar-check"></i>
-            </div>
+            <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
             <h3>Make Your Booking</h3>
             <p>Enter your travel details and submit your booking request.</p>
           </div>
-
-          <div class="step-connector">
-            <i class="fas fa-arrow-right"></i>
-          </div>
-
-          <div class="booking-step">
+          <div class="step-connector"><i class="fas fa-arrow-right"></i></div>
+          <div
+            class="booking-step"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-delay="400"
+          >
             <div class="step-number">03</div>
-            <div class="step-icon">
-              <i class="fas fa-suitcase-rolling"></i>
-            </div>
+            <div class="step-icon"><i class="fas fa-suitcase-rolling"></i></div>
             <h3>Enjoy Your Journey</h3>
             <p>Get ready for your trip and enjoy your travel experience.</p>
           </div>
         </div>
       </div>
     </section>
-    <!-- ================= HOW IT WORKS END ================= -->
-
-    <!-- ================= TRAVEL CTA START ================= -->
     <section class="travel-cta-section">
       <div class="container">
-        <div class="travel-cta-content">
+        <div
+          class="travel-cta-content"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+        >
           <div class="travel-cta-text">
             <span>LET'S MAKE MEMORIES TOGETHER</span>
             <h2>Your Next Adventure<br />Starts With <strong>UCS.</strong></h2>
@@ -889,73 +803,62 @@
               Whether it's a short getaway or an international holiday, let us
               help you plan your next journey.
             </p>
-
             <a href="contact.html" class="travel-cta-btn">
-              Contact Us <i class="fas fa-arrow-right"></i>
-            </a>
+              Contact Us <i class="fas fa-arrow-right"></i
+            ></a>
           </div>
-
-          <div class="travel-cta-icon">
-            <i class="fas fa-earth-asia"></i>
-          </div>
+          <div class="travel-cta-icon"><i class="fas fa-earth-asia"></i></div>
         </div>
       </div>
     </section>
-    <!-- ================= TRAVEL CTA END ================= -->
-
-    <!-- ================= ONLINE BOOKING FAQ SECTION START ================= -->
     <section class="online-faq-section">
       <div class="container">
         <div class="faq-main-wrapper">
-          <!-- LEFT CONTENT -->
-          <div class="faq-left-content">
-            <span class="faq-eyebrow">
-              <i class="fas fa-headset"></i> WE ARE HERE TO HELP
+          <div
+            class="faq-left-content"
+            data-aos="fade-right"
+            data-aos-duration="900"
+          >
+            <span class="faq-eyebrow"
+              ><i class="fas fa-headset"></i> WE ARE HERE TO HELP
             </span>
-
             <h2>Online Booking <strong>FAQs</strong></h2>
-
             <p class="faq-description">
               Have questions about booking your journey with UCS World Tour and
               Travels? Find answers to some of the most frequently asked
               questions below.
             </p>
-
             <div class="faq-support-card">
               <div class="faq-support-icon">
                 <i class="fas fa-comments"></i>
               </div>
-
               <div>
                 <h4>Still Have Questions?</h4>
                 <p>Our team is ready to help you with your travel queries.</p>
                 <a href="contacts.html">
-                  Contact Our Team <i class="fas fa-arrow-right"></i>
-                </a>
+                  Contact Our Team <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
-
             <div class="faq-trust-note">
-              <i class="fas fa-shield-alt"></i>
-              <span>Your journey matters to us.</span>
+              <i class="fas fa-shield-alt"></i
+              ><span>Your journey matters to us.</span>
             </div>
           </div>
-
-          <!-- RIGHT FAQ ACCORDION -->
-          <div class="faq-right-content">
+          <div
+            class="faq-right-content"
+            data-aos="fade-left"
+            data-aos-duration="900"
+            data-aos-delay="150"
+          >
             <div class="faq-accordion">
-              <!-- FAQ 1 -->
               <div class="faq-item active">
                 <button class="faq-question" type="button" aria-expanded="true">
-                  <span>
-                    <span class="faq-number">01</span>
-                    How can I book a flight online?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">01</span>
+                    How can I book a flight online? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     Select the Flight option in the booking section, enter your
@@ -964,23 +867,17 @@
                   </p>
                 </div>
               </div>
-
-              <!-- FAQ 2 -->
               <div class="faq-item">
                 <button
                   class="faq-question"
                   type="button"
                   aria-expanded="false"
                 >
-                  <span>
-                    <span class="faq-number">02</span>
-                    Can I book bus tickets through your website?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">02</span>
+                    Can I book bus tickets through your website? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     Yes, you can use the Bus booking option to enter your travel
@@ -988,23 +885,17 @@
                   </p>
                 </div>
               </div>
-
-              <!-- FAQ 3 -->
               <div class="faq-item">
                 <button
                   class="faq-question"
                   type="button"
                   aria-expanded="false"
                 >
-                  <span>
-                    <span class="faq-number">03</span>
-                    How can I book a car for my journey?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">03</span>
+                    How can I book a car for my journey? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     Select the Car option, provide your pickup location,
@@ -1013,23 +904,17 @@
                   </p>
                 </div>
               </div>
-
-              <!-- FAQ 4 -->
               <div class="faq-item">
                 <button
                   class="faq-question"
                   type="button"
                   aria-expanded="false"
                 >
-                  <span>
-                    <span class="faq-number">04</span>
-                    Can I book a round-trip journey?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">04</span>
+                    Can I book a round-trip journey? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     Yes. Where available, select the Round Trip option and enter
@@ -1037,23 +922,17 @@
                   </p>
                 </div>
               </div>
-
-              <!-- FAQ 5 -->
               <div class="faq-item">
                 <button
                   class="faq-question"
                   type="button"
                   aria-expanded="false"
                 >
-                  <span>
-                    <span class="faq-number">05</span>
-                    Can I book holiday packages online?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">05</span>
+                    Can I book holiday packages online? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     You can explore the Holiday option and share your preferred
@@ -1062,23 +941,17 @@
                   </p>
                 </div>
               </div>
-
-              <!-- FAQ 6 -->
               <div class="faq-item">
                 <button
                   class="faq-question"
                   type="button"
                   aria-expanded="false"
                 >
-                  <span>
-                    <span class="faq-number">06</span>
-                    How can I get help with my booking?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">06</span>
+                    How can I get help with my booking? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     For assistance with your travel booking, questions or
@@ -1087,23 +960,17 @@
                   </p>
                 </div>
               </div>
-
-              <!-- FAQ 7 -->
               <div class="faq-item">
                 <button
                   class="faq-question"
                   type="button"
                   aria-expanded="false"
                 >
-                  <span>
-                    <span class="faq-number">07</span>
-                    Can I change or cancel my booking?
-                  </span>
-                  <span class="faq-toggle">
-                    <i class="fas fa-plus"></i>
-                  </span>
+                  <span
+                    ><span class="faq-number">07</span>
+                    Can I change or cancel my booking? </span
+                  ><span class="faq-toggle"><i class="fas fa-plus"></i></span>
                 </button>
-
                 <div class="faq-answer">
                   <p>
                     Changes and cancellations depend on the applicable booking
@@ -1117,12 +984,7 @@
         </div>
       </div>
     </section>
-    <!-- ================= ONLINE BOOKING FAQ SECTION END ================= -->
-
-    <!-- Footer will load here -->
     <div id="footer"></div>
-
-    <!-- JavaScript -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/loader.js"></script>
     <script>
@@ -1131,17 +993,37 @@
         .then((data) => {
           document.getElementById("header").innerHTML = data;
         });
-
       fetch("includes/footer.html")
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("footer").innerHTML = data;
         });
     </script>
-
     <script
       type="text/javascript"
       src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (typeof AOS !== "undefined") {
+          AOS.init({
+            duration: 900,
+            easing: "ease-in-out",
+            once: true,
+            offset: 90,
+            delay: 0,
+            mirror: false,
+            anchorPlacement: "top-bottom",
+          });
+          window.addEventListener("load", function () {
+            AOS.refreshHard();
+          });
+          window.addEventListener("resize", function () {
+            AOS.refresh();
+          });
+        }
+      });
+    </script>
   </body>
 </html>

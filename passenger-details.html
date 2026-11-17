@@ -1,0 +1,1110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Details | UCS World Tour & Travels</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --pd-navy: #071b49;
+            --pd-red: #ff0808;
+            --pd-blue: #1769aa;
+            --pd-bg: #f4f6fa;
+            --pd-border: #e4e8ef;
+            --pd-text: #25334c;
+            --pd-muted: #778196;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--pd-bg) !important;
+            color: var(--pd-text);
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .pd-page {
+            width: min(1180px, calc(100% - 36px));
+            margin: 24px auto 45px;
+        }
+
+        /* PROGRESS STEPS */
+
+        .pd-progress {
+            background: #fff;
+            border: 1px solid var(--pd-border);
+            border-radius: 8px;
+            padding: 18px 25px;
+            margin-bottom: 20px;
+        }
+
+        .pd-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .pd-steps::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 9%;
+            right: 9%;
+            height: 2px;
+            background: #e5e9f0;
+            z-index: 0;
+        }
+
+        .pd-step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            min-width: 90px;
+            color: var(--pd-muted);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .pd-step-circle {
+            width: 31px;
+            height: 31px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #e9edf3;
+            color: #68758a;
+            font-weight: 700;
+            font-size: 12px;
+            border: 3px solid #fff;
+        }
+
+        .pd-step.done .pd-step-circle {
+            background: #0dbb88;
+            color: #fff;
+        }
+
+        .pd-step.current .pd-step-circle {
+            background: #397cf4;
+            color: #fff;
+        }
+
+        .pd-step.done,
+        .pd-step.current {
+            color: var(--pd-navy);
+            font-weight: 600;
+        }
+
+        /* MAIN LAYOUT */
+
+        .pd-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 345px;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .pd-left,
+        .pd-right {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 0;
+        }
+
+        .pd-panel {
+            background: #fff;
+            border: 1px solid var(--pd-border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(20, 38, 70, 0.035);
+        }
+
+        .pd-panel-heading {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 14px 17px;
+            color: var(--pd-navy);
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--pd-border);
+            background: #fff;
+        }
+
+        .pd-panel-heading i {
+            color: var(--pd-blue);
+            font-size: 14px;
+        }
+
+        .pd-panel-body {
+            padding: 17px;
+        }
+
+        /* PASSENGER FORM */
+
+        .pd-passenger-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 11px 13px;
+            background: #f4f7fc;
+            border: 1px solid #e7edf6;
+            border-radius: 5px;
+            margin-bottom: 17px;
+            color: var(--pd-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .pd-passenger-heading span {
+            color: var(--pd-red);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .pd-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px 16px;
+        }
+
+        .pd-field {
+            min-width: 0;
+        }
+
+        .pd-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .pd-field label {
+            display: block;
+            color: #46536a;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .pd-field label span {
+            color: var(--pd-red);
+        }
+
+        .pd-page input,
+        .pd-page select {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #dce2eb !important;
+            border-radius: 5px !important;
+            padding: 0 11px !important;
+            background: #fff !important;
+            color: var(--pd-text) !important;
+            font-family: inherit;
+            font-size: 13px !important;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        .pd-page input:focus,
+        .pd-page select:focus {
+            border-color: var(--pd-blue) !important;
+        }
+
+        /* CONTACT PHONE */
+
+        .pd-phone {
+            display: flex;
+            height: 40px;
+            border: 1px solid #dce2eb;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .pd-phone select {
+            width: 105px;
+            flex-shrink: 0;
+            height: 100%;
+            border: 0 !important;
+            border-right: 1px solid #e1e5ec !important;
+            border-radius: 0 !important;
+            padding: 0 7px !important;
+            background: #f8f9fb !important;
+        }
+
+        .pd-phone input {
+            height: 100%;
+            border: 0 !important;
+            border-radius: 0 !important;
+            min-width: 0;
+        }
+
+        /* MEALS AND BAGGAGE */
+
+        .pd-extra-box {
+            border: 1px solid var(--pd-border);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .pd-extra-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .pd-extra-title {
+            color: var(--pd-navy);
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 11px;
+        }
+
+        .pd-extra-title span {
+            color: var(--pd-red);
+        }
+
+        .pd-extra-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 11px;
+            padding: 10px 11px;
+            background: #f7f8fb;
+            border-radius: 5px;
+        }
+
+        .pd-info-item small {
+            display: block;
+            color: var(--pd-muted);
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .pd-info-item strong {
+            display: block;
+            color: var(--pd-text);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pd-inline-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 12px;
+            color: #657087;
+            font-size: 12px;
+        }
+
+        .pd-inline-info strong {
+            color: var(--pd-navy);
+            font-weight: 600;
+        }
+
+        /* FLIGHT SUMMARY */
+
+        .pd-flight {
+            padding: 17px 15px;
+            border-bottom: 1px solid var(--pd-border);
+        }
+
+        .pd-flight:last-child {
+            border-bottom: 0;
+        }
+
+        .pd-flight-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 17px;
+        }
+
+        .pd-airline {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--pd-navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .pd-airline-icon {
+            width: 29px;
+            height: 29px;
+            display: grid;
+            place-items: center;
+            background: var(--pd-navy);
+            color: #fff;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .pd-flight-number {
+            color: var(--pd-muted);
+            font-size: 11px;
+        }
+
+        .pd-route {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 55px minmax(0, 1fr);
+            align-items: start;
+            gap: 5px;
+        }
+
+        .pd-route-end {
+            min-width: 0;
+        }
+
+        .pd-route-end:last-child {
+            text-align: right;
+        }
+
+        .pd-route-time {
+            color: var(--pd-navy);
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .pd-route-date {
+            color: var(--pd-muted);
+            font-size: 10px;
+            margin-top: 5px;
+            white-space: nowrap;
+        }
+
+        .pd-route-code {
+            color: var(--pd-navy);
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .pd-route-airport {
+            color: var(--pd-muted);
+            font-size: 10px;
+            line-height: 1.4;
+            margin-top: 4px;
+            overflow-wrap: break-word;
+        }
+
+        .pd-duration {
+            text-align: center;
+            color: var(--pd-muted);
+            font-size: 10px;
+            padding-top: 3px;
+        }
+
+        .pd-duration-line {
+            height: 1px;
+            background: #dce2eb;
+            margin: 8px 0;
+            position: relative;
+        }
+
+        .pd-duration-line::before,
+        .pd-duration-line::after {
+            content: "";
+            position: absolute;
+            top: -3px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #cbd3df;
+        }
+
+        .pd-duration-line::before {
+            left: 0;
+        }
+
+        .pd-duration-line::after {
+            right: 0;
+        }
+
+        /* PRICE AND EXTRA SUMMARY */
+
+        .pd-summary-body {
+            padding: 16px;
+        }
+
+        .pd-summary-heading {
+            color: var(--pd-navy);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .pd-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 13px;
+            color: #657087;
+            font-size: 12px;
+        }
+
+        .pd-summary-row strong {
+            color: var(--pd-navy);
+            font-weight: 600;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .pd-summary-row.bold {
+            color: var(--pd-navy);
+            font-weight: 700;
+        }
+
+        .pd-summary-row.offer strong {
+            color: var(--pd-red);
+            font-size: 14px;
+        }
+
+        .pd-summary-divider {
+            border-top: 1px solid var(--pd-border);
+            margin: 13px 0;
+        }
+
+        .pd-total-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: #f4f7fc;
+            border: 1px solid #e4eaf3;
+            border-radius: 5px;
+            padding: 12px;
+            margin-top: 13px;
+            color: var(--pd-navy);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pd-total-box strong {
+            color: var(--pd-red);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* CONTINUE BUTTON */
+
+        .pd-continue {
+            width: 100%;
+            height: 45px;
+            border: 0;
+            border-radius: 5px;
+            background: var(--pd-red);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s ease;
+        }
+
+        .pd-continue:hover {
+            background: #d90000;
+        }
+
+        .pd-continue i {
+            margin-left: 8px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+            .pd-layout {
+                grid-template-columns: minmax(0, 1fr) 310px;
+                gap: 13px;
+            }
+
+            .pd-panel-body {
+                padding: 14px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .pd-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .pd-right {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .pd-right .pd-panel:first-child {
+                grid-column: 1 / -1;
+            }
+
+            .pd-right .pd-panel:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .pd-page {
+                width: calc(100% - 20px);
+                margin-top: 14px;
+            }
+
+            .pd-progress {
+                padding: 14px 10px;
+                overflow-x: auto;
+            }
+
+            .pd-steps {
+                min-width: 490px;
+            }
+
+            .pd-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pd-field.full {
+                grid-column: auto;
+            }
+
+            .pd-right {
+                display: flex;
+            }
+
+            .pd-panel-body {
+                padding: 13px;
+            }
+
+            .pd-route {
+                grid-template-columns: minmax(0, 1fr) 45px minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="pd-page">
+
+    <!-- BOOKING PROGRESS -->
+    <section class="pd-progress">
+        <div class="pd-steps">
+
+            <div class="pd-step done">
+                <div class="pd-step-circle"><i class="fa-solid fa-check"></i></div>
+                <span>Flight Selection</span>
+            </div>
+
+            <div class="pd-step done">
+                <div class="pd-step-circle"><i class="fa-solid fa-check"></i></div>
+                <span>Fare Confirmation</span>
+            </div>
+
+            <div class="pd-step done">
+                <div class="pd-step-circle"><i class="fa-solid fa-check"></i></div>
+                <span>Add Extras</span>
+            </div>
+
+            <div class="pd-step current">
+                <div class="pd-step-circle">4</div>
+                <span>Passenger Details</span>
+            </div>
+
+            <div class="pd-step">
+                <div class="pd-step-circle">5</div>
+                <span>Payment</span>
+            </div>
+
+        </div>
+    </section>
+
+    <form id="passengerForm">
+
+        <div class="pd-layout">
+
+            <!-- LEFT CONTENT -->
+            <div class="pd-left">
+
+                <!-- PASSENGER DETAILS -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-user"></i>
+                        Passenger Details
+                    </div>
+
+                    <div class="pd-panel-body">
+
+                        <div class="pd-passenger-heading">
+                            Adult Passenger 1
+                            <span>(Lead Passenger)</span>
+                        </div>
+
+                        <div class="pd-form-grid">
+
+                            <div class="pd-field">
+                                <label>Select Title<span>*</span></label>
+                                <select name="title" required>
+                                    <option value="">Select Title</option>
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                    <option>Ms</option>
+                                </select>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>First Name<span>*</span></label>
+                                <input type="text" name="first_name" placeholder="First Name" required>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>Last Name<span>*</span></label>
+                                <input type="text" name="last_name" placeholder="Last Name" required>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>Date of Birth<span>*</span></label>
+                                <input type="date" name="dob" required>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>Select Gender<span>*</span></label>
+                                <select name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>Nationality (2-letter code)<span>*</span></label>
+                                <input type="text" name="nationality" value="India" required>
+                            </div>
+
+                            <div class="pd-field full">
+                                <label>Street Address<span>*</span></label>
+                                <input type="text" name="address" placeholder="Street Address" required>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>City<span>*</span></label>
+                                <input type="text" name="city" placeholder="City" required>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>Country<span>*</span></label>
+                                <select name="country" required>
+                                    <option value="India">India</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTACT INFORMATION -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-address-book"></i>
+                        Contact Information
+                    </div>
+
+                    <div class="pd-panel-body">
+
+                        <div class="pd-form-grid">
+
+                            <div class="pd-field">
+                                <label>Phone Number <span>*</span></label>
+
+                                <div class="pd-phone">
+                                    <select name="phone_code">
+                                        <option value="+91">🇮🇳 (+91)</option>
+                                    </select>
+                                    <input type="tel" name="phone" placeholder="Enter phone number" required>
+                                </div>
+                            </div>
+
+                            <div class="pd-field">
+                                <label>Email Address <span>*</span></label>
+                                <input type="email" name="email" placeholder="Email Address" required>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MEAL SELECTION -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-utensils"></i>
+                        Adult Passenger 1
+                    </div>
+
+                    <div class="pd-panel-body">
+
+                        <div class="pd-form-grid">
+
+                            <div class="pd-field">
+                                <div class="pd-extra-title">
+                                    Meal for DEL → BDQ (6E 990) <span>*</span>
+                                </div>
+
+                                <select name="meal1">
+                                    <option value="">Select Meal</option>
+                                </select>
+
+                                <div class="pd-inline-info">
+                                    <span>Description: <strong>—</strong></span>
+                                    <span>Quantity: <strong>—</strong></span>
+                                    <span>Price: <strong>—</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="pd-field">
+                                <div class="pd-extra-title">
+                                    Meal for BDQ → NMI (6E 2139) <span>*</span>
+                                </div>
+
+                                <select name="meal2">
+                                    <option value="">Select Meal</option>
+                                </select>
+
+                                <div class="pd-inline-info">
+                                    <span>Description: <strong>—</strong></span>
+                                    <span>Quantity: <strong>—</strong></span>
+                                    <span>Price: <strong>—</strong></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- BAGGAGE -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-suitcase-rolling"></i>
+                        Baggage
+                    </div>
+
+                    <div class="pd-panel-body">
+
+                        <div class="pd-field">
+                            <select name="baggage">
+                                <option value="">Select baggage</option>
+                            </select>
+                        </div>
+
+                        <div class="pd-inline-info">
+                            <span>Weight: <strong>—</strong></span>
+                            <span>Price: <strong>—</strong></span>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- PAYMENT MODE -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-wallet"></i>
+                        Payment Mode <span style="color:var(--pd-red)">*</span>
+                    </div>
+
+                    <div class="pd-panel-body">
+
+                        <div class="pd-field">
+                            <select name="payment_mode" required>
+                                <option value="">-- Select Payement Mode --</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </section>
+
+                <button type="submit" class="pd-continue">
+                    Continue to Payment
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+            <!-- RIGHT CONTENT -->
+            <aside class="pd-right">
+
+                <!-- BOOKING SUMMARY -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-plane"></i>
+                        Booking Summary
+                    </div>
+
+                    <!-- FLIGHT 1 -->
+                    <div class="pd-flight">
+
+                        <div class="pd-flight-top">
+                            <div class="pd-airline">
+                                <span class="pd-airline-icon">
+                                    <i class="fa-solid fa-plane"></i>
+                                </span>
+                                Indigo 990
+                            </div>
+                            <span class="pd-flight-number">320</span>
+                        </div>
+
+                        <div class="pd-route">
+
+                            <div class="pd-route-end">
+                                <div class="pd-route-time">10:25 AM</div>
+                                <div class="pd-route-date">Wed, Nov 25</div>
+                                <div class="pd-route-code">DEL</div>
+                                <div class="pd-route-airport">Indira Gandhi Airport</div>
+                            </div>
+
+                            <div class="pd-duration">
+                                1h 35m
+                                <div class="pd-duration-line"></div>
+                            </div>
+
+                            <div class="pd-route-end">
+                                <div class="pd-route-time">12:00 PM</div>
+                                <div class="pd-route-date">Wed, Nov 25</div>
+                                <div class="pd-route-code">BDQ</div>
+                                <div class="pd-route-airport">Vadodara</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- FLIGHT 2 -->
+                    <div class="pd-flight">
+
+                        <div class="pd-flight-top">
+                            <div class="pd-airline">
+                                <span class="pd-airline-icon">
+                                    <i class="fa-solid fa-plane"></i>
+                                </span>
+                                Indigo 2139
+                            </div>
+                            <span class="pd-flight-number">321</span>
+                        </div>
+
+                        <div class="pd-route">
+
+                            <div class="pd-route-end">
+                                <div class="pd-route-time">03:25 PM</div>
+                                <div class="pd-route-date">Wed, Nov 25</div>
+                                <div class="pd-route-code">BDQ</div>
+                                <div class="pd-route-airport">Vadodara</div>
+                            </div>
+
+                            <div class="pd-duration">
+                                1h 00m
+                                <div class="pd-duration-line"></div>
+                            </div>
+
+                            <div class="pd-route-end">
+                                <div class="pd-route-time">04:25 PM</div>
+                                <div class="pd-route-date">Wed, Nov 25</div>
+                                <div class="pd-route-code">NMI</div>
+                                <div class="pd-route-airport">Navi Mumbai International</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- EXTRA SERVICES -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        Extra Services
+                    </div>
+
+                    <div class="pd-summary-body">
+
+                        <div class="pd-summary-heading">Baggage</div>
+
+                        <div class="pd-summary-row">
+                            <span>No baggage selected</span>
+                            <strong>₹0</strong>
+                        </div>
+
+                        <div class="pd-summary-row bold">
+                            <span>Total Baggage</span>
+                            <strong>₹0</strong>
+                        </div>
+
+                        <div class="pd-summary-divider"></div>
+
+                        <div class="pd-summary-heading">Meal</div>
+
+                        <div class="pd-summary-row">
+                            <span>No meal selected</span>
+                            <strong>₹0</strong>
+                        </div>
+
+                        <div class="pd-summary-row bold">
+                            <span>Total Meal</span>
+                            <strong>₹0</strong>
+                        </div>
+
+                        <div class="pd-summary-divider"></div>
+
+                        <div class="pd-summary-row bold">
+                            <span>Total Extra Services</span>
+                            <strong>₹0</strong>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- PRICE SUMMARY -->
+                <section class="pd-panel">
+
+                    <div class="pd-panel-heading">
+                        <i class="fa-solid fa-receipt"></i>
+                        Price Summary
+                    </div>
+
+                    <div class="pd-summary-body">
+
+                        <div class="pd-summary-row">
+                            <span>Base Fare</span>
+                            <strong>₹5,298.00</strong>
+                        </div>
+
+                        <div class="pd-summary-row">
+                            <span>Taxes & Fees</span>
+                            <strong>₹2,146.00</strong>
+                        </div>
+
+                        <div class="pd-summary-divider"></div>
+
+                        <div class="pd-summary-row bold">
+                            <span>Published Price</span>
+                            <strong>₹7,444.00</strong>
+                        </div>
+
+                        <div class="pd-summary-row">
+                            <span>Discount (−)</span>
+                            <strong>₹74.59</strong>
+                        </div>
+
+                        <div class="pd-summary-row">
+                            <span>TDS (+)</span>
+                            <strong>₹3.73</strong>
+                        </div>
+
+                        <div class="pd-summary-row">
+                            <span>GST (+)</span>
+                            <strong>₹0.00</strong>
+                        </div>
+
+                        <div class="pd-summary-divider"></div>
+
+                        <div class="pd-summary-row offer">
+                            <span>Offer Price</span>
+                            <strong>₹7373.14</strong>
+                        </div>
+
+                        <div class="pd-total-box">
+                            <span>Total Amount</span>
+                            <strong>₹7,373.14</strong>
+                        </div>
+
+                        <div class="pd-total-box">
+                            <span>Grand Total Amount</span>
+                            <strong>₹7,373.14</strong>
+                        </div>
+
+                    </div>
+                </section>
+
+            </aside>
+
+        </div>
+
+    </form>
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+    // Header and footer includes
+    async function loadInclude(elementId, filePath) {
+        try {
+            const response = await fetch(filePath);
+
+            if (!response.ok) {
+                throw new Error("Could not load " + filePath);
+            }
+
+            document.getElementById(elementId).innerHTML =
+                await response.text();
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    loadInclude("header", "includes/header.html");
+    loadInclude("footer", "includes/footer.html");
+
+    // Date of birth maximum date
+    const dobInput = document.querySelector('[name="dob"]');
+    const today = new Date();
+
+    dobInput.max = [
+        today.getFullYear(),
+        String(today.getMonth() + 1).padStart(2, "0"),
+        String(today.getDate()).padStart(2, "0")
+    ].join("-");
+
+    // Passenger form submission
+    document.getElementById("passengerForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!this.checkValidity()) {
+            this.reportValidity();
+            return;
+        }
+
+        const passengerDetails = Object.fromEntries(
+            new FormData(this).entries()
+        );
+
+        sessionStorage.setItem(
+            "passengerBookingDetails",
+            JSON.stringify(passengerDetails)
+        );
+
+        window.location.href = "payment.html";
+    });
+</script>
+
+<script src="assets/js/script.js"></script>
+
+</body>
+</html>

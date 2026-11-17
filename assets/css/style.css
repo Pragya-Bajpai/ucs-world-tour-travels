@@ -331,7 +331,7 @@ select {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 0px;
     border: 1px solid #ff0000;
     border-radius: 5px;
     background: #ff0000;

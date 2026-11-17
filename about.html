@@ -8,11 +8,67 @@
 
     <title>About Us | UCS World Tour and Travels</title>
 
+    <meta name="description" content="Learn about UCS World Tour and Travels, our travel services, commitment to customer satisfaction and why you should choose us for your journeys.">
+
+    <!-- Website CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <link rel="stylesheet" href="assets/css/loader.css">
+
+    <!-- Loader CSS -->
+    <link rel="stylesheet" href="assets/css/loader.css">
+
+    <!-- AOS Animation CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        /* =====================================
+           ABOUT PAGE ANIMATION SUPPORT
+        ===================================== */
+
+        .about-company-section,
+        .why-choose-section {
+            overflow: hidden;
+        }
+
+        /* AOS animation stability */
+        [data-aos] {
+            will-change: transform, opacity;
+        }
+
+        /* Image animation */
+        .about-company-image[data-aos] {
+            transform-origin: center;
+        }
+
+        /* Feature item animation */
+        .about-feature-item[data-aos] {
+            transition-property: transform, opacity, background-color;
+        }
+
+        /* Card animation */
+        .why-card[data-aos] {
+            transition-property: transform, opacity, box-shadow;
+        }
+
+        @media (max-width: 767px) {
+            [data-aos] {
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            [data-aos] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -20,190 +76,371 @@
     <!-- Header -->
     <div id="header"></div>
 
+
     <!-- About Company Section Start -->
     <section class="about-company-section">
+
         <div class="container">
 
             <div class="about-company-wrapper">
 
                 <!-- About Image -->
-                <div class="about-company-image">
-                    <div class="about-image-frame">
-                        <img src="assets/images/car.jpg"
-                            alt="UCS World Tour and Travels">
+                <div class="about-company-image" data-aos="fade-right" data-aos-duration="1100">
 
-                        <div class="about-image-label">
+                    <div class="about-image-frame">
+
+                        <img src="assets/images/car.jpg"
+                            alt="UCS World Tour and Travels"
+                            data-aos="zoom-in"
+                            data-aos-duration="1200">
+
+                        <div class="about-image-label"
+                            data-aos="fade-up"
+                            data-aos-delay="350">
+
                             <i class="fas fa-plane-departure"></i>
+
                             <span>Explore The World With Us</span>
+
                         </div>
+
                     </div>
 
-                    <div class="about-experience-badge">
+                    <div class="about-experience-badge"
+                        data-aos="zoom-in"
+                        data-aos-delay="500">
+
                         <i class="fas fa-globe-asia"></i>
+
                         <div>
                             <strong>UCS</strong>
                             <span>Your Travel Partner</span>
                         </div>
+
                     </div>
 
                     <div class="about-decoration"></div>
+
                 </div>
 
-                <!-- About Content -->
-                <div class="about-company-content">
 
-                    <span class="about-section-label">
+                <!-- About Content -->
+                <div class="about-company-content" data-aos="fade-left" data-aos-duration="1100">
+
+                    <span class="about-section-label"
+                        data-aos="fade-up"
+                        data-aos-delay="100">
+
                         <span></span> ABOUT UCS WORLD TOUR & TRAVELS
+
                     </span>
 
-                    <h1>
+                    <h1 data-aos="fade-up" data-aos-delay="200">
+
                         Making Every Journey
+
                         <span>Special & Memorable</span>
+
                     </h1>
 
-                    <p>
+                    <p data-aos="fade-up" data-aos-delay="300">
+
                         Welcome to UCS World Tour and Travels, your ultimate travel
                         companion for creating extraordinary experiences worldwide.
                         With a focus on quality, convenience, and customer satisfaction,
                         we offer a comprehensive range of travel services designed to
                         meet all your travel needs under one roof.
+
                     </p>
+
 
                     <div class="about-features">
 
-                        <div class="about-feature-item">
+                        <div class="about-feature-item"
+                            data-aos="fade-up"
+                            data-aos-delay="350">
+
                             <div class="about-feature-icon">
                                 <i class="fas fa-plane"></i>
                             </div>
+
                             <div>
                                 <h4>Easy Travel Planning</h4>
                                 <span>Convenient travel services</span>
                             </div>
+
                         </div>
 
-                        <div class="about-feature-item">
+
+                        <div class="about-feature-item"
+                            data-aos="fade-up"
+                            data-aos-delay="500">
+
                             <div class="about-feature-icon">
                                 <i class="fas fa-headset"></i>
                             </div>
+
                             <div>
                                 <h4>Customer Support</h4>
                                 <span>Support whenever you need</span>
                             </div>
+
                         </div>
 
                     </div>
 
-                    <a href="contact.html" class="about-contact-btn">
+
+                    <a href="contact.html"
+                        class="about-contact-btn"
+                        data-aos="fade-up"
+                        data-aos-delay="600">
+
                         Get In Touch
+
                         <i class="fas fa-arrow-right"></i>
+
                     </a>
 
                 </div>
 
             </div>
+
         </div>
+
     </section>
     <!-- About Company Section End -->
 
 
-  <!-- Why Choose Us Section Start -->
-<section class="why-choose-section">
-    <div class="container">
 
-        <!-- Section Heading -->
-        <div class="why-heading">
-            <span class="why-subtitle">WHY TRAVEL WITH UCS</span>
-            <h2>Why Choose Us</h2>
-            <p>
-                At UCS Tour and Travels, we provide reliable flight, bus, and car
-                booking services for a smooth and comfortable journey.
-            </p>
+    <!-- Why Choose Us Section Start -->
+    <section class="why-choose-section">
+
+        <div class="container">
+
+            <!-- Section Heading -->
+            <div class="why-heading"
+                data-aos="fade-up"
+                data-aos-duration="900">
+
+                <span class="why-subtitle">WHY TRAVEL WITH UCS</span>
+
+                <h2>Why Choose Us</h2>
+
+                <p>
+                    At UCS Tour and Travels, we provide reliable flight, bus, and car
+                    booking services for a smooth and comfortable journey.
+                </p>
+
+            </div>
+
+
+            <!-- Feature Cards -->
+            <div class="why-cards">
+
+
+                <!-- Card 1 -->
+                <div class="why-card"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                    data-aos-duration="900">
+
+                    <div class="feature-icon">
+
+                        <img src="assets/images/guarantee.svg"
+                            alt="Best Price Guarantee">
+
+                    </div>
+
+                    <h3>Best Price Guarantee</h3>
+
+                    <p>
+                        Experience top destinations without overpaying.
+                        Our pricing is fair, transparent, and guaranteed.
+                    </p>
+
+                    <div class="why-card-line"></div>
+
+                </div>
+
+
+
+                <!-- Card 2 -->
+                <div class="why-card"
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    data-aos-duration="900">
+
+                    <div class="feature-icon">
+
+                        <img src="assets/images/booking.svg"
+                            alt="Easy and Quick Booking">
+
+                    </div>
+
+                    <h3>Easy &amp; Quick Booking</h3>
+
+                    <p>
+                        Plan your trip in minutes with our smooth and
+                        user-friendly booking system.
+                    </p>
+
+                    <div class="why-card-line"></div>
+
+                </div>
+
+
+
+                <!-- Card 3 -->
+                <div class="why-card"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                    data-aos-duration="900">
+
+                    <div class="feature-icon">
+
+                        <img src="assets/images/customer_care.svg"
+                            alt="Customer Care">
+
+                    </div>
+
+                    <h3>Customer Care 24/7</h3>
+
+                    <p>
+                        Our support team is here for you anytime, anywhere —
+                        before, during, and after your trip.
+                    </p>
+
+                    <div class="why-card-line"></div>
+
+                </div>
+
+
+            </div>
+
         </div>
 
-        <!-- Feature Cards -->
-        <div class="why-cards">
+    </section>
+    <!-- Why Choose Us Section End -->
 
-            <!-- Card 1 -->
-            <div class="why-card">
-                <div class="feature-icon">
-                    <img src="assets/images/guarantee.svg"
-                         alt="Best Price Guarantee">
-                </div>
-
-                <h3>Best Price Guarantee</h3>
-
-                <p>
-                    Experience top destinations without overpaying.
-                    Our pricing is fair, transparent, and guaranteed.
-                </p>
-
-                <div class="why-card-line"></div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="why-card">
-                <div class="feature-icon">
-                    <img src="assets/images/booking.svg"
-                         alt="Easy and Quick Booking">
-                </div>
-
-                <h3>Easy &amp; Quick Booking</h3>
-
-                <p>
-                    Plan your trip in minutes with our smooth and
-                    user-friendly booking system.
-                </p>
-
-                <div class="why-card-line"></div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="why-card">
-                <div class="feature-icon">
-                    <img src="assets/images/customer_care.svg"
-                         alt="Customer Care">
-                </div>
-
-                <h3>Customer Care 24/7</h3>
-
-                <p>
-                    Our support team is here for you anytime, anywhere —
-                    before, during, and after your trip.
-                </p>
-
-                <div class="why-card-line"></div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- Why Choose Us Section End -->
 
 
     <!-- Footer -->
     <div id="footer"></div>
 
 
+
     <!-- Header and Footer Include -->
     <script>
-        fetch("includes/header.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("header").innerHTML = data;
-            });
 
-        fetch("includes/footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* =====================================
+               LOAD WEBSITE HEADER
+            ===================================== */
+
+            fetch("includes/header.html")
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error("Header file could not be loaded");
+                    }
+
+                    return response.text();
+
+                })
+                .then(data => {
+
+                    document.getElementById("header").innerHTML = data;
+
+                    if (typeof AOS !== "undefined") {
+                        AOS.refreshHard();
+                    }
+
+                })
+                .catch(error => {
+                    console.error("Header Error:", error);
+                });
+
+
+
+            /* =====================================
+               LOAD WEBSITE FOOTER
+            ===================================== */
+
+            fetch("includes/footer.html")
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error("Footer file could not be loaded");
+                    }
+
+                    return response.text();
+
+                })
+                .then(data => {
+
+                    document.getElementById("footer").innerHTML = data;
+
+                    if (typeof AOS !== "undefined") {
+                        AOS.refreshHard();
+                    }
+
+                })
+                .catch(error => {
+                    console.error("Footer Error:", error);
+                });
+
+        });
+
     </script>
 
+
+
+    <!-- Website JS -->
     <script src="assets/js/script.js"></script>
 
-    <script type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+
+    <!-- AOS Animation JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+
+    <!-- Initialize AOS -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            AOS.init({
+
+                duration: 900,
+
+                easing: "ease-in-out",
+
+                once: true,
+
+                offset: 100,
+
+                delay: 0,
+
+                mirror: false,
+
+                anchorPlacement: "top-bottom"
+
+            });
+
+        });
+
     </script>
-<script src="assets/js/loader.js"></script>
+
+
+    <!-- Google Translate -->
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+
+    <!-- Loader JS -->
+    <script src="assets/js/loader.js"></script>
+
 </body>
+
 </html>

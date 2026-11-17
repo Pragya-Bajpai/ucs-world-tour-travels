@@ -698,7 +698,11 @@ document.addEventListener("click", function (e) {
     }
 });
 
-// Booking Search Button Click
+
+// =====================================
+// BOOKING SEARCH BUTTON CLICK
+// =====================================
+
 document.addEventListener("click", function (e) {
 
     const searchButton = e.target.closest("#bookingSearchBtn");
@@ -708,18 +712,48 @@ document.addEventListener("click", function (e) {
     const activeTab = document.querySelector(".booking-tab.active");
     const selectedTab = activeTab?.dataset.tab;
 
+    // =====================================
+    // HOLIDAY SEARCH - ONLY CITY REQUIRED
+    // =====================================
+
+    if (selectedTab === "holiday") {
+
+        const destinationInput = document.querySelector(
+            '[data-field="destination"] input'
+        );
+
+        const city = destinationInput?.value.trim() || "";
+
+        if (!city) {
+            alert("Please enter your holiday destination.");
+            destinationInput?.focus();
+            return;
+        }
+
+        window.location.href =
+            "tour-list.html?city=" + encodeURIComponent(city);
+
+        return;
+    }
+
+    // =====================================
+    // COMMON FIELDS FOR FLIGHT / BUS / CAR
+    // =====================================
+
     const from = document.getElementById("busFrom")?.value.trim();
     const to = document.getElementById("busTo")?.value.trim();
     const date = document.getElementById("departDate")?.value;
 
-    // Validate common fields
-    if (!from || !to || !date) {
-        alert("Please enter From, To and Departure Date.");
-        return;
-    }
-
+    // =====================================
     // FLIGHT SEARCH
+    // =====================================
+
     if (selectedTab === "flight") {
+
+        if (!from || !to || !date) {
+            alert("Please enter From, To and Departure Date.");
+            return;
+        }
 
         const returnDate =
             document.getElementById("returnDate")?.value || "";
@@ -763,8 +797,16 @@ document.addEventListener("click", function (e) {
         return;
     }
 
+    // =====================================
     // BUS SEARCH
+    // =====================================
+
     if (selectedTab === "bus") {
+
+        if (!from || !to || !date) {
+            alert("Please enter From, To and Departure Date.");
+            return;
+        }
 
         const params = new URLSearchParams({
             from: from,
@@ -776,8 +818,16 @@ document.addEventListener("click", function (e) {
         return;
     }
 
+    // =====================================
     // CAR SEARCH
+    // =====================================
+
     if (selectedTab === "car") {
+
+        if (!from || !to || !date) {
+            alert("Please enter From, To and Departure Date.");
+            return;
+        }
 
         const returnDate =
             document.getElementById("returnDate")?.value || "";
@@ -793,4 +843,31 @@ document.addEventListener("click", function (e) {
         return;
     }
 
+});
+
+
+// =====================================
+// HOLIDAY SEARCH REDIRECT
+// =====================================
+
+searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (activeTab === "holiday") {
+        const destinationInput = destinationField.querySelector("input");
+        const city = destinationInput ? destinationInput.value.trim() : "";
+
+        if (!city) {
+            alert("Please enter your holiday destination.");
+            destinationInput?.focus();
+            return;
+        }
+
+        window.location.href =
+            "tour-list.html?city=" + encodeURIComponent(city);
+
+        return;
+    }
+
+    // Flight / Bus / Car ke existing search code ko yahan continue rakhein.
 });
