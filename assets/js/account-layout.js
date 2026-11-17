@@ -72,7 +72,95 @@ document.addEventListener("DOMContentLoaded", function () {
         dropdownToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
     }
+    // =====================================
+    // HEADER MOBILE NAVIGATION
+    // =====================================
 
+    const mobileToggle = document.getElementById("mobileNavToggle");
+    const navigation = document.getElementById("headerNavigation");
+
+    const walletDropdown = document.getElementById("walletDropdown");
+
+    const walletToggle = walletDropdown
+      ? walletDropdown.querySelector(".header-dropdown-toggle")
+      : null;
+
+    // Mobile Navigation Toggle
+    if (mobileToggle && navigation) {
+      mobileToggle.addEventListener("click", function () {
+        const isOpen = navigation.classList.toggle("active");
+
+        mobileToggle.setAttribute("aria-expanded", isOpen);
+
+        mobileToggle.innerHTML = isOpen
+          ? '<i class="fas fa-times"></i>'
+          : '<i class="fas fa-bars"></i>';
+
+        if (!isOpen && walletDropdown) {
+          walletDropdown.classList.remove("active");
+          walletToggle?.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    // =====================================
+    // WALLET DROPDOWN
+    // =====================================
+
+    if (walletToggle && walletDropdown) {
+      walletToggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        const isOpen = walletDropdown.classList.toggle("active");
+
+        walletToggle.setAttribute("aria-expanded", isOpen);
+      });
+    }
+
+    // =====================================
+    // CLOSE ON OUTSIDE CLICK
+    // =====================================
+
+    document.addEventListener("click", function (event) {
+      if (walletDropdown && !walletDropdown.contains(event.target)) {
+        walletDropdown.classList.remove("active");
+
+        walletToggle?.setAttribute("aria-expanded", "false");
+      }
+
+      if (
+        navigation &&
+        mobileToggle &&
+        !navigation.contains(event.target) &&
+        !mobileToggle.contains(event.target)
+      ) {
+        navigation.classList.remove("active");
+
+        mobileToggle.setAttribute("aria-expanded", "false");
+
+        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+
+    // =====================================
+    // HEADER RESIZE
+    // =====================================
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 991) {
+        navigation?.classList.remove("active");
+
+        walletDropdown?.classList.remove("active");
+
+        mobileToggle?.setAttribute("aria-expanded", "false");
+
+        walletToggle?.setAttribute("aria-expanded", "false");
+
+        if (mobileToggle) {
+          mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      }
+    });
     // Mobile overlay click
     if (overlay) {
       overlay.addEventListener("click", closeMobileSidebar);
@@ -307,95 +395,5 @@ document.addEventListener("DOMContentLoaded", function () {
   applyFlightFilters();
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const mobileToggle = document.getElementById("mobileNavToggle");
-  const navigation = document.getElementById("headerNavigation");
 
-  const walletDropdown = document.getElementById("walletDropdown");
 
-  const walletToggle = walletDropdown
-    ? walletDropdown.querySelector(".header-dropdown-toggle")
-    : null;
-
-  // =====================================
-  // MOBILE NAVIGATION OPEN / CLOSE
-  // =====================================
-
-  if (mobileToggle && navigation) {
-    mobileToggle.addEventListener("click", function () {
-      const isOpen = navigation.classList.toggle("active");
-
-      mobileToggle.setAttribute("aria-expanded", isOpen);
-
-      mobileToggle.innerHTML = isOpen
-        ? '<i class="fas fa-times"></i>'
-        : '<i class="fas fa-bars"></i>';
-
-      if (!isOpen && walletDropdown) {
-        walletDropdown.classList.remove("active");
-        walletToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  // =====================================
-  // WALLET DROPDOWN
-  // =====================================
-
-  if (walletToggle && walletDropdown) {
-    walletToggle.addEventListener("click", function (event) {
-      event.stopPropagation();
-
-      const isOpen = walletDropdown.classList.toggle("active");
-
-      walletToggle.setAttribute("aria-expanded", isOpen);
-    });
-  }
-
-  // =====================================
-  // CLOSE ON OUTSIDE CLICK
-  // =====================================
-
-  document.addEventListener("click", function (event) {
-    if (walletDropdown && !walletDropdown.contains(event.target)) {
-      walletDropdown.classList.remove("active");
-
-      if (walletToggle) {
-        walletToggle.setAttribute("aria-expanded", "false");
-      }
-    }
-
-    if (
-      navigation &&
-      mobileToggle &&
-      !navigation.contains(event.target) &&
-      !mobileToggle.contains(event.target)
-    ) {
-      navigation.classList.remove("active");
-
-      mobileToggle.setAttribute("aria-expanded", "false");
-
-      mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    }
-  });
-
-  // =====================================
-  // RESET ON DESKTOP RESIZE
-  // =====================================
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 991) {
-      navigation?.classList.remove("active");
-
-      walletDropdown?.classList.remove("active");
-
-      mobileToggle?.setAttribute("aria-expanded", "false");
-
-      walletToggle?.setAttribute("aria-expanded", "false");
-
-      if (mobileToggle) {
-        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-      }
-    }
-  });
-});

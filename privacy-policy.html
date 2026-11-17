@@ -1,0 +1,1002 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Privacy Policy | UCS World Tour & Travels</title>
+    <meta name="description" content="Read the Privacy Policy of UCS World Tour & Travels to understand how we collect, use and protect your personal information.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ucs-navy: #07123d;
+            --ucs-navy-light: #10265a;
+            --ucs-red: #ff0000;
+            --ucs-blue: #1769aa;
+            --ucs-text: #26334a;
+            --ucs-muted: #647087;
+            --ucs-border: #e1e7f0;
+            --ucs-light: #f3f7fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--ucs-text);
+            background: #f4f7fc;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =================================
+           PRIVACY HERO
+        ================================= */
+
+        .privacy-hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 175px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(100deg, rgba(220,237,255,.96), rgba(103,170,224,.72)),
+                linear-gradient(135deg, #dceeff, #7bb8e8);
+        }
+
+        .privacy-hero::before {
+            content: "";
+            position: absolute;
+            width: 480px;
+            height: 220px;
+            right: 7%;
+            top: -35px;
+            background: radial-gradient(ellipse, rgba(255,255,255,.55), transparent 68%);
+            pointer-events: none;
+        }
+
+        .privacy-hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 150px;
+            right: 8%;
+            bottom: -90px;
+            background: rgba(255,255,255,.35);
+            filter: blur(25px);
+            border-radius: 50%;
+        }
+
+        .privacy-hero-inner {
+            width: 100%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 32px 25px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .privacy-hero h1 {
+            margin: 0 0 12px;
+            color: var(--ucs-navy);
+            font-size: 39px;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+        }
+
+        .privacy-hero h1 span {
+            color: var(--ucs-red);
+        }
+
+        .privacy-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ucs-navy);
+        }
+
+        .privacy-breadcrumb a {
+            color: var(--ucs-navy);
+        }
+
+        .privacy-breadcrumb i {
+            color: var(--ucs-red);
+            font-size: 11px;
+        }
+
+        .privacy-hero-plane {
+            position: absolute;
+            right: 12%;
+            top: 50%;
+            transform: translateY(-50%) rotate(-8deg);
+            color: rgba(7,18,61,.9);
+            font-size: 82px;
+            opacity: .9;
+        }
+
+        .privacy-hero-line {
+            width: 48px;
+            height: 3px;
+            background: var(--ucs-red);
+            margin-top: 13px;
+        }
+
+        /* =================================
+           MAIN PRIVACY SECTION
+        ================================= */
+
+        .privacy-main {
+            padding: 38px 20px 65px;
+            background:
+                radial-gradient(circle at 5% 30%, rgba(23,105,170,.09), transparent 25%),
+                #f4f7fc;
+        }
+
+        .privacy-layout {
+            max-width: 1390px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 30% minmax(0, 1fr) 22%;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* LEFT ILLUSTRATION */
+
+        .privacy-visual {
+            position: sticky;
+            top: 25px;
+            min-height: 440px;
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 12px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 35%, #ffffff 0, #e5f1ff 55%, #d3e5fa 100%);
+            box-shadow: 0 12px 35px rgba(7,18,61,.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .privacy-visual::before {
+            content: "";
+            position: absolute;
+            width: 290px;
+            height: 290px;
+            border: 1px solid rgba(23,105,170,.13);
+            border-radius: 50%;
+        }
+
+        .privacy-visual::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 1px dashed rgba(23,105,170,.22);
+            border-radius: 50%;
+        }
+
+        .visual-globe {
+            position: absolute;
+            top: 35px;
+            color: rgba(23,105,170,.12);
+            font-size: 190px;
+        }
+
+        .visual-shield {
+            position: relative;
+            z-index: 2;
+            width: 205px;
+            height: 235px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 100px;
+            background: linear-gradient(145deg, #1769aa, #07123d);
+            clip-path: polygon(50% 0, 96% 19%, 91% 65%, 76% 83%, 50% 100%, 24% 83%, 9% 65%, 4% 19%);
+            filter: drop-shadow(0 12px 15px rgba(7,18,61,.2));
+        }
+
+        .visual-shield i {
+            font-size: 85px;
+            color: #fff;
+        }
+
+        .visual-lock {
+            position: absolute;
+            z-index: 3;
+            width: 66px;
+            height: 66px;
+            border-radius: 14px;
+            background: #fff;
+            color: var(--ucs-navy);
+            display: grid;
+            place-items: center;
+            font-size: 35px;
+            box-shadow: 0 8px 25px rgba(7,18,61,.18);
+        }
+
+        .visual-passport {
+            position: absolute;
+            z-index: 4;
+            left: 7%;
+            bottom: 22%;
+            width: 105px;
+            height: 140px;
+            border-radius: 7px;
+            background: var(--ucs-navy);
+            color: white;
+            transform: rotate(-12deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            box-shadow: 0 10px 20px rgba(7,18,61,.18);
+        }
+
+        .visual-passport i {
+            font-size: 34px;
+            color: #e7b94e;
+        }
+
+        .visual-passport span {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .visual-ticket {
+            position: absolute;
+            z-index: 4;
+            right: 7%;
+            bottom: 17%;
+            width: 115px;
+            height: 65px;
+            border-radius: 5px;
+            background: white;
+            transform: rotate(12deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ucs-blue);
+            font-size: 35px;
+            box-shadow: 0 8px 20px rgba(7,18,61,.14);
+        }
+
+        .visual-plane {
+            position: absolute;
+            right: 10%;
+            top: 16%;
+            color: var(--ucs-navy);
+            font-size: 35px;
+            transform: rotate(-15deg);
+            z-index: 4;
+        }
+
+        .visual-bottom-wave {
+            position: absolute;
+            bottom: -35px;
+            left: -20px;
+            width: 120%;
+            height: 85px;
+            background: var(--ucs-navy);
+            border-radius: 50% 50% 0 0;
+            transform: rotate(-5deg);
+            border-top: 9px solid var(--ucs-red);
+            z-index: 5;
+        }
+
+        /* CENTER CONTENT */
+
+        .privacy-content {
+            min-width: 0;
+            padding: 12px 0;
+        }
+
+        .privacy-eyebrow {
+            color: var(--ucs-navy);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            margin-bottom: 7px;
+        }
+
+        .privacy-content > h2 {
+            margin: 0 0 12px;
+            color: var(--ucs-navy);
+            font-size: 35px;
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .privacy-content > h2 span {
+            color: var(--ucs-red);
+        }
+
+        .privacy-heading-line {
+            width: 48px;
+            height: 3px;
+            background: var(--ucs-red);
+            margin-bottom: 12px;
+        }
+
+        .privacy-intro {
+            font-size: 13px;
+            line-height: 1.85;
+            color: var(--ucs-muted);
+            margin: 0 0 22px;
+        }
+
+        .policy-item {
+            display: grid;
+            grid-template-columns: 31px minmax(0, 1fr);
+            gap: 13px;
+            margin-bottom: 18px;
+        }
+
+        .policy-number {
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            background: var(--ucs-navy);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 3px 8px rgba(7,18,61,.15);
+        }
+
+        .policy-item h3 {
+            color: var(--ucs-navy);
+            font-size: 15px;
+            font-weight: 700;
+            margin: 1px 0 5px;
+        }
+
+        .policy-item p {
+            color: var(--ucs-muted);
+            font-size: 12.5px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .policy-item ul {
+            margin: 7px 0 0;
+            padding-left: 18px;
+        }
+
+        .policy-item li {
+            color: var(--ucs-muted);
+            font-size: 12.5px;
+            line-height: 1.8;
+            padding-left: 3px;
+        }
+
+        .policy-item li::marker {
+            color: var(--ucs-red);
+        }
+
+        /* RIGHT SIDEBAR */
+
+        .privacy-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-top: 5px;
+        }
+
+        .privacy-side-card {
+            background: rgba(255,255,255,.92);
+            border: 1px solid #e3eaf4;
+            border-radius: 12px;
+            padding: 23px 20px;
+            box-shadow: 0 8px 25px rgba(7,18,61,.055);
+        }
+
+        .help-card {
+            text-align: center;
+        }
+
+        .help-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 12px;
+            display: grid;
+            place-items: center;
+            color: var(--ucs-navy);
+            font-size: 48px;
+        }
+
+        .help-card h3 {
+            font-size: 23px;
+            color: var(--ucs-navy);
+            margin: 0 0 11px;
+            font-weight: 800;
+        }
+
+        .help-card p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--ucs-muted);
+            margin: 0 0 17px;
+        }
+
+        .privacy-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--ucs-navy);
+            color: white;
+            border-radius: 30px;
+            padding: 11px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .25s ease;
+        }
+
+        .privacy-contact-btn:hover {
+            background: var(--ucs-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .quick-card h3 {
+            color: var(--ucs-navy);
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 13px;
+            padding-bottom: 11px;
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quick-links a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 9px 2px;
+            color: var(--ucs-navy);
+            font-size: 12.5px;
+            font-weight: 500;
+            border-bottom: 1px solid #edf0f5;
+            transition: .2s ease;
+        }
+
+        .quick-links a:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .quick-links a i {
+            color: var(--ucs-red);
+            font-size: 13px;
+        }
+
+        .quick-links a:hover {
+            color: var(--ucs-red);
+            padding-left: 6px;
+        }
+
+        /* =================================
+           RESPONSIVE DESIGN
+        ================================= */
+
+        @media (max-width: 1100px) {
+            .privacy-layout {
+                grid-template-columns: 27% minmax(0, 1fr) 22%;
+                gap: 20px;
+            }
+
+            .privacy-visual {
+                min-height: 390px;
+            }
+
+            .visual-shield {
+                width: 165px;
+                height: 195px;
+            }
+
+            .visual-passport {
+                width: 80px;
+                height: 115px;
+            }
+
+            .visual-ticket {
+                width: 90px;
+                height: 55px;
+            }
+
+            .privacy-content > h2 {
+                font-size: 29px;
+            }
+
+            .privacy-side-card {
+                padding: 19px 15px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .privacy-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .privacy-visual {
+                min-height: 350px;
+            }
+
+            .privacy-content {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+            }
+
+            .privacy-sidebar {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .privacy-content > h2 {
+                font-size: 27px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .privacy-hero {
+                min-height: 145px;
+            }
+
+            .privacy-hero-inner {
+                padding: 27px 20px;
+            }
+
+            .privacy-hero h1 {
+                font-size: 29px;
+            }
+
+            .privacy-hero-plane {
+                font-size: 48px;
+                right: 8%;
+                opacity: .45;
+            }
+
+            .privacy-main {
+                padding: 25px 15px 45px;
+            }
+
+            .privacy-layout {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .privacy-visual {
+                position: relative;
+                top: auto;
+                min-height: 330px;
+                max-width: 430px;
+                width: 100%;
+                margin: auto;
+            }
+
+            .privacy-content {
+                grid-column: auto;
+                grid-row: auto;
+                padding: 5px 2px;
+            }
+
+            .privacy-sidebar {
+                grid-column: auto;
+                grid-row: auto;
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-content > h2 {
+                font-size: 27px;
+            }
+
+            .privacy-intro {
+                font-size: 13px;
+            }
+
+            .policy-item {
+                gap: 10px;
+                margin-bottom: 17px;
+            }
+
+            .policy-item h3 {
+                font-size: 14px;
+            }
+
+            .policy-item p,
+            .policy-item li {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .privacy-hero h1 {
+                font-size: 25px;
+            }
+
+            .privacy-visual {
+                min-height: 285px;
+            }
+
+            .visual-shield {
+                width: 145px;
+                height: 170px;
+            }
+
+            .visual-passport {
+                width: 70px;
+                height: 100px;
+                left: 5%;
+            }
+
+            .visual-ticket {
+                width: 75px;
+                height: 48px;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- WEBSITE HEADER -->
+    <div id="header"></div>
+
+    <main>
+
+        <!-- PRIVACY HERO -->
+        <section class="privacy-hero">
+            <div class="privacy-hero-inner">
+
+                <div>
+                    <h1>Privacy <span>Policy</span></h1>
+
+                    <div class="privacy-breadcrumb">
+                        <a href="index.html">Home</a>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <span>Privacy Policy</span>
+                    </div>
+
+                    <div class="privacy-hero-line"></div>
+                </div>
+
+                <i class="fa-solid fa-plane privacy-hero-plane"></i>
+
+            </div>
+        </section>
+
+
+        <!-- PRIVACY MAIN CONTENT -->
+        <section class="privacy-main">
+
+            <div class="privacy-layout">
+
+                <!-- LEFT TRAVEL SECURITY VISUAL -->
+                <div class="privacy-visual">
+
+                    <i class="fa-solid fa-earth-americas visual-globe"></i>
+
+                    <div class="visual-passport">
+                        <span>PASSPORT</span>
+                        <i class="fa-solid fa-earth-americas"></i>
+                    </div>
+
+                    <div class="visual-shield">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div class="visual-lock">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                    <div class="visual-ticket">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+
+                    <i class="fa-solid fa-plane visual-plane"></i>
+
+                    <div class="visual-bottom-wave"></div>
+
+                </div>
+
+
+                <!-- CENTER PRIVACY CONTENT -->
+                <div class="privacy-content">
+
+                    <div class="privacy-eyebrow">
+                        YOUR PRIVACY, OUR PRIORITY
+                    </div>
+
+                    <h2>Privacy <span>Policy</span></h2>
+
+                    <div class="privacy-heading-line"></div>
+
+                    <p class="privacy-intro">
+                        At UCS World Tour & Travels, we value your privacy.
+                        This Privacy Policy explains how we collect, use and
+                        protect your personal information when you use our
+                        website and travel services.
+                    </p>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">1</div>
+                        <div>
+                            <h3>Introduction</h3>
+                            <p>
+                                Welcome to UCS World Tour & Travels. We respect
+                                your privacy and are committed to protecting
+                                your personal information while providing
+                                travel-related services.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">2</div>
+                        <div>
+                            <h3>Information We Collect</h3>
+                            <p>
+                                We may collect information that you provide
+                                while using our website, making enquiries or
+                                booking travel services, including:
+                            </p>
+                            <ul>
+                                <li>Name and contact details.</li>
+                                <li>Email address and mobile number.</li>
+                                <li>Travel preferences and booking information.</li>
+                                <li>Payment and transaction details.</li>
+                                <li>Other information voluntarily provided by you.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">3</div>
+                        <div>
+                            <h3>How We Use Your Information</h3>
+                            <p>
+                                Your information may be used to process travel
+                                bookings, provide customer support, send booking
+                                confirmations and updates, improve our website
+                                and communicate important service-related details.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">4</div>
+                        <div>
+                            <h3>Data Security</h3>
+                            <p>
+                                We take reasonable measures to protect your
+                                personal information against unauthorized
+                                access, misuse, alteration or disclosure.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">5</div>
+                        <div>
+                            <h3>Cookies</h3>
+                            <p>
+                                Our website may use cookies to improve your
+                                browsing experience, understand website usage
+                                and enhance website functionality. You can
+                                manage cookies through your browser settings.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">6</div>
+                        <div>
+                            <h3>Third-Party Services</h3>
+                            <p>
+                                We may use third-party providers for payment
+                                processing, booking services and website
+                                functionality. These providers may handle
+                                information according to their own privacy policies.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">7</div>
+                        <div>
+                            <h3>Sharing of Information</h3>
+                            <p>
+                                We do not sell your personal information.
+                                Information may be shared with relevant service
+                                providers when necessary to complete your
+                                bookings or comply with applicable legal requirements.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">8</div>
+                        <div>
+                            <h3>Your Privacy Rights</h3>
+                            <p>
+                                You may contact us to request access to,
+                                correction of, or assistance regarding your
+                                personal information, subject to applicable laws.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">9</div>
+                        <div>
+                            <h3>Changes to This Privacy Policy</h3>
+                            <p>
+                                We may update this Privacy Policy whenever
+                                necessary. Any changes will be published on
+                                this page with the revised information.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="policy-item">
+                        <div class="policy-number">10</div>
+                        <div>
+                            <h3>Contact Us</h3>
+                            <p>
+                                If you have any questions or concerns regarding
+                                this Privacy Policy or the handling of your
+                                personal information, please contact our team.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT SIDEBAR -->
+                <aside class="privacy-sidebar">
+
+                    <!-- HELP CARD -->
+                    <div class="privacy-side-card help-card">
+
+                        <div class="help-icon">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+
+                        <h3>Need Help?</h3>
+
+                        <p>
+                            If you have any questions about our Privacy Policy,
+                            feel free to contact us.
+                        </p>
+
+                        <a href="contact.html" class="privacy-contact-btn">
+                            Contact Us
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <!-- QUICK LINKS -->
+                    <div class="privacy-side-card quick-card">
+
+                        <h3>Quick Links</h3>
+
+                        <div class="quick-links">
+
+                            <a href="terms.html">
+                                Terms & Conditions
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="refund.html">
+                                Refund Policy
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="contact.html">
+                                Contact Us
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="about.html">
+                                About Us
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- WEBSITE FOOTER -->
+    <div id="footer"></div>
+
+
+    <!-- HEADER AND FOOTER LOADER -->
+    <script>
+        // Load Website Header
+        fetch("includes/header.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Header not found");
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            })
+            .catch(error => console.error("Header Error:", error));
+
+
+        // Load Website Footer
+        fetch("includes/footer.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Footer not found");
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error("Footer Error:", error));
+    </script>
+
+    <script src="assets/js/script.js"></script>
+
+</body>
+</html>

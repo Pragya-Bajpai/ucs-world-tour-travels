@@ -6,20 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Terms & Conditions | UCS World Tour & Travels</title>
-    <meta name="description" content="Read the booking terms and conditions of UCS World Tour & Travels before making your flight reservation.">
+    <meta name="description" content="Read the Terms and Conditions of UCS World Tour & Travels before using our website or booking travel services.">
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --navy: #07123d;
-            --red: #ff0000;
-            --blue: #1769aa;
-            --bg: #f3f5f8;
-            --text: #25304a;
-            --muted: #758198;
-            --border: #e4e9f0;
+            --ucs-navy: #07123d;
+            --ucs-navy-light: #10265a;
+            --ucs-red: #ff0000;
+            --ucs-blue: #1769aa;
+            --ucs-text: #26334a;
+            --ucs-muted: #647087;
+            --ucs-border: #e1e7f0;
         }
 
         * {
@@ -28,303 +32,575 @@
 
         body {
             margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            color: var(--ucs-text);
+            background: #f4f7fc;
         }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =================================
+           HERO SECTION
+        ================================= */
 
         .terms-hero {
-            background: linear-gradient(120deg, #07123d, #142d67);
-            padding: 55px 20px 65px;
-            text-align: center;
-            color: #fff;
             position: relative;
             overflow: hidden;
+            min-height: 175px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(100deg, rgba(220,237,255,.96), rgba(103,170,224,.72)),
+                linear-gradient(135deg, #dceeff, #7bb8e8);
         }
 
-        .terms-hero::before,
-        .terms-hero::after {
+        .terms-hero::before {
+            content: "";
+            position: absolute;
+            width: 480px;
+            height: 220px;
+            right: 7%;
+            top: -35px;
+            background: radial-gradient(ellipse, rgba(255,255,255,.55), transparent 68%);
+            pointer-events: none;
+        }
+
+        .terms-hero-inner {
+            width: 100%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 32px 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .terms-hero h1 {
+            margin: 0 0 12px;
+            color: var(--ucs-navy);
+            font-size: 39px;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+        }
+
+        .terms-hero h1 span {
+            color: var(--ucs-red);
+        }
+
+        .terms-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ucs-navy);
+        }
+
+        .terms-breadcrumb a {
+            color: var(--ucs-navy);
+        }
+
+        .terms-breadcrumb i {
+            color: var(--ucs-red);
+            font-size: 11px;
+        }
+
+        .terms-hero-plane {
+            position: absolute;
+            right: 12%;
+            top: 50%;
+            transform: translateY(-50%) rotate(-8deg);
+            color: rgba(7,18,61,.9);
+            font-size: 82px;
+            opacity: .9;
+        }
+
+        .terms-hero-line {
+            width: 48px;
+            height: 3px;
+            background: var(--ucs-red);
+            margin-top: 13px;
+        }
+
+        /* =================================
+           MAIN SECTION
+        ================================= */
+
+        .terms-main {
+            padding: 38px 20px 65px;
+            background:
+                radial-gradient(circle at 5% 30%, rgba(23,105,170,.09), transparent 25%),
+                #f4f7fc;
+        }
+
+        .terms-layout {
+            max-width: 1390px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 30% minmax(0, 1fr) 22%;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* LEFT VISUAL */
+
+        .terms-visual {
+            position: sticky;
+            top: 25px;
+            min-height: 440px;
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 12px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 35%, #ffffff 0, #e5f1ff 55%, #d3e5fa 100%);
+            box-shadow: 0 12px 35px rgba(7,18,61,.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .terms-visual::before {
+            content: "";
+            position: absolute;
+            width: 290px;
+            height: 290px;
+            border: 1px solid rgba(23,105,170,.13);
+            border-radius: 50%;
+        }
+
+        .terms-visual::after {
             content: "";
             position: absolute;
             width: 220px;
             height: 220px;
-            border: 1px solid rgba(255,255,255,.09);
+            border: 1px dashed rgba(23,105,170,.22);
             border-radius: 50%;
         }
 
-        .terms-hero::before {
-            top: -120px;
-            left: -50px;
+        .terms-globe {
+            position: absolute;
+            top: 35px;
+            color: rgba(23,105,170,.12);
+            font-size: 190px;
         }
 
-        .terms-hero::after {
-            bottom: -150px;
-            right: -40px;
-        }
-
-        .terms-hero .hero-icon {
-            width: 58px;
-            height: 58px;
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255,255,255,.12);
-            border: 1px solid rgba(255,255,255,.2);
-            border-radius: 15px;
-            font-size: 24px;
-        }
-
-        .terms-hero h1 {
-            font-size: 34px;
-            margin: 0 0 12px;
-            font-weight: 700;
-        }
-
-        .terms-hero p {
-            max-width: 600px;
-            margin: auto;
-            color: #d5def1;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .terms-breadcrumb {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #c5d2eb;
-        }
-
-        .terms-breadcrumb a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .terms-container {
-            max-width: 1120px;
-            margin: -25px auto 60px;
-            padding: 0 15px;
+        .terms-document {
             position: relative;
             z-index: 2;
-        }
-
-        .terms-layout {
-            display: grid;
-            grid-template-columns: 260px minmax(0, 1fr);
-            gap: 22px;
-            align-items: start;
-        }
-
-        .terms-sidebar,
-        .terms-content {
+            width: 185px;
+            height: 245px;
+            border-radius: 10px;
             background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: 0 6px 25px rgba(7,18,61,.06);
-        }
-
-        .terms-sidebar {
-            padding: 20px 15px;
-            position: sticky;
-            top: 95px;
-        }
-
-        .terms-sidebar h3 {
-            color: var(--navy);
-            font-size: 15px;
-            padding: 0 10px 13px;
-            margin: 0 0 8px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .terms-sidebar a {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            padding: 11px 10px;
-            border-radius: 6px;
-            color: #66738b;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: .2s;
+            padding: 27px 18px;
+            box-shadow: 0 12px 30px rgba(7,18,61,.16);
+            border-top: 7px solid var(--ucs-red);
         }
 
-        .terms-sidebar a i {
-            width: 17px;
-            color: var(--red);
+        .terms-document-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #eaf2fc;
+            color: var(--ucs-navy);
+            font-size: 32px;
+            margin-bottom: 17px;
         }
 
-        .terms-sidebar a:hover {
-            background: #fff2f2;
-            color: var(--navy);
+        .terms-document-line {
+            height: 6px;
+            border-radius: 5px;
+            background: #dce5f0;
+            width: 100%;
+            margin-bottom: 10px;
         }
+
+        .terms-document-line.short {
+            width: 65%;
+            margin-right: auto;
+        }
+
+        .terms-document-line.medium {
+            width: 82%;
+            margin-right: auto;
+        }
+
+        .terms-check {
+            position: absolute;
+            z-index: 4;
+            right: 11%;
+            top: 20%;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: var(--ucs-navy);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 29px;
+            border: 5px solid #eaf2fc;
+            box-shadow: 0 8px 20px rgba(7,18,61,.15);
+        }
+
+        .terms-plane-small {
+            position: absolute;
+            left: 10%;
+            top: 20%;
+            font-size: 35px;
+            color: var(--ucs-blue);
+            transform: rotate(-15deg);
+        }
+
+        .terms-bottom-wave {
+            position: absolute;
+            bottom: -35px;
+            left: -20px;
+            width: 120%;
+            height: 85px;
+            background: var(--ucs-navy);
+            border-radius: 50% 50% 0 0;
+            transform: rotate(-5deg);
+            border-top: 9px solid var(--ucs-red);
+            z-index: 5;
+        }
+
+        /* CENTER CONTENT */
 
         .terms-content {
-            padding: 30px;
+            min-width: 0;
+            padding: 12px 0;
         }
 
-        .terms-intro {
-            padding: 18px 20px;
-            background: #f3f7fd;
-            border-left: 4px solid var(--blue);
-            border-radius: 7px;
-            margin-bottom: 25px;
-        }
-
-        .terms-intro strong {
-            display: block;
-            color: var(--navy);
-            font-size: 14px;
+        .terms-eyebrow {
+            color: var(--ucs-navy);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
             margin-bottom: 7px;
         }
 
-        .terms-intro p {
-            color: #63718a;
+        .terms-content > h2 {
+            margin: 0 0 12px;
+            color: var(--ucs-navy);
+            font-size: 35px;
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .terms-content > h2 span {
+            color: var(--ucs-red);
+        }
+
+        .terms-heading-line {
+            width: 48px;
+            height: 3px;
+            background: var(--ucs-red);
+            margin-bottom: 12px;
+        }
+
+        .terms-intro {
+            font-size: 13px;
+            line-height: 1.85;
+            color: var(--ucs-muted);
+            margin: 0 0 22px;
+        }
+
+        .terms-item {
+            display: grid;
+            grid-template-columns: 31px minmax(0, 1fr);
+            gap: 13px;
+            margin-bottom: 18px;
+        }
+
+        .terms-number {
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            background: var(--ucs-navy);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 3px 8px rgba(7,18,61,.15);
+        }
+
+        .terms-item h3 {
+            color: var(--ucs-navy);
+            font-size: 15px;
+            font-weight: 700;
+            margin: 1px 0 5px;
+        }
+
+        .terms-item p {
+            color: var(--ucs-muted);
+            font-size: 12.5px;
             line-height: 1.8;
             margin: 0;
         }
 
-        .terms-section {
-            padding: 22px 0;
-            border-bottom: 1px solid var(--border);
-            scroll-margin-top: 100px;
+        .terms-item ul {
+            margin: 7px 0 0;
+            padding-left: 18px;
         }
 
-        .terms-section:last-child {
-            border-bottom: 0;
+        .terms-item li {
+            color: var(--ucs-muted);
+            font-size: 12.5px;
+            line-height: 1.8;
+            padding-left: 3px;
         }
 
-        .terms-section h2 {
+        .terms-item li::marker {
+            color: var(--ucs-red);
+        }
+
+        /* RIGHT SIDEBAR */
+
+        .terms-sidebar {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--navy);
-            font-size: 17px;
-            margin: 0 0 13px;
+            flex-direction: column;
+            gap: 14px;
+            padding-top: 5px;
         }
 
-        .terms-section h2 span {
-            width: 34px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff0f0;
-            color: var(--red);
-            border-radius: 8px;
-            font-size: 14px;
-            flex-shrink: 0;
+        .terms-side-card {
+            background: rgba(255,255,255,.92);
+            border: 1px solid #e3eaf4;
+            border-radius: 12px;
+            padding: 23px 20px;
+            box-shadow: 0 8px 25px rgba(7,18,61,.055);
         }
 
-        .terms-section p,
-        .terms-section li {
-            color: #65718a;
+        .terms-help-card {
+            text-align: center;
+        }
+
+        .terms-help-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 12px;
+            display: grid;
+            place-items: center;
+            color: var(--ucs-navy);
+            font-size: 48px;
+        }
+
+        .terms-help-card h3 {
+            font-size: 23px;
+            color: var(--ucs-navy);
+            margin: 0 0 11px;
+            font-weight: 800;
+        }
+
+        .terms-help-card p {
             font-size: 13px;
-            line-height: 1.85;
+            line-height: 1.7;
+            color: var(--ucs-muted);
+            margin: 0 0 17px;
         }
 
-        .terms-section p {
-            margin: 0 0 10px;
-        }
-
-        .terms-section ul {
-            padding-left: 20px;
-            margin: 8px 0;
-        }
-
-        .terms-section li {
-            padding: 3px 0;
-        }
-
-        .terms-contact {
-            margin-top: 25px;
-            padding: 22px;
-            border-radius: 10px;
-            background: var(--navy);
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .terms-contact h3 {
-            margin: 0 0 6px;
-            font-size: 17px;
-        }
-
-        .terms-contact p {
-            color: #d2dbee;
-            font-size: 12px;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .terms-contact a {
+        .terms-contact-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: var(--red);
-            color: #fff;
-            padding: 11px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 12px;
+            justify-content: center;
+            gap: 12px;
+            background: var(--ucs-navy);
+            color: white;
+            border-radius: 30px;
+            padding: 11px 22px;
+            font-size: 13px;
             font-weight: 700;
-            white-space: nowrap;
+            transition: .25s ease;
         }
 
-        .terms-updated {
+        .terms-contact-btn:hover {
+            background: var(--ucs-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .terms-quick-card h3 {
+            color: var(--ucs-navy);
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 13px;
+            padding-bottom: 11px;
+            border-bottom: 1px solid var(--ucs-border);
+        }
+
+        .terms-quick-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terms-quick-links a {
             display: flex;
             align-items: center;
-            gap: 7px;
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 20px;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 9px 2px;
+            color: var(--ucs-navy);
+            font-size: 12.5px;
+            font-weight: 500;
+            border-bottom: 1px solid #edf0f5;
+            transition: .2s ease;
         }
 
-        @media(max-width: 800px) {
+        .terms-quick-links a:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .terms-quick-links a i {
+            color: var(--ucs-red);
+            font-size: 13px;
+        }
+
+        .terms-quick-links a:hover {
+            color: var(--ucs-red);
+            padding-left: 6px;
+        }
+
+        /* =================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 1100px) {
             .terms-layout {
-                grid-template-columns: 1fr;
+                grid-template-columns: 27% minmax(0, 1fr) 22%;
+                gap: 20px;
             }
 
-            .terms-sidebar {
-                position: static;
+            .terms-visual {
+                min-height: 390px;
             }
 
-            .terms-sidebar nav {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 3px;
+            .terms-content > h2 {
+                font-size: 29px;
+            }
+
+            .terms-side-card {
+                padding: 19px 15px;
             }
         }
 
-        @media(max-width: 576px) {
-            .terms-hero {
-                padding: 40px 15px 55px;
+        @media (max-width: 850px) {
+            .terms-layout {
+                grid-template-columns: 1fr 1fr;
             }
 
-            .terms-hero h1 {
-                font-size: 26px;
+            .terms-visual {
+                min-height: 350px;
             }
 
             .terms-content {
-                padding: 18px;
+                grid-column: 2;
+                grid-row: 1 / span 2;
             }
 
-            .terms-sidebar nav {
+            .terms-sidebar {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .terms-content > h2 {
+                font-size: 27px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .terms-hero {
+                min-height: 145px;
+            }
+
+            .terms-hero-inner {
+                padding: 27px 20px;
+            }
+
+            .terms-hero h1 {
+                font-size: 29px;
+            }
+
+            .terms-hero-plane {
+                font-size: 48px;
+                right: 8%;
+                opacity: .45;
+            }
+
+            .terms-main {
+                padding: 25px 15px 45px;
+            }
+
+            .terms-layout {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .terms-visual {
+                position: relative;
+                top: auto;
+                min-height: 330px;
+                max-width: 430px;
+                width: 100%;
+                margin: auto;
+            }
+
+            .terms-content {
+                grid-column: auto;
+                grid-row: auto;
+                padding: 5px 2px;
+            }
+
+            .terms-sidebar {
+                grid-column: auto;
+                grid-row: auto;
+                display: grid;
                 grid-template-columns: 1fr;
             }
 
-            .terms-contact {
-                flex-direction: column;
-                align-items: flex-start;
+            .terms-content > h2 {
+                font-size: 27px;
             }
 
-            .terms-section h2 {
-                font-size: 15px;
+            .terms-intro {
+                font-size: 13px;
+            }
+
+            .terms-item {
+                gap: 10px;
+                margin-bottom: 17px;
+            }
+
+            .terms-item h3 {
+                font-size: 14px;
+            }
+
+            .terms-item p,
+            .terms-item li {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .terms-hero h1 {
+                font-size: 25px;
+            }
+
+            .terms-visual {
+                min-height: 285px;
+            }
+
+            .terms-document {
+                width: 155px;
+                height: 210px;
             }
         }
     </style>
@@ -332,259 +608,408 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- WEBSITE HEADER -->
     <div id="header"></div>
 
-    <!-- HERO -->
-    <section class="terms-hero">
-        <div class="hero-icon">
-            <i class="fas fa-file-contract"></i>
-        </div>
+    <main>
 
-        <h1>Terms & Conditions</h1>
+        <!-- TERMS HERO -->
+        <section class="terms-hero">
+            <div class="terms-hero-inner">
 
-        <p>
-            Please read these terms carefully before using our services
-            or making a flight reservation with UCS World Tour & Travels.
-        </p>
+                <h1>Terms <span>& Conditions</span></h1>
 
-        <div class="terms-breadcrumb">
-            <a href="index.html">Home</a>
-            &nbsp; / &nbsp; Terms & Conditions
-        </div>
-    </section>
-
-    <main class="terms-container">
-
-        <div class="terms-layout">
-
-            <!-- SIDEBAR -->
-            <aside class="terms-sidebar">
-                <h3>On This Page</h3>
-
-                <nav>
-                    <a href="#general"><i class="fas fa-info-circle"></i> General Terms</a>
-                    <a href="#booking"><i class="fas fa-plane"></i> Flight Booking</a>
-                    <a href="#payment"><i class="fas fa-credit-card"></i> Payment Policy</a>
-                    <a href="#cancellation"><i class="fas fa-ban"></i> Cancellation</a>
-                    <a href="#refund"><i class="fas fa-wallet"></i> Refund Policy</a>
-                    <a href="#changes"><i class="fas fa-calendar-alt"></i> Changes & Rescheduling</a>
-                    <a href="#baggage"><i class="fas fa-suitcase"></i> Baggage Rules</a>
-                    <a href="#responsibility"><i class="fas fa-user-shield"></i> Responsibilities</a>
-                    <a href="#privacy"><i class="fas fa-lock"></i> Privacy & Security</a>
-                    <a href="#contact"><i class="fas fa-headset"></i> Contact Us</a>
-                </nav>
-            </aside>
-
-            <!-- MAIN CONTENT -->
-            <div class="terms-content">
-
-                <div class="terms-intro">
-                    <strong><i class="fas fa-shield-alt"></i> Welcome to UCS World Tour & Travels</strong>
-                    <p>
-                        These Terms & Conditions explain the rules governing
-                        your use of our website and travel booking services.
-                        By making a reservation, you acknowledge that you have
-                        read and understood the applicable terms.
-                    </p>
+                <div class="terms-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>Terms & Conditions</span>
                 </div>
 
-                <section class="terms-section" id="general">
-                    <h2><span><i class="fas fa-info-circle"></i></span> 01. General Terms</h2>
-                    <p>
-                        UCS World Tour & Travels provides travel booking assistance
-                        and related services through its website and other
-                        authorized channels.
-                    </p>
-                    <ul>
-                        <li>Users must provide accurate and complete information while using our services.</li>
-                        <li>Users must be legally authorized to make a booking for themselves or other passengers.</li>
-                        <li>Website content, fares and availability may change without prior notice.</li>
-                        <li>Use of our services is subject to these terms and applicable laws.</li>
-                    </ul>
-                </section>
+                <div class="terms-hero-line"></div>
 
-                <section class="terms-section" id="booking">
-                    <h2><span><i class="fas fa-plane"></i></span> 02. Flight Booking</h2>
-                    <p>
-                        Flight reservations are subject to airline availability,
-                        fare confirmation and successful completion of the booking process.
-                    </p>
-                    <ul>
-                        <li>A booking is confirmed only after successful payment and issuance of the applicable ticket or confirmation.</li>
-                        <li>Passenger names must match the identity documents used for travel.</li>
-                        <li>Passengers are responsible for checking travel dates, routes and passenger information before confirmation.</li>
-                        <li>Airlines may change schedules, aircraft or other operational details.</li>
-                        <li>Any special request is subject to airline approval and availability.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="payment">
-                    <h2><span><i class="fas fa-credit-card"></i></span> 03. Payment Policy</h2>
-                    <p>
-                        All applicable booking amounts must be paid through
-                        the payment methods displayed during checkout.
-                    </p>
-                    <ul>
-                        <li>Displayed fares may change until the booking is confirmed.</li>
-                        <li>Applicable taxes, service fees and other charges will be shown during checkout where available.</li>
-                        <li>Customers should not share OTPs, PINs or confidential payment information with anyone.</li>
-                        <li>In case of a failed or pending transaction, customers should verify the payment status before attempting another payment.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="cancellation">
-                    <h2><span><i class="fas fa-ban"></i></span> 04. Cancellation Policy</h2>
-                    <p>
-                        Flight cancellation is governed by the cancellation
-                        conditions of the airline and the fare type purchased.
-                    </p>
-                    <ul>
-                        <li>Cancellation requests must be submitted through the applicable booking support channel.</li>
-                        <li>Airline cancellation charges and applicable service fees may be deducted.</li>
-                        <li>Some promotional or restricted fares may be non-refundable.</li>
-                        <li>Cancellation charges may vary according to the time remaining before departure.</li>
-                        <li>Airline-initiated cancellations are handled according to the airline's applicable policy and passenger rights.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="refund">
-                    <h2><span><i class="fas fa-wallet"></i></span> 05. Refund Policy</h2>
-                    <p>
-                        Eligible refunds are processed according to the
-                        applicable airline rules and the payment provider's procedures.
-                    </p>
-                    <ul>
-                        <li>Refund eligibility and amount depend on the fare conditions and cancellation reason.</li>
-                        <li>Refunds are generally sent to the original payment method, where supported.</li>
-                        <li>Processing times may vary depending on the airline, bank and payment provider.</li>
-                        <li>Non-refundable charges and applicable deductions may not be returned.</li>
-                        <li>Customers may contact our support team for assistance with refund status.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="changes">
-                    <h2><span><i class="fas fa-calendar-alt"></i></span> 06. Changes & Rescheduling</h2>
-                    <p>
-                        Changes to passenger details, travel dates or flight
-                        selections are subject to airline rules and availability.
-                    </p>
-                    <ul>
-                        <li>Date and time changes may attract airline penalties and fare differences.</li>
-                        <li>Minor name corrections, where permitted, are subject to airline approval.</li>
-                        <li>Some tickets do not permit changes or corrections.</li>
-                        <li>All change requests should be submitted before the applicable airline deadline.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="baggage">
-                    <h2><span><i class="fas fa-suitcase"></i></span> 07. Baggage Rules</h2>
-                    <p>
-                        Baggage allowance, size limits and restricted items
-                        are determined by the operating airline and route.
-                    </p>
-                    <ul>
-                        <li>Passengers should check their ticket for the permitted cabin and checked baggage allowance.</li>
-                        <li>Additional baggage may attract extra charges.</li>
-                        <li>Dangerous, prohibited or restricted items must not be carried.</li>
-                        <li>Passengers are responsible for complying with airport security and airline baggage regulations.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="responsibility">
-                    <h2><span><i class="fas fa-user-shield"></i></span> 08. Passenger Responsibilities</h2>
-                    <ul>
-                        <li>Passengers must carry valid identification and any required travel documents.</li>
-                        <li>Passengers must comply with airport security, immigration and airline instructions.</li>
-                        <li>Passengers should check flight status and reporting time before departure.</li>
-                        <li>Passengers are responsible for obtaining required visas, permits and other travel documents.</li>
-                        <li>UCS World Tour & Travels cannot guarantee airline operational schedules or decisions.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="privacy">
-                    <h2><span><i class="fas fa-lock"></i></span> 09. Privacy & Security</h2>
-                    <p>
-                        Personal information submitted during a booking may
-                        be used to process reservations, provide customer
-                        support and communicate booking updates.
-                    </p>
-                    <ul>
-                        <li>Information necessary for ticket issuance may be shared with airlines and relevant service providers.</li>
-                        <li>Payment processing may be handled by authorized payment providers.</li>
-                        <li>Customers should protect their login credentials and payment details.</li>
-                        <li>For additional information, please review our <a href="privacy-policy.html">Privacy Policy</a>.</li>
-                    </ul>
-                </section>
-
-                <section class="terms-section" id="contact">
-                    <h2><span><i class="fas fa-headset"></i></span> 10. Customer Support</h2>
-                    <p>
-                        For questions about bookings, cancellations, refunds
-                        or other travel-related concerns, please contact
-                        the UCS World Tour & Travels support team through
-                        the contact details provided on our website.
-                    </p>
-                    <p>
-                        Please keep your booking reference or ticket details
-                        available when requesting assistance.
-                    </p>
-                </section>
-
-                <div class="terms-contact">
-                    <div>
-                        <h3>Need Help With Your Booking?</h3>
-                        <p>Our team is here to assist you with your travel queries.</p>
-                    </div>
-
-                    <a href="contact.html">
-                        <i class="fas fa-headset"></i> Contact Us
-                    </a>
-                </div>
-
-                <div class="terms-updated">
-                    <i class="far fa-calendar-alt"></i>
-                    Last Updated: November 2026
-                </div>
+                <i class="fa-solid fa-plane terms-hero-plane"></i>
 
             </div>
-        </div>
+        </section>
+
+
+        <!-- TERMS MAIN CONTENT -->
+        <section class="terms-main">
+
+            <div class="terms-layout">
+
+                <!-- LEFT ILLUSTRATION -->
+                <div class="terms-visual">
+
+                    <i class="fa-solid fa-earth-americas terms-globe"></i>
+
+                    <i class="fa-solid fa-plane terms-plane-small"></i>
+
+                    <div class="terms-document">
+
+                        <div class="terms-document-icon">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+
+                        <div class="terms-document-line"></div>
+                        <div class="terms-document-line medium"></div>
+                        <div class="terms-document-line"></div>
+                        <div class="terms-document-line short"></div>
+                        <div class="terms-document-line"></div>
+                        <div class="terms-document-line medium"></div>
+
+                    </div>
+
+                    <div class="terms-check">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+
+                    <div class="terms-bottom-wave"></div>
+
+                </div>
+
+
+                <!-- CENTER CONTENT -->
+                <div class="terms-content">
+
+                    <div class="terms-eyebrow">
+                        IMPORTANT INFORMATION
+                    </div>
+
+                    <h2>Terms <span>& Conditions</span></h2>
+
+                    <div class="terms-heading-line"></div>
+
+                    <p class="terms-intro">
+                        Welcome to UCS World Tour & Travels. These Terms &
+                        Conditions explain the rules and guidelines for
+                        accessing our website and using our travel-related
+                        services. Please read them carefully before proceeding
+                        with a booking or enquiry.
+                    </p>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">1</div>
+                        <div>
+                            <h3>Acceptance of Terms</h3>
+                            <p>
+                                By accessing or using this website, you agree
+                                to follow these Terms & Conditions. If you do
+                                not agree with any part of these terms, please
+                                discontinue using our website and services.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">2</div>
+                        <div>
+                            <h3>Our Services</h3>
+                            <p>
+                                UCS World Tour & Travels provides travel-related
+                                information, booking assistance and other
+                                services as displayed on our website. The
+                                availability and details of services may change
+                                without prior notice.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">3</div>
+                        <div>
+                            <h3>Booking and Reservations</h3>
+                            <p>
+                                All bookings are subject to availability and
+                                confirmation. Customers are responsible for
+                                providing accurate information while making
+                                reservations.
+                            </p>
+                            <ul>
+                                <li>Check all booking details before confirmation.</li>
+                                <li>Provide correct passenger and contact information.</li>
+                                <li>Keep booking confirmations and reference details safely.</li>
+                                <li>Additional service-provider terms may also apply.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">4</div>
+                        <div>
+                            <h3>Pricing and Payments</h3>
+                            <p>
+                                Prices and applicable charges will be communicated
+                                during the booking process. Payments must be
+                                completed through the payment methods made
+                                available for the relevant service. Any applicable
+                                taxes or additional charges will be communicated
+                                as part of the booking details.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">5</div>
+                        <div>
+                            <h3>Cancellation and Refunds</h3>
+                            <p>
+                                Cancellation, modification and refund requests
+                                are subject to the applicable booking conditions
+                                and the policies of the relevant airline, hotel,
+                                transport operator or service provider. Please
+                                review our Refund Policy before making a booking.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">6</div>
+                        <div>
+                            <h3>Customer Responsibilities</h3>
+                            <p>
+                                Customers must ensure that all information
+                                submitted during a booking is accurate and
+                                complete. Customers are also responsible for:
+                            </p>
+                            <ul>
+                                <li>Carrying valid identification and travel documents.</li>
+                                <li>Checking travel dates, timings and booking details.</li>
+                                <li>Following applicable travel rules and regulations.</li>
+                                <li>Arriving at the relevant departure point on time.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">7</div>
+                        <div>
+                            <h3>Travel Documents and Requirements</h3>
+                            <p>
+                                Customers are responsible for obtaining valid
+                                passports, visas, permits, tickets and other
+                                required documents. Entry requirements and
+                                travel regulations may vary depending on the
+                                destination and relevant authorities.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">8</div>
+                        <div>
+                            <h3>Third-Party Services</h3>
+                            <p>
+                                Certain travel services may be provided or
+                                operated by third-party companies. Such services
+                                may be governed by their own terms, conditions
+                                and policies. Customers should review the
+                                applicable provider terms before booking.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">9</div>
+                        <div>
+                            <h3>Limitation of Liability</h3>
+                            <p>
+                                To the extent permitted by applicable law,
+                                UCS World Tour & Travels shall not be responsible
+                                for losses arising from circumstances beyond
+                                its reasonable control, including delays,
+                                cancellations, disruptions or actions of
+                                independent third-party service providers.
+                                Nothing in these terms excludes liability
+                                that cannot legally be excluded.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">10</div>
+                        <div>
+                            <h3>Website Usage</h3>
+                            <p>
+                                You agree not to misuse this website, attempt
+                                unauthorized access, disrupt its functionality
+                                or use its content for unlawful purposes.
+                                Website content may not be copied or reproduced
+                                without appropriate permission.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">11</div>
+                        <div>
+                            <h3>Privacy and Personal Information</h3>
+                            <p>
+                                Your use of our website and services may involve
+                                the collection and processing of personal
+                                information. Please read our Privacy Policy
+                                to understand how your information is handled.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">12</div>
+                        <div>
+                            <h3>Changes to These Terms</h3>
+                            <p>
+                                We may revise these Terms & Conditions from
+                                time to time. Updated terms will be published
+                                on this page. Continued use of the website
+                                after changes are published indicates
+                                acceptance of the revised terms, subject
+                                to applicable law.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">13</div>
+                        <div>
+                            <h3>Applicable Law</h3>
+                            <p>
+                                These Terms & Conditions are subject to
+                                applicable laws of India. Any disputes will
+                                be handled by the competent courts having
+                                jurisdiction, as determined under applicable law.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="terms-item">
+                        <div class="terms-number">14</div>
+                        <div>
+                            <h3>Contact Us</h3>
+                            <p>
+                                If you have any questions regarding these
+                                Terms & Conditions, please contact the
+                                UCS World Tour & Travels support team.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT SIDEBAR -->
+                <aside class="terms-sidebar">
+
+                    <!-- HELP CARD -->
+                    <div class="terms-side-card terms-help-card">
+
+                        <div class="terms-help-icon">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+
+                        <h3>Need Help?</h3>
+
+                        <p>
+                            Have questions about our Terms & Conditions?
+                            Our team is here to assist you.
+                        </p>
+
+                        <a href="contact.html" class="terms-contact-btn">
+                            Contact Us
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <!-- QUICK LINKS -->
+                    <div class="terms-side-card terms-quick-card">
+
+                        <h3>Quick Links</h3>
+
+                        <div class="terms-quick-links">
+
+                            <a href="privacy-policy.html">
+                                Privacy Policy
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="refund.html">
+                                Refund Policy
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="contact.html">
+                                Contact Us
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="about.html">
+                                About Us
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
     </main>
 
-    <!-- FOOTER -->
+
+    <!-- WEBSITE FOOTER -->
     <div id="footer"></div>
 
+
+    <!-- HEADER AND FOOTER LOADER -->
     <script>
-        fetch('includes/header.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('header').innerHTML = data)
-            .catch(error => console.error('Header loading error:', error));
-
-        fetch('includes/footer.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(error => console.error('Footer loading error:', error));
-
-        // Smooth section navigation
-        document.querySelectorAll('.terms-sidebar a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // Load Website Header
+        fetch("includes/header.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Header not found");
                 }
-            });
-        });
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            })
+            .catch(error => console.error("Header Error:", error));
+
+
+        // Load Website Footer
+        fetch("includes/footer.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Footer not found");
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error("Footer Error:", error));
     </script>
-<!-- js-->
+
     <script src="assets/js/script.js"></script>
-    <!-- Google Translate -->
-    <script type="text/javascript"
-        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
+
 </body>
 </html>

@@ -2722,7 +2722,7 @@ body.sidebar-collapsed .account-main {
    TABLET RESPONSIVE
 ========================================= */
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 992px) {
 
     .account-header {
         padding: 0 20px;
@@ -2753,131 +2753,149 @@ body.sidebar-collapsed .account-main {
 }
 
 /* =========================================
-   MOBILE RESPONSIVE
+   MOBILE HEADER
 ========================================= */
 
 @media (max-width: 991px) {
 
     .account-header {
+        width: 100%;
+        height: 68px;
         min-height: 68px;
-        height: auto;
-        padding: 10px 16px;
-        gap: 10px;
-        flex-wrap: wrap;
+
+        padding: 0 16px;
+        gap: 0;
+
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        position: sticky;
+        top: 0;
+        z-index: 1100;
+
+        background: #ffffff;
+        box-shadow: 0 2px 12px rgba(7, 18, 61, 0.07);
     }
+
+    /* LEFT SECTION */
 
     .header-left {
+        display: flex;
+        align-items: center;
         gap: 12px;
+
+        flex: 1;
+        min-width: 0;
     }
 
-    .account-logo img {
-        width: 140px;
-        max-height: 43px;
-    }
+    /* SIDEBAR BUTTON */
 
-    .mobile-nav-toggle {
+    .sidebar-toggle {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: auto;
+        flex-direction: column;
+        gap: 4px;
+
+        border: 1px solid #e4e8ef;
+        border-radius: 8px;
+        background: #ffffff;
     }
 
-    /* NAVIGATION PANEL */
+    .sidebar-toggle span {
+        width: 17px;
+        height: 2px;
+        background: #07123d;
+    }
+
+    /* LOGO */
+
+    .account-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .account-logo img {
+        width: 105px;
+        max-width: 105px;
+        max-height: 42px;
+        object-fit: contain;
+    }
+
+    /* HIDE PUBLIC NAVIGATION */
+
+    .mobile-nav-toggle {
+        display: none !important;
+    }
 
     .header-navigation {
-        display: none;
-        order: 4;
-
-        width: 100%;
-        flex: 0 0 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 0;
-
-        padding: 8px;
-        margin-top: 5px;
-
-        background: #ffffff;
-        border: 1px solid #edf0f5;
-        border-radius: 10px;
-
-        box-shadow: 0 8px 22px rgba(7,18,61,.06);
-    }
-
-    .header-navigation.active {
-        display: flex;
-    }
-
-    .header-navigation > a {
-        display: block;
-        padding: 13px 12px;
-        border-bottom: 1px solid #f0f2f6;
-    }
-
-    /* MOBILE WALLET DROPDOWN */
-
-    .header-dropdown {
-        display: block;
-        height: auto;
-    }
-
-    .header-dropdown-toggle {
-        width: 100%;
-        justify-content: space-between;
-        padding: 13px 12px;
-        border-bottom: 1px solid #f0f2f6;
-    }
-
-    .header-dropdown-menu {
-        position: static;
-        width: 100%;
-
-        display: none;
-
-        padding: 5px 8px;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        background: #fafbfc;
-    }
-
-    .header-dropdown.active .header-dropdown-menu {
-        display: block;
-    }
-
-    .header-dropdown-menu a {
-        padding: 12px;
+        display: none !important;
     }
 
     /* RIGHT SECTION */
 
     .header-right {
-        gap: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        flex: 1;
+        min-width: 0;
+        gap: 8px;
     }
 
-    .header-help span:last-child,
-    .header-divider {
-        display: none;
+    .header-divider,
+    .header-help,
+    .user-arrow {
+        display: none !important;
     }
 
-    .header-help-icon {
-        width: 34px;
-        height: 34px;
-    }
+    /* USER PROFILE */
 
     .header-user {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
         gap: 7px;
     }
 
     .header-user-avatar {
-        width: 35px;
-        height: 35px;
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 50%;
+        background: #07123d;
+        color: #ffffff;
+
+        font-size: 13px;
     }
 
-    .user-arrow {
-        display: none;
+    .header-user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .header-user-info strong {
+        font-size: 11px;
+        line-height: 14px;
+        white-space: nowrap;
+    }
+
+    .header-user-info span {
+        font-size: 9px;
+        line-height: 12px;
     }
 
 }
@@ -2886,48 +2904,50 @@ body.sidebar-collapsed .account-main {
    SMALL MOBILE
 ========================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
 
     .account-header {
-        padding: 9px 12px;
-    }
-
-    .account-logo img {
-        width: 118px;
-        max-height: 38px;
+        height: 64px;
+        min-height: 64px;
+        padding: 0 10px;
     }
 
     .header-left {
-        gap: 9px;
-    }
-
-    .sidebar-toggle,
-    .mobile-nav-toggle {
-        width: 35px;
-        height: 35px;
-    }
-
-    .header-right {
         gap: 8px;
     }
 
+    .sidebar-toggle {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
+    }
+
+    .account-logo img {
+        width: 88px;
+        max-width: 88px;
+        max-height: 36px;
+    }
+
+    .header-right {
+        gap: 5px;
+    }
+
     .header-user {
-        gap: 6px;
+        gap: 5px;
     }
 
     .header-user-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 13px;
+        width: 31px;
+        height: 31px;
+        min-width: 31px;
     }
 
     .header-user-info strong {
-        font-size: 11px;
-    }
-
-    .header-user-info span {
         font-size: 10px;
     }
 
-}
+    .header-user-info span {
+        font-size: 9px;
+    }
 
+}

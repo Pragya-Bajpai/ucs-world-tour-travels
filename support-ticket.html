@@ -436,6 +436,80 @@
                 padding: 17px;
             }
         }
+        /* =====================================
+   SUPPORT MODAL IMPROVEMENTS
+===================================== */
+
+.support-modal {
+    animation: supportModalOpen .25s ease;
+}
+
+@keyframes supportModalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.support-modal-header p {
+    margin: 0;
+}
+
+.support-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: .2s ease;
+}
+
+.support-submit-btn:hover {
+    background: #c9000b;
+    border-color: #c9000b;
+}
+
+.support-cancel-btn:hover {
+    background: #f4f6fa;
+}
+
+@media(max-width: 480px) {
+
+    .support-modal-overlay {
+        padding: 10px;
+        align-items: center;
+    }
+
+    .support-modal {
+        max-height: 92vh;
+        border-radius: 9px;
+    }
+
+    .support-modal-header {
+        padding: 16px;
+    }
+
+    .support-modal-header h3 {
+        font-size: 16px;
+    }
+
+    .support-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .support-cancel-btn,
+    .support-submit-btn {
+        width: 100%;
+        height: 43px;
+    }
+
+}
     </style>
 </head>
 
@@ -529,14 +603,384 @@
     </div>
 
 
-    
+    <!-- =====================================
+     ADD NEW SUPPORT TICKET MODAL
+===================================== -->
+
+<div class="support-modal-overlay" id="supportModalOverlay">
+
+    <div class="support-modal" role="dialog"
+         aria-modal="true"
+         aria-labelledby="supportModalTitle">
+
+        <!-- MODAL HEADER -->
+        <div class="support-modal-header">
+
+            <div>
+                <h3 id="supportModalTitle">Submit New Ticket</h3>
+                <p>You will get response from our support team.</p>
+            </div>
+
+            <button type="button"
+                    class="support-modal-close"
+                    id="closeSupportModal"
+                    aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <!-- MODAL BODY -->
+        <div class="support-modal-body">
+
+            <form id="supportTicketForm">
+
+                <div class="support-form-grid">
+
+                    <!-- SUBJECT -->
+                    <div class="support-form-group full">
+
+                        <label for="ticketSubject">
+                            Subject <span>*</span>
+                        </label>
+
+                        <input type="text"
+                               id="ticketSubject"
+                               name="subject"
+                               placeholder="Enter ticket subject"
+                               maxlength="150"
+                               required>
+
+                    </div>
+
+                    <!-- TYPE -->
+                    <div class="support-form-group">
+
+                        <label for="ticketType">
+                            Type <span>*</span>
+                        </label>
+
+                        <select id="ticketType"
+                                name="type"
+                                required>
+
+                            <option value="">Select Type</option>
+                            <option value="Website Problem">Website Problem</option>
+                            <option value="Partner Request">Partner Request</option>
+                            <option value="Complaint">Complaint</option>
+                            <option value="Info Inquiry">Info Inquiry</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- PRIORITY -->
+                    <div class="support-form-group">
+
+                        <label for="ticketPriority">
+                            Priority <span>*</span>
+                        </label>
+
+                        <select id="ticketPriority"
+                                name="priority"
+                                required>
+
+                            <option value="">Choose Priority</option>
+                            <option value="Urgent">Urgent</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- DESCRIPTION -->
+                    <div class="support-form-group full">
+
+                        <label for="ticketDescription">
+                            Describe Your Issue <span>*</span>
+                        </label>
+
+                        <textarea id="ticketDescription"
+                                  name="description"
+                                  placeholder="Please describe your issue in detail..."
+                                  maxlength="3000"
+                                  required></textarea>
+
+                    </div>
+
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="support-modal-actions">
+
+                    <button type="button"
+                            class="support-cancel-btn"
+                            id="cancelSupportModal">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="support-submit-btn">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Submit Ticket
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 
  
     
     <!-- EXISTING ACCOUNT LAYOUT JS -->
     <script src="assets/js/account-layout.js"></script>
 
-  
+  <script>
+
+// =========================================
+// SUPPORT TICKET MODAL
+// =========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const addTicketBtn = document.getElementById("addSupportTicket");
+
+    const modalOverlay = document.getElementById("supportModalOverlay");
+
+    const closeModalBtn = document.getElementById("closeSupportModal");
+
+    const cancelModalBtn = document.getElementById("cancelSupportModal");
+
+    const ticketForm = document.getElementById("supportTicketForm");
+
+    const subjectInput = document.getElementById("ticketSubject");
+
+    const tableBody = document.getElementById("supportTableBody");
+
+    const supportCount = document.getElementById("supportCount");
+
+    const supportShowing = document.getElementById("supportShowing");
+
+
+    // =====================================
+    // OPEN MODAL
+    // =====================================
+
+    function openSupportModal() {
+
+        modalOverlay.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+        setTimeout(function () {
+            subjectInput.focus();
+        }, 100);
+
+    }
+
+
+    // =====================================
+    // CLOSE MODAL
+    // =====================================
+
+    function closeSupportModal() {
+
+        modalOverlay.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    // =====================================
+    // OPEN BUTTON
+    // =====================================
+
+    addTicketBtn.addEventListener("click", function () {
+
+        openSupportModal();
+
+    });
+
+
+    // =====================================
+    // CLOSE BUTTONS
+    // =====================================
+
+    closeModalBtn.addEventListener("click", closeSupportModal);
+
+    cancelModalBtn.addEventListener("click", closeSupportModal);
+
+
+    // =====================================
+    // OUTSIDE CLICK
+    // =====================================
+
+    modalOverlay.addEventListener("click", function (event) {
+
+        if (event.target === modalOverlay) {
+            closeSupportModal();
+        }
+
+    });
+
+
+    // =====================================
+    // ESCAPE KEY
+    // =====================================
+
+    document.addEventListener("keydown", function (event) {
+
+        if (
+            event.key === "Escape" &&
+            modalOverlay.classList.contains("show")
+        ) {
+
+            closeSupportModal();
+
+        }
+
+    });
+
+
+    // =====================================
+    // SUBMIT NEW TICKET
+    // =====================================
+
+    ticketForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const subject = subjectInput.value.trim();
+
+        const type = document.getElementById("ticketType").value;
+
+        const priority = document.getElementById("ticketPriority").value;
+
+        const description = document.getElementById("ticketDescription").value.trim();
+
+
+        if (!subject || !type || !priority || !description) {
+
+            alert("Please fill all required fields.");
+
+            return;
+
+        }
+
+
+        // Current Date
+        const now = new Date();
+
+        const submissionDate = now.toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+        });
+
+
+        // Create New Table Row
+        const row = document.createElement("tr");
+
+        row.dataset.priority = priority;
+
+        const subjectCell = document.createElement("td");
+
+        subjectCell.className = "support-topic";
+
+        subjectCell.textContent = subject;
+
+
+        const dateCell = document.createElement("td");
+
+        dateCell.textContent = submissionDate;
+
+
+        const typeCell = document.createElement("td");
+
+        typeCell.textContent = type;
+
+
+        const statusCell = document.createElement("td");
+
+        const statusBadge = document.createElement("span");
+
+        statusBadge.className = "support-status";
+
+        statusBadge.textContent = "Open";
+
+        statusCell.appendChild(statusBadge);
+
+
+        const actionCell = document.createElement("td");
+
+        const viewButton = document.createElement("button");
+
+        viewButton.type = "button";
+
+        viewButton.className = "support-view-btn";
+
+        viewButton.innerHTML = '<i class="fa-regular fa-eye"></i> View';
+
+        viewButton.title = "Priority: " + priority;
+
+
+        actionCell.appendChild(viewButton);
+
+
+        // Append Cells
+        row.appendChild(subjectCell);
+
+        row.appendChild(dateCell);
+
+        row.appendChild(typeCell);
+
+        row.appendChild(statusCell);
+
+        row.appendChild(actionCell);
+
+
+        // Add New Row On Top
+        tableBody.prepend(row);
+
+
+        // Update Ticket Count
+        const totalTickets = tableBody.querySelectorAll("tr").length;
+
+        supportCount.textContent =
+            totalTickets + (totalTickets === 1 ? " Ticket" : " Tickets");
+
+        supportShowing.textContent = totalTickets;
+
+
+        // Reset Form
+        ticketForm.reset();
+
+
+        // Close Modal
+        closeSupportModal();
+
+
+        // Success Message
+        alert("Your support ticket has been submitted successfully!");
+
+    });
+
+});
+
+</script>
     
 
 </body>

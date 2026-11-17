@@ -1,0 +1,1014 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FAQs | UCS World Tour & Travels</title>
+    <meta name="description" content="Get answers to frequently asked questions about flight bookings, bus reservations, cab services, payments and cancellations at UCS World Tour & Travels.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        :root {
+            --faq-navy: #07123d;
+            --faq-navy-light: #10285f;
+            --faq-red: #ed101b;
+            --faq-blue: #1769aa;
+            --faq-text: #17243d;
+            --faq-muted: #778196;
+            --faq-border: #e9edf3;
+            --faq-bg: #f5f7fb;
+        }
+
+        .ucs-faq-page,
+        .ucs-faq-page * {
+            box-sizing: border-box;
+        }
+
+        .ucs-faq-page {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--faq-text);
+            overflow: hidden;
+        }
+
+        /* HERO SECTION */
+
+        .faq-premium-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 76px 20px 115px;
+            background: linear-gradient(115deg, #06102f 0%, #0b2052 55%, #153c79 100%);
+            color: #fff;
+        }
+
+        .faq-premium-hero::before {
+            content: "";
+            position: absolute;
+            width: 430px;
+            height: 430px;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 50%;
+            right: -100px;
+            top: -220px;
+            box-shadow: 0 0 0 45px rgba(255,255,255,.025),
+                        0 0 0 90px rgba(255,255,255,.02);
+        }
+
+        .faq-premium-hero::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 50%;
+            left: -120px;
+            bottom: -180px;
+        }
+
+        .faq-hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 1150px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .faq-hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 17px;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 30px;
+            background: rgba(255,255,255,.08);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .faq-hero-label i {
+            color: #ff5058;
+        }
+
+        .faq-premium-hero h1 {
+            color: #fff;
+            font-size: clamp(34px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.8px;
+            line-height: 1.2;
+            margin: 0 0 17px;
+        }
+
+        .faq-premium-hero h1 span {
+            color: #ff515a;
+        }
+
+        .faq-premium-hero p {
+            max-width: 590px;
+            margin: auto;
+            color: #d0d9eb;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .faq-breadcrumb {
+            margin-top: 25px;
+            color: #b7c5df;
+            font-size: 12px;
+        }
+
+        .faq-breadcrumb a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .faq-breadcrumb span {
+            margin: 0 9px;
+            color: #ff555e;
+        }
+
+        /* MAIN CONTENT */
+
+        .faq-main-section {
+            position: relative;
+            z-index: 2;
+            max-width: 1160px;
+            margin: -48px auto 0;
+            padding: 0 20px 85px;
+        }
+
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 340px minmax(0, 1fr);
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* LEFT INFORMATION CARD */
+
+        .faq-info-card {
+            background: #fff;
+            border: 1px solid var(--faq-border);
+            border-radius: 15px;
+            padding: 29px 25px;
+            box-shadow: 0 15px 45px rgba(7,18,61,.07);
+        }
+
+        .faq-info-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff0f1;
+            color: var(--faq-red);
+            border-radius: 13px;
+            font-size: 23px;
+            margin-bottom: 22px;
+        }
+
+        .faq-info-card h2 {
+            color: var(--faq-navy);
+            font-size: 23px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin: 0 0 12px;
+        }
+
+        .faq-info-card > p {
+            color: var(--faq-muted);
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0 0 25px;
+        }
+
+        .faq-info-divider {
+            height: 1px;
+            background: var(--faq-border);
+            margin: 23px 0;
+        }
+
+        .faq-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            margin-bottom: 19px;
+        }
+
+        .faq-feature:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-feature-icon {
+            width: 37px;
+            height: 37px;
+            min-width: 37px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: #f0f4fb;
+            color: var(--faq-blue);
+            font-size: 14px;
+        }
+
+        .faq-feature h4 {
+            color: var(--faq-navy);
+            font-size: 13px;
+            font-weight: 700;
+            margin: 1px 0 5px;
+        }
+
+        .faq-feature p {
+            color: var(--faq-muted);
+            font-size: 11px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* SUPPORT CARD */
+
+        .faq-contact-card {
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            padding: 25px;
+            border-radius: 14px;
+            background: linear-gradient(140deg, #ed101b, #b9000b);
+            color: #fff;
+        }
+
+        .faq-contact-card::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 50%;
+            right: -55px;
+            bottom: -70px;
+            box-shadow: 0 0 0 20px rgba(255,255,255,.04);
+        }
+
+        .faq-contact-card h3 {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 9px;
+        }
+
+        .faq-contact-card p {
+            position: relative;
+            z-index: 1;
+            color: #ffe3e4;
+            font-size: 12px;
+            line-height: 1.7;
+            margin: 0 0 19px;
+        }
+
+        .faq-contact-btn {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 16px;
+            border-radius: 6px;
+            background: #fff;
+            color: var(--faq-red);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            transition: .25s ease;
+        }
+
+        .faq-contact-btn:hover {
+            background: var(--faq-navy);
+            color: #fff;
+        }
+
+        /* RIGHT FAQ AREA */
+
+        .faq-content-card {
+            background: #fff;
+            border: 1px solid var(--faq-border);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(7,18,61,.06);
+        }
+
+        .faq-content-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .faq-content-heading h2 {
+            color: var(--faq-navy);
+            font-size: 21px;
+            font-weight: 800;
+            margin: 0 0 7px;
+        }
+
+        .faq-content-heading p {
+            color: var(--faq-muted);
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .faq-count {
+            min-width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #fff0f1;
+            color: var(--faq-red);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        /* FAQ ACCORDION */
+
+        .faq-accordion-item {
+            border: 1px solid var(--faq-border);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background: #fff;
+            overflow: hidden;
+            transition: border-color .25s ease, box-shadow .25s ease;
+        }
+
+        .faq-accordion-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-accordion-item.active {
+            border-color: rgba(237,16,27,.35);
+            box-shadow: 0 5px 18px rgba(7,18,61,.045);
+        }
+
+        .faq-accordion-question {
+            width: 100%;
+            min-height: 67px;
+            padding: 16px 18px;
+            border: 0;
+            outline: none;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .faq-question-text {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: var(--faq-navy);
+            font-size: 13px;
+            font-weight: 650;
+            line-height: 1.6;
+        }
+
+        .faq-question-number {
+            width: 29px;
+            height: 29px;
+            min-width: 29px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f3f8;
+            color: #68758c;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .faq-accordion-item.active .faq-question-number {
+            background: #fff0f1;
+            color: var(--faq-red);
+        }
+
+        .faq-question-arrow {
+            width: 29px;
+            height: 29px;
+            min-width: 29px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f4f6fa;
+            color: #67748a;
+            font-size: 11px;
+            transition: transform .25s ease, background .25s ease, color .25s ease;
+        }
+
+        .faq-accordion-item.active .faq-question-arrow {
+            background: var(--faq-red);
+            color: #fff;
+            transform: rotate(180deg);
+        }
+
+        .faq-accordion-question:hover .faq-question-text {
+            color: var(--faq-red);
+        }
+
+        .faq-accordion-answer {
+            display: none;
+            padding: 0 20px 19px 60px;
+        }
+
+        .faq-accordion-item.active .faq-accordion-answer {
+            display: block;
+            animation: faqAnswerShow .25s ease;
+        }
+
+        .faq-accordion-answer p {
+            margin: 0;
+            color: var(--faq-muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .faq-accordion-answer a {
+            color: var(--faq-red);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .faq-accordion-answer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes faqAnswerShow {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* BOTTOM TRUST SECTION */
+
+        .faq-bottom-section {
+            max-width: 1160px;
+            margin: 0 auto 75px;
+            padding: 0 20px;
+        }
+
+        .faq-bottom-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+            padding: 28px 32px;
+            border: 1px solid var(--faq-border);
+            border-radius: 14px;
+            background: #f8faff;
+        }
+
+        .faq-bottom-inner h3 {
+            color: var(--faq-navy);
+            font-size: 17px;
+            font-weight: 750;
+            margin: 0 0 7px;
+        }
+
+        .faq-bottom-inner p {
+            color: var(--faq-muted);
+            font-size: 12px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .faq-bottom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 13px 20px;
+            background: var(--faq-navy);
+            border-radius: 7px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: .25s ease;
+        }
+
+        .faq-bottom-btn:hover {
+            background: var(--faq-red);
+            color: #fff;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .faq-layout {
+                grid-template-columns: 280px minmax(0, 1fr);
+                gap: 18px;
+            }
+
+            .faq-content-card {
+                padding: 22px 17px;
+            }
+
+            .faq-info-card {
+                padding: 23px 18px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .faq-premium-hero {
+                padding: 58px 18px 95px;
+            }
+
+            .faq-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-main-section {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .faq-info-card {
+                order: 2;
+            }
+
+            .faq-content-card {
+                order: 1;
+            }
+
+            .faq-contact-card {
+                margin-top: 15px;
+            }
+
+            .faq-bottom-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 24px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-premium-hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .faq-content-heading h2 {
+                font-size: 18px;
+            }
+
+            .faq-content-card {
+                padding: 19px 12px;
+            }
+
+            .faq-accordion-question {
+                padding: 13px 11px;
+            }
+
+            .faq-question-text {
+                gap: 9px;
+                font-size: 12px;
+            }
+
+            .faq-accordion-answer {
+                padding: 0 13px 16px 49px;
+            }
+
+            .faq-count {
+                min-width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header"></div>
+
+    <main class="ucs-faq-page">
+
+        <!-- HERO -->
+        <section class="faq-premium-hero">
+            <div class="faq-hero-inner">
+
+                <div class="faq-hero-label">
+                    <i class="fa-solid fa-circle-question"></i>
+                    Help & Support
+                </div>
+
+                <h1>Frequently Asked <span>Questions</span></h1>
+
+                <p>
+                    Everything you need to know about your travel bookings,
+                    payments and services. Find quick answers to your questions.
+                </p>
+
+                <div class="faq-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    FAQs
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MAIN FAQ CONTENT -->
+        <section class="faq-main-section">
+
+            <div class="faq-layout">
+
+                <!-- LEFT COLUMN -->
+                <aside class="faq-left-column">
+
+                    <div class="faq-info-card">
+
+                        <div class="faq-info-icon">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+
+                        <h2>How Can We Help You?</h2>
+
+                        <p>
+                            We want to make your travel experience simple and
+                            hassle-free. Explore our frequently asked questions
+                            to get the information you need.
+                        </p>
+
+                        <div class="faq-info-divider"></div>
+
+                        <div class="faq-feature">
+                            <div class="faq-feature-icon">
+                                <i class="fa-solid fa-ticket"></i>
+                            </div>
+                            <div>
+                                <h4>Easy Booking</h4>
+                                <p>Get information about your flight, bus and cab bookings.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-feature">
+                            <div class="faq-feature-icon">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <h4>Payments & Refunds</h4>
+                                <p>Understand payment, cancellation and refund procedures.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-feature">
+                            <div class="faq-feature-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h4>Secure Experience</h4>
+                                <p>Know more about your information and booking security.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="faq-contact-card">
+                        <h3>Need More Help?</h3>
+                        <p>
+                            Can't find the answer you're looking for?
+                            Our team is ready to assist you.
+                        </p>
+
+                        <a href="contact.html" class="faq-contact-btn">
+                            Contact Support
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                </aside>
+
+                <!-- RIGHT COLUMN -->
+                <section class="faq-content-card">
+
+                    <div class="faq-content-heading">
+                        <div>
+                            <h2>Popular Questions</h2>
+                            <p>Click any question to read the answer.</p>
+                        </div>
+
+                        <div class="faq-count">09</div>
+                    </div>
+
+                    <div class="faq-accordion">
+
+                        <div class="faq-accordion-item active">
+                            <button type="button" class="faq-accordion-question" aria-expanded="true">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">01</span>
+                                    How can I book a ticket through UCS?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    You can book tickets through our website by selecting your preferred
+                                    travel service, entering your journey details and completing the
+                                    booking process. You can also contact our support team for assistance.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">02</span>
+                                    What travel services do you provide?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    UCS World Tour & Travels provides flight booking, bus booking,
+                                    cab services and holiday packages to help make your journey
+                                    convenient and comfortable.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">03</span>
+                                    What payment methods are available?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    You can use the payment methods displayed during the booking
+                                    process. Please verify your booking details before completing
+                                    the payment.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">04</span>
+                                    How will I receive my booking confirmation?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    Once your booking is successfully confirmed, the booking
+                                    details will be shared using the contact information
+                                    provided during the booking process.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">05</span>
+                                    Can I cancel my confirmed booking?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    Yes, cancellation may be available depending on the service
+                                    provider's cancellation rules. Applicable cancellation
+                                    charges and conditions may vary by booking.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">06</span>
+                                    How can I request a refund?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    Refund eligibility and processing time depend on the
+                                    applicable service provider's policy. Please refer to our
+                                    <a href="refund.html">Refund Policy</a> for further details.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">07</span>
+                                    Can I change my travel details after booking?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    Changes depend on the service provider's rules and availability.
+                                    Additional charges may apply. Contact our support team to
+                                    check whether your booking can be modified.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">08</span>
+                                    Is my personal information secure?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    We take reasonable measures to protect the personal
+                                    information shared with us. You can read our
+                                    <a href="privacy-policy.html">Privacy Policy</a>
+                                    to understand how your information is handled.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <button type="button" class="faq-accordion-question" aria-expanded="false">
+                                <span class="faq-question-text">
+                                    <span class="faq-question-number">09</span>
+                                    How can I contact the UCS support team?
+                                </span>
+                                <span class="faq-question-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </button>
+
+                            <div class="faq-accordion-answer">
+                                <p>
+                                    Visit our <a href="contact.html">Contact Us</a> page
+                                    to get in touch with our team. Please share your booking
+                                    reference and query so we can assist you effectively.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+        <!-- BOTTOM SUPPORT BANNER -->
+        <section class="faq-bottom-section">
+            <div class="faq-bottom-inner">
+                <div>
+                    <h3>Still Have Questions About Your Journey?</h3>
+                    <p>Get in touch with our team for assistance with your travel requirements.</p>
+                </div>
+
+                <a href="contact.html" class="faq-bottom-btn">
+                    Get In Touch
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* =====================================
+               FAQ ACCORDION
+            ===================================== */
+
+            const faqItems = document.querySelectorAll(".faq-accordion-item");
+
+            faqItems.forEach(function (item) {
+
+                const button = item.querySelector(".faq-accordion-question");
+
+                button.addEventListener("click", function () {
+
+                    const wasOpen = item.classList.contains("active");
+
+                    faqItems.forEach(function (otherItem) {
+                        otherItem.classList.remove("active");
+
+                        const otherButton = otherItem.querySelector(".faq-accordion-question");
+                        otherButton.setAttribute("aria-expanded", "false");
+                    });
+
+                    if (!wasOpen) {
+                        item.classList.add("active");
+                        button.setAttribute("aria-expanded", "true");
+                    }
+
+                });
+
+            });
+
+
+            /* =====================================
+               LOAD HEADER
+            ===================================== */
+
+            fetch("includes/header.html")
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Header file not found");
+                    }
+                    return response.text();
+                })
+                .then(function (data) {
+                    document.getElementById("header").innerHTML = data;
+                })
+                .catch(function (error) {
+                    console.error("Header Error:", error);
+                });
+
+
+            /* =====================================
+               LOAD FOOTER
+            ===================================== */
+
+            fetch("includes/footer.html")
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Footer file not found");
+                    }
+                    return response.text();
+                })
+                .then(function (data) {
+                    document.getElementById("footer").innerHTML = data;
+                })
+                .catch(function (error) {
+                    console.error("Footer Error:", error);
+                });
+
+        });
+    </script>
+
+    <script src="assets/js/script.js"></script>
+
+</body>
+</html>
